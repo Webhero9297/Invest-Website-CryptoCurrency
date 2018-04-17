@@ -1,15 +1,12 @@
 @extends('layouts.frontend')
-
 @section('content')
 <style>
     .control-label {
         font-family: Montserrat-light;
     }
     @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
     /*Checkboxes styles*/
     input[type="checkbox"] { display: none; }
-
     input[type="checkbox"] + label {
         display: inline-block;
         position: relative;
@@ -22,9 +19,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
     }
-
     input[type="checkbox"] + label:last-child { margin-bottom: 0; }
-
     input[type="checkbox"] + label:before {
         content: '';
         display: block;
@@ -38,7 +33,6 @@
         -webkit-transition: all .12s, border-color .08s;
         transition: all .12s, border-color .08s;
     }
-
     input[type="checkbox"]:checked + label:before {
         width: 10px;
         top: -5px;
@@ -102,8 +96,6 @@
                             <div class="col-xs-12 col-sm-8 col-md-6">
                                 <input type="checkbox" id="box-1" field="audio_alert" checked>
                                 <label for="box-1" class="alert-method">Audio alert</label>
-                            {{--</div>--}}
-                            {{--<div class="col-md-6">--}}
                                 &nbsp;&nbsp;&nbsp;
                                 <input type="checkbox" id="box-2" field="email_alert" checked>
                                 <label for="box-2" class="alert-method">Email alert</label>
@@ -120,7 +112,6 @@
                     </form>
                 </div>
             </div>
-
             <div class="panel panel-default" style="margin-top:50px;">
                 <div class="div-panel-heading">
                     Your Alert Coins
@@ -129,7 +120,6 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr id="thead_title">
-
                         </tr>
                         <tr>
                             <th class="td-cell">#</th>
@@ -168,7 +158,6 @@
 </div>
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Moonfolio</h4>
