@@ -42,11 +42,6 @@ function loadLivePortfolioData() {
 
         }
         $('#tbody_content').html(trHTML);
-        //$($('#example_wrapper')[0].childNodes[0]).css('display', 'none')
-        //$($('#example_wrapper')[0].childNodes[1]).css('width', '100%')
-        //$($('#example_wrapper')[0].childNodes[2]).css('display', 'none')
-
-        //sortTable();
     });
 }
 function doOnSortTable($tag) {

@@ -1,8 +1,6 @@
 var currentCryptoPage = 'prev';
 var currentUsersPage = 'prev';
 $(document).ready(function(){
-    //doOnParticles();
-    //doOnCircle();
     doOnLoginForm();
     doOnDrawCanvas();
     $('#top_cryptos_next').css('display', 'none');
@@ -10,10 +8,6 @@ $(document).ready(function(){
 
     loadLiveData();
     window.setInterval(loadLiveData, 10000);
-
-
-
-
 });
 function loadLiveData() {
     $.get('/toplivedata', function(response){
@@ -41,12 +35,9 @@ function loadLiveData() {
                 $('#top_users_next').css('display', '');
             }
         }
-
-        //console.log(response);
     });
 }
 function drawTopUsers( topUsers ) {
-    //console.log(topUsers);
     divHTML = '';
     if ( topUsers.length>0 ) {
         divHTML = '<div class="row" id="top_users_prev">';
@@ -377,9 +368,6 @@ doOnCircle = function() {
         function  drawScreen () {
             context.fillStyle = '#EEEEEE00';
             context.fillRect(0, 0, theCanvas.width, theCanvas.height);
-            //Box
-            //context.strokeStyle = '#000000';
-            //context.strokeRect(1,  1, theCanvas.width-2, theCanvas.height-2);
             ball.x = circle.centerX + Math.cos(circle.angle) * circle.radius;
             ball.y = circle.centerY + Math.sin(circle.angle) * circle.radius;
             circle.angle += ball.speed;
