@@ -46,11 +46,6 @@ $(document).ready(function(){
     $('.a-close-account').click(function(){
         $('#confirmCloseThisAccount').modal('show');
     });
-    //var element = document.getElementById('coinchart_detail');
-    //new ResizeSensor(element, function() {
-    //    $('.py-4').css('height', '100%');
-    //});
-    //
 });
 function doOnLoadLiveProfileCurrencyData() {
     $.get('/getliveprofilecurrencydata', function(resp){
@@ -120,10 +115,8 @@ function doOnRequestDelete() {
 function doOnRequestCloseThisAccount() {
     $('#confirmCloseThisAccount').modal('hide');
     $.get('closethisaccount', function(resp){
-        //$('#myConfirm').modal('show');
         if ( resp == 'ok') {
             window.location.href=window.origin+"/home";
-            //window.location.reload();
         }
 
     });
