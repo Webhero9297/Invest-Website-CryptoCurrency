@@ -5,7 +5,6 @@
         .control-label {
             font-family: Montserrat-light;
         }
-
         .here {
             background: url( {{ asset('./assets/images/icon/arrow_up_white.png') }}) no-repeat!important;
             background-size: 18px!important;
@@ -25,7 +24,6 @@
             position: relative;
             top: -10px;
         }
-
         /***************************************  Custom select box start  *********************************************/
         @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
         /*@import url(font-icomoon.css);*/
@@ -135,7 +133,6 @@
             -webkit-transition: .2s;
             z-index:2;
             background: #0297bf;
-
         }
         .selectCF li ul li{
             padding:9px 0 9px 20px;
@@ -177,9 +174,7 @@
             -moz-animation: effect1 0.3s alternate 1;
             -webkit-animation: effect1 0.3s alternate 1;
         }
-
         /***************************************  Custom select box end    *********************************************/
-
         #myInput {
             background-image: url({{ asset('./assets/images/icon/searchicon.png') }});
             background-position: 10px 8px;
@@ -195,16 +190,13 @@
         ::placeholder {
             color: white;;
         }
-
         :-ms-input-placeholder { /* Internet Explorer 10-11 */
             color: white;
         }
-
         ::-ms-input-placeholder { /* Microsoft Edge */
             color: white;
         }
     </style>
-{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
@@ -231,7 +223,6 @@
                                 <i class="fa fa-refresh" ></i>
                             </a>
                         </div>
-
                     </div>
                     <div class="panel-body panel-table">
                         <table id="coin_table" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" style="width:100%;margin-top: -5px!important;">
@@ -260,11 +251,8 @@
                                 </tr>
                             </tfoot>
                         </table>
-
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
