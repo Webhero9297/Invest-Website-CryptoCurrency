@@ -1,0 +1,543 @@
+body{
+    background: #000;
+    overflow-x: hidden;
+}
+@font-face {
+    font-family: "Montserrat-Black";
+    src: url("../assets/fonts/Montserrat-Black.otf");
+}
+@font-face {
+    font-family: "Montserrat-Bold";
+    src: url("../assets/fonts/Montserrat-Bold.otf");
+}
+@font-face {
+    font-family: "Montserrat-ExtraBold";
+    src: url("../assets/fonts/Montserrat-ExtraBold.otf");
+}
+@font-face {
+    font-family: "Montserrat-Hairline";
+    src: url("../assets/fonts/Montserrat-Hairline.otf");
+}
+@font-face {
+    font-family: "Montserrat-Light";
+    src: url("../assets/fonts/Montserrat-Light.otf");
+}
+@font-face {
+    font-family: "Montserrat-Regular";
+    src: url("../assets/fonts/Montserrat-Regular.otf");
+}
+@font-face {
+    font-family: "Montserrat-SemiBold";
+    src: url("../assets/fonts/Montserrat-SemiBold.otf");
+}
+@font-face {
+    font-family: "Montserrat-Thin";
+    src: url("../assets/fonts/Montserrat-Thin.ttf");
+}
+@font-face {
+    font-family: "Montserrat-UltraLight";
+    src: url("../assets/fonts/Montserrat-UltraLight.otf");
+}
+.navbar-fixed {
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+.logo {
+    background-image: url(../assets/images/background/logo.png);
+    height: 53px;
+    width: 287px;
+    background-size: cover;
+}
+.navbar-laravel {
+    background: linear-gradient(#000000ff, #00000000);
+    z-index: 2;
+}
+.navbar-light .navbar-nav .nav-link, .a-link {
+    color: rgba(255,255,255,1);
+    padding: .7rem 1.5rem;
+    font-size: 16px;
+    font-family: Montserrat-light;
+}
+.padding0 {
+    padding: 0!important;
+}
+.sign {
+    background: linear-gradient(#06b5e5, #0481a3);
+    margin: 0px 10px;
+    border-radius: 22px;
+    border-top: 1px solid #92e5fd;
+    border-left: 1px solid #92e5fd05;
+    border-right: 1px solid #92e5fd05;
+    text-shadow: 1px 1px 1px rgba(4, 4, 4, 0.83);
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: #FFFF00;
+    text-shadow: 1px 1px 10px black, 0 0 5px #ffe877, 0 0 5px #b99a01;
+}
+.navbar-light .navbar-toggler {
+    color: rgb(255, 255, 255);
+    border-color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+}
+.navbar-light .navbar-toggler-icon{
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.div-footer {
+    width:100%;
+    height: 100px;
+    /*position: fixed;*/
+    /*bottom:0;*/
+}
+.footer-copyright-label {
+    font-family: Montserrat-UltraLight;
+    margin-top: 40px;
+}
+.footer-backtotop {
+    float: right;
+    margin-top: 30px;
+    color: #282b39;
+    cursor: pointer;
+}
+.footer-backtotop:hover {
+    color: #392b49;
+    text-decoration: none;
+}
+.dropdown-new-menu {
+    background-color: #05a4cf;
+    border-radius: 0;
+    color: white;
+    font-family: Montserrat-UltraLight;
+}
+.dropdown-item {
+    border-bottom: 1px solid #05a4cf;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+    color: gold!important;
+    background-color: #05a4cf;
+    border-bottom: 1px solid #3d4d5d;
+}
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: transparent!important;
+    background-image: none;
+    color: white;
+}
+.form-control {
+    padding: .3rem .75rem;
+    height: 40px;
+}
+.form-control.input-form-control.grey-border {
+    height:46px;
+}
+/***  ***/
+select.our {
+    font-size: 18px;
+    width: 100%;
+    padding: 7px 0 16px -1px;
+    /* needed */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* SVG background image */
+    background: url("../assets/images/icon/arrow_up.png") no-repeat;
+    background-size: 18px;
+    background-position: calc(100% - 10px) center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    color: grey;
+    border: 1px solid grey;
+}
+select.form-control {
+    height: 46px!important;;
+}
+select option {
+    padding: 10px 0px!important;
+    background-color: rgba(0,0,0,0.1)!important;
+    color: black;
+}
+
+.our:focus {
+    background-color: transparent;
+}
+/*** SPINNER START***/
+.spinner {
+    width: 100px;
+}
+.spinner input {
+    text-align: right;
+}
+.input-group-btn-vertical {
+    position: relative;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+    display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+    display: block;
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 11px;
+    margin-left: -1px;
+    position: relative;
+    border-radius: 0;
+    border: 1px solid grey;
+    background: transparent;
+    color: white;
+}
+.input-group-btn-vertical > .btn:first-child {
+    border-top-right-radius: 4px;
+}
+.input-group-btn-vertical > .btn:last-child {
+    margin-top: -2px;
+    border-bottom-right-radius: 4px;
+}
+.input-group-btn-vertical i{
+    position: absolute;
+    top: 4px;
+    left: 7px;
+}
+label.control-label{
+    font-size: 15px;
+    font-family: Montserrat-UltraLight;
+    font-weight: bold;
+}
+/**** SPINNER END ****/
+.grey-color {
+    color: grey;
+}
+.grey-border{
+    border-color: grey;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+/***   Search Filter Start ************************************************************************** ***/
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+[data-icon]:after {
+    font-family: "entypo";
+    content: attr(data-icon);
+    speak: none;
+}
+input[type="search"] {
+    /*width: 196px;*/
+    /*height: 36px;*/
+    padding: 0;
+    line-height: 32px;
+    background: #56e2c9;
+    color: #fff;
+    /*border: 0;*/
+    font: bold 14px/20px "Arial", sans-serif;
+    text-indent: 12px;
+    outline: none;
+    -webkit-appearance: textfield;
+}
+input[type="search"]::-webkit-input-placeholder {
+    color: transparent;
+}
+input[type="search"]::-moz-input-placeholder {
+    color: transparent;
+}
+input[type="search"]:-ms-input-placeholder {
+    color: transparent;
+}
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-results-button, input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+}
+input[type="search"]::-webkit-search-cancel-button:before, input[type="search"]::-webkit-search-results-button:before, input[type="search"]::-webkit-search-results-decoration:before {
+    position: absolute;
+    content: 'x';
+    font-style: normal;
+}
+input[type="search"]:invalid {
+    /*border: 0 !important;*/
+}
+input[type="search"]:invalid::-webkit-search-cancel-button:before, input[type="search"]:invalid::-webkit-search-results-button:before, input[type="search"]:invalid::-webkit-search-results-decoration:before {
+    font-family: "entypo";
+    content: attr(data-icon);
+}
+input[type="search"] + label {
+    position: absolute;
+    margin: 8px 0 0 -30px;
+    cursor: pointer;
+}
+input[type="search"] + label:before {
+    position: absolute;
+    content: 'Choisir';
+    left: -152px;
+    width: 180px;
+    color: #fff;
+    font: bold 14px/20px "Arial", sans-serif;
+    text-align: left;
+}
+input[type="search"] + label:after {
+    margin-left: 7px;
+    color: #fff;
+    content: '\25BE';
+}
+
+input[type="search"]:focus::-webkit-input-placeholder {
+    font-weight: normal;
+    color: #fff;
+}
+input[type="search"]:focus::-moz-input-placeholder {
+    font-weight: normal;
+    color: #fff;
+}
+input[type="search"]:focus:-ms-input-placeholder {
+    font-weight: normal;
+    color: #fff;
+}
+input[type="search"]:focus:invalid + label:before {
+    display: none;
+}
+input[type="search"]:focus:invalid + label:after {
+    margin-left: 4px;
+    content: attr(data-icon);
+}
+input[type="search"]:valid + label {
+    display: none;
+}
+
+.ui-autocomplete {
+    width: 190px;
+    max-height: 180px;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #000000;
+    color: #fff;
+    border-width: 4px 4px 4px 0;
+    border-style: solid;
+    border-color: #333333;
+}
+.ui-autocomplete ul {
+    list-style: none;
+}
+.ui-autocomplete li {
+    height: 36px;
+    margin: 0;
+    font: bold 14px/36px Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+}
+.ui-autocomplete li:hover {
+    -moz-transition: background 0.3s ease-in;
+    -o-transition: background 0.3s ease-in;
+    -webkit-transition: background 0.3s ease-in;
+    transition: background 0.3s ease-in;
+    background: #555555;
+}
+
+.ui-autocomplete li a {
+    display: block;
+    padding: 0 12px;
+    cursor: pointer;
+}
+.ui-corner-all {
+    color: white;
+}
+.ui-corner-all:hover {
+    color: white;
+    text-decoration: none;
+}
+/***   Search Filter End ************************************************************************** ***/
+
+.div-coins {
+    background-image: url(../assets/images/background/login-bg.png);
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    margin-top: -56px;
+    padding-top: 5px;
+    padding-bottom: 1px;
+    /*height: 737px;*/
+    /*overflow-y: scroll;*/
+}
+.a-refresh {
+    font-size: 35px;
+    margin-top: -7px;
+    margin-right: -5px;
+}
+.a-white {
+    color: white;
+}
+.a-white:hover {
+    color: gold;
+    text-decoration: none;
+}
+
+/*********   Datatable Customizing Starting ...... **********/
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #dadbdc24;
+    border: none;
+}
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: none!important;
+}
+.table-bordered>thead>tr>th {
+    border: none!important;
+    border-bottom: 2px solid #0297bf!important;
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
+}
+.table-bordered>tbody>tr>td.td-grey {
+    border: none!important;
+    background-color: #5f5d5d33;
+    border-top:1px solid darkgrey!important;
+}
+.table-bordered>tbody>tr>td {
+    padding: 0.3rem;
+    /*border-bottom: 1px solid grey!important;*/
+}
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #232323;
+    border-color: #ddd;
+}
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    z-index: 2;
+    color: #ffffff;
+    background-color: #65656570;
+    border-color: #ddd;
+}
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: transparent;
+    border-color: #ddd;
+}
+.table-bordered th, .table-bordered td {
+    /*font-family: Montserrat-UltraLight;*/
+    font-size: 16px;
+}
+table.dataTable {
+    margin-top: -5px !important;
+}
+/*********   Datatable Customizing Ending ...... **********/
+.panel-default{
+    border:none;
+    background: transparent;
+}
+/*********    Real Chat Customizing Start   ****************/
+.cryptocompare-logo {
+    display: none;
+}
+#marketsContainerUSD, #marketsContainerAUD, #marketsContainerGBP, #marketsContainerEUR, #marketsContainerCAD, #marketsContainerCandleUSD, #marketsContainerCandleAUD, #marketsContainerCandleGBP, #marketsContainerCandleEUR, #marketsContainerCandleCAD {
+    display: none!important;
+}
+.chartTypeTabLinks {
+    border-radius: 5px;
+    color: black;
+    background: grey!important;
+    margin-right: 10px!important;
+    margin-bottom: 30px;
+
+}
+.tabperiods {
+    background: grey!important;
+    width: calc(100% / 6 - 5px)!important;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    height: auto!important;
+    color: white!important;
+    font-size: 16px!important;
+    font-weight: bold!important;
+    border-radius: 5px!important;
+}
+#tabElemUSD, #tabElemAUD, #tabElemCAD, #tabElemGBP, #tabElemEUR {
+    border-radius: 5px;
+    color: black;
+    background: grey;
+    margin-right: 10px!important;
+    margin-bottom: 30px;
+}
+.cTypeTabActive, .tablinks.active, .tabperiods_active {
+    background: #0297df!important;
+    color:white!important;
+}
+.tablinks {
+    color: white!important;
+    padding: 4px 20px!important;
+    border: none!important;
+    /*border-radius: 15px!important;*/
+}
+.tabContainer {
+    margin-top: -94px!important;
+    margin-left: 558px!important;
+}
+.ccc-widget>div:nth-child(2) {
+    background: #016a84!important;
+    border: 1px dotted #111!important;
+    border-radius:5px;
+    color:white!important;
+    font-family: Montserrat-UltraLight;
+}
+.tabsPeriodsContainer {
+    width:100%!important;
+    margin-top:20px!important;
+}
+/*********    Real Chat End   ****************/
+
+.div-portfolios-rect {
+    padding-top: 100px!important;
+    padding-bottom: 200px!important;
+}
+.btn-primary{
+    background: #333333;
+    border-color: #0277bf;
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #0297bf;
+    border-color: #0277bf;
+}
+.btn-primary:hover {
+    color: gold;
+    background-color: #0297bf;
+    border-color: #0277bf;
+}
+.panel-table {
+    min-height: 250px;
+    padding-left:0px!important;
+    padding-right:0px!important;
+    padding-top:1px!important;
+}
+.wrap-div-col {
+    font-size: 16px;
+}
+.label-title-portfolio {
+    font-size: 24px;
+    padding-bottom: 5px;
+    font-weight:bold;
+    font-family: Montserrat-UltraLight;
+}
+.span-sort{
+    cursor: pointer;
+}

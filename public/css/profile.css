@@ -1,0 +1,274 @@
+.div-panel-heading {
+    background: url(../assets/images/background/panel-header.png);
+    color: white;
+    font-size: 24px;
+    padding: 10px 20px 25px;
+    background-size: cover;
+}
+.panel-body {
+    margin-top: -15px;
+    background: rgba(0,0,0,0.75);
+    border-radius: 7px;
+    color: white;
+    padding: 15px;
+}
+.div-avatar-img {
+    min-width: 200px;
+    min-height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 1px solid #333333;
+    height: 200px;
+}
+.div-avatar-img-choise-btn {
+    color: #0297bf;
+    font-size: 48px;
+    font-family: Montserrat-UltraLight;
+}
+.img-edit {
+    display: block;
+    margin-top: -24px;
+    color: #0297bf;
+    cursor: pointer;
+}
+.img-edit:hover {
+    color: gold;
+}
+.img-icon {
+    width:43px;
+    height:43px;
+}
+.img-email {
+    background-image: url(../assets/images/icon/profile_email.png);
+}
+.img-name {
+    background-image: url(../assets/images/icon/profile_name.png);
+}
+.img-gender {
+    background-image: url(../assets/images/icon/profile_gender.png);
+}
+.img-age {
+    background-image: url(../assets/images/icon/profile_age.png);
+}
+.img-country {
+    background-image: url(../assets/images/icon/profile_country.png);
+}
+.i-icon {
+    font-size: 17px;
+    color: white;
+    border: 1px solid white;
+    width: 36px;
+    height: 36px;
+    padding: 7px 10px;
+    border-radius: 51%;
+}
+.img-icon-email {
+    color: white;
+    border: 1px solid white;
+    width: 36px;
+    height: 36px;
+    padding: 6px 8px 9px;
+    border-radius: 50%;
+}
+.row {
+    padding:10px;
+}
+.div-flex {
+    display: flex;
+}
+.div-label-first{
+    font-size: 17px;
+    color: grey;
+    padding-left: 15px;
+    font-family: Montserrat-UltraLight;
+}
+.div-label-value {
+    font-size: 17px;
+    color: white;
+    padding-left: 5px;
+    font-weight: bold;
+    font-family: Montserrat-UltraLight;
+}
+.div-pt-5 {
+    padding-top: 5px;
+}
+.div-pt-7 {
+    padding-top: 7px;
+}
+.a-edit {
+    float: right;
+    margin-right: -10px;
+}
+.a-close-account {
+    width: 24px;
+    height: 24px;
+    display: block;
+    float: right;
+    margin-top: -1px;
+    margin-right: -60px;
+    cursor: pointer;
+    color: white;
+    font-size: 27px;
+}
+.a-close-account:hover {
+    color:gold!important;
+    /*margin-top: -3px;*/
+}
+.a-pencil {
+    background-image: url(../assets/images/icon/pencil.png);
+    width:24px;
+    height:24px;
+    display: block;
+    float: right;
+    margin-top: 8px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.a-pencil:hover{
+    /*margin-top:7px;*/
+    background-image: url(../assets/images/icon/pencil_hover.png);
+}
+.a-plus {
+    background-image: url(../assets/images/icon/add_plus.png);
+    width: 40px;
+    height: 40px;
+    display: block;
+    float: right;
+    margin-top: -1px;
+    margin-right: -8px;
+    cursor: pointer;
+}
+.a-plus:hover{
+    /*margin-top:-2px;*/
+    background-image: url(../assets/images/icon/add_plus_hover.png);
+}
+.a-add-to-portfolio {
+    background-image: url(../assets/images/icon/addtoportfolio.png);
+    width: 187px;
+    height: 38px;
+    display: block;
+    float: right;
+    margin-top: -1px;
+    margin-right: -8px;
+    cursor: pointer;
+}
+.a-add-to-portfolio:hover{
+    margin-top:-2px;
+}
+.label-total {
+    font-size: 24px!important;
+    padding-top: 15px;
+}
+.a-currency-edit{
+    background-image: url(../assets/images/icon/profile_coin_edit.png);
+    width: 42px;
+    height: 42px;
+    display: block;
+    float: left;
+}
+.a-currency-delete{
+    background-image: url(../assets/images/icon/profile_coin_remove.png);
+    width: 42px;
+    height: 42px;
+    display: block;
+    float: left;
+}
+th.td-cell {
+    vertical-align: top;
+    border: none;
+    border-bottom: 1px solid #0297bf;
+}
+td.td-cell {
+    vertical-align: top;
+    border: none;
+    border-bottom: 1px solid #555555;
+}
+.table thead th {
+    border-bottom: 2px solid #53a9ff;
+}
+.table-bordered, .table-bordered td, .table-bordered th {
+    border: 0px solid #dee2e6;
+}
+.td-cell {
+    font-family: Montserrat-UltraLight;
+    font-size: 12px;
+    border: none;
+    text-align: center;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle!important;
+    font-weight: bold!important;
+}
+.td-action {
+    width:100px;
+    padding: 5px 8px!important;
+}
+.td-coin-icon {
+    width:42px;
+    height:42px;
+}
+.color-red{
+    font-family: Montserrat-Light;
+    color: #ff0000;
+}
+.color-green{
+    font-family: Montserrat-Light;
+    color: #00ff00;
+}
+
+.btn-save-details {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 17px 20px;
+    width: 220px;
+    margin-left:20px;
+}
+.input-form-control {
+    background: transparent!important;
+    color: white!important;
+}
+.modal-header{
+    background: #0297bf;
+    color: white;
+    border: none;
+}
+.modal-body, .modal-footer {
+    background: rgba(0,0,0,1);
+    color: white;
+    border:none;
+}
+.modal-content {
+    border: 1px solid white;
+}
+.img-avatar {
+    width:100%;
+    cursor: pointer;
+    border: 1px solid #0297bf;
+}
+.img-avatar:hover {
+    border:1px solid gold;
+}
+.selected {
+    border:1px solid gold;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+div.file {
+    position: relative;
+    overflow: hidden;
+    width: 320px;
+}
+input.user_avatar {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    height: 55px;
+    cursor: pointer;
+}
+.td-cell {
+    height: 60px;
+    min-height:60px;
+    font-size: 16px;
+}

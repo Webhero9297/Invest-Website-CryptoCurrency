@@ -1,0 +1,1234 @@
+.smartObject {
+    background-image: url('../assets/images/background/smartObject.png');
+    background-size: cover;
+}
+label {
+    color: white;
+}
+.home-label {
+    display:block;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+.a-link {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+}
+.a-link:hover {
+    color: gold;
+}
+.div-container {
+    width: 100%;
+}
+.div-button-wrap {
+    padding-top: 30px;
+}
+#canvas, #text {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+#text {
+    min-height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 8vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#text h1 {
+    opacity: 0.9
+}
+.div-home {
+    background-image: url(../assets/images/background/home.png);
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    /*margin-top: -56px;*/
+    padding-top: 70px;
+    padding-bottom: 131px;
+    min-height: 840px;
+}
+.div-topportios {
+    background-image: url('../assets/images/background/topportios.png');
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    padding-top: 0;
+    padding-bottom: 1px;
+    margin-top: -320px;
+}
+.div-features {
+    background-image: url('../assets/images/background/features.png');
+    background-size: 100% 100%;
+    position: relative;
+    z-index: 1;
+    /*padding-top: 50px;*/
+    padding-bottom: 10px;
+}
+.div-topcryptos {
+    background-image: url('../assets/images/background/topcryptos.png');
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    padding-top: 0;
+    padding-bottom: 5px;
+    /*margin-top:-260px;*/
+}
+.div-faq {
+    background-image: url('../assets/images/background/faq.png');
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+.div-clienttest {
+    background-image: url('../assets/images/background/clienttest.png');
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 55px;
+}
+.div-aboutus {
+    background-image: url('../assets/images/background/aboutus.png');
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 60px;
+}
+.div-avatar-bg {
+    background-image: url('../assets/images/background/panel-bk.png');
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 190px;
+    padding: 10px;
+    border: 1px solid #666666;
+
+}
+.div-avatar-panel {
+    padding-left: 0;
+    cursor: pointer;
+}
+.div-avatar-panel:hover {
+    /*box-shadow: 2px 3px 18px #888888;*/
+
+}
+/*.div-avatar-icon {*/
+    /*background-image: url('../assets/images/avatars/default.png');*/
+    /*background-size: cover;*/
+    /*width: 64px;*/
+    /*height: 64px;*/
+    /*border: 2px solid white;*/
+    /*border-radius: 50%;*/
+    /*margin:auto;*/
+    /*margin-bottom: 10px;*/
+/*}*/
+.div-avatar-icon {
+    background-size: cover;
+    width: 70px;
+    height: 70px;
+    border: 2px solid white;
+    border-radius: 50%;
+    margin:auto;
+    margin-bottom: 10px;
+    background: white;
+}
+.div-avatar-icon img {
+    width:100%;
+    height:100%;
+}
+.btn-action {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 54px;
+    height: 54px;
+    cursor: pointer;
+}
+.div-numeric {
+    color: #ffffff94;
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #ffffff94;
+    border-radius: 50%;
+    font-family: sans-serif;
+    font-stretch: expanded;
+    padding: 1px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.div-user-name {
+    color: white;
+    font-size: 20px;
+    font-family: 'Montserrat-light';
+    font-stretch: expanded;
+    margin-bottom: 10px;
+}
+.div-subtitle {
+    font-size: 13px;
+    margin-top: -15px;
+}
+.div-white-wrap {
+    background: white;
+    padding-top: 15px;
+    border-bottom: 1px dotted grey;
+    padding-bottom: 25px;
+}
+.div-panel-title {
+    font-size: 14px;
+    font-weight: bolder;
+    font-stretch: expanded;
+    font-family: Montserrat-Regular;
+}
+.div-panel-money {
+    font-size: 14px;
+    font-weight: bolder;
+    font-stretch: expanded;
+    font-family: Montserrat-Light;
+    color: #555555;
+}
+.div-panel-icon-wrap {
+    color: white;
+    font-size: 18px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin: auto;
+    font-weight: lighter;
+}
+#btn_prev {
+    background-image: url('../assets/images/background/btn-prev.png');
+}
+#btn_next {
+    background-image: url('../assets/images/background/btn-next.png');
+}
+.btn-action:hover {
+    background-color: #ffffff10;
+}
+.div-top-title {
+    padding-top: 20px;
+}
+.div-features-wrap {
+    margin-left: -100px;
+    margin-right: -100px;
+}
+.media {
+    margin: 30px 0 50px 0;
+}
+.div-sep {
+    margin-bottom: 13px;
+}
+.white-text {
+    color: white;
+}
+.faq-subtitle {
+    font-size: 22px;
+    margin-top: 10px;
+    font-family: Montserrat-Light;
+}
+.features-img {
+    width: 400px;
+    margin-top: 70px;
+    margin-right: 50px;
+    float: right;
+}
+/** FAQ start **/
+
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: rgba(255,255,255,0);
+    border-color: #e4e5e7;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.panel-default>.panel-heading a {
+    display: block;
+    background: white;
+    font-family: Montserrat-Light;
+    color: black;
+    text-decoration: none;
+    height: 60px;
+    width: 80%;
+    padding: 12px 15px;
+    font-size: 27px;
+}
+
+.panel-default>.panel-heading a:after {
+    content: "\f054";
+    /*background: url('../assets/images/background/gt.png');*/
+    position: relative;
+    top: 6px;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 100;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    float: right;
+    transition: transform .25s linear;
+    -webkit-transition: -webkit-transform .25s linear;
+}
+
+.panel-default>.panel-heading a[aria-expanded="true"] {
+    background-color: rgba(255,255,255,0.1);
+    background: white;
+    color: #0099d2;
+}
+
+.panel-default>.panel-heading a[aria-expanded="true"]:after {
+    content: "\f054";
+    /*background: url('../assets/images/background/gt.png');*/
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.panel-default>.panel-heading a[aria-expanded="false"]:after {
+    content: "\f054";
+    /*background: url('../assets/images/background/gt.png');*/
+    /*-webkit-transform: rotate(90deg);*/
+    /*transform: rotate(90deg);*/
+}
+
+.accordion-option {
+    width: 100%;
+    float: left;
+    clear: both;
+    margin: 15px 0;
+}
+
+.accordion-option .title {
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+.accordion-option .toggle-accordion {
+    float: right;
+    font-size: 16px;
+    color: #6a6c6f;
+}
+
+.accordion-option .toggle-accordion:before {
+    content: "Expand All";
+}
+
+.accordion-option .toggle-accordion.active:before {
+    content: "Collapse All";
+}
+.div-faq-content {
+    margin-top:-8px;
+    width: 80%;
+    font-family: Montserrat-Hairline;
+    font-size:14px;
+    padding: 20px;
+    background: #464855;
+    color: white;
+}
+.img-faq-icon {
+    width:32px;height:32px;margin-top:-3px;
+}
+/** FAQ end **/
+.div-pad1-panel {
+    margin-top: 70px;
+    background: url(../assets/images/background/pad1-panel.png);
+    height: 300px;
+    width: 900px;
+    background-repeat: no-repeat;
+    float: right;
+    margin-right: -50px;
+}
+.div-pad1{
+    background: url('../assets/images/background/i-pad_02.png');
+    height:400px;
+    width:480px;
+    margin-left: -220px;
+    margin-top: -60px;
+    background-size: cover;
+}
+.div-pad1-label-title{
+    position: absolute;
+    right: 0;
+    top: 80px;
+    width: 530px;
+    text-align: justify;
+    font-family: Montserrat-Black;
+    font-size: 36px;
+    font-weight: bolder;
+}
+.div-pad1-label{
+    position: absolute;
+    right: 0;
+    top: 150px;
+    width: 530px;
+    text-align: justify;
+    font-size: 16px;
+    font-family: Montserrat-Light;
+}
+.div-pad2-label-title{
+    position: absolute;
+    left: 0;
+    top: 90px;
+    width: 530px;
+    text-align: justify;
+    font-family: Montserrat-Black;
+    font-size: 36px;
+    font-weight: bolder;
+}
+.div-pad2-label{
+    position: absolute;
+    left: 0;
+    top: 153px;
+    width: 620px;
+    text-align: justify;
+    font-size: 16px;
+    font-family: Montserrat-Light;
+}
+.div-pad2 {
+    background: url(../assets/images/background/i-pad_01.png);
+    height: 400px;
+    width: 460px;
+    margin-right: -206px;
+    margin-top: -70px;
+    float: right;
+    background-size: cover;
+}
+.div-pad2-panel {
+    margin-top: 80px;
+    margin-bottom: 0px;
+    background: url(../assets/images/background/pad2-panel.png);
+    height: 280px;
+    width: 895px;
+    background-repeat: no-repeat;
+}
+.label-aboutus {
+    text-align: justify;
+    width:100%;
+    font-family: Montserrat-Light;
+    font-size:16px;
+    margin-top: 30px;
+}
+.form-contact {
+    background: white;
+    padding: 10px 40px;
+    font-family: Montserrat-UltraLight;
+}
+.form-contact label {
+    color: #000;
+}
+.form-contact input, .form-contact textarea {
+    color: #000;
+    border: 1px solid #eee;
+}
+.btn-sendmessage{
+    /*width:100%;*/
+    border-radius: 0;
+    padding: 15px 30px;
+    font-family: Montserrat-SemiBold;
+    font-size: 18px;
+    background-color: #0297df;
+}
+.label-auth-top-title{
+    font-size: 32px;
+    text-align: center;
+    font-family: Montserrat-Thin;
+    display: block;
+}
+.label-auth-sub-title{
+    font-size: 32px;
+    text-align: center;
+    font-family: Montserrat-SemiBold;
+    margin-top: -20px;
+    display: block;
+}
+.div-auth-button-wrap{
+    width:340px;
+    margin:auto;
+}
+.btn-auth {
+    border-bottom: none;
+    width:100%;
+}
+.label-auth-bottom-title{
+    font-size: 20px;
+    text-align: center;
+    font-family: Montserrat-Light;
+}
+.a-join-here {
+    display: inline-block;
+    color: #0481a3;
+    font-size: 21px;
+    font-family: Montserrat-Light;
+    padding: 3px;
+}
+.div-auth-login{
+    background-image: url(../assets/images/background/login-bg.png);
+    background-size: 100% 100%;
+    position: relative;
+    z-index: 1;
+    padding-top: 5px;
+    min-height: 507px;
+    height: 100%;
+}
+.div-auth-register{
+    background-image: url(../assets/images/background/login-bg.png);
+    background-size: 100% 100%;
+    position: relative;
+    z-index: 1;
+    padding-top: 5px;
+    min-height: 507px;
+    height: 100%;
+}
+/********************************** Material Login Form  Start **********************/
+form.auth-login {
+    width: 960px;
+    margin: 6em auto;
+    padding: 3em 10em 2em 10em;
+    background: transparent;
+}
+.group {
+    position: relative;
+    margin-bottom: 45px;
+}
+input.auth-input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    -webkit-appearance: none;
+    display: block;
+    background: transparent;
+    color: #636363;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #757575;
+}
+input.auth-input:focus { outline: none; }
+/* Label */
+label.auth-label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: all 0.3s ease;
+    font-family: Montserrat-UltraLight;
+}
+/* active */
+input.auth-input:focus ~ label, input.auth-input.used ~ label {
+    top: -20px;
+    transform: scale(.75); left: -2px;
+    /* font-size: 14px; */
+    color: #FFFFFF;
+}
+
+/* Underline */
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.bar:before, .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #FFFFFF;
+    transition: all 0.2s ease;
+}
+.bar:before { left: 50%; }
+.bar:after { right: 50%; }
+/* active */
+input.auth-input:focus ~ .bar:before, input.auth-input:focus ~ .bar:after { width: 50%; }
+/* Highlight */
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.01;
+}
+/* active */
+input.auth-input:focus ~ .highlight {
+    animation: inputHighlighter 0.2s ease;
+}
+/* Animations */
+@keyframes inputHighlighter {
+    from { background: #FFFFFF; }
+    to 	{ width: 0; background: transparent; }
+}
+/* Button */
+.button {
+    position: relative;
+    display: inline-block;
+    padding: 30px;
+    margin: .3em 0 1em 0;
+    width: 320px;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 16px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    letter-spacing: 1px;
+    background: linear-gradient(#06b5e5, #0481a3);
+    border: none;
+    font-family: Montserrat-Light;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border-radius: 40px;
+    border-top: 1px solid #92e5fd;
+    border-left: 1px solid #92e5fd05;
+    border-right: 1px solid #92e5fd05;
+}
+.button:focus { outline: 0; }
+/* Button modifiers */
+.buttonBlue {
+    background: linear-gradient(#06b5e5, #0481a3);
+    text-shadow: 1px 1px 1px rgba(4, 4, 4, 0.83);
+}
+.buttonBlue:hover {
+    background: linear-gradient(#06b5e5, #0481a3);
+}
+.buttonRed {
+    border-top: 1px solid #ff7474;
+    background: linear-gradient(#e50606, #650202);
+}
+/* Ripples container */
+.ripples {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+/* Ripples circle */
+.ripplesCircle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+}
+.ripples.is-active .ripplesCircle {
+    animation: ripples .4s ease-in;
+}
+/* Ripples animation */
+@keyframes ripples {
+    0% { opacity: 0; }
+    25% { opacity: 1; }
+    100% {
+        width: 200%;
+        padding-bottom: 200%;
+        opacity: 0;
+    }
+}
+footer { text-align: center; }
+footer p {
+    color: #888;
+    font-size: 13px;
+    letter-spacing: .4px;
+}
+footer a {
+    color: #4a89dc;
+    text-decoration: none;
+    transition: all .2s ease;
+}
+footer a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+footer img {
+    width: 80px;
+    transition: all .2s ease;
+}
+footer img:hover { opacity: .83; }
+footer img:focus , footer a:focus { outline: none; }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}
+input:-webkit-autofill ~ label {
+    top:-20px;
+    transform: scale(.75);
+    left: -2px;
+}
+/************************************************************* Material Login Form End ***/
+.auth-title {
+    margin-left: -8rem;
+    margin-bottom: 50px;
+    margin-right: -8rem;
+}
+@media (max-width:768px) {
+    .div-title {
+        padding-top: 0;
+    }
+    .a-link {
+        font-size: 26px;
+    }
+    .smartObject {
+        width: 347px;
+        height: 238px;
+    }
+    .div-container {
+        padding: 10px 0px;
+    }
+    .jointhe {
+        font-size: 64px;
+        font-family: 'Montserrat-light';
+        font-stretch: expanded;
+    }
+    .community {
+        font-size: 48px;
+        font-family: "Montserrat-Black";
+        font-stretch: expanded;
+        font-weight: bolder;
+        font-style: unset;
+    }
+    .lets {
+        font-size: 28px;
+        font-family: 'Montserrat-UltraLight';
+        font-weight: lighter;
+        font-stretch: expanded;
+    }
+    .moon {
+        font-size: 82px;
+        font-stretch: expanded;
+        font-family: "Montserrat-Black";
+        font-weight: 900;
+    }
+}
+@media (min-width:768px) {
+    .div-home {
+        width: 100%;
+    }
+    .div-title {
+        padding-top: 55px;
+        margin-left: -22px;
+    }
+    .smartObject {
+        width: 540px;
+        height: 370px;
+        margin: auto;
+        margin-top: 164px;
+        position: absolute;
+        top: 38px;
+        right: -18px;
+    }
+
+    #particles-js {
+        position: absolute;
+        height: 760px!important;
+        width: 760px!important;
+        border-radius: 400px;
+        overflow: hidden;
+        margin: 20px 40px 40px 20px;
+    }
+    .a-link {
+        font-size: 32px;
+    }
+    .div-container {
+        padding:10px 10%;
+    }
+    .jointhe {
+        font-size: 64px;
+        font-family: 'Montserrat-Light';
+        font-stretch: expanded;
+        padding-top: 15px;
+    }
+    .community {
+        font-size: 65px;
+        font-family: "Montserrat-Black";
+        font-stretch: expanded;
+        font-weight: bolder;
+        font-style: unset;
+        padding-top: 15px;
+    }
+    .lets {
+        font-size: 41px;
+        font-family: 'Montserrat-Hairline';
+        font-weight: lighter;
+        font-stretch: expanded;
+        padding-top: 15px;
+    }
+    .top {
+        font-size: 70px;
+        font-weight: lighter;
+        font-stretch: expanded;
+        margin-top: -12px;
+    }
+    .port{
+        font-size: 80px;
+    }
+    .moon {
+        font-size: 122px;
+        font-stretch: expanded;
+        font-family: "Montserrat-Black";
+        font-weight: 900;
+        margin-top: -15px;
+    }
+    .label-take {
+        font-size: 29px;
+        font-family: Montserrat-UltraLight;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .icon-main {
+        font-size: 32px;
+        font-stretch: expanded;
+        font-family: "Montserrat-Black";
+        font-weight: 900;
+    }
+    .faq {
+        margin-top: -80px;
+        font-size: 100px;
+    }
+    .client {
+        margin-top: -11px;
+    }
+    .testimonials {
+        margin-top: -30px;
+    }
+    .form-auth {
+        margin-top: 90px;
+    }
+    .label-features {
+        margin-top: -42px;
+    }
+    .label-top-aboutus {
+        float: right;
+        font-size: 90px;
+        margin-top: 1px;
+    }
+    .form-contact label {
+        font-size: 14px;
+        font-weight: normal;
+        font-family: Montserrat-UltraLight;
+    }
+    .form-group {
+        margin-bottom: 0;
+    }
+    .page-btn-group {
+        width: fit-content;
+        display: flex;
+    }
+    .btn-page {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+        border-radius: 50%;
+        padding: 7px 10px;;
+        text-align: center;
+        line-height: 1.7;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 1px;
+    }
+    .btn-page:hover {
+        background: rgba(255,255,255,0.1);
+    }
+    .btn-page-active {
+        background: rgba(255,255,255,0.075);
+        border: 1px dotted grey;
+    }
+}
+@media (width:1024px) and (height:768px) {
+    .div-features {
+        padding-bottom: 10px;
+    }
+    .nav-div-container {
+        margin-left: 10px;
+    }
+    .div-panel-heading {
+        background-size: 100% 100%;
+    }
+    .button {
+        padding: 20px;
+        font-size: 20px;
+    }
+    .div-home {
+        width: 100%;
+        padding-top: 0;
+    }
+    .div-top-title {
+        padding-top: 20px;
+    }
+    .div-title {
+        padding-top: 55px;
+        margin-left: -22px;
+    }
+    .smartObject {
+        width: 380px;
+        height: 260px;
+        margin-top: 260px;
+        position: absolute;
+        top: 38px;
+        right: -18px;
+    }
+    #myCanvas {
+        width: 600px;
+        height:600px;
+        margin: 120px 60px -10px;
+    }
+    #particles-js {
+        position: absolute;
+        height: 560px!important;
+        width: 560px!important;
+        border-radius: 400px;
+        overflow: hidden;
+        margin: 140px 230px 6px 80px;
+    }
+    .a-link {
+        font-size: 32px;
+    }
+    .div-container {
+        padding:10px 10%;
+    }
+    .jointhe {
+        font-size: 44px;
+    }
+    .community {
+        font-size: 50px;
+    }
+    .lets {
+        font-size: 32px;
+    }
+    .top {
+        font-size: 60px;
+    }
+    .port{
+        font-size: 60px!important;
+        padding-top: 30px;
+    }
+    .moon {
+        font-size: 110px;
+    }
+    .features-img {
+        width: 330px;
+        float: right;
+        margin-top: 50px;
+        margin-right: 50px;
+    }
+    .media {
+        margin: 28px 0 20px 0;
+    }
+    .div-faq {
+        padding-top: 0;
+        padding-bottom: 10px;
+    }
+    .div-aboutus {
+        padding-bottom: 30px;
+    }
+    .div-clienttest {
+        padding-bottom: 10px;
+    }
+    .features-right-buttun-wrap {
+        padding-left: 0!important;
+        margin-top: -20px;
+    }
+    .label-take {
+        font-size: 29px;
+        font-family: Montserrat-UltraLight;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .icon-main {
+        font-size: 32px;
+        font-stretch: expanded;
+        font-family: "Montserrat-Black";
+        font-weight: 900;
+    }
+    .div-pad1-panel {
+        margin-top: 30px;
+        height: 240px;
+        width: 880px;
+    }
+    .div-pad1 {
+        height: 324px;
+        width: 390px;
+        margin-left: -140px;
+        margin-top: -55px;
+    }
+    .div-pad1-label-title {
+        top: 40px;
+        font-size: 30px;
+    }
+    .div-pad1-label {
+        top: 90px;
+        width: 540px;
+        font-size: 14px;
+    }
+    .div-pad2-panel {
+        margin-left: -100px;
+        height: 240px;
+        width: 895px;
+        margin-top: 40px;
+    }
+    .div-pad2 {
+        height: 330px;
+        width: 380px;
+        margin-right: -145px;
+        margin-top: -50px;
+    }
+    .div-pad2-label-title {
+        top: 50px;
+        font-size: 30px;
+    }
+    .div-pad2-label {
+        top: 100px;
+        width: 560px;
+        font-size: 14px;
+    }
+    .label-aboutus {
+        margin-top: 10px;
+    }
+    .faq {
+        margin-top: -37px;
+        font-size: 100px;
+    }
+    .client {
+        margin-top: -11px;
+    }
+    .testimonials {
+        padding-top: 0;
+    }
+    .form-auth {
+        margin-top: 90px;
+    }
+    .label-features {
+        margin-top: -42px;
+    }
+    .label-top-aboutus {
+        float: right;
+        font-size: 110px;
+        margin-top: 1px;
+    }
+    .form-contact label {
+        font-size: 14px;
+        font-weight: normal;
+        font-family: Montserrat-UltraLight;
+    }
+    .form-group {
+        margin-bottom: 0;
+    }
+    .page-btn-group {
+        width: fit-content;
+        display: flex;
+    }
+    .btn-page {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+        border-radius: 50%;
+        padding: 7px 10px;;
+        text-align: center;
+        line-height: 1.7;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 1px;
+    }
+    .btn-page:hover {
+        background: rgba(255,255,255,0.1);
+    }
+    .btn-page-active {
+        background: rgba(255,255,255,0.075);
+        border: 1px dotted grey;
+    }
+}
+@media (min-width:5120px) {
+    .div-home {
+        width:100%;
+    }
+    .div-title {
+        padding-top: 55px;
+        margin-left: -22px;
+    }
+    .smartObject {
+        width: 540px;
+        height: 370px;
+        margin: auto;
+        margin-top: 164px;
+        position: absolute;
+        top: 38px;
+        right: -18px;
+    }
+
+    #particles-js {
+        position: absolute;
+        height: 760px!important;
+        width: 760px!important;
+        border-radius: 400px;
+        overflow: hidden;
+        margin: 20px 40px 40px 20px;
+    }
+    .a-link {
+        font-size: 32px;
+    }
+    .div-container {
+        padding:10px 10%;
+    }
+    .jointhe {
+        font-size: 64px;
+        font-family: 'Montserrat-Light';
+        font-stretch: expanded;
+        padding-top: 15px;
+    }
+    .community {
+        font-size: 65px;
+        font-family: "Montserrat-Black";
+        font-stretch: expanded;
+        font-weight: bolder;
+        font-style: unset;
+        padding-top: 15px;
+    }
+    .lets {
+        font-size: 41px;
+        font-family: 'Montserrat-Hairline';
+        font-weight: lighter;
+        font-stretch: expanded;
+        padding-top: 15px;
+    }
+    .top {
+        font-size: 90px;
+        font-family: 'Montserrat-Hairline';
+        font-weight: lighter;
+        font-stretch: expanded;
+        margin-top: 22px;
+    }
+    .port{
+        font-size: 100px;
+    }
+    .moon {
+        font-size: 122px;
+        font-stretch: expanded;
+        font-family: "Montserrat-Black";
+        font-weight: 900;
+        margin-top: -15px;
+    }
+    .label-take {
+        font-size: 29px;
+        font-family: Montserrat-UltraLight;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .icon-main {
+        font-size: 32px;
+        font-stretch: expanded;
+        font-family: "Montserrat-Black";
+        font-weight: 900;
+    }
+    .faq {
+        margin-top: -37px;
+        font-size: 100px;
+    }
+    .client {
+        margin-top: -11px;
+    }
+    .testimonials {
+        margin-top: -30px;
+    }
+    .form-auth {
+        margin-top: 90px;
+    }
+    .label-features {
+        margin-top: -42px;
+    }
+    .label-top-aboutus {
+        float: right;
+        font-size: 110px;
+        margin-top: 1px;
+    }
+    .form-contact label {
+        font-size: 14px;
+        font-weight: normal;
+        font-family: Montserrat-UltraLight;
+    }
+    .form-group {
+        margin-bottom: 0;
+    }
+    .page-btn-group {
+        width: fit-content;
+        display: flex;
+    }
+    .btn-page {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+        border-radius: 50%;
+        padding: 7px 10px;;
+        text-align: center;
+        line-height: 1.7;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 1px;
+    }
+    .btn-page:hover {
+        background: rgba(255,255,255,0.1);
+    }
+    .btn-page-active {
+        background: rgba(255,255,255,0.075);
+        border: 1px dotted grey;
+    }
+}
+.btn-coin-currency{
+    background: transparent;
+    color: white;
+    font-weight: bold;
+    border: 1px dotted grey;
+    cursor: pointer;
+}
+.btn-coin-currency:hover {
+    background: rgba(255,255,255,0.1);
+}
+.btn-coin-active {
+    border: 1px dotted white;
+}
+#tbody_coin_live_data {
+    min-height: 160px;
+    text-align: center;
+}
+.loader {
+    border: 16px solid #f3f3f300; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
