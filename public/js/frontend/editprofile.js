@@ -121,17 +121,14 @@ function doOnRequestCloseThisAccount() {
         if ( resp == 'ok') {
             window.location.href=window.origin+"/home";
         }
-
     });
 }
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-
         reader.onload = function (e) {
             $('#img_user_avatar').attr('src', e.target.result);
         }
-
         reader.readAsDataURL(input.files[0]);
     }
 }
