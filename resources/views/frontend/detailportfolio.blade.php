@@ -115,7 +115,7 @@
                         <div class="col-md-4 padding0 wrap-div-col">
                             Total Profit/Loss Percentage:
                             <span class=" {{ ($total_data['total_profit_loss_percentage']>0)?"color-green":"color-red" }} strok-white">
-                                {{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}%
+                                {{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}
                             </span>
                         </div>
                     </div>

@@ -28,9 +28,12 @@ $(document).ready(function(){
     //    }, 10000);
     //}, 5000);
 
+    $('#tfoot').css('display', 'none');
+
     //$('#currency').change(doOnchangeCurrency);
 });
 function doOnLoadLiveChart() {
+    $('#tfoot').css('display', 'none');
     $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center"><div class="loader"></div></td></tr>');
     loadLiveChart();
 }
@@ -57,6 +60,7 @@ function loadLiveChart() {
                               </tr>';
         }
         $('#tbody_coin_live_data').html(tbodyHTML);
+        $('#tfoot').css('display', '');
         $('.py-4').css('height', '100%');
     });
 }
@@ -121,9 +125,9 @@ function myFunction() {
 
             html += "<ul class='selectCF'>";
             html += 	"<li style='margin-top: 12px;'>";
-            html += 		"<span class='arrowCF fa fa-chevron-right' style='"+style+"'></span>";
-            html += 		"<span class='titleCF' style='"+style+"; width:"+width+"px'>"+title+"</span>";
-            html += 		"<span class='searchCF' style='"+style+"; width:"+width+"px'><input style='color:"+settings.color+"' /></span>";
+            html += 		"<span class='arrowCF fa fa-chevron-right a-gold' style='"+style+"'></span>";
+            html += 		"<span class='titleCF a-gold' style='"+style+"; width:"+width+"px'>"+title+"</span>";
+            html += 		"<span class='searchCF a-gold' style='"+style+"; width:"+width+"px'><input style='color:"+settings.color+"' /></span>";
             html += 		"<ul>";
             $.each(list, function(k, v){ s = (v.selected == 1)? "selected":"";
                 html += 			"<li value="+v.value+" class='"+s+"'>"+v.text+"</li>";})
@@ -208,6 +212,7 @@ $(function(){
             var value = $(this).val();
             var text = $(this).children('option:selected').html();
             console.log(value+' : '+text);
+            $('#tfoot').css('display', 'none');
             doOnchangeCurrency(value);
             event_change.html(value+' : '+text);
         }

@@ -153,7 +153,7 @@
     cursor: pointer;
 }
 .a-add-to-portfolio:hover{
-    margin-top:-2px;
+    background-image: url(../assets/images/icon/addtoportfolio_hover.png);
 }
 .label-total {
     font-size: 24px!important;
@@ -172,6 +172,7 @@
     height: 42px;
     display: block;
     float: left;
+    outline: none;
 }
 th.td-cell {
     vertical-align: top;
@@ -215,6 +216,10 @@ td.td-cell {
 .color-green{
     font-family: Montserrat-Light;
     color: #00ff00;
+}
+.strok-white{
+    font-family: Montserrat-Bold;
+    font-weight: bold;
 }
 
 .btn-save-details {

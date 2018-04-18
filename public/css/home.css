@@ -477,6 +477,10 @@ label {
     font-family: Montserrat-Light;
     padding: 3px;
 }
+.a-join-here:hover {
+    color: gold;
+    text-shadow: 1px 1px 1px black, 0 0 1px #ffe877, 0 0 1px #b99a01;
+}
 .div-auth-login{
     background-image: url(../assets/images/background/login-bg.png);
     background-size: 100% 100%;
@@ -609,6 +613,8 @@ input.auth-input:focus ~ .highlight {
     text-shadow: 1px 1px 1px rgba(4, 4, 4, 0.83);
 }
 .buttonBlue:hover {
+    color: gold;
+    text-shadow: 1px 1px 1px black, 0 0 1px #ffe877, 0 0 1px #b99a01;
     background: linear-gradient(#06b5e5, #0481a3);
 }
 .buttonRed {

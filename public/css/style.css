@@ -541,3 +541,7 @@ table.dataTable {
 .span-sort{
     cursor: pointer;
 }
+.span-sort:hover {
+    color: gold;
+    text-shadow: 1px 1px 1px black, 0 0 1px #ffe877, 0 0 1px #b99a01;
+}

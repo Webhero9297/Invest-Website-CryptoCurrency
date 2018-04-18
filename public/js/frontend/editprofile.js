@@ -48,7 +48,7 @@ $(document).ready(function(){
     });
 });
 function doOnLoadLiveProfileCurrencyData() {
-    $.get('/getliveprofilecurrencydata', function(resp){
+    $.ajax('/getliveprofilecurrencydata').done(function(resp){
         total_data = resp.total;
         currency_data = resp.currency_data;
 
@@ -56,16 +56,16 @@ function doOnLoadLiveProfileCurrencyData() {
         ( total_data.total_profit_loss>0 ) ? p_style= "color-green": p_style="color-red";
 
         theadHTML = '<th class="td-cell" colspan="2">Total Coins: '+total_data.coins+ '</th>\
-                     <th class="td-cell" colspan="2">Invested Capital: '+total_data.invested_capital+'</th>\
+                     <th class="td-cell" colspan="2">Invested Capital: $'+total_data.invested_capital+'</th>\
                      <th class="td-cell" colspan="2">\
                      Total Profit/Loss: \
                         <span class="'+p_style+'" style="font-size:16px;">\
-                        '+total_data.total_profit_loss+'%</span>\
+                        $'+total_data.total_profit_loss+'</span>\
                      </th>\
                      <th class="td-cell" colspan="2" style="padding:0;">\
                         Total Profit/Loss Percentage:\
                         <span class="'+style+'" style="font-size:16px;">\
-                        '+total_data.total_profit_loss_percentage+'%</span>\
+                        '+total_data.total_profit_loss_percentage+'</span>\
                      </th>';
 
         trHTML = '';
@@ -93,6 +93,9 @@ function doOnLoadLiveProfileCurrencyData() {
         $('#thead_title').html(theadHTML);
         $('#tbody_content').html(trHTML);
 
+        $('.py-4').css('height', '100%');
+    })
+    .fail(function(fail_resp){
         $('.py-4').css('height', '100%');
     });
 }

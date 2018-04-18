@@ -31,7 +31,7 @@ function loadLivePortfolioData() {
                                     <td class="td-cell td-coin-icon">\
                                         <img src="'+ live_data.avatar+'" width="32px" height="32px" />\
                                     </td>\
-                                    <td class="td-cell">\
+                                    <td class="td-cell" coin-name="'+live_data.full_name+'">\
                                     <a class="a-white" href="/detailportfolio/'+live_data.user_id+'" >'+live_data.full_name+'</a>\
                                 </td>\
                                 <td class="td-cell">$' + live_data.invested_capital+'</td>\
@@ -88,4 +88,22 @@ function sortTable(_col, _direction) {
 }
 function MoneyToNumber(moneyString) {
     return parseFloat(moneyString.split('$').join('').split(',').join(''));
+}
+
+function myFunction() {
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tbody_content");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if ($(td).attr('coin-name').toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
 }

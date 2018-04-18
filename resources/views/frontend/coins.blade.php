@@ -24,6 +24,13 @@
             margin-left: 10px;
             position: relative;
             top: -10px;
+            cursor: pointer;
+        }
+        .a-refresh-tag:hover {
+            color: gold!important;
+        }
+        .a-gold:hover {
+            color: gold!important;
         }
 
         /***************************************  Custom select box start  *********************************************/

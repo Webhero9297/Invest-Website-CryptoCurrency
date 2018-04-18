@@ -5,6 +5,52 @@
         .control-label {
             font-family: Montserrat-light;
         }
+        #myInput {
+            background-image: url({{ asset('./assets/images/icon/searchicon.png') }});
+            background-position: 10px 8px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 4px 10px 4px 40px;
+            border: 1px solid #ddd;
+            margin-top: -17px;
+            margin-bottom: 1px;
+            background-color: #0297bf;
+            color: white;
+        }
+        input::-webkit-input-placeholder {
+            color: #fff;
+        }
+        input:focus::-webkit-input-placeholder {
+            color: gold;
+            border-color: gold;
+        }
+
+        /* Firefox < 19 */
+        input:-moz-placeholder {
+            color: #fff;
+        }
+        input:focus:-moz-placeholder {
+            color: gold;
+            border-color: gold;
+        }
+
+        /* Firefox > 19 */
+        input::-moz-placeholder {
+            color: #fff;
+        }
+        input:focus::-moz-placeholder {
+            color: gold;
+            border-color: gold;
+        }
+
+        /* Internet Explorer 10 */
+        input:-ms-input-placeholder {
+            color: #fff;
+        }
+        input:focus:-ms-input-placeholder {
+            color: gold;
+            border-color: gold;
+        }
     </style>
     {{--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">--}}
     <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -16,6 +62,8 @@
                 <div class="panel panel-default">
                     <div class="div-panel-heading">
                         PORTFOLIOS
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for name" title="Type in a name">
                     </div>
                     <div class="panel-body panel-table">
                         <table class="table table-bordered" id="example">
