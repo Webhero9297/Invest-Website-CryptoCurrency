@@ -296,12 +296,11 @@ class MyProfileController extends Controller
             }
             if ( $coin['email_alert'] == 1 && $coin['email_sent_state'] == 0 ) {
                 $message = "<div>Hi {$to_fullname},<br><br>
-	                    <div style='font-weight: bold;'>Please click on the link below to activate your Moonfolio account.</div><br>
 	                    <div>".$coin['coin_name']." has been fallen below $".$coin['limit_price']."<br></div><br>
 	                    <div style=\"display:inline-flex;margin-top:-20px;\">
 	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
 	                    </div>
-	                    <div>You are receiving this alert because you are requested it in your Moonfolio settings.</div>";
+	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
 
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
                 if ( $message != '' )

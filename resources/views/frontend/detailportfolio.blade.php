@@ -110,11 +110,11 @@
                             Invested Capital: ${{ number_format($total_data['invested_capital'], 2, '.',',') }}</div>
                         <div class="col-md-3 padding0 wrap-div-col">
                             Total Profit/Loss:
-                            <span class="{{ ($total_data['total_profit_loss']<0)?"color-red":"color-green" }}">${{ number_format($total_data['total_profit_loss'], 2, '.',',') }}</span>
+                            <span class="{{ ($total_data['total_profit_loss']<0)?"color-red":"color-green" }} strok-white">${{ number_format($total_data['total_profit_loss'], 2, '.',',') }}</span>
                         </div>
                         <div class="col-md-4 padding0 wrap-div-col">
                             Total Profit/Loss Percentage:
-                            <span class=" {{ ($total_data['total_profit_loss_percentage']>0)?"color-green":"color-red" }}" style="font-size:14px;">
+                            <span class=" {{ ($total_data['total_profit_loss_percentage']>0)?"color-green":"color-red" }} strok-white">
                                 {{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}%
                             </span>
                         </div>

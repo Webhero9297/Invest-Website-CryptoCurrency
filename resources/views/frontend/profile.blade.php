@@ -19,8 +19,8 @@
             <div class="panel panel-default">
                 <div class="div-panel-heading">
                     PERSONAL INFORMATION
-                    <a class="a-pencil" href="{{ route('editprofile') }}"></a>
-                    <a class="a-close-account" data-toggle="popover" data-content="Delete your profile">
+                    <a class="a-pencil" href="{{ route('editprofile') }}" data-toggle="popover" data-content="Edit your profile"></a>
+                    <a class="a-close-account" data-toggle="popover" data-content="Delete your account">
                         <i class="fa fa-trash" ></i>
                     </a>
                 </div>
@@ -86,6 +86,11 @@
                                     </div>
                                     <a href="{{ route('edit.price.alert') }}" class="nav-link a-link sign text-center edit-price-alert">Add Price Alert</a>
                                 </div>
+                                {{--<div class="col-sm-5 div-flex">--}}
+                                    {{--<div class="div-pt-7">--}}
+
+                                    {{--</div>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>

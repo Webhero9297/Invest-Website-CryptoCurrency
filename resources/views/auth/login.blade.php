@@ -42,5 +42,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('./js/frontend/home.js') }}" ></script>
+<script src="{{ asset('./js/frontend/login.js') }}" ></script>
 @endsection

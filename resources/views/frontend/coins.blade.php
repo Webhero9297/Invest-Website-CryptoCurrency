@@ -5,6 +5,7 @@
         .control-label {
             font-family: Montserrat-light;
         }
+
         .here {
             background: url( {{ asset('./assets/images/icon/arrow_up_white.png') }}) no-repeat!important;
             background-size: 18px!important;
@@ -24,6 +25,7 @@
             position: relative;
             top: -10px;
         }
+
         /***************************************  Custom select box start  *********************************************/
         @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
         /*@import url(font-icomoon.css);*/
@@ -133,6 +135,7 @@
             -webkit-transition: .2s;
             z-index:2;
             background: #0297bf;
+
         }
         .selectCF li ul li{
             padding:9px 0 9px 20px;
@@ -174,7 +177,9 @@
             -moz-animation: effect1 0.3s alternate 1;
             -webkit-animation: effect1 0.3s alternate 1;
         }
+
         /***************************************  Custom select box end    *********************************************/
+
         #myInput {
             background-image: url({{ asset('./assets/images/icon/searchicon.png') }});
             background-position: 10px 8px;
@@ -187,16 +192,42 @@
             background-color: #0297bf;
             color: white;
         }
-        ::placeholder {
-            color: white;;
+        input::-webkit-input-placeholder {
+            color: #fff;
         }
-        :-ms-input-placeholder { /* Internet Explorer 10-11 */
-            color: white;
+        input:focus::-webkit-input-placeholder {
+            color: gold;
+            border-color: gold;
         }
-        ::-ms-input-placeholder { /* Microsoft Edge */
-            color: white;
+
+        /* Firefox < 19 */
+        input:-moz-placeholder {
+            color: #fff;
+        }
+        input:focus:-moz-placeholder {
+            color: gold;
+            border-color: gold;
+        }
+
+        /* Firefox > 19 */
+        input::-moz-placeholder {
+            color: #fff;
+        }
+        input:focus::-moz-placeholder {
+            color: gold;
+            border-color: gold;
+        }
+
+        /* Internet Explorer 10 */
+        input:-ms-input-placeholder {
+            color: #fff;
+        }
+        input:focus:-ms-input-placeholder {
+            color: gold;
+            border-color: gold;
         }
     </style>
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
@@ -210,7 +241,7 @@
                     <div class="div-panel-heading" style="">
                         COINS
                         &nbsp;&nbsp;&nbsp;
-                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for coins" title="Type in a name">
                         <div style="display:inline;float:right;margin-top:-15px;">
                             <select id="currency" class="select">
                                 <option value="USD">USD</option>
@@ -223,6 +254,7 @@
                                 <i class="fa fa-refresh" ></i>
                             </a>
                         </div>
+
                     </div>
                     <div class="panel-body panel-table">
                         <table id="coin_table" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" style="width:100%;margin-top: -5px!important;">
@@ -237,7 +269,7 @@
                             </thead>
                             <tbody id="tbody_coin_live_data" class="text-center">
                             </tbody>
-                            <tfoot>
+                            <tfoot id="tfoot">
                                 <tr>
                                     <td align="center" colspan="5">
                                         <div class="page-btn-group text-center">
@@ -251,8 +283,11 @@
                                 </tr>
                             </tfoot>
                         </table>
+
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

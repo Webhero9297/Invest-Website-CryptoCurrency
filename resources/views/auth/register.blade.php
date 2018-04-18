@@ -12,7 +12,7 @@
                     <label class="label-auth-sub-title">All you need to start is an account. Get one for free now!</label>
                 </div>
                 <div class="group">
-                    <input type="text" class="auth-input" name="full_name"><span class="highlight"></span><span class="bar"></span>
+                    <input type="text" class="auth-input" name="full_name" id="full_name"><span class="highlight"></span><span class="bar"></span>
                     <label class="auth-label">Username*</label>
                     @if ($errors->has('full_name'))
                         <span class="invalid-feedback">
@@ -47,8 +47,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('./js/frontend/home.js') }}" ></script>
+<script src="{{ asset('./js/frontend/register.js') }}" ></script>
 @endsection
-<script>
-    document.getElementsByName('full_name').focus;
-</script>
