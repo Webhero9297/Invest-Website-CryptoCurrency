@@ -102,8 +102,6 @@
                             <div class="col-xs-12 col-sm-8 col-md-6">
                                 <input type="checkbox" id="box-1" field="audio_alert" checked>
                                 <label for="box-1" class="alert-method">Audio alert</label>
-                            {{--</div>--}}
-                            {{--<div class="col-md-6">--}}
                                 &nbsp;&nbsp;&nbsp;
                                 <input type="checkbox" id="box-2" field="email_alert" checked>
                                 <label for="box-2" class="alert-method">Email alert</label>
