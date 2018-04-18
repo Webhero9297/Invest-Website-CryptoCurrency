@@ -184,9 +184,7 @@
             -moz-animation: effect1 0.3s alternate 1;
             -webkit-animation: effect1 0.3s alternate 1;
         }
-
         /***************************************  Custom select box end    *********************************************/
-
         #myInput {
             background-image: url({{ asset('./assets/images/icon/searchicon.png') }});
             background-position: 10px 8px;
@@ -234,7 +232,6 @@
             border-color: gold;
         }
     </style>
-{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
