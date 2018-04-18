@@ -6,7 +6,6 @@
         font-family: Montserrat-light;
     }
 </style>
-
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home" style="padding-top:100px;">
         <div class="container">
@@ -78,8 +77,6 @@
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

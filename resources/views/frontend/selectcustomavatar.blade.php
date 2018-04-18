@@ -1,12 +1,10 @@
 @extends('layouts.frontend')
-
 @section('content')
 <style>
     .control-label {
         font-family: Montserrat-light;
     }
 </style>
-
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home">
         <div class="container" style="padding-bottom: 100px;">
@@ -39,8 +37,6 @@
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
