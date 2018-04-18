@@ -10,7 +10,6 @@
     <div class="container-fluid padding0">
         <div class="div-home" id="home">
             <div class="container">
-                {{--<canvas id="canvas"></canvas>--}}
                 <div class="row">
                     @guest
                         <div class="col-xs-12 col-sm-5 div-title">
@@ -31,9 +30,6 @@
                         </div>
                     @endguest
                     <div class="col-xs-12 col-sm-7 text-right">
-                        {{--<canvas id="canvasOne" width="500" height="500">--}}
-                        {{--Your browser does not support HTML5 Canvas.--}}
-                        {{--</canvas>--}}
                         <canvas id="particles-js" width="800" height="800"></canvas>
                         <canvas id="myCanvas" width="800" height="800"></canvas>
                         <div class="smartObject"></div>
@@ -403,9 +399,7 @@
                             <label class="div-pad1-label-title">How It Works</label>
                             <label class="div-pad1-label">
                                 CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.
-
                                 To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.
-
                                 To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.
                             </label>
                         </div>
@@ -416,9 +410,7 @@
                             <label class="div-pad2-label-title">How It Works</label>
                             <label class="div-pad2-label">
                                 CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.
-
                                 To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.
-
                                 To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.
                             </label>
                         </div>
@@ -484,9 +476,3 @@
     </div>
     <script src="{{ asset('./js/frontend/home.js') }}"></script>
 @endsection
-
-{{--<script>--}}
-    {{--window.setInterval(function() {--}}
-        {{--window.location.reload();--}}
-    {{--}, 10000);--}}
-{{--</script>--}}
