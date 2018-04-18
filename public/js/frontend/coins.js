@@ -22,15 +22,8 @@ $(document).ready(function(){
     });
 
     loadLiveChart();
-    //window.setTimeout(function(){
-    //    window.setInterval(function(){
-    //        loadLiveChart();
-    //    }, 10000);
-    //}, 5000);
 
     $('#tfoot').css('display', 'none');
-
-    //$('#currency').change(doOnchangeCurrency);
 });
 function doOnLoadLiveChart() {
     $('#tfoot').css('display', 'none');
@@ -38,7 +31,6 @@ function doOnLoadLiveChart() {
     loadLiveChart();
 }
 function loadLiveChart() {
-    //$('#tbody_coin_live_data').html('<tr><td colspan="5" align="center"><div class="loader"></div></td></tr>');
     $.get('/coinpage/'+pos, {currency : selected_currency }, function(coin_live_datas){
         tbodyHTML = '';
         for( i=0;i<coin_live_datas.length; i++ ) {
