@@ -14,18 +14,12 @@
         height: 420px;
         background-color: rgb(8,8,8);
     }
-
     .card:hover {
         box-shadow: 2px 3px 4px 0 rgba(255,255,255,0.2);
     }
-
     .article-container {
         padding: 2px 16px;
     }
-    .title{
-        /*color: black;*/
-    }
-
     .image {
         opacity: 1;
         display: block;
@@ -34,7 +28,6 @@
         transition: .5s ease;
         backface-visibility: hidden;
     }
-
     .middle {
         transition: .5s ease;
         opacity: 0;
@@ -45,11 +38,9 @@
         -ms-transform: translate(-50%, -50%);
         text-align: center;
     }
-
     .article-container:hover .image {
         opacity: 0.3;
     }
-
     .article-container:hover .middle {
         opacity: 1;
     }
@@ -63,22 +54,12 @@
     .div-news-title {
         max-height: 72px;
         height: 70px;
-        /*white-space: nowrap;*/
         overflow: hidden;
-        /*text-overflow: ellipsis;*/
         font-size: 14px;
         font-family: Montserrat-Light;
-        /*color: black;*/
-    }
-    .div-news-title:hover, .a-view-detail:hover {
-        /*color: black;*/
     }
     .div-content-bottom {
-        /*position: fixed;*/
         bottom: 0;
-    }
-    .color-black {
-        /*color: black;*/
     }
     .a-view-detail{
         line-height: 20px;
@@ -87,7 +68,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        /*color: black;*/
         font-size: 24px;
         font-family: Montserrat-Light;
     }
@@ -107,7 +87,6 @@
                     <div class="div-panel-heading" style="">
                         News
                         &nbsp;&nbsp;&nbsp;
-
                     </div>
                     <div class="panel-body panel-table">
                         @if ( $news_data )
@@ -120,7 +99,6 @@
                                         <div class="middle">
                                             <a href="{{ $news['url'] }}" class="a-view-detail color-black" target="_blank">
                                                 View More
-                                                {{--{{ $news['body'] }}--}}
                                             </a>
                                         </div>
                                     </div>
@@ -143,5 +121,4 @@
             </div>
         </div>
     </div>
-{{--    <script src="{{ asset('./js/frontend/coins.js') }}"></script>--}}
 @endsection
