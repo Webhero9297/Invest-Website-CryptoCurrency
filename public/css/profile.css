@@ -261,7 +261,9 @@ td.td-cell {
 div.file {
     position: relative;
     overflow: hidden;
-    width: 320px;
+    /*width: 320px;*/
+    font-size: 22px;
+    /*padding: 15px 30px;*/
 }
 input.user_avatar {
     position: absolute;
