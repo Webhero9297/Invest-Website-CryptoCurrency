@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use App\PHPMailer;
+use App\SMTP;
+
 class RegisterController extends Controller
 {
     /*
@@ -63,7 +66,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-    	$activation_code = substr(str_replace('/', '', Hash::make($data['email'])), -24);
+        $activation_code = substr(str_replace('/', '', Hash::make($data['email'])), -24);
 //        dd($activation_code);
         $user = User::create([
             'full_name' => $data['full_name'],
@@ -86,35 +89,76 @@ class RegisterController extends Controller
     }
     private function sendEmail($code) {
         $user = app(User::class)->where('activation_code', $code)->first();
+//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+//        $subject = "Welcome to Moonfolio";
+//        $to_email = $user->email;
+//        $to_fullname = $user->full_name;
+//        $from_email = "manager@moonfolio.io";
+//        $from_fullname = "Welcome to Moonfolio";
+//
+//        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
+//        $headers .= "Reply-To: ".$from_email."\r\n";
+//        $headers .= "Reply-Path: ".$from_email."\r\n";
+//
+//        $headers .= "MIME-Version: 1.0\r\n";
+//        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+//
+//        $message = "<div>Hi {$to_fullname},<br><br>
+//                    <div style='font-weight: bold;'>Please click on the link below to activate your Moonfolio account.</div><br>
+//                    <div>
+//                    <a href=\"{$serverLink}/verify-user/{$code}\" target='_blank'>Click Here.</a><br><br>
+//                    Greetings,<br><br>
+//                    Team Moonfolio.</div><br>
+//                    <div style=\"display:inline-flex;margin-top:-20px;\">
+//                        <div>Lets go to the moon!</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+//                    </div>";
+//
+//        if (!@mail($to_email, $subject, $message, $headers)) {
+//            print_r($message);
+//        }
+//        else {
+//
+//        }
+
         $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
         $subject = "Welcome to Moonfolio";
         $to_email = $user->email;
         $to_fullname = $user->full_name;
-        $from_email = "manager@moonfolio.io";
-        $from_fullname = "Welcome to Moonfolio";
-        
-        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
-        $headers .= "Reply-To: ".$from_email."\r\n";
-        $headers .= "Reply-Path: ".$from_email."\r\n";
-        
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->Host = "mail.moonfolio.io";
+        $mail->Port = 25;
+        //$mail->SMTPSecure = 'SSL';
+        $mail->SMTPAuth = true;
+        $mail->Username = "manager@moonfolio.io";
+        $mail->Password = "Moonfolio1114!";
+        $mail->IsSendmail(true);
+        $mail->CharSet ="UTF-8";
 
-        $message = "<div>Hi {$to_fullname},<br><br>
+        $mail->SetFrom("manager@moonfolio.io");
+        $mail->FromName   = "Welcome to Moonfolio";
+        $mail->AddReplyTo('manager@moonfolio.io');
+        $mail->AddCC('manager@moonfolio.io');
+        $mail->AddBCC('manager@moonfolio.io');
+
+        $mail->AddAddress($to_email);
+        $mail->Subject = $subject;
+        $mail->IsHTML(true); //Or false if you do not want HTML content
+        $mail->Body = "<div>Hi {$to_fullname},<br><br>
                     <div style='font-weight: bold;'>Please click on the link below to activate your Moonfolio account.</div><br>
                     <div>
                     <a href=\"{$serverLink}/verify-user/{$code}\" target='_blank'>Click Here.</a><br><br>
                     Greetings,<br><br>
                     Team Moonfolio.</div><br>
                     <div style=\"display:inline-flex;margin-top:-20px;\">
-                        <div>Lets go to the moon!</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+                        <div>Lets go to the moon!</div><img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" style=\"margin-top: -10px;\">
                     </div>";
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
-        if (!@mail($to_email, $subject, $message, $headers)) {
-            print_r($message);
-        }
-        else { 
-        
+        if(!$mail->Send()){
+//            echo "Error sending";
+        } else {
+//            echo "Mail successfully sent";
         }
     }
     /**

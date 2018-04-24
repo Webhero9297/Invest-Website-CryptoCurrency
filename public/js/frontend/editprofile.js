@@ -53,7 +53,7 @@ function doOnLoadLiveProfileCurrencyData() {
         currency_data = resp.currency_data;
 
         ( total_data.total_profit_loss_percentage>0 ) ? style= "color-green": style="color-red";
-        ( total_data.total_profit_loss>0 ) ? p_style= "color-green": p_style="color-red";
+        ( total_data.sign*1==1 ) ? p_style= "color-green": p_style="color-red";
 
         theadHTML = '<th class="td-cell" colspan="2">Total Coins: '+total_data.coins+ '</th>\
                      <th class="td-cell" colspan="2">Invested Capital: $'+total_data.invested_capital+'</th>\

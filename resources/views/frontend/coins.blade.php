@@ -238,9 +238,80 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
+<script src="{{ asset('./assets/jsLib/accounting.min.js') }}" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
     var totalCount = <?php echo $totalCount; ?>;
 </script>
+<style>
+.elementToFadeInAndOut {
+    -webkit-animation: fadeinout 1s linear forwards;
+    animation: fadeinout 1s linear forwards;
+    opacity: 1;
+}
+.tr-live {
+    height: 50px;
+}
+.td-cell, .td-cell-live {
+    height: 50px;
+    min-height: 50px;
+    font-size: 16px;
+}
+#tbody_coin_live_data tr td span {
+    font-family: Montserrat-Light;
+}
+.live_data {
+    width: 60%;
+    height: 80%;
+    padding: 7px 10px;
+    border-radius: 7px;
+    display: inline-block;
+    margin: 2% auto;
+}
+.bg-red {
+    -webkit-animation-name: red-example;  /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
+    -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
+    animation-name: red-example;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-fill-mode: backwards;
+}
+.bg-green {
+    -webkit-animation-name: green-example;  /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
+    -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
+    animation-name: green-example;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-fill-mode: backwards;
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes red-example {
+    from {background-color: red;}
+    to {background-color: transparent;}
+}
+
+/* Standard syntax */
+@keyframes red-example {
+    from {background-color: red;}
+    to {background-color: transparent;}
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes green-example {
+    from {background-color: green;}
+    to {background-color: transparent;}
+}
+
+/* Standard syntax */
+@keyframes green-example {
+    from {background-color: green;}
+    to {background-color: transparent;}
+}
+
+</style>
     <div class="container-fluid padding0">
         <div class="div-auth-register" id="home" style="padding-top:100px;">
             <div class="container" style="padding-bottom: 50px;">

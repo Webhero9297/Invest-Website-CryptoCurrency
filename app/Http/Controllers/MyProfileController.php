@@ -8,6 +8,9 @@ use App\UserCurrencyDetails;
 use Illuminate\Http\Request;
 use App\User;
 
+use App\PHPMailer;
+use App\SMTP;
+
 class MyProfileController extends Controller
 {
     //
@@ -56,7 +59,7 @@ class MyProfileController extends Controller
 
             $investedCapital += $coin['total_cost']*1;
             $currentValue += $coin['price_usd']*$coin['quantity'];
-            $totalProfitLossValue += $coin['profit_loss'];
+            $totalProfitLossValue += $coin['profit_loss']*$coin['quantity'];
             $profitlossPercentage += $coin['profit_loss_percentage'];
             $coin_ids[] = $coin['id'];
             $currency_data[] = $coin_data;
@@ -66,7 +69,10 @@ class MyProfileController extends Controller
         $arr['invested_capital'] = number_format($investedCapital, 2, '.',',');
         $arr['current_value'] = number_format($currentValue, 2, '.',',');
         $arr['total_profit_loss'] = number_format($totalProfitLossValue, 2, '.',',');
-        $arr['total_profit_loss_percentage'] = number_format($profitlossPercentage, 2, '.',',');
+        $_temp = ($currentValue/$investedCapital-1)*100;
+        if ( $currentValue < $investedCapital ) $arr['sign'] = -1; else $arr['sign'] = 1;
+
+        $arr['total_profit_loss_percentage'] = number_format($_temp, 2, '.',',');
         $arr['coins'] = count($dd);
         return response()->json(['total'=>$arr, 'currency_data'=>$currency_data]);
     }
@@ -103,6 +109,7 @@ class MyProfileController extends Controller
         $model->fiat = $fiat;
         $model->coin_id = $coin_id;
         $model->coin_name = $coin_name;
+        $model->limit_type = 0;
         $model->limit_price = $limit_price;
         $model->email_alert = request()->get('email_alert');
         $model->audio_alert = request()->get('audio_alert');
@@ -134,6 +141,7 @@ class MyProfileController extends Controller
         $age = request()->get('age');
         $country = request()->get('country');
 
+//        $user = app(User::class)->where('id', $user->id)->first();
         $user->full_name = $full_name;
         $user->email = $email;
         $user->gender = $gender;
@@ -218,27 +226,8 @@ class MyProfileController extends Controller
         return view('frontend.selectdefaultavatar')->with(['default_avatars'=>$default_avatars]);
     }
     public function selectCustomAvatarImageForm() {
-        $cryptoData = Common::getRealTimeCryptoCurrencyList();
-        $currency_name='';
-        $quantity=0;
-        $purchased_price=0;
-        $purchased_date=date('Y-m-d');
-        $base_dir = base_path()."/public/assets/images/avatars/master avatars/";
-        $default_avatars = array();
-        if (is_dir($base_dir)){
-            if ($dh = opendir($base_dir)){
-                while (($file = readdir($dh)) !== false){
-                    if ( $file == '.' || $file == '..' ) continue;
-                    else{
-                        $filePath = $base_dir.$file;
-                        if ( exif_imagetype($filePath) >= 1 && exif_imagetype($filePath) ) $default_avatars[] = "./assets/images/avatars/master avatars/".$file;
-                    }
-                }
-                closedir($dh);
-            }
-        }
-
-        return view('frontend.selectcustomavatar')->with(['default_avatars'=>$default_avatars]);
+        $default = '../assets/images/avatars/default.png';
+        return view('frontend.selectcustomavatar')->with(['default_avatar'=>$default]);
     }
     public function changeUserAvatarWithDefaultAvatar() {
         $user = \Auth::user();
@@ -273,37 +262,83 @@ class MyProfileController extends Controller
         $user_id = \Auth::user()->id;
         $coinAlertData = Common::getAlertCoinData($user_id);
 
+//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+//        $subject = "PRICE ALERT!";
+//        $to_email =\Auth::user()->email;
+//        $to_fullname = \Auth::user()->full_name;
+//        $from_email = "manager@moonfolio.io";
+//        $from_fullname = "Team Moonfolio";
+//
+//        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
+//        $headers .= "Reply-To: ".$from_email."\r\n";
+//        $headers .= "Reply-Path: ".$from_email."\r\n";
+//
+//        $headers .= "MIME-Version: 1.0\r\n";
+//        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+
         $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
         $subject = "PRICE ALERT!";
-        $to_email =\Auth::user()->email;
+        $to_email = \Auth::user()->email;
         $to_fullname = \Auth::user()->full_name;
-        $from_email = "manager@moonfolio.io";
-        $from_fullname = "Team Moonfolio";
-        
-        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
-        $headers .= "Reply-To: ".$from_email."\r\n";
-        $headers .= "Reply-Path: ".$from_email."\r\n";
-        
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->Host = "mail.moonfolio.io";
+        $mail->Port = 25;
+        //$mail->SMTPSecure = 'SSL';
+        $mail->SMTPAuth = true;
+        $mail->Username = "manager@moonfolio.io";
+        $mail->Password = "Moonfolio1114!";
+        $mail->IsSendmail(true);
+        $mail->CharSet ="UTF-8";
+
+        $mail->SetFrom("manager@moonfolio.io");
+        $mail->FromName   = "Team Moonfolio";
+        $mail->AddReplyTo('manager@moonfolio.io');
+        $mail->AddCC('manager@moonfolio.io');
+        $mail->AddBCC('manager@moonfolio.io');
+
+        $mail->AddAddress($to_email);
+        $mail->Subject = $subject;
+        $mail->IsHTML(true); //Or false if you do not want HTML content
+
 
         $audio_alert_datas = array();
+
         foreach( $coinAlertData as $coin ) {
+
             if ( $coin['audio_alert'] == 1 && $coin['audio_sent_state'] == 0 ) {
+                $coin['current_datetime'] = date("Y-m-d H:i:s");
                 $audio_alert_datas[] = $coin;
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['audio_sent_state'=>1]);
             }
             if ( $coin['email_alert'] == 1 && $coin['email_sent_state'] == 0 ) {
-                $message = "<div>Hi {$to_fullname},<br><br>
-	                    <div>".$coin['coin_name']." has been fallen below $".$coin['limit_price']."<br></div><br>
+
+                $mail->Body = "<div>Hi {$to_fullname},<br><br>
+	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price']."<br></div><br>
 	                    <div style=\"display:inline-flex;margin-top:-20px;\">
-	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" style=\"display:block;margin-top: -10px;\">
 	                    </div>
 	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
-
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
-                if ( $message != '' )
-                    @mail($to_email, $subject, $message, $headers);
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
+
+                if(!$mail->Send()){
+//                    echo "Error sending";
+                } else {
+
+//                    echo "Mail successfully sent";
+                }
+
+//                $message = "<div>Hi {$to_fullname},<br><br>
+//	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price']."<br></div><br>
+//	                    <div style=\"display:inline-flex;margin-top:-20px;\">
+//	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+//	                    </div>
+//	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
+//
+//                app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
+//                if ( $message != '' )
+//                    @mail($to_email, $subject, $message, $headers);
             }
 
         }

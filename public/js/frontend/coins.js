@@ -1,37 +1,55 @@
 var pos = 0;
 var selected_currency = 'USD';
+var coin_symbol_data = [];
+var socket;
+var current_fiat_symbol = 'USD';
+var current_fiat_rate = 1;
+var live_rates = {};
 $(document).ready(function(){
-    $('.btn-page').click(function(){
-        pos = $(this).attr('page-pos');
-        $('.btn-page').removeClass('btn-page-active');
-        $(this).addClass('btn-page-active');
-        loadLiveChart( pos );
+    doOnGetRate(function(rates){
+        live_rates = rates;
+        current_fiat_rate = live_rates[current_fiat_symbol];
+
+        $('.btn-page').click(function(){
+            pos = $(this).attr('page-pos');
+            $('.btn-page').removeClass('btn-page-active');
+            $(this).addClass('btn-page-active');
+            loadLiveChart( pos );
+        });
+
+
+        $('.img-avatar').click(function(){
+            $('.img-avatar').removeClass('selected');
+            $(this).addClass('selected');
+            $('input[name="default_avatar"]').val($(this).attr('src'));
+        });
+        $('.img-avatar').on('dblclick', function() {
+            $('.img-avatar').removeClass('selected');
+            $(this).addClass('selected');
+            $('input[name="default_avatar"]').val($(this).attr('src'));
+            $('form').submit();
+        });
+
+        loadLiveChart();
+        window.setTimeout(function(){
+            window.setInterval(function(){
+                doOnGetRate(function(rates) {
+                    live_rates = rates;
+                });
+            }, 60000);
+        }, 60000);
+
+        $('#tfoot').css('display', 'none');
+
+        socket = io.connect('https://coincap.io');
     });
 
-
-    $('.img-avatar').click(function(){
-        $('.img-avatar').removeClass('selected');
-        $(this).addClass('selected');
-        $('input[name="default_avatar"]').val($(this).attr('src'));
-    });
-    $('.img-avatar').on('dblclick', function() {
-        $('.img-avatar').removeClass('selected');
-        $(this).addClass('selected');
-        $('input[name="default_avatar"]').val($(this).attr('src'));
-        $('form').submit();
-    });
-
-    loadLiveChart();
-    //window.setTimeout(function(){
-    //    window.setInterval(function(){
-    //        loadLiveChart();
-    //    }, 10000);
-    //}, 5000);
-
-    $('#tfoot').css('display', 'none');
-
-    //$('#currency').change(doOnchangeCurrency);
 });
+function doOnGetRate(callback) {
+    $.getJSON('http://coincap.io/exchange_rates', function(resp){
+        callback(resp.rates);
+    });
+}
 function doOnLoadLiveChart() {
     $('#tfoot').css('display', 'none');
     $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center"><div class="loader"></div></td></tr>');
@@ -43,29 +61,51 @@ function loadLiveChart() {
         tbodyHTML = '';
         for( i=0;i<coin_live_datas.length; i++ ) {
             coin_data = coin_live_datas[i];
+            coinSymbol = coin_data.name.split(' ').join('');
+            coin_symbol_data.push(coinSymbol);
             ( coin_data.percent_change_24h > 0) ? colorstyle = "color-green" : colorstyle = "color-red";
             ( coin_data.percent_change_24h > 0 ) ? img_tag = "coin_up" : img_tag = "coin_down";
-            tbodyHTML += '<tr style="border-bottom: 1px solid #555555;">\
+            ( coin_data.current_price*1 > 100 ) ? dc = 2 : dc = 4;
+            tbodyHTML += '<tr class="tr-live" style="border-bottom: 1px solid #555555;" id="tr_'+coin_data.symbol+'">\
                                     <td class="td-cell td-coin-icon td-grey padding0">'+(pos*100+i+1)+'</td>\
                                     <td class="td-cell td-grey padding0" coin-name="'+coin_data.name+'">\
                                         <img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+coin_data.id+'.png" width="32px" height="32px" />\
                                         &nbsp;&nbsp;&nbsp;\
                                         <a class="a-white" href="'+window.origin+'/coinchart/'+coin_data.id+'" >'+coin_data.name+'</a>\
                                     </td>\
-                                    <td class="td-cell td-grey padding0">'+coin_data.current_price+'</td>\
-                                    <td class="td-cell td-grey padding0">'+coin_data.market_cap_usd+'</td>\
-                                    <td class="td-cell ' + colorstyle + ' td-grey padding0">' + coin_data.percent_change_24h +
-                '<img src="./assets/images/icon/' + img_tag + '.png" width="24px" height="12px" />\
+                                    <td class="td-cell td-cell-live td-grey padding0"><span class="live_data" id="price_'+coinSymbol+'">'+accounting.formatMoney(coin_data.current_price, '', dc, ",", ".")+'</span></td>\
+                                    <td class="td-cell td-grey padding0"><span id="mktcap_'+coinSymbol+'">'+accounting.formatMoney(coin_data.market_cap_usd, '', 0, ",", ".")+'</span></td>\
+                                    <td class="td-cell ' + colorstyle + ' td-grey padding0"><span id="h24_'+coinSymbol+'">' + accounting.formatMoney(coin_data.percent_change_24h, '', 2, ",", ".") +
+                '</span><img src="./assets/images/icon/' + img_tag + '.png" width="24px" height="12px" />\
                                     </td>\
                               </tr>';
         }
+
         $('#tbody_coin_live_data').html(tbodyHTML);
         $('#tfoot').css('display', '');
         $('.py-4').css('height', '100%');
+
+        socket.on('trades', function (tradeMsg) {
+            socket_data = tradeMsg.message;
+            coin_symbol = socket_data.msg.long.split(' ').join('').split(current_fiat_symbol).join('');
+            if ( coin_symbol_data.indexOf(coin_symbol)!= -1 ) {
+                var prevV = $('#price_'+coin_symbol).html().split(',').join('');
+                ( socket_data.msg.price*1 > 100 ) ? dc = 2 : dc = 4;
+                $('#price_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.price*current_fiat_rate, '', dc, ",", "."));
+                ( prevV*1 < socket_data.msg.price*1 ) ? sString = "bg-green" : sString = "bg-red";
+                $('#price_'+coin_symbol).attr('class', 'live_data');
+                $('#price_'+coin_symbol).addClass(sString);
+                $('#mktcap_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.mktcap*current_fiat_rate, '', 0, ",", "."));
+                $('h24_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.cap24hrChange, '', 2, ",", "."));
+            }
+        });
+
     });
 }
 function doOnchangeCurrency(currency) {
-    //currency = $(this).val();
+    current_fiat_symbol = currency;
+    current_fiat_rate = live_rates[current_fiat_symbol];
+
     selected_currency = currency;
     $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center"><div class="loader"></div></td></tr>');
     loadLiveChart();
@@ -214,7 +254,10 @@ $(function(){
             console.log(value+' : '+text);
             $('#tfoot').css('display', 'none');
             doOnchangeCurrency(value);
+
             event_change.html(value+' : '+text);
+
+
         }
     });
     $( ".test" ).selectCF({

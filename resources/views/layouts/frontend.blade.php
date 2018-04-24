@@ -164,6 +164,9 @@
     .close {
         color: #fff;
     }
+    .ifc-chat-window-textbox textarea {
+        outline:none!important;
+    }
 </style>
 </body>
 </html>
@@ -210,7 +213,7 @@ function notification(coin_data) {
     message = '<br/><img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+coin_data.coin_id+'.png" width="32px" height="32px" />';
     message += '<label class="message">&nbsp;&nbsp;'+coin_data.coin_name+'('+coin_data.symbol+')'+'</label>&nbsp;&nbsp;&nbsp;';
     message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Current Price: $'+coin_data.current_price+'</label>';
-    message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Alert time: '+coin_data.current_datetime+'</label>';
+    message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Alert time: '+coin_data.current_datetime+'(UTC)</label>';
     $.notify({
         title: '<label class="message alert-title">PRICE ALERT!</label>',
         icon: '',
@@ -246,13 +249,13 @@ function notification(coin_data) {
         $iflychat = new iFlyChat($APP_ID, $API_KEY);
         $user = array(
                 'user_name' => \Auth::user()->full_name, // string(required)
-                'user_id' => \Auth::user()->id, // string (required)
+                'user_id' => \Auth::user()->full_name, // string (required)
                 'is_admin' => FALSE, // boolean (optional)
                 'user_avatar_url' => \Auth::user()->user_avatar, // string (optional)
-                'user_profile_url' => 'user-profile-link', // string (optional)
+                'user_profile_url' => '/profile' //'user-profile-link', // string (optional)
         );
 
-        //$iflychat->setUser($user);
+        $iflychat->setUser($user);
         $iflychat_code = $iflychat->getHtmlCode();
         print $iflychat_code;
     ?>

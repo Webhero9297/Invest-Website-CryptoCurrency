@@ -90,8 +90,10 @@ class Common
     }
     public static function stdToArray($stdObj){
         $ret = array();
-        foreach( $stdObj as $key=>$val ) {
-            $ret[$key] = $val;
+        if ( $stdObj ) {
+            foreach( $stdObj as $key=>$val ) {
+                $ret[$key] = $val;
+            }
         }
         return $ret;
     }

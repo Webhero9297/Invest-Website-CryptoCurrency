@@ -39,7 +39,8 @@ class PortfolioController extends Controller
             is_null($user['user_avatar']) ? $arr['avatar'] = $default_avatar : $arr['avatar'] = $user['user_avatar'];
             $arr['invested_capital'] = number_format($investedCapital, 2, '.',',');
             $arr['current_value'] = number_format($currentValue, 2, '.',',');
-            $arr['total_profit_loss'] = number_format($totalProfitLossValue, 2, '.',',');
+            $temp = ($currentValue / $investedCapital - 1)*100;
+            $arr['total_profit_loss'] = number_format($temp, 2, '.',',');
             $arr['coin_ids'] = $coin_ids;
             $arr['user_id'] = $user['id'];
             $portfolios[] = $arr;
@@ -84,7 +85,8 @@ class PortfolioController extends Controller
         $arr['invested_capital'] = $investedCapital;
         $arr['current_value'] = $currentValue;
         $arr['total_profit_loss'] = $totalProfitLossValue;
-        $arr['total_profit_loss_percentage'] = $profitlossPercentage;
+        $temp = ($currentValue / $investedCapital - 1)*100;
+        $arr['total_profit_loss_percentage'] = number_format($temp, 2, '.',',');//$profitlossPercentage;
         $arr['coins'] = count($dd);
 
         return view('frontend.detailportfolio')->with(['user_avatar'=>$img_avatar, 'full_name'=>$full_name, 'email'=>$email,

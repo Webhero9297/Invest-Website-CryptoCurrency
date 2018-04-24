@@ -15,20 +15,36 @@ $(document).ready(function(){
             }
         });
     });
-    $('#quantity').on('keyup', function(ev){
-        quantity = parseFloat($(this).val()||0);
-        if ( ev.keyCode != 190 && ev.keyCode != 110 ) {
-            if ($(this).val().search('.')!=-1)
-                $(this).val(parseFloat($(this).val())||0);
+    $('#quantity').on("keypress keyup blur",function (event) {
+        var _V = $(this).val().replace(/[^0-9\.]/g,'');
+        if ( _V.length >=2 && _V.substr(0,1) == '0' && _V.substr(1,1) != '.' ) {
+            _V = _V.substr(1, _V.length-1);
         }
+        $(this).val(_V);
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+        quantity = parseFloat(_V||0);
         doOnCalcTotalCost();
     });
-    $('#purchased_price').on('keyup', function(ev){
-        purchased_price = parseFloat($(this).val()||0);
-        if ( ev.keyCode != 190 && ev.keyCode != 110 ) {
-            if ($(this).val().search('.')!=-1)
-                $(this).val(parseFloat($(this).val())||0);
+    //$('#quantity').on('keyup', function(ev){
+    //    quantity = parseFloat($(this).val()||0);
+    //    if ( ev.keyCode != 190 && ev.keyCode != 110 ) {
+    //        if ($(this).val().search('.')!=-1)
+    //            $(this).val(parseFloat($(this).val())||0);
+    //    }
+    //    doOnCalcTotalCost();
+    //});
+    $('#purchased_price').on('keypress keyup blur', function(event){
+        var _V = $(this).val().replace(/[^0-9\.]/g,'');
+        if ( _V.length >=2 && _V.substr(0,1) == '0' && _V.substr(1,1) != '.' ) {
+            _V = _V.substr(1, _V.length-1);
         }
+        $(this).val(_V);
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+        purchased_price = parseFloat(_V||0);
         doOnCalcTotalCost();
 
     });
@@ -37,7 +53,13 @@ $(document).ready(function(){
 function doOnChangeInputValue( tagId, direction ) {
     var _inputVal = parseFloat($('#'+tagId).val());
     if ( direction == 'down' && _inputVal == 0 ) return;
-    ( direction == 'up' ) ? $('#'+tagId).val(Decimal.add(_inputVal,1)) : $('#'+tagId).val(Decimal.sub(_inputVal,1));
+    if ( direction == 'up' ) {
+        $('#'+tagId).val(Decimal.add(_inputVal,1))
+    }
+    else{
+        if ( Decimal.sub(_inputVal,1) < 0 ) return;
+        $('#'+tagId).val(Decimal.sub(_inputVal,1));
+    }
 
     doOnCalcTotalCost();
 }

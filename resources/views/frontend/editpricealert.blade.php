@@ -175,7 +175,7 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you would like to remove this price alert?</h3>
+                <h3>Are you sure you would like to remove this currency data?</h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="button buttonRed btn-save-details ui-corner-all" onclick="doOnRequestDelete()">Remove</button>
