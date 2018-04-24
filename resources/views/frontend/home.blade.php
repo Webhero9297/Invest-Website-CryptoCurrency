@@ -484,9 +484,3 @@
     </div>
     <script src="{{ asset('./js/frontend/home.js') }}"></script>
 @endsection
-
-{{--<script>--}}
-    {{--window.setInterval(function() {--}}
-        {{--window.location.reload();--}}
-    {{--}, 10000);--}}
-{{--</script>--}}
