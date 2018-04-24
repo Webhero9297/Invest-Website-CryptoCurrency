@@ -50,7 +50,6 @@ label {
     background-size: cover;
     position: relative;
     z-index: 1;
-    /*margin-top: -56px;*/
     padding-top: 70px;
     padding-bottom: 131px;
     min-height: 840px;
@@ -69,7 +68,6 @@ label {
     background-size: 100% 100%;
     position: relative;
     z-index: 1;
-    /*padding-top: 50px;*/
     padding-bottom: 10px;
 }
 .div-topcryptos {
@@ -79,7 +77,6 @@ label {
     z-index: 1;
     padding-top: 0;
     padding-bottom: 5px;
-    /*margin-top:-260px;*/
 }
 .div-faq {
     background-image: url('../assets/images/background/faq.png');
@@ -119,19 +116,8 @@ label {
     cursor: pointer;
 }
 .div-avatar-panel:hover {
-    /*box-shadow: 2px 3px 18px #888888;*/
 
 }
-/*.div-avatar-icon {*/
-    /*background-image: url('../assets/images/avatars/default.png');*/
-    /*background-size: cover;*/
-    /*width: 64px;*/
-    /*height: 64px;*/
-    /*border: 2px solid white;*/
-    /*border-radius: 50%;*/
-    /*margin:auto;*/
-    /*margin-bottom: 10px;*/
-/*}*/
 .div-avatar-icon {
     background-size: cover;
     width: 70px;
@@ -269,7 +255,6 @@ label {
 
 .panel-default>.panel-heading a:after {
     content: "\f054";
-    /*background: url('../assets/images/background/gt.png');*/
     position: relative;
     top: 6px;
     display: inline-block;
@@ -292,16 +277,12 @@ label {
 
 .panel-default>.panel-heading a[aria-expanded="true"]:after {
     content: "\f054";
-    /*background: url('../assets/images/background/gt.png');*/
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
 }
 
 .panel-default>.panel-heading a[aria-expanded="false"]:after {
     content: "\f054";
-    /*background: url('../assets/images/background/gt.png');*/
-    /*-webkit-transform: rotate(90deg);*/
-    /*transform: rotate(90deg);*/
 }
 
 .accordion-option {
@@ -437,7 +418,6 @@ label {
     border: 1px solid #eee;
 }
 .btn-sendmessage{
-    /*width:100%;*/
     border-radius: 0;
     padding: 15px 30px;
     font-family: Montserrat-SemiBold;
