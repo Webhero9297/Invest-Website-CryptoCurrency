@@ -89,36 +89,6 @@ class RegisterController extends Controller
     }
     private function sendEmail($code) {
         $user = app(User::class)->where('activation_code', $code)->first();
-//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
-//        $subject = "Welcome to Moonfolio";
-//        $to_email = $user->email;
-//        $to_fullname = $user->full_name;
-//        $from_email = "manager@moonfolio.io";
-//        $from_fullname = "Welcome to Moonfolio";
-//
-//        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
-//        $headers .= "Reply-To: ".$from_email."\r\n";
-//        $headers .= "Reply-Path: ".$from_email."\r\n";
-//
-//        $headers .= "MIME-Version: 1.0\r\n";
-//        $headers .= "Content-type: text/html; charset=utf-8\r\n";
-//
-//        $message = "<div>Hi {$to_fullname},<br><br>
-//                    <div style='font-weight: bold;'>Please click on the link below to activate your Moonfolio account.</div><br>
-//                    <div>
-//                    <a href=\"{$serverLink}/verify-user/{$code}\" target='_blank'>Click Here.</a><br><br>
-//                    Greetings,<br><br>
-//                    Team Moonfolio.</div><br>
-//                    <div style=\"display:inline-flex;margin-top:-20px;\">
-//                        <div>Lets go to the moon!</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
-//                    </div>";
-//
-//        if (!@mail($to_email, $subject, $message, $headers)) {
-//            print_r($message);
-//        }
-//        else {
-//
-//        }
 
         $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
         $subject = "Welcome to Moonfolio";
@@ -128,7 +98,6 @@ class RegisterController extends Controller
         $mail->IsSMTP();
         $mail->Host = "mail.moonfolio.io";
         $mail->Port = 25;
-        //$mail->SMTPSecure = 'SSL';
         $mail->SMTPAuth = true;
         $mail->Username = "manager@moonfolio.io";
         $mail->Password = "Moonfolio1114!";
