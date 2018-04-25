@@ -13,14 +13,6 @@ $(document).ready(function(){
         live_rates = rates;
         current_fiat_rate = live_rates[current_fiat_symbol];
 
-        //$('.btn-page').click(function(){
-        //    pos = $(this).attr('page-pos');
-        //    $('.btn-page').removeClass('btn-page-active');
-        //    $(this).addClass('btn-page-active');
-        //    loadLiveChart( pos );
-        //    document.getElementById("myInput").value = "";
-        //});
-
 
         $('.img-avatar').click(function(){
             $('.img-avatar').removeClass('selected');
@@ -42,9 +34,6 @@ $(document).ready(function(){
                 });
             }, 60000);
         }, 60000);
-        //
-        ////$('#tfoot').css('display', 'none');
-        //
         socket = io.connect('https://coincap.io');
     });
 
