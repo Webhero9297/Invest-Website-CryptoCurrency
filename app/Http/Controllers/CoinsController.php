@@ -43,7 +43,6 @@ class CoinsController extends Controller
             $temp['current_price'] = $temp['price_'.strtolower($currency)];
             $ret_data[] = $temp;
         }
-//dd($data);
         return response()->json($ret_data);
     }
     public function coinChart( $coinId ) {
