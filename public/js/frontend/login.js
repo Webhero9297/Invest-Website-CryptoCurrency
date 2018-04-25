@@ -39,3 +39,4 @@ doOnLoginForm = function(){
         $(this).removeClass('is-active');
     });
 }
+

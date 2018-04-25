@@ -27,6 +27,14 @@ $(document).ready(function(){
         quantity = parseFloat(_V||0);
         doOnCalcTotalCost();
     });
+    //$('#quantity').on('keyup', function(ev){
+    //    quantity = parseFloat($(this).val()||0);
+    //    if ( ev.keyCode != 190 && ev.keyCode != 110 ) {
+    //        if ($(this).val().search('.')!=-1)
+    //            $(this).val(parseFloat($(this).val())||0);
+    //    }
+    //    doOnCalcTotalCost();
+    //});
     $('#purchased_price').on('keypress keyup blur', function(event){
         var _V = $(this).val().replace(/[^0-9\.]/g,'');
         if ( _V.length >=2 && _V.substr(0,1) == '0' && _V.substr(1,1) != '.' ) {

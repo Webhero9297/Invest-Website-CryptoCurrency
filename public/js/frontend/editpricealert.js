@@ -14,11 +14,15 @@ $(document).ready(function(){
         });
     });
     $('#limit_price').on('keyup', function(ev){
-        quantity = parseFloat($(this).val()||0);
-        if ( ev.keyCode != 190 && ev.keyCode != 110 ) {
-            if ($(this).val().search('.')!=-1)
-                $(this).val(parseFloat($(this).val())||0);
+        var _V = $(this).val().replace(/[^0-9\.]/g,'');
+        if ( _V.length >=2 && _V.substr(0,1) == '0' && _V.substr(1,1) != '.' ) {
+            _V = _V.substr(1, _V.length-1);
         }
+        $(this).val(_V);
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+        quantity = parseFloat(_V||0);
     });
 
     $('.alert-method').click(function(){
@@ -37,6 +41,13 @@ $(document).ready(function(){
         $('.py-4').css('height', '100%');
     });
 
+    $('[data-toggle="tooltip"]').tooltip({
+        'placement': 'top'
+    });
+    $('[data-toggle="popover"]').popover({
+        trigger: 'hover',
+        'placement': 'top'
+    });
 });
 
 function doOnChangeInputValue( tagId, direction ) {
@@ -51,6 +62,10 @@ function doOnClickSave() {
 
     $('#frm_price_alert').submit();
 }
+function doOnClick(type){
+    (type == 'below')? m_type = 1 : m_type = 2;
+    $('input[name="limit_type"]').val(m_type);
+}
 function doOnClickEdit(jsonObj) {
     $('input[name="coin_id"]').val(jsonObj.coin_id);
     $('input[name="detail_id"]').val(jsonObj.id);
@@ -58,7 +73,7 @@ function doOnClickEdit(jsonObj) {
     $('input[name="coin_name"]').val(jsonObj.coin_name);
     $('input[name="audio_alert"]').val(jsonObj.audio_alert);
     $('input[name="email_alert"]').val(jsonObj.email_alert);
-
+console.log(jsonObj);
     if ( jsonObj.email_alert == 1 ) {
         $('#box-2').attr('checked', true);
     }
@@ -70,6 +85,17 @@ function doOnClickEdit(jsonObj) {
     }
     else{
         $('#box-1').attr('checked', false);
+    }
+
+    if ( jsonObj.limit_type == 0 ) {
+        $('#label_below').addClass('active');
+        $('#label_above').removeClass('active');
+        $('input[name="limit_type"]').val(1);
+    }
+    else{
+        $('#label_below').removeClass('active');
+        $('#label_above').addClass('active');
+        $('input[name="limit_type"]').val(2);
     }
 }
 function doOnDelete(detail_id) {

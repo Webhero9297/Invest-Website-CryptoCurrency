@@ -8,6 +8,19 @@ $(document).ready(function(){
 
     loadLiveData();
     window.setInterval(loadLiveData, 10000);
+
+    $('a[data-parent="#accordion"]').click(function(){
+        if ( $(this).attr('aria-expanded') == undefined || $(this).attr('aria-expanded') == 'false' ){
+            $('.collapse').collapse('hide');
+            $(this).collapse("show");
+        }
+
+    });
+    if ( alert_message != undefined ){
+        notificationEx(alert_message);
+    }
+
+
 });
 function loadLiveData() {
     $.get('/toplivedata', function(response){
@@ -496,4 +509,33 @@ doOnParticles = function() {
         rgb = opts.lineColor.match(/\d+/g);
     resizeReset();
     setup();
+}
+
+function notificationEx(alert_message) {
+    //message = '<br/><img src="'+logo_img+'" height="50px" />';
+    message = '<label class="message" style="width:100%;word-wrap: break-word;">&nbsp;&nbsp;'+alert_message+'</label>&nbsp;&nbsp;&nbsp;';
+    $.notify({
+        title: '<img src="'+logo_img+'" height="30px" />', //'<label class="message alert-title">Moonfolio!</label>',
+        icon: '',
+        message: message
+    }, {
+        type: 'danger',
+        animate: {
+            enter: 'animated fadeInUp',
+            exit: 'animated fadeOutRight'
+        },
+        placement: {
+            from: "bottom",
+            align: "left"
+        },
+        offset: 20,
+        spacing: 10,
+//        showProgressbar: true,
+        z_index: 1031,
+        delay: 60000,
+        timer: 100,
+        onShow: function(){
+            x.play();
+        }
+    });
 }
