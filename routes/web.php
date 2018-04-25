@@ -49,7 +49,8 @@ Route::get('/getliveportfolios', 'PortfolioController@getLivePortfolioData')->na
 Route::get('/detailportfolio/{userId}', 'PortfolioController@detailPortfolio')->name('detailportfolio');
 Route::get('/coins', 'CoinsController@index')->name('coins');
 Route::get('/coinchart/{coin_id}', 'CoinsController@coinChart')->name('coinchart');
-Route::get('/coinpage/{page_pos}', 'CoinsController@getCoinDataByPagePos')->name('coin.page');
+Route::get('/coinpage', 'CoinsController@getCoinDataByPagePos')->name('coin.page');
+Route::get('/filter/{filter}', 'CoinsController@getSearchDataForFilter')->name('coin.filter');
 
 Route::get('/verification/{code}', 'Auth\RegisterController@verificationForm')->name('verification');
 Route::post('/sendverification', 'Auth\RegisterController@verificationEmail')->name('sendverification');
