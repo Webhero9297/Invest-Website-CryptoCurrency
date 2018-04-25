@@ -87,8 +87,9 @@ class PortfolioController extends Controller
         $arr['invested_capital'] = $investedCapital;
         $arr['current_value'] = $currentValue;
         $arr['total_profit_loss'] = $totalProfitLossValue;
+        if ( $investedCapital == 0 ) $investedCapital = 1;
         $temp = ($currentValue / $investedCapital - 1)*100;
-        $arr['total_profit_loss_percentage'] = number_format($temp, 2, '.',',');//$profitlossPercentage;
+        $arr['total_profit_loss_percentage'] = $temp;//$profitlossPercentage;
         $arr['coins'] = count($dd);
 
         return view('frontend.detailportfolio')->with(['user_avatar'=>$img_avatar, 'full_name'=>$full_name, 'email'=>$email,

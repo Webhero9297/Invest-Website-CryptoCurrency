@@ -238,6 +238,7 @@ class Common
             $coin_data['total_cost'] = $record['purchased_price']*$record['quantity'];
             $coin_data['purchased_date'] = $record['purchased_date'];
             $coin_data['profit_loss'] = $coin_data['price_usd'] - $record['purchased_price'];
+            if ( $record['purchased_price'] == 0 ) $record['purchased_price'] = 1;
             $coin_data['profit_loss_percentage'] = ($coin_data['price_usd'] / $record['purchased_price'])*100-100;
             $coin_data['detail_id'] = $record['detail_id'];
             $ret_data[] = $coin_data;

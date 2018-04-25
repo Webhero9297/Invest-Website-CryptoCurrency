@@ -57,6 +57,14 @@ class CoinsController extends Controller
     public function coinChart( $coinId ) {
         $coinData = Common::getRealTimeCryptoCurrencyDataPerCoinId($coinId);
         $coin_data = Common::stdToArray($coinData[0]);
-        return view('frontend.coinchart')->with(['coinData'=>$coin_data]);
+        return view('frontend.coinchart')->with(['coinData'=>$coin_data, 'coin_id'=>$coinId]);
+    }
+    public function coinLiveData($coinId) {
+        $coinData = Common::getRealTimeCryptoCurrencyDataPerCoinId($coinId);
+        $coin_data = Common::stdToArray($coinData[0]);
+        $coin_data['price_usd'] = number_format($coin_data['price_usd'], 2, '.',',');
+        $coin_data['mkt_cap_usd'] = number_format($coin_data['market_cap_usd'], 2, '.',',');
+        $coin_data['h24_vol_usd'] = number_format($coin_data['24h_volume_usd'], 2, '.',',');
+        return response()->json($coin_data);
     }
 }
