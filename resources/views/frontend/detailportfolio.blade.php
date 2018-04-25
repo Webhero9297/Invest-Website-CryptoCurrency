@@ -237,8 +237,6 @@
         );
         return false;
     });
-
-
     (function(){
         var shareButtons = document.querySelectorAll(".twitter-share-button");
         if (shareButtons) {
