@@ -105,7 +105,7 @@
                 <label class="label-title-portfolio">PORTFOLIO</label>
                 <div class="div-panel-heading" style="padding-top:18px;">
                     <div class="row padding0">
-                        <div class="col-md-2 padding0 wrap-div-col" style="padding-left: 20px!important;">Total Coins: {{ $total_data['coins'] }}</div>
+                        <div class="col-md-2 padding0 wrap-div-col" style="padding-left: 20px!important;">Total Coins: {{ $total_coins }}</div>
                         <div class="col-md-3 padding0 wrap-div-col">
                             Invested Capital: ${{ number_format($total_data['invested_capital'], 2, '.',',') }}</div>
                         <div class="col-md-3 padding0 wrap-div-col">

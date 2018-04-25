@@ -233,84 +233,111 @@
             color: gold;
             border-color: gold;
         }
+
+        input[type="search"] {
+            padding: 0;
+            line-height: 32px;
+            background: #0297bf;
+            color: #fff;
+            font: bold 14px/20px "Arial", sans-serif;
+            text-indent: 12px;
+            outline: none;
+            -webkit-appearance: textfield;
+            border-radius: 0;
+        }
+        .form-control:focus {
+            background: #0297bf;
+        }
     </style>
 {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+<link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/accounting.min.js') }}" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-<script>
-    var totalCount = <?php echo $totalCount; ?>;
-</script>
 <style>
-.elementToFadeInAndOut {
-    -webkit-animation: fadeinout 1s linear forwards;
-    animation: fadeinout 1s linear forwards;
-    opacity: 1;
-}
-.tr-live {
-    height: 50px;
-}
-.td-cell, .td-cell-live {
-    height: 50px;
-    min-height: 50px;
-    font-size: 16px;
-}
-#tbody_coin_live_data tr td span {
-    font-family: Montserrat-Light;
-}
-.live_data {
-    width: 60%;
-    height: 80%;
-    padding: 7px 10px;
-    border-radius: 7px;
-    display: inline-block;
-    margin: 2% auto;
-}
-.bg-red {
-    -webkit-animation-name: red-example;  /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
-    -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
-    -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
-    animation-name: red-example;
-    animation-duration: 2s;
-    animation-delay: 1s;
-    animation-fill-mode: backwards;
-}
-.bg-green {
-    -webkit-animation-name: green-example;  /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
-    -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
-    -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
-    animation-name: green-example;
-    animation-duration: 2s;
-    animation-delay: 1s;
-    animation-fill-mode: backwards;
-}
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes red-example {
-    from {background-color: red;}
-    to {background-color: transparent;}
-}
+    .elementToFadeInAndOut {
+        -webkit-animation: fadeinout 1s linear forwards;
+        animation: fadeinout 1s linear forwards;
+        opacity: 1;
+    }
+    .tr-live {
+        height: 50px;
+    }
+    .td-cell, .td-cell-live {
+        height: 50px;
+        min-height: 50px;
+        font-size: 16px;
+    }
+    #tbody_coin_live_data tr td span {
+        font-family: Montserrat-Light;
+    }
+    .live_data {
+        width: 60%;
+        height: 80%;
+        padding: 7px 10px;
+        border-radius: 7px;
+        display: inline-block;
+        margin: 2% auto;
+    }
+    .bg-red {
+        -webkit-animation-name: red-example;  /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
+        -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+        -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
+        animation-name: red-example;
+        animation-duration: 2s;
+        animation-delay: 1s;
+        animation-fill-mode: backwards;
+    }
+    .bg-green {
+        -webkit-animation-name: green-example;  /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
+        -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+        -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
+        animation-name: green-example;
+        animation-duration: 2s;
+        animation-delay: 1s;
+        animation-fill-mode: backwards;
+    }
+    /* Safari 4.0 - 8.0 */
+    @-webkit-keyframes red-example {
+        /*from {background-color: red;}*/
+        /*to {background-color: transparent;}*/
+        from {color: red;}
+        to {color: red;}
+    }
 
-/* Standard syntax */
-@keyframes red-example {
-    from {background-color: red;}
-    to {background-color: transparent;}
-}
-/* Safari 4.0 - 8.0 */
-@-webkit-keyframes green-example {
-    from {background-color: green;}
-    to {background-color: transparent;}
-}
+    /* Standard syntax */
+    @keyframes red-example {
+        from {color: red;}
+        to {color: red;}
+        /*from {background-color: red;}*/
+        /*to {background-color: transparent;}*/
+    }
+    /* Safari 4.0 - 8.0 */
+    @-webkit-keyframes green-example {
+        /*from {background-color: green;}*/
+        /*to {background-color: transparent;}*/
+        from {color: green;}
+        to {color: green;}
+    }
 
-/* Standard syntax */
-@keyframes green-example {
-    from {background-color: green;}
-    to {background-color: transparent;}
-}
+    /* Standard syntax */
+    @keyframes green-example {
+        /*from {background-color: green;}*/
+        /*to {background-color: transparent;}*/
+        from {color: green;}
+        to {color: green;}
+    }
 
+    .form-inline {
+        display: block;
+    }
+    .coin_table_info {
+        font-family: Montserrat-Light;
+    }
 </style>
     <div class="container-fluid padding0">
         <div class="div-auth-register" id="home" style="padding-top:100px;">
@@ -319,7 +346,7 @@
                     <div class="div-panel-heading" style="">
                         COINS
                         &nbsp;&nbsp;&nbsp;
-                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for coins" title="Type in a name">
+                        <input type="text" id="myInput" placeholder="Search for coins" title="Type in a name">
                         <div style="display:inline;float:right;margin-top:-15px;">
                             <select id="currency" class="select">
                                 <option value="USD">USD</option>
@@ -335,31 +362,18 @@
 
                     </div>
                     <div class="panel-body panel-table">
-                        <table id="coin_table" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" style="width:100%;margin-top: -5px!important;">
+                        <table id="coin_table" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" style="width:100%;margin-top: -35px!important;">
                             <thead>
-                            <tr>
-                                <th class="td-cell td-grey" width="120px">RANK</th>
-                                <th class="td-cell td-grey" width="22%">Name</th>
-                                <th class="td-cell td-grey" width="22%">Current Price</th>
-                                <th class="td-cell td-grey" width="22%">Market Capital</th>
-                                <th class="td-cell td-grey">24H Change %</th>
-                            </tr>
+                                <tr>
+                                    <th class="td-cell td-grey" width="80px">Rank</th>
+                                    <th class="td-cell td-grey" width="22%">Name</th>
+                                    <th class="td-cell td-grey" width="22%">Current Price</th>
+                                    <th class="td-cell td-grey" width="22%">Market Capital</th>
+                                    <th class="td-cell td-grey">24H Change %</th>
+                                </tr>
                             </thead>
                             <tbody id="tbody_coin_live_data" class="text-center">
                             </tbody>
-                            <tfoot id="tfoot">
-                                <tr>
-                                    <td align="center" colspan="5">
-                                        <div class="page-btn-group text-center">
-                                            @if ($totalCount>0)
-                                                @for( $count = 0; $count<$totalCount; $count++ )
-                                                    <div class="btn-page {{ $count==0 ? "btn-page-active" : "" }}" page-pos="{{ $count }}" >{{ $count+1 }}</div>
-                                                @endfor
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tfoot>
                         </table>
 
                     </div>

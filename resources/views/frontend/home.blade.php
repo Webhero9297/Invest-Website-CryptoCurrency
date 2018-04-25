@@ -7,6 +7,163 @@
     <script>
         var top_users_count = {{ count($top_users) }};
     </script>
+<style>
+.panel-body{
+    margin-top:0;
+    width: 80%;
+    border-radius: 0;
+    margin-bottom: 8px;
+    padding:20px 15px;
+}
+a[href="#collapse2"], #collapse2 .panel-body,a[href="#collapse4"], #collapse4 .panel-body,a[href="#collapse6"], #collapse6 .panel-body {
+    left: 20%;
+    position: relative;
+}
+/**********************************************    Carousel Start   ************************************************/
+.wrapper{
+    width:100%;
+    position:relative;
+    margin:5% auto 0;
+}
+.carousel{
+    width: 100%;
+    position: relative;
+    padding-top: 380px;
+    overflow: hidden;
+}
+.inner{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.slide{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    z-index: 1;
+    opacity: 0;
+}
+.slide.active,
+.slide.left,
+.slide.right{
+    z-index: 2;
+    opacity: 1;
+}
+.js-reset-left{left:auto}
+.slide.left{
+    left:-100%;
+    right:0;
+}
+.slide.right{
+    right:-100%;
+    left: auto;
+}
+.transition .slide.left{left:0%}
+.transition .slide.right{right:0%}
+.transition .slide.shift-right{right: 100%;left:auto}
+.transition .slide.shift-left{left: 100%;right:auto}
+.transition .slide{
+    transition-property: right, left, margin;
+}
+.indicators{
+    width:100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 4;
+    padding:0;
+    text-align: center;
+}
+.indicators li{
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    margin: 5px;
+    background: #fff;
+    list-style-type: none;
+    border-radius: 50%;
+    cursor:pointer;
+    transition:background 0.3s ease-out;
+}
+.indicators li.active{background:#0297df}
+.indicators li:hover{background-color:#2b2b2b}
+.arrow{
+    width: 20px;
+    height: 20px;
+    position:absolute;
+    top:49%;
+    z-index:5;
+    border-top:3px solid #fff;
+    border-right:3px solid #fff;
+    cursor:pointer;
+    transition:border-color 0.3s ease-out;
+}
+.arrow:hover{border-color:#0297df}
+.arrow-left{
+    left:20px;
+    transform:rotate(225deg);
+}
+.arrow-right{
+    right:20px;
+    transform:rotate(45deg);
+}
+.slide{
+    text-align:center;
+    /*padding-top:25%;*/
+    background-size:cover;
+}
+h1{
+    width:100px;
+    height:100px;
+    background-color:rgba(2, 151, 223,0.7);
+    margin:auto;
+    line-height:100px;
+    color:#fff;
+    font-size:2.4em;
+    border-radius:50%;
+}
+.slide:nth-child(1){
+    /*background-image:url(http://mamiskincare.net/wp-content/uploads/2015/11/inspire-fashion-ideas-for-styleator-concept-with-fashion-style-for-fall-2015-with-street-style-at-stockholm-fashion-week-fall-winter-2015-2016-15.jpg);*/
+}
+/*.slide:nth-child(2){*/
+    /*background-image:url(http://conversationsabouther.net/wp-content/uploads/2015/03/1-seoul-fashion-week-fall-2015-street-style-45.jpg);*/
+/*}*/
+/*.slide:nth-child(3){*/
+    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+/*}*/
+/*.slide:nth-child(4){*/
+    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+/*}*/
+/*.slide:nth-child(5){*/
+    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+/*}*/
+/**********************************************    Carousel  End    ************************************************/
+    .div-pd-lr{
+        padding-left:50px;padding-right:50px;
+    }
+    .a-review-user{
+        color: white;
+        font-family: Montserrat-Light;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .a-review-user:hover {
+        text-decoration: none;
+        color: gold;
+    }
+</style>
+<script>
+    var logo_img = "{{ asset('./assets/images/background/black_logo.png') }}";
+</script>
+@if ( $alert_message != 'sent' )
+    <script> var alert_message = '<?php echo $alert_message; ?>';</script>
+@else
+    <script> var alert_message = undefined; </script>
+@endif
     <div class="container-fluid padding0">
         <div class="div-home" id="home">
             <div class="container">
@@ -198,8 +355,8 @@
                                 <img src="{{ asset('./assets/images/icon/icon-fiat.png') }}" class="media-object" >
                             </div>
                             <div class="media-body" style="padding-left:15px;margin-top: -5px;">
-                                <h4 class="media-heading icon-main white-text">FIAT</h4>
-                                <p class="white-text" style="font-size: 16px;padding-right:100px;">Different major fiat currencies such as USD, CAD, AUD, GBP, EUR etc.</p>
+                                <h4 class="media-heading icon-main white-text">CHAT</h4>
+                                <p class="white-text" style="font-size: 16px;padding-right:20px;">Communicate with each other about crypto currencies.</p>
                             </div>
                         </div>
                     </div>
@@ -310,79 +467,91 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#faq1">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
                                             <img src="{{ asset('./assets/images/background/faq-icon.png') }}" class="img-faq-icon">
                                             Which currencies do you offer?
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="faq1" class="div-faq-content panel-collapse collapse">
-                                    We offer all coins listed on <a href="https://coinmarketcap.com" target="_blank" style="color:gold;">coinmarketcap.com</a>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        We offer all coins listed on <a href="https://coinmarketcap.com" target="_blank" style="color:gold;">coinmarketcap.com</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default" style="margin-left:20%;width:100%;">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#faq2">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
                                             <img src="{{ asset('./assets/images/background/faq-icon.png') }}" class="img-faq-icon">
                                             Is there a mobile version?
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="faq2" class="div-faq-content panel-collapse collapse">
-                                    At the moment there is no mobile version, but there will be in future.
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        At the moment there is no mobile version, but there will be in future.
+                                    </div>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#faq3">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
                                             <img src="{{ asset('./assets/images/background/faq-icon.png') }}" class="img-faq-icon">
                                             Could we communicate inside Moonfolio?
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="faq3" class="div-faq-content panel-collapse collapse">
-                                    Yes, we have an chat room where we can talk and share our opinions about crypto’s.
-                                </div>
-                            </div>
-                            <div class="panel panel-default" style="margin-left:20%;width:100%;">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#faq4">
-                                            <img src="{{ asset('./assets/images/background/faq-icon.png') }}" class="img-faq-icon">
-                                            Are there price alerts?
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="faq4" class="div-faq-content panel-collapse collapse">
-                                    Yes, you can set an price alert and you will receive an email or audio alert once your price strike has been hit.
+                                <div id="collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        Yes, we have an chat room where we can talk and share our opinions about crypto’s.
+                                    </div>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#faq5">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                            <img src="{{ asset('./assets/images/background/faq-icon.png') }}" class="img-faq-icon">
+                                            Are there price alerts?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse4" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        Yes, you can set an price alert and you will receive an email or audio alert once your price strike has been hit.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
                                             <img src="{{ asset('./assets/images/background/faq-icon.png') }}" class="img-faq-icon">
                                             Could I trade from Moonfolio?
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="faq5" class="div-faq-content panel-collapse collapse">
-                                    Not yet, but we will add this in future.
+                                <div id="collapse5" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        Not yet, but we will add this in future.
+                                    </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default" style="margin-left:20%;width:100%;">
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#faq6">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                                             <img src="{{ asset('./assets/images/background/faq-icon.png') }}" class="img-faq-icon">
                                             Is the pricing real time?
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="faq6" class="div-faq-content panel-collapse collapse">
-                                    Yes, it will be update every seconds.
+                                <div id="collapse6" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        Yes, it will be update every seconds.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -397,32 +566,110 @@
                     <label class="home-label community port" style="margin-top: -42px;">TESTIMONIALS</label>
                 </div>
                 <div class="row" style="padding-top: 0;">
-                    <div class="col-sm-12 text-right">
-                        <div class="div-pad1-panel">
-                            <div class="div-pad1"></div>
-                            <label class="div-pad1-label-title">How It Works</label>
-                            <label class="div-pad1-label">
-                                CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.
-
-                                To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.
-
-                                To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.
-                            </label>
+                    <div class="wrapper">
+                        <div class="carousel">
+                            <div class="inner">
+                                {{--<div class="slide active">--}}
+                                    {{--<div class="div-pad1-panel">--}}
+                                        {{--<label class="div-pad1-label-title">How It Works</label>--}}
+                                        {{--<div class="row div-pd-lr">--}}
+                                            {{--<div class="col-xs-12 col-sm-5 col-md-4">--}}
+                                                {{--<div class="div-pad1"></div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-xs-12 col-sm-7 col-md-8">--}}
+                                                {{--<label class="div-pad1-label">--}}
+                                                    {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
+                                                    {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
+                                                    {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
+                                                {{--</label>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="slide">--}}
+                                    {{--<div class="div-pad1-panel">--}}
+                                        {{--<label class="div-pad1-label-title">How It Works</label>--}}
+                                        {{--<div class="row div-pd-lr">--}}
+                                            {{--<div class="col-xs-12 col-sm-7 col-md-8">--}}
+                                                {{--<label class="div-pad1-label">--}}
+                                                    {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
+                                                    {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
+                                                    {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
+                                                {{--</label>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-xs-12 col-sm-5 col-md-4">--}}
+                                                {{--<div class="div-pad2"></div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                <div class="slide active">
+                                    <div class="div-pad1-panel">
+                                        <label class="div-pad1-label-title"></label>
+                                        <div class="row div-pd-lr">
+                                            <div class="col-xs-12 col-sm-5 col-md-4">
+                                                <div class="div-pad1"></div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-7 col-md-8">
+                                                <label class="div-pad1-label">
+                                                    What makes this portfolio platform better than the rest is the chat functionality,
+                                                    where you can talk to other people and ask their experiences and even get useful tips.
+                                                    For now the best product on the internet.
+                                                </label>
+                                                <label class=" text-center">
+                                                    <a href="/detailportfolio/14" class="a-review-user">MareenN</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="div-pad1-panel">
+                                        <label class="div-pad1-label-title"></label>
+                                        <div class="row div-pd-lr">
+                                            <div class="col-xs-12 col-sm-7 col-md-8">
+                                                <label class="div-pad1-label">
+                                                    Moonfolio price alerts are a MUST-HAVE for any serious crypto currency investor.
+                                                    They saved me from taking profits at the right time and I was able to cash in just before the sell off in January 2018.
+                                                </label>
+                                                <label class=" text-center">
+                                                    <a href="/detailportfolio/24" class="a-review-user">Josh</a>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-5 col-md-4">
+                                                <div class="div-pad2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arrow arrow-left"></div>
+                            <div class="arrow arrow-right"></div>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="div-pad2-panel">
-                            <div class="div-pad2"></div>
-                            <label class="div-pad2-label-title">How It Works</label>
-                            <label class="div-pad2-label">
-                                CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.
 
-                                To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.
-
-                                To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.
-                            </label>
-                        </div>
                     </div>
+                    {{--<div class="col-sm-12 text-right">--}}
+                        {{--<div class="div-pad1-panel">--}}
+                            {{--<div class="div-pad1"></div>--}}
+                            {{--<label class="div-pad1-label-title">How It Works</label>--}}
+                            {{--<label class="div-pad1-label">--}}
+                                {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
+                                {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
+                                {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
+                            {{--</label>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-sm-12">--}}
+                        {{--<div class="div-pad2-panel">--}}
+                            {{--<div class="div-pad2"></div>--}}
+                            {{--<label class="div-pad2-label-title">How It Works</label>--}}
+                            {{--<label class="div-pad2-label">--}}
+                                {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
+                                {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
+                                {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
+                            {{--</label>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
         </div>
@@ -483,4 +730,11 @@
         </div>
     </div>
     <script src="{{ asset('./js/frontend/home.js') }}"></script>
+    <script src="{{ asset('./js/frontend/home-carousel.js') }}"></script>
 @endsection
+
+{{--<script>--}}
+    {{--window.setInterval(function() {--}}
+        {{--window.location.reload();--}}
+    {{--}, 10000);--}}
+{{--</script>--}}

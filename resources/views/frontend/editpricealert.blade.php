@@ -50,6 +50,9 @@
         -webkit-transform: rotate(45deg);
         transform: rotate(45deg);
     }
+    input[type="radio"] {
+        display: none;;
+    }
 </style>
 <script>
     var coin_arr = <?php echo $coin_arr;?>;
@@ -69,6 +72,7 @@
                         <input type="hidden" name="fiat" value="USD" />
                         <input type="hidden" name="audio_alert" value="1" />
                         <input type="hidden" name="email_alert" value="1" />
+                        <input type="hidden" name="limit_type" value="1" />
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label class="control-label grey-color" for="currency_name">Currency Name*</label>
@@ -99,7 +103,16 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-8 col-md-6">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-primary active" id="label_below" onclick="doOnClick('below')" data-toggle="popover" data-content="Below price alert">
+                                        <input type="radio" name="options" id="input_below" autocomplete="off"> Below
+                                    </label>
+                                    <label class="btn btn-primary" id="label_above" onclick="doOnClick('above')" data-toggle="popover" data-content="Above price alert">
+                                        <input type="radio" name="options" id="input_above" autocomplete="off"> Above
+                                    </label>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;
                                 <input type="checkbox" id="box-1" field="audio_alert" checked>
                                 <label for="box-1" class="alert-method">Audio alert</label>
                             {{--</div>--}}
@@ -134,6 +147,7 @@
                         <tr>
                             <th class="td-cell">#</th>
                             <th class="td-cell">Coin</th>
+                            <th class="td-cell">Above/Below</th>
                             <th class="td-cell">Limit Price USD</th>
                             <th class="td-cell">Audio Alert</th>
                             <th class="td-cell">Email Alert</th>
@@ -148,6 +162,17 @@
                                         <td class="td-cell">
                                             <img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/{{ $data['coin_id'] }}.png" width="32px" height="32px" />
                                             {{ $data['coin_name'] }}
+                                        </td>
+                                        <td class="td-cell">
+                                            @if ( $data['limit_type']==1 )
+                                                <span class="color-green">
+                                                    <i class="fa fa-arrow-up"></i>
+                                                </span>
+                                            @else
+                                                <span class="color-red">
+                                                    <i class="fa fa-arrow-down"></i>
+                                                </span>
+                                            @endif
                                         </td>
                                         <td class="td-cell">{{ $data['limit_price'] }}</td>
                                         <td class="td-cell">{{ ( $data['audio_alert'] == 1 ) ? "Yes" : "No" }}</td>
@@ -175,7 +200,7 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you would like to remove this currency data?</h3>
+                <h3>Are you sure you would like to remove this price alert?</h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="button buttonRed btn-save-details ui-corner-all" onclick="doOnRequestDelete()">Remove</button>

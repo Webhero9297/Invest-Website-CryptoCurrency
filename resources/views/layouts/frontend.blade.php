@@ -150,7 +150,7 @@
         font-family: Montserrat-Hairline;
         font-size: 16px;
         border:none;;
-        width: 320px;
+        width: 340px;
     }
     .message {
         font-family: Montserrat-Light;
@@ -212,6 +212,7 @@ var x = document.getElementById("notification");
 function notification(coin_data) {
     message = '<br/><img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+coin_data.coin_id+'.png" width="32px" height="32px" />';
     message += '<label class="message">&nbsp;&nbsp;'+coin_data.coin_name+'('+coin_data.symbol+')'+'</label>&nbsp;&nbsp;&nbsp;';
+    message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">'+coin_data.msg+'</label>';
     message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Current Price: $'+coin_data.current_price+'</label>';
     message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Alert time: '+coin_data.current_datetime+'(UTC)</label>';
     $.notify({
