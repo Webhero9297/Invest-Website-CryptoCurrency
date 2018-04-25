@@ -28,37 +28,51 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $loggedInUser = \Auth::user();
+        $alert_message = 'sent';
+        if ( !is_null($loggedInUser) ) {
+            if ( $loggedInUser->notification_status == 1 ) {
+                $alert_message = 'Thank you, your Moonfolio account have been activated!';
+                $loggedInUser->notification_status = 2;
+                $loggedInUser->save();
+            }
+        }
         $realTopCurrencies = Common::getRealTimeCryptoCurrencyListPerPage(0);
         $realTopCryptos = array();
-        foreach($realTopCurrencies as $realCrypto) $realTopCryptos[] = Common::stdToArray($realCrypto);
+        if ( $realTopCurrencies ){
+            foreach($realTopCurrencies as $realCrypto) $realTopCryptos[] = Common::stdToArray($realCrypto);
+        }
         $topUsers = Common::getTopPortfolios();
         $top_users = array();
         $default = '../assets/images/avatars/default.png';
         $real_data = Common::getRealTimeCryptoCurrencyList();
-        foreach( $topUsers as $top_user ){
-            $topUser = Common::stdToArray($top_user);
-            $user = app(User::class)->where('id', $topUser['id'])->first();
-            (is_null($user->user_avatar))? $img_avatar = $default : $img_avatar = '../'.$user->user_avatar;
+        if ( $topUsers ) {
+            foreach( $topUsers as $top_user ){
+                $topUser = Common::stdToArray($top_user);
+                $user = app(User::class)->where('id', $topUser['id'])->first();
+                (is_null($user->user_avatar))? $img_avatar = $default : $img_avatar = '../'.$user->user_avatar;
 
-            $data = app(UserCurrencyDetails::class)->where('user_id', $user->id)->get();
-            $user_currency_data = $data->toArray();
-            $userCurrencyData = Common::getCoinDataFromRecordsExt($real_data, $user_currency_data);
-            $default_avatar = './assets/images/avatars/default.png';
-            $investedCapital = 0;
-            $currentValue = 0;
-            $profitlossPercentage = 0;
-            foreach( $userCurrencyData as $coin ) {
-                $investedCapital += $coin['total_cost']*1;
-                $currentValue += $coin['price_usd']*$coin['quantity'];
-                $profitlossPercentage += $coin['profit_loss_percentage'];
+                $data = app(UserCurrencyDetails::class)->where('user_id', $user->id)->get();
+                $user_currency_data = $data->toArray();
+                $userCurrencyData = Common::getCoinDataFromRecordsExt($real_data, $user_currency_data);
+                $default_avatar = './assets/images/avatars/default.png';
+                $investedCapital = 0;
+                $currentValue = 0;
+                $profitlossPercentage = 0;
+                foreach( $userCurrencyData as $coin ) {
+                    $investedCapital += $coin['total_cost']*1;
+                    $currentValue += $coin['price_usd']*$coin['quantity'];
+                    $profitlossPercentage += $coin['profit_loss_percentage'];
+                }
+                is_null($user['user_avatar']) ? $topUser['avatar'] = $default_avatar : $topUser['avatar'] = $user['user_avatar'];
+                $topUser['invested_capital'] = $investedCapital;
+                $topUser['current_value'] = $currentValue;
+                $topUser['total_profit_loss_percentage'] = number_format(($currentValue - $investedCapital)/$investedCapital*100, 2, '.',',');
+                $top_users[] = $topUser;
             }
-            is_null($user['user_avatar']) ? $topUser['avatar'] = $default_avatar : $topUser['avatar'] = $user['user_avatar'];
-            $topUser['invested_capital'] = $investedCapital;
-            $topUser['current_value'] = $currentValue;
-            $topUser['total_profit_loss_percentage'] = number_format(($currentValue - $investedCapital)/$investedCapital*100, 2, '.',',');
-            $top_users[] = $topUser;
         }
-        return view('frontend.home')->with(['topCryptos'=>$realTopCryptos, 'top_users'=>Common::sortArray($top_users, 'total_profit_loss_percentage')]);
+        return view('frontend.home')->with(['topCryptos'=>$realTopCryptos, 'top_users'=>Common::sortArray($top_users, 'total_profit_loss_percentage'),
+            'alert_message'=>$alert_message]);
     }
     public function getTopLiveData() {
         $realTopCurrencies = Common::getRealTimeCryptoCurrencyListPerPage(0, 8);

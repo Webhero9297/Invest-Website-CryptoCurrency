@@ -98,6 +98,7 @@ class MyProfileController extends Controller
         $coin_name = request()->get('coin_name');
         $fiat = request()->get('fiat');
         $limit_price = request()->get('limit_price');
+        $limit_type = request()->get('limit_type');
 
         if ( $detail_id == 'NULL' ) {
             $model = new CoinAlert();
@@ -109,13 +110,15 @@ class MyProfileController extends Controller
         $model->fiat = $fiat;
         $model->coin_id = $coin_id;
         $model->coin_name = $coin_name;
-        $model->limit_type = 0;
+        $model->limit_type = $limit_type*1-1;
         $model->limit_price = $limit_price;
         $model->email_alert = request()->get('email_alert');
         $model->audio_alert = request()->get('audio_alert');
         $model->audio_sent_state = 0;
         $model->email_sent_state = 0;
         $model->email_sent_date = date('Y-m-d');
+
+
         $model->save();
         return redirect()->route('edit.price.alert');
     }
@@ -262,6 +265,20 @@ class MyProfileController extends Controller
         $user_id = \Auth::user()->id;
         $coinAlertData = Common::getAlertCoinData($user_id);
 
+//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+//        $subject = "PRICE ALERT!";
+//        $to_email =\Auth::user()->email;
+//        $to_fullname = \Auth::user()->full_name;
+//        $from_email = "manager@moonfolio.io";
+//        $from_fullname = "Team Moonfolio";
+//
+//        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
+//        $headers .= "Reply-To: ".$from_email."\r\n";
+//        $headers .= "Reply-Path: ".$from_email."\r\n";
+//
+//        $headers .= "MIME-Version: 1.0\r\n";
+//        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+
         $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
         $subject = "PRICE ALERT!";
         $to_email = \Auth::user()->email;
@@ -294,26 +311,69 @@ class MyProfileController extends Controller
 
             if ( $coin['audio_alert'] == 1 && $coin['audio_sent_state'] == 0 ) {
                 $coin['current_datetime'] = date("Y-m-d H:i:s");
+                if ($coin['limit_type'] == 0) {
+                    $coin['msg'] = 'fallen below $'.$coin['current_price'];
+                }
+                else{
+                    $coin['msg'] = 'reached $'.$coin['current_price'];
+                }
                 $audio_alert_datas[] = $coin;
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['audio_sent_state'=>1]);
             }
             if ( $coin['email_alert'] == 1 && $coin['email_sent_state'] == 0 ) {
-
-                $mail->Body = "<div>Hi {$to_fullname},<br><br>
-	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price']."<br></div><br>
+                if ( $coin['limit_type'] == 0 ) {
+                    $mail->Body = "<div>Hi {$to_fullname},<br><br>
+	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price'].".<br></div><br>
+	                    <div>Current price is $".$coin['current_price'].".<br></div><br>
 	                    <div style=\"display:inline-flex;margin-top:-20px;\">
-	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" style=\"display:block;margin-top: -10px;\">
+	                        <div>Team Moonfolio.</div>
+	                        <br>
+	                        <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" style=\"display:block;margin-top: -10px;\">
+	                        <br>
+	                        <br>
 	                    </div>
 	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
+                }
+                else {
+                    $mail->Body = "<div>Hi {$to_fullname},<br><br>
+	                    <div>".$coin['coin_name']." has reached $".$coin['limit_price'].".<br></div><br>
+	                    <div>Current price is $".$coin['current_price'].".<br></div><br>
+	                    <div style=\"margin-top:-20px;\">
+	                        <div>Team Moonfolio.</div>
+	                        <br>
+	                        <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" >
+	                        <br>
+	                        <br>
+	                    </div>
+	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
+                }
+
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
                 if(!$mail->Send()){
 //                    echo "Error sending";
                 } else {
+
 //                    echo "Mail successfully sent";
                 }
+
+//                $message = "<div>Hi {$to_fullname},<br><br>
+//	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price']."<br></div><br>
+//	                    <div style=\"display:inline-flex;margin-top:-20px;\">
+//	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+//	                    </div>
+//	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
+//
+//                app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
+//                if ( $message != '' )
+//                    @mail($to_email, $subject, $message, $headers);
             }
+
         }
+
+
+
         return response()->json($audio_alert_datas);
     }
 

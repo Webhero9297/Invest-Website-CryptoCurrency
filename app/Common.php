@@ -38,6 +38,32 @@ class Common
         $response = curl_exec($ch);
         return json_decode($response);
     }
+    public static function getRealTimeCryptoCurrencyNameList($currency='USD') {
+        $ch = curl_init();
+        $headers = array(
+            'Accept: application/json',
+            'Content-Type: application/json',
+        );
+        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?convert='.$currency.'&limit=0');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+        $responses = json_decode(curl_exec($ch));
+        $ret = [];
+        if ( $responses ) {
+            foreach ($responses as $crypto) {
+                $ret['id'][] = $crypto->id;
+                $ret['name'][] = $crypto->name;
+                $ret['lower_name'][] = strtolower($crypto->name);
+                $ret['symbol'][] = $crypto->symbol;
+            }
+        }
+        $ret['real_data'] = $responses;
+        return $ret;
+    }
     public static function getRealTimeCryptoCurrencyListPerPage($start, $limit=100) {
         ini_set('max_execution_time', '500');
         $ch = curl_init();
@@ -56,7 +82,23 @@ class Common
         ini_set('max_execution_time', '30');
         return json_decode($response);
     }
-    public static function getRealTimeCryptoCurrencyListPerPageEx($start, $currency='USD', $limit=100) {
+    public static function getRealTimeCryptoCurrencyListPerCurrency( $currency='USD') {
+        $ch = curl_init();
+        $headers = array(
+            'Accept: application/json',
+            'Content-Type: application/json',
+        );
+        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?convert='.$currency.'&limit=0');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+        $response = curl_exec($ch);
+        return json_decode($response);
+    }
+    public static function getRealTimeCryptoCurrencyListPerPageEx($start, $currency='USD', $limit=0) {
         $ch = curl_init();
         $headers = array(
             'Accept: application/json',
@@ -164,6 +206,7 @@ class Common
             $coin_data['quantity'] = $record->quantity;
             $coin_data['total_cost'] = $record->total_cost;
             $coin_data['profit_loss'] = $coin_data['price_usd']*$record->quantity - $record->total_cost;
+//            $coin_data['profit_loss'] = ($coin_data['price_usd'] / $record->purchased_price)*100-100;
             $ret_data[] = $coin_data;
         }
         return $ret_data;
@@ -192,10 +235,10 @@ class Common
             if ( count($coin_data)==0 ) continue;
             $coin_data['quantity'] = $record['quantity'];
             $coin_data['purchased_price'] = $record['purchased_price'];
-            $coin_data['total_cost'] = $record['total_cost'];
+            $coin_data['total_cost'] = $record['purchased_price']*$record['quantity'];
             $coin_data['purchased_date'] = $record['purchased_date'];
             $coin_data['profit_loss'] = $coin_data['price_usd'] - $record['purchased_price'];
-            $coin_data['profit_loss_percentage'] = ($coin_data['price_usd'] - $record['purchased_price'])/$coin_data['price_usd']*100;
+            $coin_data['profit_loss_percentage'] = ($coin_data['price_usd'] / $record['purchased_price'])*100-100;
             $coin_data['detail_id'] = $record['detail_id'];
             $ret_data[] = $coin_data;
         }
@@ -232,7 +275,13 @@ class Common
                 $coin_data = self::stdToArray($coin_live_data[0]);
                 $price = $coin_data['price_'.strtolower($d['fiat'])];
                 $alertPrice = $d['limit_price'];
-                if ( $alertPrice >= $price ) {
+                if ( $d['limit_type'] == 0 && $alertPrice >= $price ) {
+                    $d['current_price'] = $price;
+                    $d['percent_1h'] = $coin_data['percent_change_1h'];
+                    $d['symbol'] = $coin_data['symbol'];
+                    $ret[] = $d;
+                }
+                if ( $d['limit_type'] == 1 && $alertPrice <= $price ) {
                     $d['current_price'] = $price;
                     $d['percent_1h'] = $coin_data['percent_change_1h'];
                     $d['symbol'] = $coin_data['symbol'];

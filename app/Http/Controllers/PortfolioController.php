@@ -39,7 +39,7 @@ class PortfolioController extends Controller
             is_null($user['user_avatar']) ? $arr['avatar'] = $default_avatar : $arr['avatar'] = $user['user_avatar'];
             $arr['invested_capital'] = number_format($investedCapital, 2, '.',',');
             $arr['current_value'] = number_format($currentValue, 2, '.',',');
-            $temp = ($currentValue / $investedCapital - 1)*100;
+            $temp = ($currentValue - $investedCapital);
             $arr['total_profit_loss'] = number_format($temp, 2, '.',',');
             $arr['coin_ids'] = $coin_ids;
             $arr['user_id'] = $user['id'];
@@ -73,12 +73,14 @@ class PortfolioController extends Controller
         $totalProfitLossValue = 0;
         $coin_ids = array();
         $profitlossPercentage = 0;
+        $total_coins = 0;
         foreach( $userCurrencyData as $coin ) {
             $investedCapital += $coin['total_cost']*1;
             $currentValue += $coin['price_usd']*$coin['quantity'];
-            $totalProfitLossValue += $coin['profit_loss'];
+            $totalProfitLossValue += $coin['profit_loss']*$coin['quantity'];
             $profitlossPercentage += $coin['profit_loss_percentage'];
             $coin_ids[] = $coin['id'];
+            $total_coins += $coin['quantity'];
         }
         $arr['full_name'] = $user['full_name'];
         is_null($user['user_avatar']) ? $arr['avatar'] = $default_avatar : $arr['avatar'] = $user['user_avatar'];
@@ -90,6 +92,6 @@ class PortfolioController extends Controller
         $arr['coins'] = count($dd);
 
         return view('frontend.detailportfolio')->with(['user_avatar'=>$img_avatar, 'full_name'=>$full_name, 'email'=>$email,
-            'gender'=>$gender, 'age'=>$age, 'country'=>$country, 'user_currency_data'=>$userCurrencyData, 'isPrivate'=>$isPrivate, 'total_data'=>$arr]);
+            'gender'=>$gender, 'age'=>$age, 'country'=>$country, 'user_currency_data'=>$userCurrencyData, 'isPrivate'=>$isPrivate, 'total_data'=>$arr, 'total_coins'=>$total_coins]);
     }
 }

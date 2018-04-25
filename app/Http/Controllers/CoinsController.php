@@ -10,13 +10,19 @@ class CoinsController extends Controller
     //
     public function index() {
 
-        $totalCount = ceil(count(Common::getRealTimeCryptoCurrencyList())/100);
-        return view('frontend.coins')->with(['totalCount'=>$totalCount]);
+//        $totalCount = ceil(count(Common::getRealTimeCryptoCurrencyList())/100);
+
+
+//        if ( ($totalCount-intval($totalCount)) > 0 )
+//            $totalCount++;
+//        $totalCount = intval($totalCount);
+//        $real_data = Common::getRealTimeCryptoCurrencyList();
+//        $real_data = Common::getRealTimeCryptoCurrencyListPerPage(0);
+        return view('frontend.coins');
     }
-    public function getCoinDataByPagePos( $pagePos ) {
+    public function getCoinDataByPagePos() {
         $currency = request()->get('currency');
-        $pagePos *= 100;
-        $real_data = Common::getRealTimeCryptoCurrencyListPerPageEx($pagePos, $currency);
+        $real_data = Common::getRealTimeCryptoCurrencyListPerCurrency( $currency );
         $ret_data = array();
         foreach($real_data as $data) {
             $tmp = Common::stdToArray($data);
@@ -28,6 +34,24 @@ class CoinsController extends Controller
 
             $ret_data[] = $tmp;
         }
+        return response()->json($ret_data);
+    }
+    public function getSearchDataForFilter($filter_name) {
+        $currency = request()->get('currency');
+        $coin_data = Common::getRealTimeCryptoCurrencyNameList($currency);
+        $input = preg_quote(strtolower($filter_name), '~'); // don't forget to quote input string!
+        $data = $coin_data['lower_name'];
+
+        $search_result = preg_grep('~' . $input . '~', $data);
+
+        $id_arr = [];
+        $ret_data = array();
+        foreach( $search_result as $idx=>$v ) {
+            $temp = Common::stdToArray($coin_data['real_data'][$idx]);
+            $temp['current_price'] = $temp['price_'.strtolower($currency)];
+            $ret_data[] = $temp;
+        }
+//dd($data);
         return response()->json($ret_data);
     }
     public function coinChart( $coinId ) {
