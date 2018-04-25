@@ -144,7 +144,6 @@ class MyProfileController extends Controller
         $age = request()->get('age');
         $country = request()->get('country');
 
-//        $user = app(User::class)->where('id', $user->id)->first();
         $user->full_name = $full_name;
         $user->email = $email;
         $user->gender = $gender;
