@@ -10,14 +10,6 @@ class CoinsController extends Controller
     //
     public function index() {
 
-//        $totalCount = ceil(count(Common::getRealTimeCryptoCurrencyList())/100);
-
-
-//        if ( ($totalCount-intval($totalCount)) > 0 )
-//            $totalCount++;
-//        $totalCount = intval($totalCount);
-//        $real_data = Common::getRealTimeCryptoCurrencyList();
-//        $real_data = Common::getRealTimeCryptoCurrencyListPerPage(0);
         return view('frontend.coins');
     }
     public function getCoinDataByPagePos() {
