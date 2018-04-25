@@ -642,34 +642,32 @@ h1{
                                         </div>
                                     </div>
                                 </div>
+                                <div class="slide">
+                                    <div class="div-pad1-panel">
+                                        <label class="div-pad1-label-title"></label>
+                                        <div class="row div-pd-lr">
+                                            <div class="col-xs-12 col-sm-5 col-md-4">
+                                                <div class="div-pad1"></div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-7 col-md-8">
+                                                <label class="div-pad1-label">
+                                                    I have tried many portfolio websites, including ones that I needed to pay.
+                                                    Moonfolio is simple, looks nice and most importantly it's free.
+                                                    Moonfolio has all cryptos offered in the market and can be added easily in your portfolio.
+                                                </label>
+                                                <label class=" text-center">
+                                                    <a href="/detailportfolio/34" class="a-review-user">Kim</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="arrow arrow-left"></div>
                             <div class="arrow arrow-right"></div>
                         </div>
 
                     </div>
-                    {{--<div class="col-sm-12 text-right">--}}
-                        {{--<div class="div-pad1-panel">--}}
-                            {{--<div class="div-pad1"></div>--}}
-                            {{--<label class="div-pad1-label-title">How It Works</label>--}}
-                            {{--<label class="div-pad1-label">--}}
-                                {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
-                                {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
-                                {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-sm-12">--}}
-                        {{--<div class="div-pad2-panel">--}}
-                            {{--<div class="div-pad2"></div>--}}
-                            {{--<label class="div-pad2-label-title">How It Works</label>--}}
-                            {{--<label class="div-pad2-label">--}}
-                                {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
-                                {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
-                                {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
-                            {{--</label>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                 </div>
             </div>
         </div>

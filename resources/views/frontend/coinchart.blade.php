@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
     <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
     <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+    <script>
+        var coin_id = '<?php echo $coin_id; ?>';
+    </script>
     <div class="container-fluid padding0">
         <div class="div-auth-register" id="home" style="padding-top:100px;">
             <div class="container" style="padding-bottom: 50px;">
@@ -39,7 +44,7 @@
                                 <th class="td-cell td-grey">Vol.24H</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbody_content">
                                 <tr>
                                     <td class="td-cell">${{ number_format($coinData['price_usd'], 2, '.', ',') }}</td>
                                     <td class="td-cell {{ ( $coinData['percent_change_24h'] > 0) ? "color-green" : "color-red" }}">
@@ -79,5 +84,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('./js/frontend/editprofile.js') }}"></script>
+    <script src="{{ asset('./js/frontend/coinchart.js') }}"></script>
 @endsection
