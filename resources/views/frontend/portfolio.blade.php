@@ -58,7 +58,7 @@
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js" ></script>
     <div class="container-fluid padding0">
         <div class="div-auth-register div-portfolios-rect" id="home" >
-            <div class="container" style="padding-bottom: 300px;">
+            <div class="container" style="padding-bottom: 200px;">
                 <div class="panel panel-default">
                     <div class="div-panel-heading">
                         PORTFOLIOS

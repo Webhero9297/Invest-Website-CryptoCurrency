@@ -15,6 +15,9 @@
             border-top: 10px solid #35c6ec;
             border-bottom: 10px solid #35c6ec;
         }
+        .py-4 {
+            height: 100%!important;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
     <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
@@ -46,12 +49,12 @@
                             </thead>
                             <tbody id="tbody_content">
                                 <tr>
-                                    <td class="td-cell">${{ number_format($coinData['price_usd'], 2, '.', ',') }}</td>
+                                    <td class="td-cell">${{ $coinData['price_usd'] }}</td>
                                     <td class="td-cell {{ ( $coinData['percent_change_24h'] > 0) ? "color-green" : "color-red" }}">
                                         {{ $coinData['percent_change_24h'] }}%
                                     </td>
                                     <td class="td-cell {{ ( $coinData['percent_change_1h'] > 0) ? "color-green" : "color-red" }}">
-                                        {{ $coinData['percent_change_1h'] }}%
+                                        {{ number_format($coinData['percent_change_1h'], 2, '.',',') }}%
                                     </td>
                                     <td class="td-cell">${{ number_format($coinData['market_cap_usd'], 2, '.', ',') }}</td>
                                     <td class="td-cell">${{ number_format($coinData['24h_volume_usd'], 2, '.', ',') }}</td>

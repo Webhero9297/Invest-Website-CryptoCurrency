@@ -113,7 +113,7 @@
                             <span class="{{ ($total_data['total_profit_loss']<0)?"color-red":"color-green" }} strok-white">${{ number_format($total_data['total_profit_loss'], 2, '.',',') }}</span>
                         </div>
                         <div class="col-md-4 padding0 wrap-div-col">
-                            Total Profit/Loss Percentage:
+                            Total Profit/Loss(%):
                             <span class=" {{ ($total_data['total_profit_loss_percentage']>0)?"color-green":"color-red" }} strok-white">
                                 {{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}
                             </span>
@@ -145,10 +145,10 @@
                                         {{ $currency['name']."(".$currency['symbol'].")" }}
                                     </td>
                                     <td class="td-cell">
-                                        ${{ number_format($currency['price_usd'], 2, '.',',') }}
+                                        ${{ $currency['price_usd'] }}
                                     </td>
                                     <td class="td-cell">
-                                        {{ number_format($currency['total_cost'], 2, '.',',') }} <br/> {{ $currency['quantity']." ".$currency['symbol']." @ ".number_format($currency['purchased_price'], 2, '.',',') }}
+                                        {{ number_format($currency['total_cost'], 2, '.',',') }} <br/> {{ $currency['quantity']." ".$currency['symbol']." @ ".$currency['purchased_price'] }}
                                     </td>
                                     <td class="td-cell {{ ($currency['profit_loss']>0)?"color-green":"color-red" }}">
                                         ${{ number_format($currency['profit_loss'], 2, '.',',') }}
@@ -237,6 +237,8 @@
         );
         return false;
     });
+
+
     (function(){
         var shareButtons = document.querySelectorAll(".twitter-share-button");
         if (shareButtons) {

@@ -1,0 +1,9 @@
+.chk-container:hover {
+    .chk-label{
+        color: gold;
+    }
+    .checkmark {
+        background-color: #0297bf;
+        border-color: #0277bf;
+    }
+}

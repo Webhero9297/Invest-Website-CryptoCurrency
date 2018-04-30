@@ -22,9 +22,9 @@
                             <div class="form-group col-sm-6">
                                 <label class="control-label grey-color" for="currency_name">Currency Name*</label>
                                 @if ($currency_name !='')
-                                    <input type="search" class="form-control input-form-control grey-border" id="currency_name" name="currency_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" value={{ $currency_name }} autocomplete="off" required />
+                                    <input type="search" class="form-control input-form-control grey-border" id="currency_name" name="currency_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" value="{{ $currency_name }}"  required />
                                 @else
-                                    <input type="search" class="form-control input-form-control grey-border" id="currency_name" name="currency_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" autocomplete="off" required />
+                                    <input type="search" class="form-control input-form-control grey-border" id="currency_name" name="currency_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" required />
                                 @endif
                                 <datalist id="brands-list">
                                     <select>
@@ -39,7 +39,7 @@
                             <div class="form-group col-sm-6">
                                 <label class="control-label grey-color" for="quantity">Quantity*</label>
                                 <div class="input-group spinner" style="width: calc(100% - 18px);">
-                                    <input type="number" class="form-control input-form-control grey-border" id="quantity" name="quantity" value="{{ $quantity }}" min="0" tabindex="2" style="font-size:24px;" value="1">
+                                    <input type="number" class="form-control input-form-control grey-border" id="quantity" name="quantity" value="{{ $quantity }}" min="0" tabindex="2" style="font-size:24px;"  autocomplete="off">
                                     <div class="input-group-btn-vertical">
                                         <button class="btn btn-default grey-border grey-color" type="button" onclick="doOnChangeInputValue('quantity', 'up')"><i class="fa fa-caret-up"></i></button>
                                         <button class="btn btn-default grey-border grey-color" type="button" onclick="doOnChangeInputValue('quantity', 'down')"><i class="fa fa-caret-down"></i></button>
@@ -51,7 +51,7 @@
                             <div class="form-group col-sm-6">
                                 <label class="control-label grey-color" for="purchased_price">Purchased Price*(in USD)</label>
                                 <div class="input-group spinner" style="width: calc(100% - 18px);">
-                                    <input type="number" class="form-control input-form-control grey-border" id="purchased_price" name="purchased_price" value="{{ $purchased_price }}" tabindex="3" style="font-size:24px;" value="1" min="0">
+                                    <input type="number" class="form-control input-form-control grey-border" id="purchased_price" name="purchased_price" value="{{ $purchased_price }}" tabindex="3" style="font-size:24px;" min="0" autocomplete="off">
                                     <div class="input-group-btn-vertical">
                                         <button class="btn btn-default grey-border grey-color" type="button"  onclick="doOnChangeInputValue('purchased_price', 'up')"><i class="fa fa-caret-up"></i></button>
                                         <button class="btn btn-default grey-border grey-color" type="button" onclick="doOnChangeInputValue('purchased_price', 'down')"><i class="fa fa-caret-down"></i></button>
@@ -67,6 +67,13 @@
                             <div class="form-group col-sm-6">
                                 <label class="control-label label-total" >Total cost(in USD)&nbsp;:&nbsp;&nbsp;&nbsp;</label>
                                 <label class="control-label label-total" id="label_total_cost" >0</label>
+                            </div>
+                            <div class="form-group col-sm-6 text-right">
+                                sdfsdf
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
                             </div>
                             <div class="form-group col-sm-6 text-right">
                                 <button type="submit" class="button buttonBlue btn-save-details">SAVE DETAILS

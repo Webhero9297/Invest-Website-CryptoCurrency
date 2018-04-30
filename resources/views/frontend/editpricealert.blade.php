@@ -105,10 +105,10 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-primary active" id="label_below" onclick="doOnClick('below')" data-toggle="popover" data-content="Below price alert">
+                                    <label class="btn btn-primary active" id="label_below" onclick="doOnClick('below')" data-toggle="popover" data-content="If a coin has fallen below a certain level">
                                         <input type="radio" name="options" id="input_below" autocomplete="off"> Below
                                     </label>
-                                    <label class="btn btn-primary" id="label_above" onclick="doOnClick('above')" data-toggle="popover" data-content="Above price alert">
+                                    <label class="btn btn-primary" id="label_above" onclick="doOnClick('above')" data-toggle="popover" data-content="If a coin has reached a certain level">
                                         <input type="radio" name="options" id="input_above" autocomplete="off"> Above
                                     </label>
                                 </div>
@@ -200,7 +200,7 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <h3>Are you sure you would like to remove this price alert?</h3>
+                <p>Are you sure you would like to remove this currency data?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="button buttonRed btn-save-details ui-corner-all" onclick="doOnRequestDelete()">Remove</button>

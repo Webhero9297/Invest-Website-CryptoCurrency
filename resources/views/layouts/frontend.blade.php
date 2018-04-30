@@ -12,7 +12,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    {{--/***************   ChatCamp plugin  Start ************/--}}
 
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" />--}}
+    {{--<link href="/ChatCampPlugin/static/css/main.1d1e2964.css" rel="stylesheet">--}}
+
+    {{--/***************   ChatCamp plugin  Start ************/--}}
 
     <script src="{{ asset('./assets/jsLib/jquery/jquery.3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" ></script>
@@ -23,18 +28,21 @@
     <link href="{{ asset('./assets/jsLib/datepicker/css/datepicker.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ asset('./assets/jsLib/divsensor/ResizeSensor.js') }}" ></script>
     <script src="{{ asset('./assets/jsLib/divsensor/ElementQueries.js') }}" ></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{--<link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet">--}}
+    <link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+
+
 
     <style>
         .animate-in {
@@ -58,10 +66,10 @@
 </head>
 <body>
 <?php
-    require_once('../vendor/autoload.php');
-    use Iflylabs\iFlyChat;
+    //require_once('../vendor/autoload.php');
+    //use Iflylabs\iFlyChat;
 ?>
-<div id="app">
+<div id="moonfloio-app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar-fixed">
         <div class="container nav-div-container">
             <a class="navbar-brand logo" href="{{ url('/') }}">
@@ -90,6 +98,7 @@
                         var userId = undefined;
                     </script>
                     @else
+                        <li><a class="nav-link" href="{{ route('coinmatch.biz') }}">COIN MATCH</a></li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link  sign dropdown-toggle" style="min-width:160px;text-align: center;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->full_name }} <span class="caret"></span>
@@ -167,7 +176,12 @@
     .ifc-chat-window-textbox textarea {
         outline:none!important;
     }
+
+    .cc-left-panel-inbox {
+        background: white;
+    }
 </style>
+
 </body>
 </html>
 <audio id="notification">
@@ -212,7 +226,7 @@ var x = document.getElementById("notification");
 function notification(coin_data) {
     message = '<br/><img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+coin_data.coin_id+'.png" width="32px" height="32px" />';
     message += '<label class="message">&nbsp;&nbsp;'+coin_data.coin_name+'('+coin_data.symbol+')'+'</label>&nbsp;&nbsp;&nbsp;';
-    message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">'+coin_data.msg+'</label>';
+    //message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">'+coin_data.msg+'</label>';
     message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Current Price: $'+coin_data.current_price+'</label>';
     message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Alert time: '+coin_data.current_datetime+'(UTC)</label>';
     $.notify({
@@ -242,9 +256,22 @@ function notification(coin_data) {
 }
 </script>
 
+
+
 @guest
 @else
+
+    {{--<div id="app" style="z-index:99999; position: relative; background: white"></div>--}}
+    <script>
+       /* window.ChatCampData = {
+          userId: <?php // echo \Auth::user()->id; ?>
+        }*/
+        {{--window.ChatCampData = {}--}}
+        {{--window.ChatCampData.userId = "markhan0321@gmail.com";--}}
+    </script>
+    {{--<script type="text/javascript" src="/ChatCampPlugin/static/js/main.24c3394c.js"></script>--}}
     <?php
+            /*
         $APP_ID = '8844c3c4-e7d9-4533-adf8-7d3dc04b474b';
         $API_KEY = 'CRE_W2ZQuFUunU7fNqoMjWKPFmLh4JT71gypY3hO4SoW63429';
         $iflychat = new iFlyChat($APP_ID, $API_KEY);
@@ -259,5 +286,7 @@ function notification(coin_data) {
         $iflychat->setUser($user);
         $iflychat_code = $iflychat->getHtmlCode();
         print $iflychat_code;
+            */
+
     ?>
 @endguest

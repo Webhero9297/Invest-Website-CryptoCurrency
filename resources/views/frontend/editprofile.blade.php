@@ -5,6 +5,11 @@
     .control-label {
         font-family: Montserrat-light;
     }
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
 </style>
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home" style="padding-top:100px;">

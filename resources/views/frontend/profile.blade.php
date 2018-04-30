@@ -11,6 +11,28 @@
         font-size: 20px;
         padding: 7px 25px;
     }
+    .add-coin-match{
+        position: absolute;
+        right: 220px;
+        font-size: 20px;
+        padding: 7px 15px;
+    }
+    @media( min-width: 1024px ) {
+        .xtd-cell {
+            display: none;
+        }
+        .ov-cell {
+            display: block;
+        }
+    }
+    @media( max-width: 1024px ) {
+        .xtd-cell {
+            display: block;
+        }
+        .ov-cell {
+            display: none;
+        }
+    }
 </style>
 
 <div id="coinchart_detail" class="container-fluid padding0">
@@ -84,6 +106,7 @@
                                         <span class="div-label-first">Age:</span>
                                         <span class="div-label-value">{{ $age }}</span>
                                     </div>
+                                    <a href="{{ route('coin.match.view') }}" class="nav-link a-link sign text-center add-coin-match">Add Coin Match</a>
                                     <a href="{{ route('edit.price.alert') }}" class="nav-link a-link sign text-center edit-price-alert">Add Price Alert</a>
                                 </div>
                                 {{--<div class="col-sm-5 div-flex">--}}
@@ -155,7 +178,7 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Are you sure to remove this currency data?</p>
+                <p>Are you sure you would like to remove this currency data?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="button buttonRed btn-save-details ui-corner-all" onclick="doOnRequestDelete()">Remove</button>

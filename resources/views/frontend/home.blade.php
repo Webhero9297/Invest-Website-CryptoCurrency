@@ -150,14 +150,152 @@ h1{
         font-family: Montserrat-Light;
         font-size: 20px;
         font-weight: bold;
+        text-decoration:underline;
     }
     .a-review-user:hover {
-        text-decoration: none;
         color: gold;
     }
+
+/********************************************************    App download button Start    ********************************************************************/
+    .download {
+        color: #fff;
+    }
+    .download {
+        background-image: url('{{ asset('./assets/images/background/pattern5.png') }}');
+    }
+    .section-padding {
+        padding-top: 50px;
+        padding-bottom: 10px;
+    }
+    .header {
+        text-align: center;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .download .download-area .download-btn {
+        font-size: 28px;
+        padding: 12px 0 10px 10px;
+        min-width: 263px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        display: table;
+    }
+    .download .custom-btn {
+        color: #fff;
+        border: 2px solid #fff;
+    }
+    .custom-btn {
+        color: #0099FF;
+        border: 1px solid #0099FF;
+    }
+    .custom-btn {
+        background-color: transparent;
+        color: #fff;
+        border-radius: 0;
+        border: 2px solid #fff;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+    .download .download-area .app-download {
+        margin-left: 40px;
+        text-align: left;
+        font-weight: 100;
+    }
+    .download .download-area a i.fa-mobile {
+        font-size: 50px;
+        margin-top: 5px;
+    }
+    .download .download-area a i {
+        float: left;
+        margin-top: 15px;
+    }
+    .custom-btn:hover {
+        background-color: #0099FF;
+        color: #fff;
+        border-color: #0099FF;
+    }
+    .download .download-area span {
+        display: block;
+        font-size: 18px;
+        margin-bottom: -5px;
+    }
+    .download .download-area .app-download strong {
+        font-weight: 300;
+    }
+    strong {
+        font-weight: 400;
+    }
+    .download .download-area img {
+        width: 30px;
+        float: left;
+        margin-top: 15px;
+    }
+    img.app-icon {
+        display: block;
+        width: 100% \9;
+        max-width: 100%;
+        height: auto;
+    }
+    .underline {
+        position: relative;
+        font-size: 20px;
+        max-width: 0px;
+        margin: auto;
+        margin-bottom: 80px;
+        color: #0099FF;
+    }
+    .download .underline:before, .download .underline:after {
+        background-color: #BBB;
+    }
+    .underline:before, .underline:after {
+        background-color: #777;
+    }
+
+    .underline:before {
+        position: absolute;
+        content: "";
+        width: 150px;
+        height: 1px;
+        background-color: #777;
+        top: 50%;
+        left: 0;
+    }
+    .underline:before, .underline:after {
+        background-color: #777;
+    }
+    .underline:after {
+        position: absolute;
+        content: "";
+        width: 150px;
+        height: 1px;
+        background-color: #777;
+        top: 50%;
+        right: 0;
+    }
+    .div-download {
+        font-family: Montserrat-Light;
+        font-size: 48px;
+        font-weight: bold;
+    }
+    .awesome-free {
+        font-family: Montserrat-Light;
+        font-size: 18px;
+        margin-bottom: 30px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        margin: 0 0 10px;
+    }
+    .div-app-download {
+        background: url('{{ asset('./assets/images/background/pad1-panel.png') }}');
+        background-position: center center;
+        background-size: cover;
+    }
+/********************************************************    App download button  End    ********************************************************************/
 </style>
 <script>
-    var logo_img = "{{ asset('./assets/images/background/black_logo.png') }}";
+    var logo_img = "{{ asset('./assets/images/background/logo.png') }}";
 </script>
 @if ( $alert_message != 'sent' )
     <script> var alert_message = '<?php echo $alert_message; ?>';</script>
@@ -370,6 +508,7 @@ h1{
                     <label class="home-label community port" style="font-size:108px;margin-bottom:10px;margin-top: -42px;">CRYPTOS</label>
                 </div>
                 <div class="row">
+                    @if ( count($topCryptos)>0 )
                     <div class="col-md-12" id="div_coins_wrap">
                         <div class="row" id="top_cryptos_prev">
                             @for($i=0;$i<4;$i++)
@@ -446,6 +585,7 @@ h1{
                             @endfor
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="row div-sep">
                     <div class="col-sm-12 text-right">
@@ -569,40 +709,6 @@ h1{
                     <div class="wrapper">
                         <div class="carousel">
                             <div class="inner">
-                                {{--<div class="slide active">--}}
-                                    {{--<div class="div-pad1-panel">--}}
-                                        {{--<label class="div-pad1-label-title">How It Works</label>--}}
-                                        {{--<div class="row div-pd-lr">--}}
-                                            {{--<div class="col-xs-12 col-sm-5 col-md-4">--}}
-                                                {{--<div class="div-pad1"></div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="col-xs-12 col-sm-7 col-md-8">--}}
-                                                {{--<label class="div-pad1-label">--}}
-                                                    {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
-                                                    {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
-                                                    {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
-                                                {{--</label>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="slide">--}}
-                                    {{--<div class="div-pad1-panel">--}}
-                                        {{--<label class="div-pad1-label-title">How It Works</label>--}}
-                                        {{--<div class="row div-pd-lr">--}}
-                                            {{--<div class="col-xs-12 col-sm-7 col-md-8">--}}
-                                                {{--<label class="div-pad1-label">--}}
-                                                    {{--CryptoCelebrities runs on the same blockchain technology as Ethereum. Just like each individual coin, each personality is linked to one, and only one, Smart Contract Token on the game’s blockchain.--}}
-                                                    {{--To purchase a Smart Contract: Send Ether to the contract using Metamask. If someone wants to buy one of your current contracts, the buyer has to pay you more than the amount of your original purchase.--}}
-                                                    {{--To get started, simply download the MetaMask Smart Wallet Google extension. Learn more here.--}}
-                                                {{--</label>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="col-xs-12 col-sm-5 col-md-4">--}}
-                                                {{--<div class="div-pad2"></div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                                 <div class="slide active">
                                     <div class="div-pad1-panel">
                                         <label class="div-pad1-label-title"></label>
@@ -617,7 +723,7 @@ h1{
                                                     For now the best product on the internet.
                                                 </label>
                                                 <label class=" text-center">
-                                                    <a href="/detailportfolio/14" class="a-review-user">MareenN</a>
+                                                    <a href="/detailportfolio/14" class="a-review-user">MareeN</a>
                                                 </label>
                                             </div>
                                         </div>
@@ -671,6 +777,37 @@ h1{
                 </div>
             </div>
         </div>
+
+        <div class="div-app-download">
+            <div class="download section-padding">
+                <div class="container">
+                    <div class="header">
+                        <div class="div-download">Download Moonfolio</div>
+                        <div class="awesome-free"> It's Awesome and Free!</div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="row download-area">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <a href="" class="btn btn-default custom-btn download-btn">
+                                <i class="fa fa-mobile"></i>
+                                <div class="app-download">
+                                    <span>GET IT ON</span><strong>App Store</strong>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <a href="" class="btn btn-default custom-btn download-btn">
+                                <img class="app-icon" src="{{ asset('./assets/images/background/playstore.png') }}" alt="">
+                                <div class="app-download">
+                                    <span>GET IT ON</span><strong>Google Play</strong>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="div-aboutus">
             <div class="container">
                 <div class="row">

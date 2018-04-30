@@ -47,6 +47,7 @@
             font-family: Montserrat-light;
             font-size:17px;
             font-weight:bold;
+            z-index:1000;
         }
         .selectCF li{
             list-style:none;
@@ -251,9 +252,6 @@
         .td-cell {
             cursor: pointer;
         }
-        .td-cell:hover {
-            color: gold;
-        }
     </style>
 {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
 {{--<link href="{{ asset('./css/dataTable.css') }}" rel="stylesheet">--}}
@@ -308,33 +306,33 @@
     }
     /* Safari 4.0 - 8.0 */
     @-webkit-keyframes red-example {
-        /*from {background-color: red;}*/
-        /*to {background-color: transparent;}*/
-        from {color: red;}
-        to {color: red;}
+        from {background-color: red;}
+        to {background-color: transparent;}
+        /*from {color: red;}*/
+        /*to {color: red;}*/
     }
 
     /* Standard syntax */
     @keyframes red-example {
-        from {color: red;}
-        to {color: red;}
-        /*from {background-color: red;}*/
-        /*to {background-color: transparent;}*/
+        /*from {color: red;}*/
+        /*to {color: red;}*/
+        from {background-color: red;}
+        to {background-color: transparent;}
     }
     /* Safari 4.0 - 8.0 */
     @-webkit-keyframes green-example {
-        /*from {background-color: green;}*/
-        /*to {background-color: transparent;}*/
-        from {color: green;}
-        to {color: green;}
+        from {background-color: green;}
+        to {background-color: transparent;}
+        /*from {color: green;}*/
+        /*to {color: green;}*/
     }
 
     /* Standard syntax */
     @keyframes green-example {
-        /*from {background-color: green;}*/
-        /*to {background-color: transparent;}*/
-        from {color: green;}
-        to {color: green;}
+        from {background-color: green;}
+        to {background-color: transparent;}
+        /*from {color: green;}*/
+        /*to {color: green;}*/
     }
 
     .form-inline {
@@ -342,6 +340,9 @@
     }
     .coin_table_info {
         font-family: Montserrat-Light;
+    }
+    .td-cell:after{
+        content:""!important;
     }
 </style>
     <div class="container-fluid padding0">

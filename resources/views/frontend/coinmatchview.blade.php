@@ -137,27 +137,31 @@
         left: 9px;
         background: white;
     }
+    label.btn-primary {
+        font-size: 20px;
+        padding: 5px 15px;
+    }
 </style>
 
 <div class="container-fluid padding0">
-    <div class="div-auth-register" id="home" style="padding-top:100px;">
+    <div class="div-auth-register" id="home" style="padding-top:100px;padding-bottom: 50px;">
         <div class="container">
             <div class="panel panel-default">
                 <div class="div-panel-heading">
-                    ADD CRYPTO CURRENCY DETAILS
+                    ADD Coin Match Details
                 </div>
                 <div class="panel-body">
-                    <form id="form_detail" method="POST" action="{{ route('store.crypto.currency') }}">
+                    <form id="form_detail" method="POST" action="{{ route('store.coin.match') }}">
                         @csrf
-                        <input type="hidden" name="detail_id" value="{{ $detail_id }}" />
-                        {{--<input type="hidden" name="order_side" value="{{ $order_side }}" />--}}
+                        <input type="hidden" name="match_id" value="{{ $match_id }}" />
+                        <input type="hidden" name="order_side" value="{{ $order_side }}" />
                         <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label class="control-label grey-color" for="currency_name">Currency Name*</label>
-                                @if ($currency_name !='')
-                                    <input type="search" class="form-control input-form-control grey-border" id="currency_name" name="currency_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" value={{ $currency_name }} required />
+                            <div class="form-group col-sm-6" >
+                                <label class="control-label grey-color" for="coin_name">Currency Name*</label>
+                                @if ($coin_name !='')
+                                    <input type="search" class="form-control input-form-control grey-border" id="coin_name" name="coin_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" value={{ $coin_name }} required />
                                 @else
-                                    <input type="search" class="form-control input-form-control grey-border" id="currency_name" name="currency_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" required />
+                                    <input type="search" class="form-control input-form-control grey-border" id="coin_name" name="coin_name" placeholder="Enter Currency Name" tabindex="1" data-list="brands-list" required />
                                 @endif
                                 <datalist id="brands-list">
                                     <select>
@@ -201,21 +205,16 @@
                                 <label class="control-label label-total" >Total cost(in USD)&nbsp;:&nbsp;&nbsp;&nbsp;</label>
                                 <label class="control-label label-total" id="label_total_cost" >0</label>
                             </div>
-                            {{--<div class="form-group col-sm-6 text-right">--}}
-                                {{--<input type="checkbox" id="box-1" onchange="doOnChangeSideStatus(this)" >--}}
-                                {{--<label for="box-1" class="alert-method">Do you want to &nbsp;&nbsp;</label>--}}
-                                {{--<label class="chk-container" data-toggle="popover" data-content="BUY">--}}
-                                    {{--<input type="radio" class="input_side_status" name="order_side" id="input_buy" disabled>--}}
-                                    {{--<span class="chk-label">Buy</span>--}}
-                                    {{--<span class="checkmark buy"></span>--}}
-                                {{--</label>--}}
-                                {{--<label class="chk-container" data-toggle="popover" data-content="SELL">--}}
-                                    {{--<input type="radio" class="input_side_status" name="order_side" id="input_sell" disabled>--}}
-                                    {{--<span class="chk-label">Sell</span>--}}
-                                    {{--<span class="checkmark sell"></span>--}}
-                                {{--</label>--}}
-                                {{--&nbsp;&nbsp;?&nbsp;--}}
-                            {{--</div>--}}
+                            <div class="form-group col-sm-6">
+                                <div class="btn-group" data-toggle="buttons" style="margin-top:5px;">
+                                    <label class="btn btn-primary {{ $order_side == 0 ? "active" : "" }}" id="label_buy" onclick="doOnChangeSideStatus('buy')" data-toggle="popover" data-content="Buy">
+                                        <input type="radio" name="options" id="input_below" autocomplete="off"> Buy
+                                    </label>
+                                    <label class="btn btn-primary {{ $order_side == 0 ? "" : "active" }}" id="label_sell" onclick="doOnChangeSideStatus('sell')" data-toggle="popover" data-content="Sell">
+                                        <input type="radio" name="options" id="input_above" autocomplete="off"> Sell
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
@@ -231,7 +230,49 @@
                 </div>
             </div>
 
-
+            <div class="panel panel-default" style="margin-top:50px;">
+                <div class="div-panel-heading">
+                    Your Coin Match List
+                </div>
+                <div class="panel-body panel-table">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr id="thead_title">
+                        </tr>
+                        <tr>
+                            <th class="td-cell">#</th>
+                            <th class="td-cell">Coin</th>
+                            <th class="td-cell">Side</th>
+                            <th class="td-cell">Purchased Price(USD)</th>
+                            <th class="td-cell">Quantity</th>
+                            <th class="td-cell">Purchased Date</th>
+                            <th class="td-cell">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody_content">
+                        @if($coin_match_data)
+                            @foreach( $coin_match_data as $idx=>$coin_data )
+                                <tr style="border-bottom: 1px solid #555555;">
+                                    <td class="td-cell">{{ $idx+1 }}</td>
+                                    <td class="td-cell">
+                                        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{ $coin_data['coin_id'] }}.png" width="32px" height="32px" />
+                                        {{ $coin_data['coin_name'] }}
+                                    </td>
+                                    <td class="td-cell {{ ( $coin_data['order_side'] == 0 ) ? "color-green" : "color-red" }}">{{ ( $coin_data['order_side'] == 0 ) ? "Buy" : "Sell" }}</td>
+                                    <td class="td-cell">{{ $coin_data['purchased_price'] }}</td>
+                                    <td class="td-cell">{{ $coin_data['quantity'] }}</td>
+                                    <td class="td-cell">{{ date( "Y-m-d", strtotime($coin_data['purchased_date']) ) }}</td>
+                                    <td class="td-cell td-action">
+                                        <a class="a-currency-edit" onclick="doOnUpdate('{{ json_encode($coin_data) }}')" />
+                                        <a href="" onclick="doOnDelete('{{ $coin_data['match_id'] }}')" data-toggle="modal" data-target="#myModal" class="a-currency-delete" ></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -252,5 +293,23 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('./js/frontend/addcurrency.js') }}"></script>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Moonfolio</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you would like to remove this data?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button buttonRed btn-save-details ui-corner-all" onclick="doOnRequestDelete()">Remove</button>
+                <button type="button" class="button buttonBlue btn-save-details ui-corner-all" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('./js/frontend/coinmatch.js') }}"></script>
 @endsection
