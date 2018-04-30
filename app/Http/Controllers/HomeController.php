@@ -12,6 +12,16 @@ use Iflylabs\iFlyChat;
 class HomeController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
+
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -57,6 +67,7 @@ class HomeController extends Controller
                 is_null($user['user_avatar']) ? $topUser['avatar'] = $default_avatar : $topUser['avatar'] = $user['user_avatar'];
                 $topUser['invested_capital'] = $investedCapital;
                 $topUser['current_value'] = $currentValue;
+                if ( $investedCapital == 0 ) $investedCapital = 1;
                 $topUser['total_profit_loss_percentage'] = number_format(($currentValue - $investedCapital)/$investedCapital*100, 2, '.',',');
                 $top_users[] = $topUser;
             }

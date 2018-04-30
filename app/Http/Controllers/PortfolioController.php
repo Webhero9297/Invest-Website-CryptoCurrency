@@ -17,6 +17,7 @@ class PortfolioController extends Controller
         $users = app(User::class)->all()->toArray();
         $default_avatar = './assets/images/avatars/default.png';
         $real_data = Common::getRealTimeCryptoCurrencyList();
+        $file_json_data = Common::getRealTimeCryptoCurrencyListForFile();
         $model = new UserCurrencyDetails();
         $portfolios = array();
         foreach( $users as $user ) {
@@ -33,7 +34,7 @@ class PortfolioController extends Controller
                 $investedCapital += $coin['total_cost']*1;
                 $currentValue += $coin['price_usd']*$coin['quantity'];
                 $totalProfitLossValue += $coin['profit_loss'];
-                $coin_ids[] = $coin['id'];
+                $coin_ids[] = Common::getFileIdPerCoinId( $file_json_data, $coin['id'] );
             }
             $arr['full_name'] = $user['full_name'];
             is_null($user['user_avatar']) ? $arr['avatar'] = $default_avatar : $arr['avatar'] = $user['user_avatar'];
@@ -74,11 +75,25 @@ class PortfolioController extends Controller
         $coin_ids = array();
         $profitlossPercentage = 0;
         $total_coins = 0;
+        $currencyData = array();
         foreach( $userCurrencyData as $coin ) {
             $investedCapital += $coin['total_cost']*1;
             $currentValue += $coin['price_usd']*$coin['quantity'];
-            $totalProfitLossValue += $coin['profit_loss']*$coin['quantity'];
+            $totalProfitLossValue += $coin['profit_loss'];
             $profitlossPercentage += $coin['profit_loss_percentage'];
+            if ( $coin['price_usd']>100 ) {
+                $coin['price_usd'] = number_format($coin['price_usd'], 2, '.', ',');
+            }
+            else {
+                $coin['price_usd'] = number_format($coin['price_usd'],4, '.', ',');
+            }
+            if ( $coin['purchased_price']>100 ) {
+                $coin['purchased_price'] = number_format($coin['purchased_price'], 2, '.', ',');
+            }
+            else {
+                $coin['purchased_price'] = number_format($coin['purchased_price'], 4, '.', ',');
+            }
+            $currencyData[] = $coin;
             $coin_ids[] = $coin['id'];
             $total_coins += $coin['quantity'];
         }
@@ -89,9 +104,10 @@ class PortfolioController extends Controller
         $arr['total_profit_loss'] = $totalProfitLossValue;
         if ( $investedCapital == 0 ) $investedCapital = 1;
         $temp = ($currentValue / $investedCapital - 1)*100;
-        $arr['total_profit_loss_percentage'] = $temp;
+        $arr['total_profit_loss_percentage'] = $temp;//$profitlossPercentage;
         $arr['coins'] = count($dd);
+
         return view('frontend.detailportfolio')->with(['user_avatar'=>$img_avatar, 'full_name'=>$full_name, 'email'=>$email,
-            'gender'=>$gender, 'age'=>$age, 'country'=>$country, 'user_currency_data'=>$userCurrencyData, 'isPrivate'=>$isPrivate, 'total_data'=>$arr, 'total_coins'=>$total_coins]);
+            'gender'=>$gender, 'age'=>$age, 'country'=>$country, 'user_currency_data'=>$currencyData, 'isPrivate'=>$isPrivate, 'total_data'=>$arr, 'total_coins'=>$total_coins]);
     }
 }

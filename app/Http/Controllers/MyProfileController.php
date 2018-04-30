@@ -40,28 +40,40 @@ class MyProfileController extends Controller
         $user_currency_data = $data->toArray();
         $dd = Common::getCoinCountFromRecordsEx($data);
         $userCurrencyData = Common::getCoinDataFromRecords($user_currency_data);
+        $file_json_data = Common::getRealTimeCryptoCurrencyListForFile();
 
         $default_avatar = './assets/images/avatars/default.png';
         $arr = array();
         $investedCapital = 0;
         $currentValue = 0;
         $totalProfitLossValue = 0;
-        $coin_ids = array();
         $profitlossPercentage = 0;
         $currency_data = array();
+        $totalCoins = 0;
         foreach( $userCurrencyData as $coin ) {
-            $coin_data = array();
             $coin_data = $coin;
-            $coin_data['price_usd'] = number_format($coin['price_usd'], 2, '.',',');
             $coin_data['total_cost'] = number_format($coin['total_cost'], 2, '.',',');
-            $coin_data['purchased_price'] = number_format($coin['purchased_price'], 2, '.',',');
             $coin_data['profit_loss'] = number_format($coin['profit_loss'], 2, '.',',');
 
             $investedCapital += $coin['total_cost']*1;
             $currentValue += $coin['price_usd']*$coin['quantity'];
-            $totalProfitLossValue += $coin['profit_loss']*$coin['quantity'];
+            $totalProfitLossValue += $coin['profit_loss'];
             $profitlossPercentage += $coin['profit_loss_percentage'];
-            $coin_ids[] = $coin['id'];
+            if ( $coin['price_usd']>100 ) {
+                $coin_data['price_usd'] = number_format($coin['price_usd'], 2, '.',',');
+            }
+            else{
+                $coin_data['price_usd'] = number_format($coin['price_usd'], 4, '.',',');
+            }
+            if ( $coin['purchased_price']>100 ) {
+                $coin_data['purchased_price'] = number_format($coin['purchased_price'], 2, '.',',');
+            }
+            else{
+                $coin_data['purchased_price'] = number_format($coin['purchased_price'], 4, '.',',');
+            }
+            $coin_data['slug'] = Common::getFileIdPerCoinId( $file_json_data, $coin['id'] );
+
+            $totalCoins += $coin['quantity'];
             $currency_data[] = $coin_data;
         }
         $arr['full_name'] = \Auth::user()->full_name;
@@ -73,7 +85,7 @@ class MyProfileController extends Controller
         if ( $currentValue < $investedCapital ) $arr['sign'] = -1; else $arr['sign'] = 1;
 
         $arr['total_profit_loss_percentage'] = number_format($_temp, 2, '.',',');
-        $arr['coins'] = count($dd);
+        $arr['coins'] = $totalCoins; //count($dd);
         return response()->json(['total'=>$arr, 'currency_data'=>$currency_data]);
     }
     public function editPriceAlertEditForm() {
@@ -144,6 +156,7 @@ class MyProfileController extends Controller
         $age = request()->get('age');
         $country = request()->get('country');
 
+//        $user = app(User::class)->where('id', $user->id)->first();
         $user->full_name = $full_name;
         $user->email = $email;
         $user->gender = $gender;
@@ -159,14 +172,16 @@ class MyProfileController extends Controller
         $quantity=0;
         $purchased_price=0;
         $purchased_date=date('Y-m-d');
-        return view('frontend.addcryptocurrencyex')->with(['detail_id'=>'NULL', 'currency_name'=>$currency_name, 'quantity'=>$quantity, 'purchased_price'=>$purchased_price, 'purchased_date'=>$purchased_date, 'cryptoData'=>$cryptoData]);
+        return view('frontend.addcryptocurrencyex')->with(['detail_id'=>'NULL', 'currency_name'=>$currency_name, 'quantity'=>$quantity,
+            'purchased_price'=>$purchased_price, 'purchased_date'=>$purchased_date, 'cryptoData'=>$cryptoData]);
     }
     public function addCryptoCurrencyFormEx($currency_name) {
         $cryptoData = Common::getRealTimeCryptoCurrencyList();
         $quantity=0;
         $purchased_price=0;
         $purchased_date=date('Y-m-d');
-        return view('frontend.addcryptocurrencyex')->with(['detail_id'=>'NULL', 'currency_name'=>$currency_name, 'quantity'=>$quantity, 'purchased_price'=>$purchased_price, 'purchased_date'=>$purchased_date, 'cryptoData'=>$cryptoData]);
+        return view('frontend.addcryptocurrencyex')->with(['detail_id'=>'NULL', 'currency_name'=>$currency_name, 'quantity'=>$quantity,
+            'purchased_price'=>$purchased_price, 'purchased_date'=>$purchased_date, 'cryptoData'=>$cryptoData]);
     }
     public function addCryptoCurrencyData() {
         $currency_name = request()->get('currency_name');
@@ -264,6 +279,20 @@ class MyProfileController extends Controller
         $user_id = \Auth::user()->id;
         $coinAlertData = Common::getAlertCoinData($user_id);
 
+//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+//        $subject = "PRICE ALERT!";
+//        $to_email =\Auth::user()->email;
+//        $to_fullname = \Auth::user()->full_name;
+//        $from_email = "manager@moonfolio.io";
+//        $from_fullname = "Team Moonfolio";
+//
+//        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
+//        $headers .= "Reply-To: ".$from_email."\r\n";
+//        $headers .= "Reply-Path: ".$from_email."\r\n";
+//
+//        $headers .= "MIME-Version: 1.0\r\n";
+//        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+
         $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
         $subject = "PRICE ALERT!";
         $to_email = \Auth::user()->email;
@@ -307,25 +336,27 @@ class MyProfileController extends Controller
             }
             if ( $coin['email_alert'] == 1 && $coin['email_sent_state'] == 0 ) {
                 if ( $coin['limit_type'] == 0 ) {
+//                    <div>Current price is $".$coin['current_price'].".<br></div><br>
                     $mail->Body = "<div>Hi {$to_fullname},<br><br>
 	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price'].".<br></div><br>
-	                    <div>Current price is $".$coin['current_price'].".<br></div><br>
-	                    <div style=\"display:inline-flex;margin-top:-20px;\">
+	                    <div style=\"margin-top:-20px;\">
 	                        <div>Team Moonfolio.</div>
 	                        <br>
-	                        <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" style=\"display:block;margin-top: -10px;\">
+                          <div>Lets go to the moon!</div><br>
+	                        <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\">
 	                        <br>
 	                        <br>
 	                    </div>
 	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
                 }
                 else {
+//                    <div>Current price is $".$coin['current_price'].".<br></div><br>
                     $mail->Body = "<div>Hi {$to_fullname},<br><br>
 	                    <div>".$coin['coin_name']." has reached $".$coin['limit_price'].".<br></div><br>
-	                    <div>Current price is $".$coin['current_price'].".<br></div><br>
 	                    <div style=\"margin-top:-20px;\">
 	                        <div>Team Moonfolio.</div>
 	                        <br>
+                          <div>Lets go to the moon!</div><br>
 	                        <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" >
 	                        <br>
 	                        <br>
@@ -334,6 +365,7 @@ class MyProfileController extends Controller
                 }
 
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
                 if(!$mail->Send()){
 //                    echo "Error sending";
@@ -342,6 +374,16 @@ class MyProfileController extends Controller
 //                    echo "Mail successfully sent";
                 }
 
+//                $message = "<div>Hi {$to_fullname},<br><br>
+//	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price']."<br></div><br>
+//	                    <div style=\"display:inline-flex;margin-top:-20px;\">
+//	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+//	                    </div>
+//	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
+//
+//                app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
+//                if ( $message != '' )
+//                    @mail($to_email, $subject, $message, $headers);
             }
 
         }

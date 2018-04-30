@@ -66,6 +66,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $curl = curl_init();
+
+//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+//        $logo_link = "{$serverLink}/assets/images/avatars/default.jpg";
+//        curl_setopt_array($curl, array(
+//            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/users.create",
+//            CURLOPT_RETURNTRANSFER => true,
+//            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+//            CURLOPT_ENCODING => "",
+//            CURLOPT_MAXREDIRS => 10,
+//            CURLOPT_TIMEOUT => 30,
+//            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//            CURLOPT_CUSTOMREQUEST => "POST",
+//            CURLOPT_POSTFIELDS => "id=".$data['email']."&display_name=".$data['full_name']."&avatar_url={$logo_link}",
+//        ));
+//        $response = curl_exec($curl);
+//        $err = curl_error($curl);
+//
+//        curl_close($curl);
+//
+//        if ($err) {
+//            echo "cURL Error #:" . $err;
+//        } else {
+//            echo $response;
+//        }
+//dd($response);
+//
         $activation_code = substr(str_replace('/', '', Hash::make($data['email'])), -24);
         $user = User::create([
             'full_name' => $data['full_name'],
@@ -88,6 +115,36 @@ class RegisterController extends Controller
     }
     private function sendEmail($code) {
         $user = app(User::class)->where('activation_code', $code)->first();
+//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+//        $subject = "Welcome to Moonfolio";
+//        $to_email = $user->email;
+//        $to_fullname = $user->full_name;
+//        $from_email = "manager@moonfolio.io";
+//        $from_fullname = "Welcome to Moonfolio";
+//
+//        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
+//        $headers .= "Reply-To: ".$from_email."\r\n";
+//        $headers .= "Reply-Path: ".$from_email."\r\n";
+//
+//        $headers .= "MIME-Version: 1.0\r\n";
+//        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+//
+//        $message = "<div>Hi {$to_fullname},<br><br>
+//                    <div style='font-weight: bold;'>Please click on the link below to activate your Moonfolio account.</div><br>
+//                    <div>
+//                    <a href=\"{$serverLink}/verify-user/{$code}\" target='_blank'>Click Here.</a><br><br>
+//                    Greetings,<br><br>
+//                    Team Moonfolio.</div><br>
+//                    <div style=\"display:inline-flex;margin-top:-20px;\">
+//                        <div>Lets go to the moon!</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+//                    </div>";
+//
+//        if (!@mail($to_email, $subject, $message, $headers)) {
+//            print_r($message);
+//        }
+//        else {
+//
+//        }
 
         $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
         $subject = "Welcome to Moonfolio";
@@ -121,6 +178,7 @@ class RegisterController extends Controller
                     Team Moonfolio.</div><br>
                     <div>Lets go to the moon!</div><br>
                     <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" />";
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
         if(!$mail->Send()){
 //            echo "Error sending";

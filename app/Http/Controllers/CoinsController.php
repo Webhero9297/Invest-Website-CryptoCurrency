@@ -8,22 +8,31 @@ use App\Common;
 class CoinsController extends Controller
 {
     //
+    public $json_data;
     public function index() {
 
+//        $totalCount = ceil(count(Common::getRealTimeCryptoCurrencyList())/100);
+
+//        if ( ($totalCount-intval($totalCount)) > 0 )
+//            $totalCount++;
+//        $totalCount = intval($totalCount);
+//        $real_data = Common::getRealTimeCryptoCurrencyList();
+//        $real_data = Common::getRealTimeCryptoCurrencyListPerPage(0);
         return view('frontend.coins');
     }
     public function getCoinDataByPagePos() {
         $currency = request()->get('currency');
         $real_data = Common::getRealTimeCryptoCurrencyListPerCurrency( $currency );
         $ret_data = array();
-        foreach($real_data as $data) {
+        $this->json_data = Common::getRealTimeCryptoCurrencyListForFile();
+        foreach($real_data as $idx=>$data) {
             $tmp = Common::stdToArray($data);
             $tmp['market_cap_usd'] = number_format($tmp['market_cap_'.strtolower($currency)], 2, '.', ',');
             $tmp['max_supply'] = number_format($tmp['max_supply'], 2, '.', ',');
             $tmp['total_supply'] = number_format($tmp['total_supply'], 2, '.', ',');
             $tmp['last_updated'] = number_format($tmp['last_updated'], 2, '.', ',');
             $tmp['current_price'] = $tmp['price_'.strtolower($currency)];
-
+            $tmp['img_id'] = $this->json_data[$idx]['id'];
             $ret_data[] = $tmp;
         }
         return response()->json($ret_data);
@@ -48,6 +57,12 @@ class CoinsController extends Controller
     public function coinChart( $coinId ) {
         $coinData = Common::getRealTimeCryptoCurrencyDataPerCoinId($coinId);
         $coin_data = Common::stdToArray($coinData[0]);
+        if ( $coin_data['price_usd']>100 ) {
+            $coin_data['price_usd'] = number_format($coin_data['price_usd'], 2, '.', ',');
+        }
+        else{
+            $coin_data['price_usd'] = number_format($coin_data['price_usd'], 4, '.', ',');
+        }
         return view('frontend.coinchart')->with(['coinData'=>$coin_data, 'coin_id'=>$coinId]);
     }
     public function coinLiveData($coinId) {

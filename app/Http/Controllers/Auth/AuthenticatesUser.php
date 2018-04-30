@@ -130,6 +130,7 @@ trait AuthenticatesUser
     {
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
+            $this->userpass() => [trans('auth.failed')],
         ]);
     }
 
@@ -141,6 +142,15 @@ trait AuthenticatesUser
     public function username()
     {
         return 'email';
+    }
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function userpass()
+    {
+        return 'password';
     }
 
     /**

@@ -65,7 +65,7 @@ class Common
         return $ret;
     }
     public static function getRealTimeCryptoCurrencyListPerPage($start, $limit=100) {
-        ini_set('max_execution_time', '500');
+//        ini_set('max_execution_time', '500');
         $ch = curl_init();
         $headers = array(
             'Accept: application/json',
@@ -79,7 +79,7 @@ class Common
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 
         $response = curl_exec($ch);
-        ini_set('max_execution_time', '30');
+//        ini_set('max_execution_time', '30');
         return json_decode($response);
     }
     public static function getRealTimeCryptoCurrencyListPerCurrency( $currency='USD') {
@@ -97,6 +97,34 @@ class Common
 
         $response = curl_exec($ch);
         return json_decode($response);
+    }
+    public static function getRealTimeCryptoCurrencyListForFile() {
+        $ch = curl_init();
+        $headers = array(
+            'Accept: application/json',
+            'Content-Type: application/json',
+        );
+        curl_setopt($ch, CURLOPT_URL, 'https://s2.coinmarketcap.com/generated/search/quick_search.json');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+        $response = json_decode(curl_exec($ch) );
+        $ret = array();
+        foreach( $response as $res ) {
+            $ret[] = self::stdToArray($res);
+        }
+        return $ret;
+    }
+    public static function getFileIdPerCoinId( $json_data, $coin_id ) {
+
+        foreach( $json_data as $dd ) {
+            if ( $dd['slug'] != $coin_id ) continue;
+            return $dd['id'];
+        }
+        return -1;
     }
     public static function getRealTimeCryptoCurrencyListPerPageEx($start, $currency='USD', $limit=0) {
         $ch = curl_init();
@@ -141,10 +169,12 @@ class Common
     }
     public static function getCurrencyInfoByCurrencyName( $real_data, $_currencyName ) {
         $ret_data = array();
-        foreach( $real_data as $coinInfo ) {
-            if ( $coinInfo->name == $_currencyName ) {
-                foreach( $coinInfo as $key=>$value ) {
-                    $ret_data[$key] = $value;
+        if ( count($real_data) > 0 ) {
+            foreach( $real_data as $coinInfo ) {
+                if ( $coinInfo->name == $_currencyName ) {
+                    foreach( $coinInfo as $key=>$value ) {
+                        $ret_data[$key] = $value;
+                    }
                 }
             }
         }
@@ -237,7 +267,7 @@ class Common
             $coin_data['purchased_price'] = $record['purchased_price'];
             $coin_data['total_cost'] = $record['purchased_price']*$record['quantity'];
             $coin_data['purchased_date'] = $record['purchased_date'];
-            $coin_data['profit_loss'] = $coin_data['price_usd'] - $record['purchased_price'];
+            $coin_data['profit_loss'] = ( $coin_data['price_usd'] - $record['purchased_price'] ) * $record['quantity'];
             if ( $record['purchased_price'] == 0 ) $record['purchased_price'] = 1;
             $coin_data['profit_loss_percentage'] = ($coin_data['price_usd'] / $record['purchased_price'])*100-100;
             $coin_data['detail_id'] = $record['detail_id'];
@@ -306,5 +336,35 @@ class Common
         else
             array_multisort($key_arr, SORT_DESC, $arr);
         return $arr;
+    }
+
+    public static function getInvestedCoinAmountPerUserId( $user_id, $coin_name ) {
+        $model = new UserCurrencyDetails();
+        return $model->getInvestedCoinNamePerUserId( $user_id, $coin_name );
+    }
+    public static function getSoldCoinAmountPerUserId( $user_id, $coin_name ) {
+        $model = new CoinMatch();
+        return $model->getSoldCoinAmountPerUserId( $user_id, $coin_name );
+    }
+
+    public static function remakeCoinDataWithFiles( $realCoinDatas, $coin_file_arr, $coin_match_datas ) {
+        $real_coin_name_arr = array();
+        $real_coin_id_arr = array();
+        $ret = array();
+        if ( $coin_match_datas ) {
+            foreach( $realCoinDatas as $idx=>$real_coin ) {
+                $real_coin_id_arr[] = $coin_file_arr[$idx];
+                $real_coin_name_arr[] = $real_coin->name;
+            }
+            foreach( $coin_match_datas as $idx=>$coin_match ) {
+                $index = array_search($coin_match['coin_name'], $real_coin_name_arr);
+                if ( $index != -1 ) {
+                    $coin_match['coin_id'] = $real_coin_id_arr[$index]['id'];
+                }
+                $ret[] = $coin_match;
+            }
+        }
+        return $ret;
+
     }
 }
