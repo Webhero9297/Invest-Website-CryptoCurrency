@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $('#full_name').focus();
+    $('input[name="email"]').focus();
 
     doOnLoginForm();
 });

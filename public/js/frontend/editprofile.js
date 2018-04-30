@@ -63,7 +63,7 @@ function doOnLoadLiveProfileCurrencyData() {
                         $'+total_data.total_profit_loss+'</span>\
                      </th>\
                      <th class="td-cell" colspan="2" style="padding:0;">\
-                        Total Profit/Loss Percentage:\
+                        Total Profit/Loss (%):\
                         <span class="'+style+'" style="font-size:16px;">\
                         '+total_data.total_profit_loss_percentage+'</span>\
                      </th>';
@@ -76,7 +76,7 @@ function doOnLoadLiveProfileCurrencyData() {
             (parseFloat(currency.percent_change_24h)>0) ? h24Style = "color-green": h24Style = "color-red";
             trHTML += '<tr style="border-bottom: 1px solid #555555;">\
                             <td class="td-cell td-coin-icon">\
-                            <img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/' + currency.id+'.png" width="32px" height="32px" />\
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/' + currency.slug+'.png" width="32px" height="32px" />\
                             </td>\
                             <td class="td-cell">'+currency.name+"(" + currency.symbol + ')</td>\
                             <td class="td-cell">'+ currency.price_usd+'</td>\
@@ -93,7 +93,8 @@ function doOnLoadLiveProfileCurrencyData() {
         $('#thead_title').html(theadHTML);
         $('#tbody_content').html(trHTML);
 
-        $('.py-4').css('height', '100%');
+        //$('.py-4').css('height', '100%');
+        $('.py-4').css('height', '');
     })
     .fail(function(fail_resp){
         $('.py-4').css('height', '100%');

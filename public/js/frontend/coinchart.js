@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $('.py-4').css('height', '100%!important');
     window.setInterval(function(){
         $.getJSON('/getcoinlivechartdata/'+coin_id, function(resp){
             var trHTML = '';

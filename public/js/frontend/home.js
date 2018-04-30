@@ -19,6 +19,8 @@ $(document).ready(function(){
     if ( alert_message != undefined ){
         notificationEx(alert_message);
     }
+
+
 });
 function loadLiveData() {
     $.get('/toplivedata', function(response){

@@ -23,7 +23,7 @@ function loadLivePortfolioData() {
             coinIconHtml = '';
             if (live_data.coin_ids.length>0) {
                 for( j in live_data.coin_ids ) {
-                    coinIconHtml += '<img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+live_data.coin_ids[j]+'.png" width="32px" height="32px" />';
+                    coinIconHtml += '<img src="https://s2.coinmarketcap.com/static/img/coins/64x64/'+live_data.coin_ids[j]+'.png" width="32px" height="32px" />';
                 }
             }
             if ( parseFloat(live_data.total_profit_loss) < 0 ) style=" color-red "; else style=" color-green";

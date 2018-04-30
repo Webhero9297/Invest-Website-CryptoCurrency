@@ -13,7 +13,6 @@ $(document).ready(function(){
         live_rates = rates;
         current_fiat_rate = live_rates[current_fiat_symbol];
 
-
         $('.img-avatar').click(function(){
             $('.img-avatar').removeClass('selected');
             $(this).addClass('selected');
@@ -34,9 +33,14 @@ $(document).ready(function(){
                 });
             }, 60000);
         }, 60000);
+        //
+        ////$('#tfoot').css('display', 'none');
+        //
         socket = io.connect('https://coincap.io');
     });
-
+    //$('#tfoot').css('display', '');
+    //$('.py-4').css('height', '');
+    //$('.container-fluid').css('height', '');
 });
 function doOnGetRate(callback) {
     $.getJSON('http://coincap.io/exchange_rates', function(resp){
@@ -44,16 +48,14 @@ function doOnGetRate(callback) {
     });
 }
 function doOnLoadLiveChart() {
-    $('#tfoot').css('display', 'none');
-    $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center"><div class="loader"></div></td></tr>');
+    //$('#tfoot').css('display', 'none');
+    $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center" style="padding-top:50px;"><div class="loader"></div></td></tr>');
     loadLiveChart();
 }
 function loadLiveChart() {
-    $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center"><div class="loader"></div></td></tr>');
+    $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center" style="padding-top:30px;"><div class="loader"></div></td></tr>');
     $.get('/coinpage', {currency : selected_currency }, function(coin_live_datas){
-
         doOnRenderTable(coin_live_datas);
-
     });
 }
 function doOnRenderTable(coin_live_datas) {
@@ -68,7 +70,7 @@ function doOnRenderTable(coin_live_datas) {
         tbodyHTML += '<tr class="tr-live" style="border-bottom: 1px solid #555555;" id="tr_'+coin_data.symbol+'">\
                                     <td class="td-cell td-coin-icon td-grey padding0">'+(pos*100+i+1)+'</td>\
                                     <td class="td-cell td-grey padding0" coin-name="'+coin_data.name+'">\
-                                        <img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+coin_data.id+'.png" width="32px" height="32px" />\
+                                        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/'+coin_data.img_id+'.png" width="32px" height="32px" />\
                                         &nbsp;&nbsp;&nbsp;\
                                         <a class="a-white" href="'+window.origin+'/coinchart/'+coin_data.id+'" >'+coin_data.name+'</a>\
                                     </td>\
@@ -116,7 +118,7 @@ function doOnRenderTable(coin_live_datas) {
                 var prevV = $('#price_'+coin_symbol).html().split(',').join('');
                 ( socket_data.msg.price*1 > 100 ) ? dc = 2 : dc = 4;
                 $('#price_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.price*current_fiat_rate, '', dc, ",", "."));
-                ( prevV*1 < socket_data.msg.price*1 ) ? sString = "bg-green" : sString = "bg-red";
+                ( prevV*1 <= socket_data.msg.price*1 ) ? sString = "bg-green" : sString = "bg-red";
                 $('#price_'+coin_symbol).attr('class', 'live_data');
                 $('#price_'+coin_symbol).addClass(sString);
                 $('#mktcap_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.mktcap*current_fiat_rate, '', 0, ",", "."));

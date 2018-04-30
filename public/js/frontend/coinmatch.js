@@ -1,4 +1,5 @@
 var quantity = purchased_price = 0;
+var remove_match_id = undefined;
 $(document).ready(function(){
     datepicker = $('#purchased_date').datepicker({format: 'yyyy-mm-dd'}).on('changeDate', function(ev) {
         datepicker.hide();
@@ -25,16 +26,9 @@ $(document).ready(function(){
             event.preventDefault();
         }
         quantity = parseFloat(_V||0);
+
         doOnCalcTotalCost();
     });
-    //$('#quantity').on('keyup', function(ev){
-    //    quantity = parseFloat($(this).val()||0);
-    //    if ( ev.keyCode != 190 && ev.keyCode != 110 ) {
-    //        if ($(this).val().search('.')!=-1)
-    //            $(this).val(parseFloat($(this).val())||0);
-    //    }
-    //    doOnCalcTotalCost();
-    //});
     $('#purchased_price').on('keypress keyup blur', function(event){
         var _V = $(this).val().replace(/[^0-9\.]/g,'');
         if ( _V.length >=2 && _V.substr(0,1) == '0' && _V.substr(1,1) != '.' ) {
@@ -57,17 +51,39 @@ $(document).ready(function(){
         'placement': 'top'
     });
 
+    //$('#label_sell').click(function(){
+    //    doOnClickSellSide();
+    //});
 
+    $('.py-4').css('height', '');
 });
-
-function doOnChangeSideStatus(obj) {
-    if ($(obj).is(':checked') == true) {
-        $('.input_side_status').prop('disabled', false);
-    }
-    else{
-        $('.input_side_status').prop('checked', '');
-        $('.input_side_status').prop('disabled', true);
-    }
+function doOnClickSellSide() {
+    quantity = parseFloat($('input[name="quantity"]').val());
+    coin_name = $('input[name="coin_name"]').val();
+    if ( coin_name == "" ) return;
+    if ( quantity == 0 ) return;
+    $.getJSON('/getinvestedcoinamount/'+coin_name, function(resp){
+        var diff = Decimal.sub(resp.invested, resp.sold);
+        if ( diff < quantity ) {
+            var title = "Sorry! Please enter quantity less than total invested amount.<br>"+"Your total invested amount is "+resp.invested + ".<br>";
+            if ( resp.sold != 0 ) {
+                title += "Your total sold amount is "+ resp.sold+".<br>";
+                title += "The amount you can sell is "+ diff + ".<br>";
+            }
+            $('.modal-body').html(title);
+            $('#myConfirm').modal('show');
+            $('input[name="quantity"]').attr('max', resp.quantity);
+            //$('input[name="quantity"]').val(resp.quantity);
+            return;
+        }
+        else{
+            $('#form_detail').submit();
+        }
+    });
+}
+function doOnChangeSideStatus(order_side) {
+    (order_side == 'buy') ? side=0: side = 1;
+    $('input[name="order_side"]').val(side);
 }
 function doOnClickSaveDetails() {
     if ( parseFloat($('#quantity').val()) == 0 ) {
@@ -80,8 +96,42 @@ function doOnClickSaveDetails() {
         $('#myConfirm').modal('show');
         return;
     }
+    if ( $('input[name="order_side"]').val() == 1 ) {
+        doOnClickSellSide();
+    }
+    else{
+        $('#form_detail').submit();
+    }
 
-    $('#form_detail').submit();
+}
+function doOnDelete(match_id) {
+    remove_match_id = match_id;
+}
+function doOnRequestDelete() {
+    $('#myModal').modal('hide');
+    $.get('deletecoinmatch/'+remove_match_id, function(resp){
+        $('#myConfirm').modal('show');
+        window.location.reload();
+    });
+}
+function doOnUpdate(jsonObj) {
+    jsonObj = JSON.parse(jsonObj);
+    $('input[name="coin_name"]').val(jsonObj.coin_name);
+    $('input[name="quantity"]').val(jsonObj.quantity);
+    $('input[name="purchased_price"]').val(jsonObj.purchased_price);
+    $('input[name="purchased_date"]').val(jsonObj.purchased_date);
+
+    $('label.btn-primary').removeClass('active');
+    if ( jsonObj.order_side == 0 ) {
+        $('#label_buy').addClass('active');
+    }
+    else{
+        $('#label_sell').addClass('active');
+    }
+    $('input[name="match_id"]').val(jsonObj.match_id);
+    $('input[name="order_side"]').val(jsonObj.order_side);
+
+    doOnCalcTotalCost();
 }
 function doOnChangeInputValue( tagId, direction ) {
     var _inputVal = parseFloat($('#'+tagId).val());

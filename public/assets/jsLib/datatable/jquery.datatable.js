@@ -1632,7 +1632,7 @@
             " - " : "") + c;
         d && (c += ". For more information about this error, please see http://datatables.net/tn/" + d);
         if (b) E.console && console.log && console.log(c);
-        else if (b = m.ext, b = b.sErrMode || b.errMode, a && r(a, null, "error", [a, d, c]), "alert" == b) alert(c);
+        //else if (b = m.ext, b = b.sErrMode || b.errMode, a && r(a, null, "error", [a, d, c]), "alert" == b) alert(c);
         else {
             if ("throw" == b) throw Error(c);
             "function" == typeof b && b(a, d, c)

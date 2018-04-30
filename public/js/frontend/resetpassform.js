@@ -1,12 +1,25 @@
 $(document).ready(function(){
 
-    $('#full_name').focus();
+    $('input[name="email"]').focus();
 
     doOnLoginForm();
 });
-
+function doOnSubmit() {
+    var _pass = $('input[name="password"]').val();
+    var _confirm_pass = $('input[name="confirm_password"]').val();
+    if ( _pass != _confirm_pass ) {
+        $('input[name="password"]').val('');
+        $('input[name="confirm_password"]').val('');
+        $('input[name="password"]').blur();
+        $('input[name="confirm_password"]').blur();
+        $('#myModal').modal('show');
+    }
+    else{
+        $('form[class="auth-login"]').submit();
+    }
+}
 doOnLoginForm = function(){
-    $('input[name="email"]').focus();
+    //$('input[name="email"]').focus();
     $('input.auth-input').blur(function() {
         var $this = $(this);
         if ($this.val())
@@ -39,4 +52,3 @@ doOnLoginForm = function(){
         $(this).removeClass('is-active');
     });
 }
-
