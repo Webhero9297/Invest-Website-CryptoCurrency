@@ -77,7 +77,6 @@ class LoginController extends Controller
         $mail->IsSMTP();
         $mail->Host = "mail.moonfolio.io";
         $mail->Port = 25;
-        //$mail->SMTPSecure = 'SSL';
         $mail->SMTPAuth = true;
         $mail->Username = "manager@moonfolio.io";
         $mail->Password = "Moonfolio1114!";
