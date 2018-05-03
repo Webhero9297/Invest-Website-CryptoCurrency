@@ -69,6 +69,9 @@
     //require_once('../vendor/autoload.php');
     //use Iflylabs\iFlyChat;
 ?>
+<script>
+    var AuthUser = "{{ (\Auth::user()) ? \Auth::user()->id : 'undefined' }}";
+</script>
 <div id="moonfloio-app">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel navbar-fixed">
         <div class="container nav-div-container">
@@ -93,6 +96,7 @@
                     <li><a class="nav-link" href="{{ route('coins') }}">COINS</a></li>
                     <li><a class="nav-link" href="{{ route('news') }}">NEWS</a></li>
                     @guest
+                    <li><a class="nav-link" href="{{ route('global.coinmatch.biz') }}">COIN MATCH</a></li>
                     <li><a class="nav-link sign" href="{{ route('login') }}">LOGIN</a></li>
                     <script>
                         var userId = undefined;
