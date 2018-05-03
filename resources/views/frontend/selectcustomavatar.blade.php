@@ -7,7 +7,6 @@
     }
 
 </style>
-
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home">
         <div class="container" style="padding-bottom: 100px;">

@@ -107,7 +107,6 @@
                     <div class="div-panel-heading" style="">
                         News
                         &nbsp;&nbsp;&nbsp;
-
                     </div>
                     <div class="panel-body panel-table">
                         @if ( $news_data )
@@ -120,7 +119,6 @@
                                         <div class="middle">
                                             <a href="{{ $news['url'] }}" class="a-view-detail color-black" target="_blank">
                                                 View More
-                                                {{--{{ $news['body'] }}--}}
                                             </a>
                                         </div>
                                     </div>
@@ -143,5 +141,4 @@
             </div>
         </div>
     </div>
-{{--    <script src="{{ asset('./js/frontend/coins.js') }}"></script>--}}
 @endsection

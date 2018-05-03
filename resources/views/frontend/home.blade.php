@@ -447,7 +447,6 @@ h1{
                     @endif
                 </div>
             </div>
-
         </div>
         <div class="div-features">
             <div class="container">

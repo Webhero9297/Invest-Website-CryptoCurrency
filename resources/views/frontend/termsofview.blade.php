@@ -7,7 +7,6 @@
     <meta name="description" content="Moonfolio terms and conditions.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body class="guest">
     <header id="header">
         <div class="container">

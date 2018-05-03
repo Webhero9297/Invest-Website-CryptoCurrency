@@ -42,7 +42,6 @@
                                         <option value="0">Male</option>
                                         <option value="1" selected>Female</option>
                                     @endif
-
                                 </select>
                             </div>
                             <div class="form-group col-sm-2">
@@ -69,8 +68,6 @@
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

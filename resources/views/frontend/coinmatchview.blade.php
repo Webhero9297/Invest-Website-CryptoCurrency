@@ -25,7 +25,6 @@
         -moz-user-select: none;
         -ms-user-select: none;
     }
-
     input[type="checkbox"] + label:last-child { margin-bottom: 0; }
 
     input[type="checkbox"] + label:before {

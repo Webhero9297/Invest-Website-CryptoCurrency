@@ -109,17 +109,11 @@
                                     <a href="{{ route('coin.match.view') }}" class="nav-link a-link sign text-center add-coin-match">Add Coin Match</a>
                                     <a href="{{ route('edit.price.alert') }}" class="nav-link a-link sign text-center edit-price-alert">Add Price Alert</a>
                                 </div>
-                                {{--<div class="col-sm-5 div-flex">--}}
-                                    {{--<div class="div-pt-7">--}}
-
-                                    {{--</div>--}}
-                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="panel panel-default" style="margin-top:50px;">
                 <div class="div-panel-heading">
                     Your Currencies
