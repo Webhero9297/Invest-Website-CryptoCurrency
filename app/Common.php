@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\User;
 
 class Common
 {
@@ -346,7 +346,13 @@ class Common
         $model = new CoinMatch();
         return $model->getSoldCoinAmountPerUserId( $user_id, $coin_name );
     }
-
+    public static function getUserInfoFromId( $user_id ) {
+        $user_data = User::where('id', $user_id)->first();
+        if ( $user_data ){
+            return $user_data->toArray();
+        }
+        return [];
+    }
     public static function remakeCoinDataWithFiles( $realCoinDatas, $coin_file_arr, $coin_match_datas ) {
         $real_coin_name_arr = array();
         $real_coin_id_arr = array();
@@ -354,17 +360,110 @@ class Common
         if ( $coin_match_datas ) {
             foreach( $realCoinDatas as $idx=>$real_coin ) {
                 $real_coin_id_arr[] = $coin_file_arr[$idx];
-                $real_coin_name_arr[] = $real_coin->name;
+                $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
             }
             foreach( $coin_match_datas as $idx=>$coin_match ) {
                 $index = array_search($coin_match['coin_name'], $real_coin_name_arr);
                 if ( $index != -1 ) {
                     $coin_match['coin_id'] = $real_coin_id_arr[$index]['id'];
+                    $coin_match['coin_symbol'] = $real_coin_id_arr[$index]['symbol'];
+                    $user_info = self::getUserInfoFromId($coin_match['user_id']);
+                    $coin_match['user_full_name'] = $user_info['full_name'];
+                    $coin_match['user_avatar'] = $user_info['user_avatar'];
+                    $coin_match['user_email'] = $user_info['email'];
                 }
+//                if( $coin_match['coin_name'] == 'Centra' ) {
+//                    dd($index, $coin_file_arr);
+//                    dd($index, $coin_match, $real_coin_id_arr[$index],$real_coin_name_arr[$index], $coin_file_arr);
+//                }
                 $ret[] = $coin_match;
             }
         }
         return $ret;
+    }
+    public static function remakeCoinDataWithFilesEx( $realCoinDatas, $coin_file_arr, $coin_match_datas, $user_id=null ) {
+        $real_coin_name_arr = array();
+        $real_coin_id_arr = array();
+        $ret = array();
+        if ( $coin_match_datas ) {
+            foreach( $realCoinDatas as $idx=>$real_coin ) {
+                $real_coin_id_arr[] = $coin_file_arr[$idx];
+                $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+            }
+            $invested_coinname_arr = array();
+            $enable_status = 0;
+            if ( !is_null($user_id) ) {
+                $userInvestedCoinData = app(UserCurrencyDetails::class)->where('user_id', $user_id)->get();
+                if ( $userInvestedCoinData ) {
+                    $userInvestedCoinData = $userInvestedCoinData->toArray();
+                    foreach( $userInvestedCoinData as $coin ) {
+                        $invested_coinname_arr[] = $coin['currency_name'];
+                    }
+                    $enable_status = 1;
+                }
+            }
+            foreach( $coin_match_datas as $idx=>$coin_match ) {
+                $index = array_search($coin_match['coin_name'], $real_coin_name_arr);
 
+                if ( $index != -1 ) {
+                    $coin_match['coin_id'] = $real_coin_id_arr[$index]['id'];
+                    $coin_match['coin_symbol'] = $real_coin_id_arr[$index]['symbol'];
+                    $user_info = self::getUserInfoFromId($coin_match['user_id']);
+                    $coin_match['user_full_name'] = $user_info['full_name'];
+                    $coin_match['user_avatar'] = $user_info['user_avatar'];
+                    $coin_match['user_email'] = $user_info['email'];
+                    if ( $enable_status == 1 ) {
+                        $_index = in_array($coin_match['coin_name'], $invested_coinname_arr);
+                        if ( $_index != false ) {
+                            $coin_match['enable_status'] = 1;
+                        }
+                        else {
+                            $coin_match['enable_status'] = 0;
+                        }
+                    }
+                    else {
+                        $coin_match['enable_status'] = 0;
+                    }
+                }
+//                if( $coin_match['coin_name'] == 'Centra' ) {
+//                    dd($index, $coin_file_arr);
+//                    dd($index, $coin_match, $real_coin_id_arr[$index],$real_coin_name_arr[$index], $coin_file_arr);
+//                }
+                $ret[] = $coin_match;
+            }
+        }
+        return $ret;
+    }
+    public static function remakeReviewData( $realCoinDatas, $coin_file_arr, $coin_review_datas ) {
+        $real_coin_name_arr = array();
+        $real_coin_id_arr = array();
+        $ret = array();
+        if ( $coin_review_datas ) {
+            foreach( $realCoinDatas as $idx=>$real_coin ) {
+                $real_coin_id_arr[] = $coin_file_arr[$idx];
+                $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+            }
+            foreach( $coin_review_datas as $idx=>$coin_review ) {
+                $coin_match = app(CoinMatch::class)->where('match_id', $coin_review['match_id'])->first()->toArray();
+                $index = array_search($coin_match['coin_name'], $real_coin_name_arr);
+                if ( $index != -1 ) {
+                    $coin_review['coin_name'] = $coin_match['coin_name'];
+                    $coin_review['order_side'] = $coin_match['order_side'];
+                    $coin_review['purchased_price'] = $coin_match['purchased_price'];
+                    $coin_review['coin_id'] = $real_coin_id_arr[$index]['id'];
+                    $coin_review['coin_symbol'] = $real_coin_id_arr[$index]['symbol'];
+                    $coin_review['maker_id'] = $coin_match['user_id'];
+                    $coin_review['taker_id'] = $coin_review['review_user_id'];
+                    $maker_info = self::getUserInfoFromId($coin_match['user_id']);
+                    $coin_review['maker_username'] = $maker_info['full_name'];
+                    $coin_review['maker_avatar'] = $maker_info['user_avatar'];
+                    $taker_info = self::getUserInfoFromId($coin_review['review_user_id']);
+                    $coin_review['taker_username'] = $taker_info['full_name'];
+                    $coin_review['taker_avatar'] = $taker_info['user_avatar'];
+                }
+                $ret[] = $coin_review;
+            }
+        }
+        return $ret;
     }
 }
