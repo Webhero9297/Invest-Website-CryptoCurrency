@@ -299,16 +299,3 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:first-chi
 div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-child {
     padding-right: 0
 }
-
-th:not(.st-sort-ascent):not(.st-sort-descent):after {
-    font-family: FontAwesome;
-    content: '\f0dc';
-}
-table.dataTable thead .sorting:after {
-    font-family: FontAwesome;
-    content: '\f0dc';
-}
-table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {
-    font-family: FontAwesome;
-    content: '\f0dc';
-}

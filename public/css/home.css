@@ -588,12 +588,11 @@ input.auth-input:focus ~ .highlight {
 .button {
     position: relative;
     display: inline-block;
-    padding: 30px;
-    margin: .3em 0 1em 0;
-    width: 320px;
+    padding: 15px 20px;
+    margin: .3em 0.5em 1em 0;
+    /* width: 240px; */
     vertical-align: middle;
     color: #fff;
-    font-size: 16px;
     line-height: 20px;
     -webkit-font-smoothing: antialiased;
     text-align: center;
@@ -601,7 +600,7 @@ input.auth-input:focus ~ .highlight {
     background: linear-gradient(#06b5e5, #0481a3);
     border: none;
     font-family: Montserrat-Light;
-    font-size: 28px;
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.15s ease;
     border-radius: 40px;
@@ -622,6 +621,12 @@ input.auth-input:focus ~ .highlight {
 }
 .buttonRed {
     border-top: 1px solid #ff7474;
+    text-shadow: 1px 1px 1px rgba(4, 4, 4, 0.83);
+    background: linear-gradient(#e50606, #650202);
+}
+.buttonRed:hover{
+    color: gold;
+    text-shadow: 1px 1px 1px black, 0 0 1px #ffe877, 0 0 1px #b99a01;
     background: linear-gradient(#e50606, #650202);
 }
 /* Ripples container */

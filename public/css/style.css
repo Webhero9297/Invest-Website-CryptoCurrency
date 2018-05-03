@@ -108,14 +108,19 @@ body{
     border-radius: 0;
     color: white;
     font-family: Montserrat-UltraLight;
+    border-radius: 5px;
+    margin-left: 10px;
+    width: 90%;
 }
 .dropdown-item {
+    font-size: 15px;
+    font-weight: bold;
     border-bottom: 1px solid #05a4cf;
 }
 .dropdown-item:focus, .dropdown-item:hover {
     color: gold!important;
     background-color: #05a4cf;
-    border-bottom: 1px solid #3d4d5d;
+    border-bottom: 1px solid #c0cedc45;
 }
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: transparent!important;
@@ -152,10 +157,14 @@ select.form-control {
 }
 select option {
     padding: 10px 0px!important;
-    background-color: rgba(0,0,0,0.1)!important;
-    color: black;
+    background-color: rgb(0,0,0);
+    color: white;
 }
-
+select option:hover {
+    padding: 10px 0px!important;
+    background-color: rgb(35,35,35);
+    color: white;
+}
 .our:focus {
     background-color: transparent;
 }

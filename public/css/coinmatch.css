@@ -1,0 +1,328 @@
+td.td-cell {
+    /*vertical-align: top!important;*/
+    height: 51px!important;
+    min-height: 51px!important;
+    max-height: 51px!important;
+}
+.control-label {
+    font-family: Montserrat-light;
+}
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    background-color: #f1f1f100;
+}
+/* Style the buttons inside the tab */
+.tab button {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid #313132!important;
+    background-color: inherit;
+    float: left;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 20px!important;
+    transition: 0.3s;
+    font-size: 17px;
+    font-family: Montserrat-Light;
+    font-weight: bold;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+    color: gold!important;
+    background-color: #0297df;
+}
+/* Create an active/current tablink class */
+.tab button.active {
+    color: gold!important;
+    background-color: #0297bf!important;
+}
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #cccccc3d;
+    min-height: 600px;
+}
+.show {
+    display: block;
+}
+.search_input {
+    background-image: url('../assets/images/icon/searchicon.png');
+    background-position: 10px 15px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    color: white;
+    background-color: transparent;
+}
+select.form-control {
+    height: 30px!important;
+    background-color: transparent;
+    color: white;
+}
+.form-control {
+    padding: .3rem .75rem;
+    height: 30px;
+}
+input[type="search"] {
+    background: #56e2c900;
+    color: #fff;
+}
+#other_sell_table, #other_buy_table, #star_table {
+    width: 100%;
+    border: 1px solid white;
+    max-height: 500px;
+    margin-top: 3px!important;
+}
+#other_buy_table thead tr, #other_sell_table thead tr, #star_table thead tr {
+    background-color: #0297bf;
+    /*height: 32px;*/
+    padding: 5px;
+}
+.st-sort-ascent:before, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting:after{
+    /*content: '\25B2';*/
+    display: none;
+}
+.st-sort-descent:before, table.dataTable thead .sorting_desc:after{
+    /*content: '\25BC';*/
+    display: none;
+}
+#other_sell_table_wrapper .row, #other_buy_table_wrapper .row, #star_table_wrapper .row {
+    width: 110%;
+}
+table.dataTable tr {
+    border-bottom: 1px solid #ddd!important;
+    cursor: pointer;
+}
+.table-bordered>tbody>tr>td {
+    padding: 0;
+    border-bottom: 1px solid grey!important;
+    padding-top: 1px;
+}
+/* Set a style for all buttons */
+.sell-button {
+    background-color: #f44336;
+    color: white;
+    padding: 7px;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    width: 80px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Montserrat-Light;
+}
+.sell-button:hover {
+    opacity: 0.8;
+}
+.buy-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 7px;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    min-width: 80px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: Montserrat-Light;
+    /*width: calc(100% - 2px);*/
+}
+.buy-button:hover {
+    opacity: 0.8;
+}
+/* Extra styles for the cancel button */
+.cancelbtn {
+    border: none;
+    padding: 4px 32px;
+    color: white;
+    background-color: #f44336;
+    width: calc(100% - 2px);
+}
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+.modal-header {
+    background-color: #0297bf;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.form-group {
+    padding: 5px 20px;
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 5; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+/* Modal Content/Box */
+.modal-content {
+    background-color: #000000f2;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+/*********************************    Ranking Star Start    *************************************/
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+fieldset, label { margin: 0; padding: 0; }
+/****** Style Star Rating Widget *****/
+.rating {
+    border: none;
+    float: left;
+}
+.rating > input { display: none; }
+.rating > label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+.rating > .half:before {
+    content: "\f089";
+    position: absolute;
+}
+.rating > label {
+    color: #ddd;
+    float: right;
+}
+/***** CSS Magic to Highlight Stars on Hover *****/
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+/*********************************    Ranking Star  End     *************************************/
+form {
+    color: black;
+    padding: 0;
+}
+form select, form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /*margin-top: 6px;*/
+    /*margin-bottom: 16px;*/
+    resize: vertical;
+}
+label.modal-title {
+    color: white;
+    font-family: Montserrat-Light;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 1px;
+}
+#review_amount {
+    width: 240px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 10px;
+    text-align: right;
+}
+.span-review {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Montserrat-Light;
+}
+.a-wrap-btn {
+    width: 100%;
+    padding: 15px 10px;
+    text-align: center;
+    display: block;
+    border: 2px solid #aaaaaa5e;
+    background: #11111147;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+.a-wrap-btn:hover {
+    text-decoration: none;
+    color: gold;
+    border-color: gold;
+}
+.form-control:focus {
+    background-color: #ffffff01;
+}
+.button-hidden {
+    display: none;
+}
+form textarea {
+    height: 200px;
+    background: #ffffff0f;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+.span-comment {
+    width: 200px;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
+     padding: 0;
+}
