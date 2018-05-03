@@ -535,7 +535,9 @@
             l = a.aoColumns;
         i && (e = h("<tr/>").appendTo(g));
         b = 0;
-        for (c = l.length; b < c; b++) f = l[b], d = h(f.nTh).addClass(f.sClass), i && d.appendTo(e), a.oFeatures.bSort && (d.addClass(f.sSortingClass), !1 !== f.bSortable && (d.attr("tabindex", a.iTabIndex).attr("aria-controls", a.sTableId), La(a, f.nTh, b))), f.sTitle != d[0].innerHTML && d.html(f.sTitle), Ma(a, "header")(a, d, f, n);
+        for (c = l.length; b < c; b++) f = l[b], d = h(f.nTh).addClass(f.sClass), i && d.appendTo(e),
+        a.oFeatures.bSort && (d.addClass(f.sSortingClass), !1 !== f.bSortable && (d.attr("tabindex", a.iTabIndex).attr("aria-controls", a.sTableId),
+            La(a, f.nTh, b))), f.sTitle != d[0].innerHTML && d.html(f.sTitle), Ma(a, "header")(a, d, f, n);
         i && da(a.aoHeader, g);
         h(g).find(">tr").attr("role", "row");
         h(g).find(">tr>th, >tr>td").addClass(n.sHeaderTH);
