@@ -114,7 +114,6 @@
 }
 .a-close-account:hover {
     color:gold!important;
-    /*margin-top: -3px;*/
 }
 .a-pencil {
     background-image: url(../assets/images/icon/pencil.png);
@@ -127,7 +126,6 @@
     cursor: pointer;
 }
 .a-pencil:hover{
-    /*margin-top:7px;*/
     background-image: url(../assets/images/icon/pencil_hover.png);
 }
 .a-plus {
@@ -141,7 +139,6 @@
     cursor: pointer;
 }
 .a-plus:hover{
-    /*margin-top:-2px;*/
     background-image: url(../assets/images/icon/add_plus_hover.png);
 }
 .a-add-to-portfolio {
@@ -263,9 +260,7 @@ td.td-cell {
 div.file {
     position: relative;
     overflow: hidden;
-    /*width: 320px;*/
     font-size: 22px;
-    /*padding: 15px 30px;*/
 }
 input.user_avatar {
     position: absolute;
