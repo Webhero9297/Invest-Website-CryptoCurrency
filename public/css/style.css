@@ -219,7 +219,6 @@ label.control-label{
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
@@ -232,13 +231,10 @@ input::-webkit-inner-spin-button {
     speak: none;
 }
 input[type="search"] {
-    /*width: 196px;*/
-    /*height: 36px;*/
     padding: 0;
     line-height: 32px;
     background: #56e2c9;
     color: #fff;
-    /*border: 0;*/
     font: bold 14px/20px "Arial", sans-serif;
     text-indent: 12px;
     outline: none;
@@ -268,7 +264,6 @@ input[type="search"]::-webkit-search-cancel-button:before, input[type="search"]:
     font-style: normal;
 }
 input[type="search"]:invalid {
-    /*border: 0 !important;*/
 }
 input[type="search"]:invalid::-webkit-search-cancel-button:before, input[type="search"]:invalid::-webkit-search-results-button:before, input[type="search"]:invalid::-webkit-search-results-decoration:before {
     font-family: "entypo";
