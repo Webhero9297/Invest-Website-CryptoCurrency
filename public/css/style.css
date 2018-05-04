@@ -86,8 +86,6 @@ body{
 .div-footer {
     width:100%;
     height: 100px;
-    /*position: fixed;*/
-    /*bottom:0;*/
 }
 .footer-copyright-label {
     font-family: Montserrat-UltraLight;
