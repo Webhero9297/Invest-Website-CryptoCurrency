@@ -336,6 +336,7 @@ class MyProfileController extends Controller
             }
             if ( $coin['email_alert'] == 1 && $coin['email_sent_state'] == 0 ) {
                 if ( $coin['limit_type'] == 0 ) {
+//                    <div>Current price is $".$coin['current_price'].".<br></div><br>
                     $mail->Body = "<div>Hi {$to_fullname},<br><br>
 	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price'].".<br></div><br>
 	                    <div style=\"margin-top:-20px;\">
@@ -349,6 +350,7 @@ class MyProfileController extends Controller
 	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
                 }
                 else {
+//                    <div>Current price is $".$coin['current_price'].".<br></div><br>
                     $mail->Body = "<div>Hi {$to_fullname},<br><br>
 	                    <div>".$coin['coin_name']." has reached $".$coin['limit_price'].".<br></div><br>
 	                    <div style=\"margin-top:-20px;\">
@@ -363,10 +365,25 @@ class MyProfileController extends Controller
                 }
 
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
                 if(!$mail->Send()){
+//                    echo "Error sending";
                 } else {
+
+//                    echo "Mail successfully sent";
                 }
+
+//                $message = "<div>Hi {$to_fullname},<br><br>
+//	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price']."<br></div><br>
+//	                    <div style=\"display:inline-flex;margin-top:-20px;\">
+//	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
+//	                    </div>
+//	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
+//
+//                app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
+//                if ( $message != '' )
+//                    @mail($to_email, $subject, $message, $headers);
             }
 
         }
