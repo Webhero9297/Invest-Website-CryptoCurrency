@@ -47,8 +47,6 @@ function doOnGetLiveData() {
                         tbody_contents += '<td class="td-cell text-center padding0">\
                                            </td>';
                     }
-
-
                 }
                 tbody_contents += '</tr>';
             }
