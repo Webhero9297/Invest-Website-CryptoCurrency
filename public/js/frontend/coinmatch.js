@@ -50,11 +50,6 @@ $(document).ready(function(){
         trigger: 'hover',
         'placement': 'top'
     });
-
-    //$('#label_sell').click(function(){
-    //    doOnClickSellSide();
-    //});
-
     $('.py-4').css('height', '');
 });
 function doOnClickSellSide() {
@@ -73,7 +68,6 @@ function doOnClickSellSide() {
             $('.modal-body').html(title);
             $('#myConfirm').modal('show');
             $('input[name="quantity"]').attr('max', resp.quantity);
-            //$('input[name="quantity"]').val(resp.quantity);
             return;
         }
         else{

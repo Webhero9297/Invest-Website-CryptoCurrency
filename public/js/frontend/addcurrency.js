@@ -48,8 +48,6 @@ $(document).ready(function(){
         trigger: 'hover',
         'placement': 'top'
     });
-
-
 });
 
 function doOnChangeSideStatus(obj) {
