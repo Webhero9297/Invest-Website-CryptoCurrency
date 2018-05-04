@@ -291,6 +291,9 @@ h1{
         background: url('{{ asset('./assets/images/background/pad1-panel.png') }}');
         background-position: center center;
         background-size: cover;
+        margin-top: -320px;
+        z-index: 3;
+        position: relative;
     }
 /********************************************************    App download button  End    ********************************************************************/
 </style>
@@ -336,6 +339,37 @@ h1{
                 </div>
             </div>
         </div>
+
+        <div class="div-app-download">
+            <div class="download section-padding">
+                <div class="container">
+                    <div class="header">
+                        <div class="div-download">Download Moonfolio</div>
+                        <div class="awesome-free"> It's Awesome and Free!</div>
+                        <div class="underline"></div>
+                    </div>
+                    <div class="row download-area">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <a href="" class="btn btn-default custom-btn download-btn">
+                                <i class="fa fa-mobile"></i>
+                                <div class="app-download">
+                                    <span>GET IT ON</span><strong>App Store</strong>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <a href="" class="btn btn-default custom-btn download-btn">
+                                <img class="app-icon" src="{{ asset('./assets/images/background/playstore.png') }}" alt="">
+                                <div class="app-download">
+                                    <span>GET IT ON</span><strong>Google Play</strong>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="div-topportios">
             <div class="container">
                 <div class="div-top-title">
@@ -447,6 +481,7 @@ h1{
                     @endif
                 </div>
             </div>
+
         </div>
         <div class="div-features">
             <div class="container">
@@ -772,36 +807,6 @@ h1{
                             <div class="arrow arrow-right"></div>
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="div-app-download">
-            <div class="download section-padding">
-                <div class="container">
-                    <div class="header">
-                        <div class="div-download">Download Moonfolio</div>
-                        <div class="awesome-free"> It's Awesome and Free!</div>
-                        <div class="underline"></div>
-                    </div>
-                    <div class="row download-area">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <a href="" class="btn btn-default custom-btn download-btn">
-                                <i class="fa fa-mobile"></i>
-                                <div class="app-download">
-                                    <span>GET IT ON</span><strong>App Store</strong>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <a href="" class="btn btn-default custom-btn download-btn">
-                                <img class="app-icon" src="{{ asset('./assets/images/background/playstore.png') }}" alt="">
-                                <div class="app-download">
-                                    <span>GET IT ON</span><strong>Google Play</strong>
-                                </div>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>

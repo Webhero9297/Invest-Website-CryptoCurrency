@@ -365,6 +365,7 @@
                                 <i class="fa fa-refresh" ></i>
                             </a>
                         </div>
+
                     </div>
                     <div class="panel-body panel-table">
                         <table id="coin_table" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" style="width:100%;margin-top: -35px!important;">
@@ -380,8 +381,11 @@
                             <tbody id="tbody_coin_live_data" class="text-center">
                             </tbody>
                         </table>
+
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
