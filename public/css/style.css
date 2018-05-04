@@ -364,8 +364,6 @@ input[type="search"]:valid + label {
     margin-top: -56px;
     padding-top: 5px;
     padding-bottom: 1px;
-    /*height: 737px;*/
-    /*overflow-y: scroll;*/
 }
 .a-refresh {
     font-size: 35px;
@@ -415,7 +413,6 @@ input[type="search"]:valid + label {
 }
 .table-bordered>tbody>tr>td {
     padding: 0.3rem;
-    /*border-bottom: 1px solid grey!important;*/
 }
 .pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
     color: #777;
@@ -436,7 +433,6 @@ input[type="search"]:valid + label {
     border-color: #ddd;
 }
 .table-bordered th, .table-bordered td {
-    /*font-family: Montserrat-UltraLight;*/
     font-size: 16px;
 }
 table.dataTable {
@@ -488,7 +484,6 @@ table.dataTable {
     color: white!important;
     padding: 4px 20px!important;
     border: none!important;
-    /*border-radius: 15px!important;*/
 }
 .tabContainer {
     margin-top: -94px!important;
