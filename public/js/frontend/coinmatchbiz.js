@@ -187,7 +187,6 @@ function doOnOtherBuyClick(other_match_id, buyJsonObj) {
 
     $('#img_user_avatar').attr('src', buyJsonObj.user_avatar)
     $('#span_user_full_name').html(buyJsonObj.user_full_name)
-    //console.log(buyJsonObj);
 }
 function doOnCloseModal() {
     $('#div_modal').fadeOut(500);
@@ -215,7 +214,6 @@ function doOnOtherSellClick(other_match_id, sellJsonObj) {
 function doOnReviewSubmit() {
     serialized = $('#form_review').serialize();
 
-    //$('input[name="review_score"]').val($('input[name="ranking"]').val());
     if ($('input[name="review_score"]').val() == '0') {
         alert("Please select review score.")
         return;
@@ -223,7 +221,6 @@ function doOnReviewSubmit() {
     else{
         $('#form_review').submit();
     }
-    //console.log(serialized);
 }
 function doOnMyBuyListClick(match_id) {
 
