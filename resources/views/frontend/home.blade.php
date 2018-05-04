@@ -126,21 +126,6 @@ h1{
     font-size:2.4em;
     border-radius:50%;
 }
-.slide:nth-child(1){
-    /*background-image:url(http://mamiskincare.net/wp-content/uploads/2015/11/inspire-fashion-ideas-for-styleator-concept-with-fashion-style-for-fall-2015-with-street-style-at-stockholm-fashion-week-fall-winter-2015-2016-15.jpg);*/
-}
-/*.slide:nth-child(2){*/
-    /*background-image:url(http://conversationsabouther.net/wp-content/uploads/2015/03/1-seoul-fashion-week-fall-2015-street-style-45.jpg);*/
-/*}*/
-/*.slide:nth-child(3){*/
-    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
-/*}*/
-/*.slide:nth-child(4){*/
-    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
-/*}*/
-/*.slide:nth-child(5){*/
-    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
-/*}*/
 /**********************************************    Carousel  End    ************************************************/
     .div-pd-lr{
         padding-left:50px;padding-right:50px;
