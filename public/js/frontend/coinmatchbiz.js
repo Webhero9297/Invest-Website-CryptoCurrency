@@ -11,9 +11,11 @@ $(document).ready(function(){
         $('input[name="review_score"]').val($(this).val());
     });
     $('.py-4').css('height', '100%');
-    //window.setInterval(function(){
-    //    doOnGetLiveData();
-    //}, 10000);
+    $('#other_sell_table thead th:last').css('width', '82px');
+    $('#other_buy_table thead th:last').css('width', '82px');
+    window.setInterval(function(){
+        doOnGetLiveData();
+    }, 10000);
 });
 function doOnGetLiveData() {
     $.getJSON('/getorderdata/'+AuthUser, function(resp){
@@ -119,6 +121,8 @@ function doOnGetLiveData() {
             $('#tbody_star_review_live_data').html(tbody_contents);
         }
         $('.py-4').css('height', '100%');
+        $('#other_sell_table thead th:last').css('width', '82px');
+        $('#other_buy_table thead th:last').css('width', '82px');
     });
 }
 function openCity(evt, tabName) {

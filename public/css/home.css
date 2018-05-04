@@ -62,7 +62,7 @@ label {
     z-index: 1;
     padding-top: 0;
     padding-bottom: 1px;
-    margin-top: -320px;
+    /*margin-top: -320px;*/
 }
 .div-features {
     background-image: url('../assets/images/background/features.png');

@@ -112,9 +112,10 @@ table.dataTable tr {
     border: none;
     cursor: pointer;
     width: 80px;
-    font-size: 22px;
+    font-size: 15px;
     font-weight: bold;
     font-family: Montserrat-Light;
+    height: 49px;
 }
 .sell-button:hover {
     opacity: 0.8;
@@ -127,9 +128,10 @@ table.dataTable tr {
     border: none;
     cursor: pointer;
     min-width: 80px;
-    font-size: 22px;
+    font-size: 15px;
     font-weight: bold;
     font-family: Montserrat-Light;
+    height: 49px;
     /*width: calc(100% - 2px);*/
 }
 .buy-button:hover {
