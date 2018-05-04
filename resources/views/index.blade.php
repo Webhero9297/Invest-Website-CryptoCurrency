@@ -7,7 +7,6 @@
     <div class="container-fluid padding0">
         <div class="div-home" id="home">
             <div class="container">
-                {{--<canvas id="canvas"></canvas>--}}
                 <div class="row">
                     <div class="col-xs-12 col-sm-5 div-title">
                         <label class="home-label jointhe">JOIN THE</label>
@@ -19,9 +18,6 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-7 text-right">
-                        {{--<canvas id="canvasOne" width="500" height="500">--}}
-                        {{--Your browser does not support HTML5 Canvas.--}}
-                        {{--</canvas>--}}
                         <canvas id="particles-js" width="800" height="800"></canvas>
                         <canvas id="myCanvas" width="800" height="800"></canvas>
                         <div class="smartObject"></div>
