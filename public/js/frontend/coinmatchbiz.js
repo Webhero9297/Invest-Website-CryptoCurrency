@@ -1,11 +1,8 @@
 var sell_modal, buy_modal;
 $(document).ready(function(){
-    $('#other_sell_table').DataTable({
-    });
-    $('#other_buy_table').DataTable({
-    });
-    $('#star_table').DataTable({
-    });
+    $('#other_sell_table').DataTable({});
+    $('#other_buy_table').DataTable({});
+    $('#star_table').DataTable({});
     $('input.score_radio').click(function(){
         $('#score_ranking').html($(this).val());
         $('input[name="review_score"]').val($(this).val());
