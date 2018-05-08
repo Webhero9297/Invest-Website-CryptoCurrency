@@ -278,7 +278,6 @@ $(function(){
         change: function(){
             var value = $(this).val();
             var text = $(this).children('option:selected').html();
-            console.log(value+' : '+text);
             $('#tfoot').css('display', 'none');
             doOnchangeCurrency(value);
 
