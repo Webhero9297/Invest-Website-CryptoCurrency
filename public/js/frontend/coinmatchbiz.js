@@ -243,7 +243,6 @@ function doOnOtherSellClick(other_match_id, sellJsonObj) {
 function doOnReviewSubmit() {
     serialized = $('#form_review').serialize();
 
-    //$('input[name="review_score"]').val($('input[name="ranking"]').val());
     if ($('input[name="review_score"]').val() == '0') {
         alert("Please select review score.")
         return;
@@ -251,7 +250,6 @@ function doOnReviewSubmit() {
     else{
         $('#form_review').submit();
     }
-    //console.log(serialized);
 }
 function doOnMyBuyListClick(match_id) {
 
