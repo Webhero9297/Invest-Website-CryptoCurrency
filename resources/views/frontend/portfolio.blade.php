@@ -52,7 +52,6 @@
             border-color: gold;
         }
     </style>
-    {{--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">--}}
     <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" ></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js" ></script>
@@ -102,6 +101,5 @@
             </div>
         </div>
     </div>
-{{--    <script src="{{ asset('./js/frontend/editprofile.js') }}"></script>--}}
     <script src="{{ asset('./js/frontend/portfolio.js') }}"></script>
 @endsection
