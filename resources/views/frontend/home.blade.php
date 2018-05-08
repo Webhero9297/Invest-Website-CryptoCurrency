@@ -127,7 +127,6 @@ h1{
     border-radius:50%;
 }
 .slide:nth-child(1){
-    /*background-image:url(http://mamiskincare.net/wp-content/uploads/2015/11/inspire-fashion-ideas-for-styleator-concept-with-fashion-style-for-fall-2015-with-street-style-at-stockholm-fashion-week-fall-winter-2015-2016-15.jpg);*/
 }
 /**********************************************    Carousel  End    ************************************************/
     .div-pd-lr{
