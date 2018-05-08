@@ -20,7 +20,6 @@ $(document).ready(function(){
             }
         });
     });
-    console.log(coinData);
     $('#quantity').on("keypress keyup blur",function (event) {
         var _V = $(this).val().replace(/[^0-9\.]/g,'');
         if ( _V.length >=2 && _V.substr(0,1) == '0' && _V.substr(1,1) != '.' ) {
@@ -56,14 +55,9 @@ $(document).ready(function(){
         'placement': 'top'
     });
 
-    //$('#label_sell').click(function(){
-    //    doOnClickSellSide();
-    //});
-
     $('.py-4').css('height', '');
 
     $('#select_coin_list').bind('click', function(){
-        console.log($(this).val());
     });
 });
 function doOnSelectCoinData(selected_coin_name) {
@@ -91,7 +85,6 @@ function doOnClickSellSide() {
             $('.modal-body').html(title);
             $('#myConfirm').modal('show');
             $('input[name="quantity"]').attr('max', resp.quantity);
-            //$('input[name="quantity"]').val(resp.quantity);
             return;
         }
         else{
