@@ -856,8 +856,3 @@ h1{
     <script src="{{ asset('./js/frontend/home-carousel.js') }}"></script>
 @endsection
 
-{{--<script>--}}
-    {{--window.setInterval(function() {--}}
-        {{--window.location.reload();--}}
-    {{--}, 10000);--}}
-{{--</script>--}}
