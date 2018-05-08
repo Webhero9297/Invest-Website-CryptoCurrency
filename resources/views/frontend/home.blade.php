@@ -113,7 +113,6 @@ a[href="#collapse2"], #collapse2 .panel-body,a[href="#collapse4"], #collapse4 .p
 }
 .slide{
     text-align:center;
-    /*padding-top:25%;*/
     background-size:cover;
 }
 h1{
@@ -317,9 +316,6 @@ h1{
                         </div>
                     @endguest
                     <div class="col-xs-12 col-sm-7 text-right">
-                        {{--<canvas id="canvasOne" width="500" height="500">--}}
-                        {{--Your browser does not support HTML5 Canvas.--}}
-                        {{--</canvas>--}}
                         <canvas id="particles-js" width="800" height="800"></canvas>
                         <canvas id="myCanvas" width="800" height="800"></canvas>
                         <div class="smartObject"></div>
