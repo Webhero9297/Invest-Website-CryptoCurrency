@@ -52,7 +52,7 @@ label {
     z-index: 1;
     /*margin-top: -56px;*/
     padding-top: 70px;
-    padding-bottom: 131px;
+    padding-bottom: 200px;
     min-height: 840px;
 }
 .div-topportios {
@@ -440,6 +440,7 @@ label {
     border: 1px solid #eee;
 }
 .btn-sendmessage{
+    /*width:100%;*/
     border-radius: 0;
     padding: 15px 30px;
     font-family: Montserrat-SemiBold;
@@ -541,6 +542,7 @@ label.auth-label {
 input.auth-input:focus ~ label, input.auth-input.used ~ label {
     top: -20px;
     transform: scale(.75); left: -2px;
+    /* font-size: 14px; */
     color: #FFFFFF;
 }
 
@@ -588,6 +590,7 @@ input.auth-input:focus ~ .highlight {
     display: inline-block;
     padding: 15px 20px;
     margin: .3em 0.5em 1em 0;
+    /* width: 240px; */
     vertical-align: middle;
     color: #fff;
     line-height: 20px;

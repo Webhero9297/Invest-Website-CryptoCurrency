@@ -1,21 +1,26 @@
 var quantity = purchased_price = 0;
 var remove_match_id = undefined;
+var availableTags;
 $(document).ready(function(){
     datepicker = $('#purchased_date').datepicker({format: 'yyyy-mm-dd'}).on('changeDate', function(ev) {
         datepicker.hide();
     }).data('datepicker');
     $('input[data-list]').each(function () {
-        var availableTags = $('#' + $(this).attr("data-list")).find('option').map(function () {
+        availableTags = $('#' + $(this).attr("data-list")).find('option').map(function () {
             return this.value;
         }).get();
         $(this).autocomplete({
-            source: availableTags
+            source: availableTags,
+            select: function(e, ui) {
+                doOnSelectCoinData( ui.item.value );
+            }
         }).on('search', function () {
             if ($(this).val() === '') {
                 $(this).autocomplete('search', ' ');
             }
         });
     });
+    console.log(coinData);
     $('#quantity').on("keypress keyup blur",function (event) {
         var _V = $(this).val().replace(/[^0-9\.]/g,'');
         if ( _V.length >=2 && _V.substr(0,1) == '0' && _V.substr(1,1) != '.' ) {
@@ -50,8 +55,26 @@ $(document).ready(function(){
         trigger: 'hover',
         'placement': 'top'
     });
+
+    //$('#label_sell').click(function(){
+    //    doOnClickSellSide();
+    //});
+
     $('.py-4').css('height', '');
+
+    $('#select_coin_list').bind('click', function(){
+        console.log($(this).val());
+    });
 });
+function doOnSelectCoinData(selected_coin_name) {
+    for( i in coinData ) {
+        coin_data = coinData[i];
+        if ( coin_data.name == selected_coin_name ) {
+            price = coin_data.price_usd;
+            $('#current_price').html('Current Price: ~ $'+price);
+        }
+    }
+}
 function doOnClickSellSide() {
     quantity = parseFloat($('input[name="quantity"]').val());
     coin_name = $('input[name="coin_name"]').val();
@@ -68,6 +91,7 @@ function doOnClickSellSide() {
             $('.modal-body').html(title);
             $('#myConfirm').modal('show');
             $('input[name="quantity"]').attr('max', resp.quantity);
+            //$('input[name="quantity"]').val(resp.quantity);
             return;
         }
         else{
@@ -99,6 +123,7 @@ function doOnClickSaveDetails() {
 
 }
 function doOnDelete(match_id) {
+    $('#myModal').modal('show');
     remove_match_id = match_id;
 }
 function doOnRequestDelete() {

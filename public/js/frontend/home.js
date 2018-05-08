@@ -512,9 +512,10 @@ doOnParticles = function() {
 }
 
 function notificationEx(alert_message) {
+    //message = '<br/><img src="'+logo_img+'" height="50px" />';
     message = '<label class="message" style="width:100%;word-wrap: break-word;">&nbsp;&nbsp;'+alert_message+'</label>&nbsp;&nbsp;&nbsp;';
     $.notify({
-        title: '<img src="'+logo_img+'" height="30px" />',
+        title: '<img src="'+logo_img+'" height="30px" />', //'<label class="message alert-title">Moonfolio!</label>',
         icon: '',
         message: message
     }, {
@@ -529,6 +530,7 @@ function notificationEx(alert_message) {
         },
         offset: 20,
         spacing: 10,
+//        showProgressbar: true,
         z_index: 1031,
         delay: 60000,
         timer: 100,

@@ -85,8 +85,8 @@ function doOnLoadLiveProfileCurrencyData() {
                             <td class="td-cell '+h1Style +'">'+currency.percent_change_1h+'%</td>\
                             <td class="td-cell '+h24Style +'">'+currency.percent_change_24h+'%</td>\
                             <td class="td-cell td-action">\
-                                <a href="/editcryptocurrency/'+currency.detail_id+'" class="a-currency-edit" />\
-                                <a href="" onclick="doOnDelete(\''+currency.detail_id+'\')" data-toggle="modal" data-target="#myModal" class="a-currency-delete" ></a>\
+                                <a href="/editcryptocurrency/'+currency.detail_id+'" class="a-currency-edit"  data-toggle="popover" data-content="Edit"/>\
+                                <a onclick="doOnDelete(\''+currency.detail_id+'\')" class="a-currency-delete"  data-toggle="popover" data-content="Remove"></a>\
                             </td>\
                         </tr>';
         }
@@ -95,6 +95,14 @@ function doOnLoadLiveProfileCurrencyData() {
 
         //$('.py-4').css('height', '100%');
         $('.py-4').css('height', '');
+
+        $('[data-toggle="tooltip"]').tooltip({
+            'placement': 'top'
+        });
+        $('[data-toggle="popover"]').popover({
+            trigger: 'hover',
+            'placement': 'top'
+        });
     })
     .fail(function(fail_resp){
         $('.py-4').css('height', '100%');
@@ -107,6 +115,7 @@ function doOnClick( status_type ) {
     });
 }
 function doOnDelete(detail_id) {
+    $('#myModal').modal('show');
     remove_detail_id = detail_id;
 }
 function doOnRequestDelete() {

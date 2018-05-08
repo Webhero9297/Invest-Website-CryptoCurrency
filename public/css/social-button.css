@@ -22,9 +22,10 @@ p {
     height: 5px;
 }
 
-
+// Icons
 @font-face {
     font-family: 'share-buttons';
+// Fonts are served from Share Buttons v1.0.0 repository via RawGit
 src:url('https://cdn.rawgit.com/sunnysingh/share-buttons/v1.0.0/build/fonts/share-buttons.eot?gpra60');
     src:url('https://cdn.rawgit.com/sunnysingh/share-buttons/v1.0.0/build/fonts/share-buttons.eot?#iefixgpra60') format('embedded-opentype'),
     url('https://cdn.rawgit.com/sunnysingh/share-buttons/v1.0.0/build/fonts/share-buttons.woff?gpra60') format('woff'),
@@ -101,7 +102,7 @@ src:url('https://cdn.rawgit.com/sunnysingh/share-buttons/v1.0.0/build/fonts/shar
     box-sizing: border-box;
 }
 
-
+// Reset box-sizing
    .share-btn,
    .share-btn *,
    .share-btn *:before,
@@ -109,7 +110,7 @@ src:url('https://cdn.rawgit.com/sunnysingh/share-buttons/v1.0.0/build/fonts/shar
        box-sizing: border-box;
    }
 
-
+// All share button styles are enclosed in .share-btn
    .share-btn {
    @color-bg: #e0e0e0;
    @color: #111;

@@ -73,6 +73,7 @@ function doOnClickEdit(jsonObj) {
     $('input[name="coin_name"]').val(jsonObj.coin_name);
     $('input[name="audio_alert"]').val(jsonObj.audio_alert);
     $('input[name="email_alert"]').val(jsonObj.email_alert);
+console.log(jsonObj);
     if ( jsonObj.email_alert == 1 ) {
         $('#box-2').attr('checked', true);
     }
@@ -98,6 +99,7 @@ function doOnClickEdit(jsonObj) {
     }
 }
 function doOnDelete(detail_id) {
+    $('#myModal').modal('show');
     remove_detail_id = detail_id;
 }
 function doOnRequestDelete() {
