@@ -69,7 +69,7 @@
                                 <label class="control-label label-total" id="label_total_cost" >0</label>
                             </div>
                             <div class="form-group col-sm-6 text-right">
-                                sdfsdf
+
                             </div>
                         </div>
                         <div class="row">
@@ -85,8 +85,6 @@
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

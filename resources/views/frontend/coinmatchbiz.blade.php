@@ -2,21 +2,31 @@
 
 @section('content')
 <link href="{{ asset('css/coinmatch.css') }}" rel="stylesheet">
-
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
+<style>
+    .p-sub-footer{
+        color: #a2a2a2;
+        margin-top: 30px;
+    }
+</style>
+<script>
+    var global_biz = <?php echo $global_biz; ?>;
+
+</script>
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home" style="padding-top:100px;">
         <div class="container">
             <div class="panel panel-default">
                 <div class="div-panel-heading">
                     Coin Match
+                    <a class="a-plus" href="{{ route('coin.match.view') }}" data-toggle="popover" data-content="Create an offer"></a>
                 </div>
                 <div class="panel-body">
                     <div class="tab">
-                        <button class="tablinks active" onclick="openCity(event, 'div_buy')">BUY</button>
-                        <button class="tablinks" onclick="openCity(event, 'div_sell')">SELL</button>
-                        <button class="tablinks" onclick="openCity(event, 'div_star')">STAR</button>
+                        <button class="tablinks active" onclick="openCity(event, 'div_buy')" data-toggle="popover" data-content="People who would like to buy their coins">BUY</button>
+                        <button class="tablinks" onclick="openCity(event, 'div_sell')" data-toggle="popover" data-content="People who would like to sell their coins">SELL</button>
+                        <button class="tablinks" onclick="openCity(event, 'div_star')" data-toggle="popover" data-content="Find review's about the people">REVIEW'S</button>
                     </div>
                     <div id="div_buy" class="tabcontent show">
                         @include('partial/buy')
@@ -29,67 +39,118 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
-<div id="div_modal" class="modal">
-    <form id="form_review" class="modal-content animate" action="{{ route('coinmatch.review') }}">
-        <input type="hidden" name="match_id" value="">
-        <input type="hidden" name="order_side" value="">
-        <input type="hidden" name="review_score" value="0">
-        <div class="modal-header">
-            Moonfolio
-        </div>
-        <div class="form-group" style="background-color: #4a4a4a5c;border-bottom: 1px solid #8080804f;">
-            <div class="row">
-                <div class="col-xs-6" style="padding:5px 5px 0 5px;">
-                    <img id="img_user_avatar" style="border-radius: 50%;" width="32px" height="32px" />&nbsp;&nbsp;&nbsp;
-                    <span id="span_user_full_name" class="span-review" style="color:white;"></span>&nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="col-xs-2" style="padding:5px 5px 0 5px;">
-                    <img id="review_icon" />
-                </div>
-                <div class="col-xs-2" style="padding:7px 5px 0 15px;">
-                    <span id="review_price" class="span-review"></span>
-                </div>
-                <div class="col-xs-2" style="padding:7px 5px 0 15px;">
-                    <span id="review_quantity" class="span-review" style="color:white;"></span>
-                </div>
+<div id="div_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Moonfolio</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form_review" class="form-modal-content" action="{{ route('coinmatch.review') }}">
+                    <input type="hidden" name="match_id" value="">
+                    <input type="hidden" name="order_side" value="">
+                    <input type="hidden" name="review_score" value="0">
+                    <div class="form-group form-modal-top-label" >
+                        <div class="row">
+                            <div class="col-xs-6" style="padding:5px 5px 0 15px;">
+                                <img id="img_user_avatar" style="border-radius: 50%;" width="32px" height="32px" />&nbsp;&nbsp;&nbsp;
+                                <span id="span_user_full_name" class="span-review" style="color:white;"></span>&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="col-xs-2" style="padding:5px 5px 0 5px;">
+                                <img id="review_icon" />
+                            </div>
+                            <div class="col-xs-2" style="padding:7px 5px 0 15px;">
+                                <span id="review_price" class="span-review"></span>
+                            </div>
+                            <div class="col-xs-2" style="padding:7px 5px 0 15px;">
+                                <span id="review_quantity" class="span-review" style="color:white;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6" style="padding-left: 5px;padding-right: 5px;display: none;">
+                                <label for="review_amount" class="modal-title">Amount: </label>
+                                <input type="number" id="review_amount" name="review_amount" class="" min="0" max="">
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <fieldset class="rating">
+                                    <input type="radio" class="score_radio" id="star5" name="ranking" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                    <input type="radio" class="score_radio" id="star4half" name="ranking" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                    <input type="radio" class="score_radio" id="star4" name="ranking" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                    <input type="radio" class="score_radio" id="star3half" name="ranking" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                    <input type="radio" class="score_radio" id="star3" name="ranking" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" class="score_radio" id="star2half" name="ranking" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                    <input type="radio" class="score_radio" id="star2" name="ranking" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                    <input type="radio" class="score_radio" id="star1half" name="ranking" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                    <input type="radio" class="score_radio" id="star1" name="ranking" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                    <input type="radio" class="score_radio" id="starhalf" name="ranking" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                </fieldset>
+                                <label class="modal-title">&nbsp;&nbsp;&nbsp;Score: </label>
+                                <label class="modal-title" id="score_ranking"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class="modal-title">Comment</label>
+                        <textarea id="subject" name="review_content" placeholder="Write something.."></textarea>
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="button" class="button buttonBlue btn-save-details" onclick="doOnReviewSubmit()">Submit</button>
+                        <button type="button" class="button buttonRed btn-save-details" onclick="doOnCloseModal()">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6" style="padding-left: 5px;padding-right: 5px;display: none;">
-                    <label for="review_amount" class="modal-title">Amount: </label>
-                    <input type="number" id="review_amount" name="review_amount" class="" min="0" max="">
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <fieldset class="rating">
-                        <input type="radio" class="score_radio" id="star5" name="ranking" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                        <input type="radio" class="score_radio" id="star4half" name="ranking" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                        <input type="radio" class="score_radio" id="star4" name="ranking" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                        <input type="radio" class="score_radio" id="star3half" name="ranking" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                        <input type="radio" class="score_radio" id="star3" name="ranking" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                        <input type="radio" class="score_radio" id="star2half" name="ranking" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                        <input type="radio" class="score_radio" id="star2" name="ranking" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                        <input type="radio" class="score_radio" id="star1half" name="ranking" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                        <input type="radio" class="score_radio" id="star1" name="ranking" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                        <input type="radio" class="score_radio" id="starhalf" name="ranking" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                    </fieldset>
-                    <label class="modal-title">&nbsp;&nbsp;&nbsp;Score: </label>
-                    <label class="modal-title" id="score_ranking"></label>
-                </div>
+    </div>
+
+</div>
+
+<div id="div_buy_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Moonfolio</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button buttonBlue" onclick="doOnSendSellInterestedSubmit()">Interested</button>
+                <button type="button" class="button buttonBlue" onclick="doOnShowSellReviewComment()">Send the user a PM</button>
             </div>
         </div>
-        <div class="form-group">
-            <label for="subject" class="modal-title">Comment</label>
-            <textarea id="subject" name="review_content" placeholder="Write something.."></textarea>
+    </div>
+</div>
+<div id="div_buy_message_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Moonfolio</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form_review" class="form-modal-content">
+                    <div class="form-group">
+                        <label for="comment" class="modal-title">Comment</label>
+                        <textarea id="comment" name="review_content" placeholder="Write something.."></textarea>
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="button" class="button buttonBlue" onclick="doOnSendMessage()">Send Message</button>
+                        <button type="button" class="button buttonRed" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group text-right">
-            <button type="button" class="button buttonBlue btn-save-details ui-corner-all" onclick="doOnReviewSubmit()">Submit</button>
-            <button type="button" class="button buttonRed btn-save-details ui-corner-all" onclick="doOnCloseModal()">Cancel</button>
-        </div>
-    </form>
+    </div>
 </div>
 <script src="{{ asset('./js/frontend/coinmatchbiz.js') }}"></script>
 @endsection

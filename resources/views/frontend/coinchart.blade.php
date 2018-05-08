@@ -23,6 +23,7 @@
     <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
     <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
     <script>
         var coin_id = '<?php echo $coin_id; ?>';
     </script>
@@ -81,6 +82,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

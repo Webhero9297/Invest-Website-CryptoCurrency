@@ -5,6 +5,10 @@
 
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
+
+<script>
+    var global_biz = 1;
+</script>
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home" style="padding-top:100px;">
         <div class="container">

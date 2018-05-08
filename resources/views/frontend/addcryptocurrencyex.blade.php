@@ -201,6 +201,21 @@
                                 <label class="control-label label-total" >Total cost(in USD)&nbsp;:&nbsp;&nbsp;&nbsp;</label>
                                 <label class="control-label label-total" id="label_total_cost" >0</label>
                             </div>
+                            {{--<div class="form-group col-sm-6 text-right">--}}
+                                {{--<input type="checkbox" id="box-1" onchange="doOnChangeSideStatus(this)" >--}}
+                                {{--<label for="box-1" class="alert-method">Do you want to &nbsp;&nbsp;</label>--}}
+                                {{--<label class="chk-container" data-toggle="popover" data-content="BUY">--}}
+                                    {{--<input type="radio" class="input_side_status" name="order_side" id="input_buy" disabled>--}}
+                                    {{--<span class="chk-label">Buy</span>--}}
+                                    {{--<span class="checkmark buy"></span>--}}
+                                {{--</label>--}}
+                                {{--<label class="chk-container" data-toggle="popover" data-content="SELL">--}}
+                                    {{--<input type="radio" class="input_side_status" name="order_side" id="input_sell" disabled>--}}
+                                    {{--<span class="chk-label">Sell</span>--}}
+                                    {{--<span class="checkmark sell"></span>--}}
+                                {{--</label>--}}
+                                {{--&nbsp;&nbsp;?&nbsp;--}}
+                            {{--</div>--}}
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-6">

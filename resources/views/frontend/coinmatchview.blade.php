@@ -141,14 +141,23 @@
         font-size: 20px;
         padding: 5px 15px;
     }
+    .p-current-price {
+        font-family: Montserrat-Light;
+        font-style: italic;
+        text-align: right;
+        color: darkgray;
+        height: 32px;
+    }
 </style>
-
+<script>
+    var coinData = <?php echo json_encode($cryptoData); ?>;
+</script>
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home" style="padding-top:100px;padding-bottom: 50px;">
         <div class="container">
             <div class="panel panel-default">
                 <div class="div-panel-heading">
-                    ADD Coin Match Details
+                    ADD Coin Match details
                 </div>
                 <div class="panel-body">
                     <form id="form_detail" method="POST" action="{{ route('store.coin.match') }}">
@@ -186,7 +195,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
-                                <label class="control-label grey-color" for="purchased_price">Purchased Price*(in USD)</label>
+                                <label class="control-label grey-color" for="purchased_price">Bid Price(in USD)</label>
                                 <div class="input-group spinner" style="width: calc(100% - 18px);">
                                     <input type="text" class="form-control input-form-control grey-border" id="purchased_price" name="purchased_price" value="{{ $purchased_price }}" tabindex="3" style="font-size:24px;" value="1" min="0" autocomplete="off">
                                     <div class="input-group-btn-vertical">
@@ -194,26 +203,27 @@
                                         <button class="btn btn-default grey-border grey-color" type="button" onclick="doOnChangeInputValue('purchased_price', 'down')"><i class="fa fa-caret-down"></i></button>
                                     </div>
                                 </div>
+                                <p class="p-current-price" id="current_price" ></p>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label class="control-label grey-color" for="purchased_date">Purchased Date*</label>
-                                <input type="text" class="form-control input-form-control grey-border" id="purchased_date" name="purchased_date" value="{{ $purchased_date }}" tabindex="4" placeholder="Enter Purchased Date" >
+                                <div class="btn-group" data-toggle="buttons" style="margin-top:32px;">
+                                    <label class="btn btn-primary {{ $order_side == 0 ? "active" : "" }}" id="label_buy" onclick="doOnChangeSideStatus('buy')" data-toggle="popover" data-content="Buy a coin">
+                                        <input type="radio" name="options" id="input_below" autocomplete="off"> Buy
+                                    </label>
+                                    <label class="btn btn-primary {{ $order_side == 0 ? "" : "active" }}" id="label_sell" onclick="doOnChangeSideStatus('sell')" data-toggle="popover" data-content="Sell a coin">
+                                        <input type="radio" name="options" id="input_above" autocomplete="off"> Sell
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
-                                <label class="control-label label-total" >Total cost(in USD)&nbsp;:&nbsp;&nbsp;&nbsp;</label>
-                                <label class="control-label label-total" id="label_total_cost" >0</label>
+                                <label class="control-label label-total" style="display: none;">Total cost(in USD)&nbsp;:&nbsp;&nbsp;&nbsp;</label>
+                                <label class="control-label label-total" id="label_total_cost"  style="display: none;">0</label>
                             </div>
                             <div class="form-group col-sm-6">
-                                <div class="btn-group" data-toggle="buttons" style="margin-top:5px;">
-                                    <label class="btn btn-primary {{ $order_side == 0 ? "active" : "" }}" id="label_buy" onclick="doOnChangeSideStatus('buy')" data-toggle="popover" data-content="Buy">
-                                        <input type="radio" name="options" id="input_below" autocomplete="off"> Buy
-                                    </label>
-                                    <label class="btn btn-primary {{ $order_side == 0 ? "" : "active" }}" id="label_sell" onclick="doOnChangeSideStatus('sell')" data-toggle="popover" data-content="Sell">
-                                        <input type="radio" name="options" id="input_above" autocomplete="off"> Sell
-                                    </label>
-                                </div>
+                                <label class="control-label grey-color" for="purchased_date" style="display: none;">Purchased Date*</label>
+                                <input type="text" class="form-control input-form-control grey-border" style="display: none;" id="purchased_date" name="purchased_date" value="{{ $purchased_date }}" tabindex="4" placeholder="Enter Purchased Date" >
                             </div>
                         </div>
                         <div class="row">
@@ -232,7 +242,7 @@
 
             <div class="panel panel-default" style="margin-top:50px;">
                 <div class="div-panel-heading">
-                    Your Coin Match List
+                    Your Coin Match list
                 </div>
                 <div class="panel-body panel-table">
                     <table class="table table-bordered">
@@ -243,9 +253,9 @@
                             <th class="td-cell">#</th>
                             <th class="td-cell">Coin</th>
                             <th class="td-cell">Side</th>
-                            <th class="td-cell">Purchased Price(USD)</th>
+                            <th class="td-cell">Bid Price(USD)</th>
                             <th class="td-cell">Quantity</th>
-                            <th class="td-cell">Purchased Date</th>
+                            {{--<th class="td-cell">Purchased Date</th>--}}
                             <th class="td-cell">Action</th>
                         </tr>
                         </thead>
@@ -261,10 +271,10 @@
                                     <td class="td-cell {{ ( $coin_data['order_side'] == 0 ) ? "color-green" : "color-red" }}">{{ ( $coin_data['order_side'] == 0 ) ? "Buy" : "Sell" }}</td>
                                     <td class="td-cell">{{ $coin_data['purchased_price'] }}</td>
                                     <td class="td-cell">{{ $coin_data['quantity'] }}</td>
-                                    <td class="td-cell">{{ date( "Y-m-d", strtotime($coin_data['purchased_date']) ) }}</td>
+{{--                                    <td class="td-cell">{{ date( "Y-m-d", strtotime($coin_data['purchased_date']) ) }}</td>--}}
                                     <td class="td-cell td-action">
-                                        <a class="a-currency-edit" onclick="doOnUpdate('{{ json_encode($coin_data) }}')" />
-                                        <a href="" onclick="doOnDelete('{{ $coin_data['match_id'] }}')" data-toggle="modal" data-target="#myModal" class="a-currency-delete" ></a>
+                                        <a class="a-currency-edit" onclick="doOnUpdate('{{ json_encode($coin_data) }}')"  data-toggle="popover" data-content="Edit" />
+                                        <a class="a-currency-delete" onclick="doOnDelete('{{ $coin_data['match_id'] }}')"  data-toggle="popover" data-content="Remove"></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -143,4 +143,5 @@
             </div>
         </div>
     </div>
+{{--    <script src="{{ asset('./js/frontend/coins.js') }}"></script>--}}
 @endsection

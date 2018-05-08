@@ -115,6 +115,8 @@
                                 &nbsp;&nbsp;&nbsp;
                                 <input type="checkbox" id="box-1" field="audio_alert" checked>
                                 <label for="box-1" class="alert-method">Audio alert</label>
+                            {{--</div>--}}
+                            {{--<div class="col-md-6">--}}
                                 &nbsp;&nbsp;&nbsp;
                                 <input type="checkbox" id="box-2" field="email_alert" checked>
                                 <label for="box-2" class="alert-method">Email alert</label>
@@ -176,8 +178,8 @@
                                         <td class="td-cell">{{ ( $data['audio_alert'] == 1 ) ? "Yes" : "No" }}</td>
                                         <td class="td-cell">{{ ( $data['email_alert'] == 1 ) ? "Yes" : "No" }}</td>
                                         <td class="td-cell td-action">
-                                            <a href="#" class="a-currency-edit" onclick="doOnClickEdit({{ json_encode($data) }})"></a>
-                                            <a href="" onclick="doOnDelete('{{ $data['id'] }}')" data-toggle="modal" data-target="#myModal" class="a-currency-delete" ></a>
+                                            <a href="#" class="a-currency-edit" onclick="doOnClickEdit({{ json_encode($data) }})" data-toggle="popover" data-content="Edit"></a>
+                                            <a onclick="doOnDelete('{{ $data['id'] }}')" class="a-currency-delete" data-toggle="popover" data-content="Remove"></a>
                                         </td>
                                     </tr>
                                 @endforeach

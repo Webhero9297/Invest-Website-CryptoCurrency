@@ -23,15 +23,25 @@
         height: 35px!important;
     }
 </style>
+<datalist id="sell-brands-list">
+    <select>
+        @if ( $cryptoData )
+            @foreach( $cryptoData as $crypto )
+                <option class="option_crypto_currency" id="{{ $crypto->id }}" currency_symbol="{{ $crypto->symbol }}" value="{{ $crypto->name }}"></option>
+            @endforeach
+        @endif
+    </select>
+</datalist>
 <div class="row">
     <div class="col-xs-12 col-sm-5 col-md-4" style="padding: 0;">
-        <input type="text" id="mySellInput" class="search_input" onkeyup="mySellFunction()" placeholder="Search for names.." title="Type in a name">
+        <p class="p-title">My sell list</p>
+        <input type="text" id="mySellInput" class="search_input" onkeyup="mySellFunction()" placeholder="Find a specific coin" title="Type in a name">
         <table id="mySellTable">
             <thead>
                 <tr class="header">
                     <th class="td-cell text-center">#</th>
                     <th class="td-cell text-center">Coin</th>
-                    <th class="td-cell text-center">Price</th>
+                    <th class="td-cell text-center">Bid Price</th>
                     <th class="td-cell text-center">Quantity</th>
                 </tr>
             </thead>
@@ -72,8 +82,8 @@
                 <th class="td-cell td-grey text-center padding0" width="50px">#</th>
                 <th class="td-cell td-grey padding0" width="25%">User</th>
                 <th class="td-cell td-grey padding0" width="25%">Coin</th>
-                <th class="td-cell td-grey padding0" width="15%">Price</th>
-                <th class="td-cell td-grey padding0" width="15%">Quantity</th>
+                <th class="td-cell td-grey padding0" width="15%">Bid Price</th>
+                <th class="td-cell td-grey padding0" width="15%">Current Price</th>
                 @if (\Auth::user())
                     <th class="td-cell td-grey text-center padding0" style="width:82px!important;">Action</th>
                 @endif
@@ -84,7 +94,7 @@
                 @foreach( $other_buy_data as $idx=>$buy_item )
                     <tr>
                         <td class="td-cell text-center padding0">{{ $idx+1 }}</td>
-                        <td class="td-cell text-center padding0">
+                        <td class="td-cell text-center padding0 span-buy-nametitle" buyer_id="{{ $buy_item['user_id'] }}" onclick="doOnClickBuyerForSell('sell', this)">
                             <img src="{{ $buy_item['user_avatar'] }}" style="border-radius: 50%;object-fit: cover;" width="32px" height="32px" />
                             <span>{{ $buy_item['user_full_name'] }}</span>
                         </td>
@@ -93,7 +103,7 @@
                             <span>{{ $buy_item['coin_name'] }}</span>
                         </td>
                         <td class="td-cell color-green text-center padding0">${{ $buy_item['purchased_price'] }}</td>
-                        <td class="td-cell text-center padding0">{{ $buy_item['quantity'] }}</td>
+                        <td class="td-cell text-center padding0">${{ $buy_item['current_price'] }}</td>
                         @if (\Auth::user())
                             <td class="td-cell text-center padding0">
                                 @if ( $buy_item['enable_status'] == 0 )
@@ -110,3 +120,4 @@
         </table>
     </div>
 </div>
+

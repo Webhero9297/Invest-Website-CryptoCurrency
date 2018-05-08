@@ -12,6 +12,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    {{--/***************   ChatCamp plugin  Start ************/--}}
+
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" />--}}
+    {{--<link href="/ChatCampPlugin/static/css/main.1d1e2964.css" rel="stylesheet">--}}
+
+    {{--/***************   ChatCamp plugin  Start ************/--}}
 
     <script src="{{ asset('./assets/jsLib/jquery/jquery.3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" ></script>
@@ -27,6 +33,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <!-- Styles -->
@@ -213,9 +220,14 @@ window.addEventListener("beforeunload", function () {
 });
 
 function alertNotify(){
-    $.get('/pricealert', function(alert_coins){
+    $.get('/pricealert', function(resp){
+        alert_coins = resp.audio_alert_datas;
         for( i in alert_coins ) {
             notification(alert_coins[i]);
+        }
+        review_datas = resp.review_datas;
+        for( i in review_datas ) {
+            notificationReview(review_datas[i]);
         }
     });
 }
@@ -228,6 +240,35 @@ function notification(coin_data) {
     message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Alert time: '+coin_data.current_datetime+'(UTC)</label>';
     $.notify({
         title: '<label class="message alert-title">PRICE ALERT!</label>',
+        icon: '',
+        message: message
+    }, {
+        type: 'danger',
+        animate: {
+            enter: 'animated fadeInUp',
+            exit: 'animated fadeOutRight'
+        },
+        placement: {
+            from: "bottom",
+            align: "left"
+        },
+        offset: 20,
+        spacing: 10,
+//        showProgressbar: true,
+        z_index: 1031,
+        delay: 0,
+        timer: 1000,
+        onShow: function(){
+            x.play();
+        }
+    });
+}
+function notificationReview(coin_data) {
+    message = '<br/><img src="/assets/images/background/logo.png" height="32px" />';
+    message += '<label class="message">&nbsp;&nbsp;You received from '+coin_data.sender_name+'</label>&nbsp;&nbsp;&nbsp;';
+    message += '<label class="message">&nbsp;&nbsp;He required '+coin_data.side+'ing for your assets.</label>&nbsp;&nbsp;&nbsp;';
+    $.notify({
+        title: '<label class="message alert-title">ALERT!</label>',
         icon: '',
         message: message
     }, {
