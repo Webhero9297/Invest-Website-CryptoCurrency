@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CoinAlert;
+use App\CoinMatchEmailSent;
 use App\Common;
 use App\UserCurrencyDetails;
 use Illuminate\Http\Request;
@@ -279,19 +280,6 @@ class MyProfileController extends Controller
         $user_id = \Auth::user()->id;
         $coinAlertData = Common::getAlertCoinData($user_id);
 
-//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
-//        $subject = "PRICE ALERT!";
-//        $to_email =\Auth::user()->email;
-//        $to_fullname = \Auth::user()->full_name;
-//        $from_email = "manager@moonfolio.io";
-//        $from_fullname = "Team Moonfolio";
-//
-//        $headers = "From: ".$from_fullname."<".$from_email.">\r\n";
-//        $headers .= "Reply-To: ".$from_email."\r\n";
-//        $headers .= "Reply-Path: ".$from_email."\r\n";
-//
-//        $headers .= "MIME-Version: 1.0\r\n";
-//        $headers .= "Content-type: text/html; charset=utf-8\r\n";
 
         $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
         $subject = "PRICE ALERT!";
@@ -336,7 +324,6 @@ class MyProfileController extends Controller
             }
             if ( $coin['email_alert'] == 1 && $coin['email_sent_state'] == 0 ) {
                 if ( $coin['limit_type'] == 0 ) {
-//                    <div>Current price is $".$coin['current_price'].".<br></div><br>
                     $mail->Body = "<div>Hi {$to_fullname},<br><br>
 	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price'].".<br></div><br>
 	                    <div style=\"margin-top:-20px;\">
@@ -350,7 +337,6 @@ class MyProfileController extends Controller
 	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
                 }
                 else {
-//                    <div>Current price is $".$coin['current_price'].".<br></div><br>
                     $mail->Body = "<div>Hi {$to_fullname},<br><br>
 	                    <div>".$coin['coin_name']." has reached $".$coin['limit_price'].".<br></div><br>
 	                    <div style=\"margin-top:-20px;\">
@@ -365,32 +351,31 @@ class MyProfileController extends Controller
                 }
 
                 app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
-//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
                 if(!$mail->Send()){
-//                    echo "Error sending";
                 } else {
 
-//                    echo "Mail successfully sent";
                 }
 
-//                $message = "<div>Hi {$to_fullname},<br><br>
-//	                    <div>".$coin['coin_name']." has fallen below $".$coin['limit_price']."<br></div><br>
-//	                    <div style=\"display:inline-flex;margin-top:-20px;\">
-//	                        <div>Team Moonfolio.</div><img src='{$serverLink}/assets/images/background/logo.png' height=\"32px\" style=\"margin-top: -5px;\">
-//	                    </div>
-//	                    <div>You are receiving this alert, because you have requested it in your Moonfolio settings.</div>";
-//
-//                app(CoinAlert::class)->where('id', $coin['id'])->update(['email_sent_state'=>1, 'email_sent_date'=>date('Y-m-d')]);
-//                if ( $message != '' )
-//                    @mail($to_email, $subject, $message, $headers);
             }
 
         }
 
+        $review_datas = array();
+        $reviewModel = new CoinMatchEmailSent();
+        $datas = $reviewModel->where('receiver_id', $user_id)->where('alerted_status', 0)->get();
+        if ( $datas ) {
+            foreach( $datas as $data ) {
+                $sender_data = Common::getUserInfoFromId($data->sender_id);
+                $temp['sender_name'] = $sender_data['full_name'];
+                ( $data->sender_side == 0 ) ? $temp['side'] = 'buy' : $temp['side'] = 'sell';
+                $review_datas[] = $temp; //Common::stdToArray($data);
+                $data->alerted_status = 1;
+                $data->save();
+            }
+        }
 
-
-        return response()->json($audio_alert_datas);
+        return response()->json(['audio_alert_datas'=>$audio_alert_datas, 'review_datas'=>$review_datas]);
     }
 
     public function closeThisAccount() {

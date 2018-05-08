@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\CoinMatch;
+use App\CoinMatchEmailSent;
 use App\MatchReview;
 use Illuminate\Http\Request;
 use App\Common;
+use App\PHPMailer;
+use App\SMTP;
 
 class CoinMatchController extends Controller
 {
@@ -90,8 +93,9 @@ class CoinMatchController extends Controller
         $star_review_data = app(MatchReview::class)->get();
         if ( $star_review_data ) $star_review_data = $star_review_data->toArray();
         $star_review_data = Common::remakeReviewData($cryptoData, $coin_file_data, $star_review_data);
-//dd($other_buy_data);
-        return view('frontend.coinmatchbiz')->with(['buy_list'=>$buy_data, 'sell_list'=>$sell_data, 'other_buy_data'=>$other_buy_data, 'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data]);
+//dd($cryptoData);
+        return view('frontend.coinmatchbiz')->with(['buy_list'=>$buy_data, 'sell_list'=>$sell_data, 'other_buy_data'=>$other_buy_data,
+            'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data, 'global_biz'=>'undefined', 'cryptoData'=>$cryptoData]);
     }
     public function storeReviewInfo() {
         $user = \Auth::user();
@@ -125,4 +129,119 @@ class CoinMatchController extends Controller
         return redirect()->route('coinmatch.biz');
     }
 
+    public function sendInterestMsgToSpecificUser($receive_user_id) {
+        $side = request()->get('side');
+        $send_user = Common::getUserInfoFromId(\Auth::user()->id);
+        $receive_user = Common::getUserInfoFromId($receive_user_id);
+
+        $send_user_fullname = $send_user['full_name'];
+
+        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+        $subject = "It's a Coinmatch!";
+        $to_email = $receive_user['email'];
+        $to_fullname = $receive_user['full_name'];
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->Host = "mail.moonfolio.io";
+        $mail->Port = 25;
+        //$mail->SMTPSecure = 'SSL';
+        $mail->SMTPAuth = true;
+        $mail->Username = "manager@moonfolio.io";
+        $mail->Password = "Moonfolio1114!";
+        $mail->IsSendmail(true);
+        $mail->CharSet ="UTF-8";
+
+        $mail->SetFrom("manager@moonfolio.io");
+        $mail->FromName   = "It's a Coinmatch!";
+        $mail->AddReplyTo('manager@moonfolio.io');
+        $mail->AddCC('manager@moonfolio.io');
+        $mail->AddBCC('manager@moonfolio.io');
+
+        $mail->AddAddress($to_email);
+        $mail->Subject = $subject;
+        $mail->IsHTML(true); //Or false if you do not want HTML content
+        $mail->Body = "<div>Hi {$to_fullname},<br><br>
+                    <div>We have found a potential {$side}er for you.</div><br>
+                    <div>{$send_user_fullname} is interested.</div><br>
+                    <div>Please contact the user on Moonfolio</div><br>
+                    <div>Team Moonfolio</div><br>
+                    <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" />";
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
+
+        if(!$mail->Send()){
+//            echo "Error sending";
+        } else {
+//            echo "Mail successfully sent";
+        }
+
+        ($side == 'buy') ? $_side = 0 : $_side = 1;
+        $model = new CoinMatchEmailSent();
+        $model->sender_id = $send_user['id'];
+        $model->receiver_id = $receive_user['id'];
+        $model->sent_type = 0;
+        $model->email_content = $mail->Body;
+        $model->sender_side = $_side;
+        $model->alerted_status = 0;
+        $model->save();
+
+        return response()->json(['result'=>'ok']);
+    }
+    public function sendMsgToSpecificUser($receive_user_id) {
+        $side = request()->get('side');
+        $msg = request()->get('message');
+        $send_user = Common::getUserInfoFromId(\Auth::user()->id);
+        $receive_user = Common::getUserInfoFromId($receive_user_id);
+
+        $send_user_fullname = $send_user['full_name'];
+
+        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
+        $subject = "It's a Coinmatch!";
+        $to_email = $receive_user['email'];
+        $to_fullname = $receive_user['full_name'];
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->Host = "mail.moonfolio.io";
+        $mail->Port = 25;
+        //$mail->SMTPSecure = 'SSL';
+        $mail->SMTPAuth = true;
+        $mail->Username = "manager@moonfolio.io";
+        $mail->Password = "Moonfolio1114!";
+        $mail->IsSendmail(true);
+        $mail->CharSet ="UTF-8";
+
+        $mail->SetFrom("manager@moonfolio.io");
+        $mail->FromName   = "It's a Coinmatch!";
+        $mail->AddReplyTo('manager@moonfolio.io');
+        $mail->AddCC('manager@moonfolio.io');
+        $mail->AddBCC('manager@moonfolio.io');
+
+        $mail->AddAddress($to_email);
+        $mail->Subject = $subject;
+        $mail->IsHTML(true); //Or false if you do not want HTML content
+        $mail->Body = "<div>Hi {$to_fullname},<br><br>
+                    <div>{$msg}</div><br>
+                    <div>{$send_user_fullname} is interested.</div><br>
+                    <div>Please contact the user on Moonfolio</div><br>
+                    <div>Team Moonfolio</div><br>
+                    <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" />";
+//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
+
+        if(!$mail->Send()){
+//            echo "Error sending";
+        } else {
+//            echo "Mail successfully sent";
+        }
+
+        ($side == 'buy') ? $_side = 0 : $_side = 1;
+        $model = new CoinMatchEmailSent();
+        $model->sender_id = $send_user['id'];
+        $model->receiver_id = $receive_user['id'];
+        $model->sent_type = 0;
+        $model->email_content = $mail->Body;
+        $model->sender_side = $_side;
+        $model->alerted_status = 0;
+        $model->save();
+
+        return response()->json(['result'=>'ok']);
+    }
 }

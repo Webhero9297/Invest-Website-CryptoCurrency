@@ -349,18 +349,22 @@ class Common
     public static function getUserInfoFromId( $user_id ) {
         $user_data = User::where('id', $user_id)->first();
         if ( $user_data ){
-            return $user_data->toArray();
+            $ret = $user_data->toArray();
+            if ( is_null($ret['user_avatar']) ) $ret['user_avatar'] = './assets/images/avatars/default.png';
+            return $ret;
         }
         return [];
     }
     public static function remakeCoinDataWithFiles( $realCoinDatas, $coin_file_arr, $coin_match_datas ) {
         $real_coin_name_arr = array();
         $real_coin_id_arr = array();
+        $real_coin_price_arr = array();
         $ret = array();
         if ( $coin_match_datas ) {
             foreach( $realCoinDatas as $idx=>$real_coin ) {
                 $real_coin_id_arr[] = $coin_file_arr[$idx];
                 $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+                $real_coin_price_arr[] = $real_coin->price_usd;
             }
             foreach( $coin_match_datas as $idx=>$coin_match ) {
                 $index = array_search($coin_match['coin_name'], $real_coin_name_arr);
@@ -371,6 +375,8 @@ class Common
                     $coin_match['user_full_name'] = $user_info['full_name'];
                     $coin_match['user_avatar'] = $user_info['user_avatar'];
                     $coin_match['user_email'] = $user_info['email'];
+                    $coin_match['user_id'] = $user_info['id'];
+                    $coin_match['current_price'] = $real_coin_price_arr[$index];
                 }
 //                if( $coin_match['coin_name'] == 'Centra' ) {
 //                    dd($index, $coin_file_arr);
@@ -384,11 +390,13 @@ class Common
     public static function remakeCoinDataWithFilesEx( $realCoinDatas, $coin_file_arr, $coin_match_datas, $user_id=null ) {
         $real_coin_name_arr = array();
         $real_coin_id_arr = array();
+        $real_coin_price_arr = array();
         $ret = array();
         if ( $coin_match_datas ) {
             foreach( $realCoinDatas as $idx=>$real_coin ) {
                 $real_coin_id_arr[] = $coin_file_arr[$idx];
                 $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+                $real_coin_price_arr[] = $real_coin->price_usd;
             }
             $invested_coinname_arr = array();
             $enable_status = 0;
@@ -412,6 +420,8 @@ class Common
                     $coin_match['user_full_name'] = $user_info['full_name'];
                     $coin_match['user_avatar'] = $user_info['user_avatar'];
                     $coin_match['user_email'] = $user_info['email'];
+                    $coin_match['user_id'] = $user_info['id'];
+                    $coin_match['current_price'] = $real_coin_price_arr[$index];
                     if ( $enable_status == 1 ) {
                         $_index = in_array($coin_match['coin_name'], $invested_coinname_arr);
                         if ( $_index != false ) {

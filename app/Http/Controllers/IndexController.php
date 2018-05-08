@@ -31,7 +31,8 @@ class IndexController extends Controller
         if ( $star_review_data ) $star_review_data = $star_review_data->toArray();
         $star_review_data = Common::remakeReviewData($cryptoData, $coin_file_data, $star_review_data);
 
-        return view('frontend.coinmatchbiz')->with(['buy_list'=>[], 'sell_list'=>[], 'other_buy_data'=>$other_buy_data, 'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data]);
+        return view('frontend.coinmatchbiz')->with(['buy_list'=>[], 'sell_list'=>[], 'other_buy_data'=>$other_buy_data,
+            'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data, 'global_biz'=>'1', 'cryptoData'=>$cryptoData]);
     }
 
     public function getOrderLiveData($userId) {
