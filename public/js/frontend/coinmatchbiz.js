@@ -295,13 +295,4 @@ function doOnSendMessage() {
 function doOnCloseThisModal() {
 
     $('#div_buy_message_modal').modal('hide');
-    //$('#div_buy_message_modal').show().on('hidden.bs.modal', hideCompleted);
-    //function hideCompleted() {
-    //    hideInProgress = false;
-    //    if (showModalId) {
-    //        showModal(showModalId);
-    //    }
-    //    showModalId = '';
-    //    $("#div_buy_message_modal").off('hidden.bs.modal');
-    //}
 }
