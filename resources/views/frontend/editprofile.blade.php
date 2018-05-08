@@ -91,7 +91,6 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label class="control-label" for="email">Country</label>
-                                {{--<input type="text" class="form-control input-form-control grey-border grey-color" tabindex="5" id="country" name="country" value="{{ $country }}">--}}
                                 <div class="input-group autocomplete" style="width:100%;">
                                     <input id="NaCountry" type="Country" class="form-control input-form-control grey-border grey-color" name="country" value="{{ $country }}" autocomplete="off">
                                 </div>
