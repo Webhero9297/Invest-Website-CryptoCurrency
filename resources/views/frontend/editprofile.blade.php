@@ -13,20 +13,22 @@
     /***********************   Country List AutoComplete   Start  *****************************/
     .autocomplete-items {
         position: absolute;
-        border: 1px solid #d4d4d4;
-        border-bottom: none;
+        border: 1px solid #4c4c4c;
+        /*border-bottom: none;*/
         border-top: none;
         z-index: 99;
         /*position the autocomplete items to be the same width as the container:*/
         top: 100%;
         left: 0;
         right: 0;
+        max-height: 300px;
+        overflow-y: auto;
     }
     .autocomplete-items div {
         padding: 10px;
         cursor: pointer;
-        background-color: #3a3a3a;
-        border-bottom: 1px solid #d4d4d4;
+        background-color: #010101;
+        border-bottom: 1px solid #101010;
     }
     .autocomplete-items div:hover {
         /*when hovering an item:*/
@@ -50,7 +52,7 @@
         <div class="container" style="padding-bottom: 278px;">
             <div class="panel panel-default">
                 <div class="div-panel-heading">
-                    PERSONAL INFORMATION
+                    Personal Information
                 </div>
                 <div class="panel-body">
                     <form method="POST" action="{{ route('save.details') }}">
@@ -91,6 +93,7 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label class="control-label" for="email">Country</label>
+                                {{--<input type="text" class="form-control input-form-control grey-border grey-color" tabindex="5" id="country" name="country" value="{{ $country }}">--}}
                                 <div class="input-group autocomplete" style="width:100%;">
                                     <input id="NaCountry" type="Country" class="form-control input-form-control grey-border grey-color" name="country" value="{{ $country }}" autocomplete="off">
                                 </div>

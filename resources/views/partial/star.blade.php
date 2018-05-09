@@ -38,9 +38,9 @@
                 <th class="td-cell td-grey" width="22%">Coin</th>
                 <th class="td-cell td-grey" width="22%">Price</th>
                 <th class="td-cell td-grey" width="22%">Quantity</th>
-                <th class="td-cell td-grey">Maker</th>
-                <th class="td-cell td-grey">Taker</th>
-                <th class="td-cell td-grey">Action</th>
+                <th class="td-cell td-grey">Seller</th>
+                <th class="td-cell td-grey">Buyer</th>
+                <th class="td-cell td-grey">Buy/Sell</th>
                 <th class="td-cell td-grey">Score</th>
                 <th class="td-cell td-grey" width="200px">Comment</th>
             </tr>

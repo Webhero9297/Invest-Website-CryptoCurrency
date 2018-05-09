@@ -105,18 +105,17 @@
                 <label class="label-title-portfolio">PORTFOLIO</label>
                 <div class="div-panel-heading" style="padding-top:18px;">
                     <div class="row padding0">
-                        <div class="col-md-2 padding0 wrap-div-col" style="padding-left: 20px!important;">Total Coins: {{ $total_coins }}</div>
-                        <div class="col-md-3 padding0 wrap-div-col">
+                        <div class="col-md-3 padding0 wrap-div-col" style="padding-left: 20px!important;">Total Coins: {{ $total_coins }}</div>
+                        <div class="col-md-4 padding0 wrap-div-col">
                             Invested Capital: ${{ number_format($total_data['invested_capital'], 2, '.',',') }}</div>
-                        <div class="col-md-3 padding0 wrap-div-col">
+                        <div class="col-md-5 padding0 wrap-div-col">
                             Total Profit/Loss:
                             <span class="{{ ($total_data['total_profit_loss']<0)?"color-red":"color-green" }} strok-white">${{ number_format($total_data['total_profit_loss'], 2, '.',',') }}</span>
-                        </div>
-                        <div class="col-md-4 padding0 wrap-div-col">
-                            Total Profit/Loss(%):
+                            &nbsp;&nbsp;(
                             <span class=" {{ ($total_data['total_profit_loss_percentage']>0)?"color-green":"color-red" }} strok-white">
-                                {{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}
+                                {{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}%
                             </span>
+                            )
                         </div>
                     </div>
                 </div>
@@ -128,7 +127,7 @@
                             <th class="td-cell">Coin</th>
                             <th class="td-cell">Current Price</th>
                             <th class="td-cell">Invested Capital</th>
-                            <th class="td-cell">Profit/Loss (Each)</th>
+                            <th class="td-cell">Profit/Loss</th>
                             <th class="td-cell">Profit/Loss %</th>
                             <th class="td-cell">1H Change %</th>
                             <th class="td-cell">24H Change %</th>
@@ -224,6 +223,7 @@
     </div>
 </div>
 
+{{--<script src="{{ asset('./js/frontend/editprofile.js') }}"></script>--}}
 <div id="fb-root"></div>
 <script>
     var fbButton = document.getElementById('fb-share-button');

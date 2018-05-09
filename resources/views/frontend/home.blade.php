@@ -8,125 +8,139 @@
         var top_users_count = {{ count($top_users) }};
     </script>
 <style>
-.panel-body{
-    margin-top:0;
-    width: 80%;
-    border-radius: 0;
-    margin-bottom: 8px;
-    padding:20px 15px;
-}
-a[href="#collapse2"], #collapse2 .panel-body,a[href="#collapse4"], #collapse4 .panel-body,a[href="#collapse6"], #collapse6 .panel-body {
-    left: 20%;
-    position: relative;
-}
-/**********************************************    Carousel Start   ************************************************/
-.wrapper{
-    width:100%;
-    position:relative;
-    margin:5% auto 0;
-}
-.carousel{
-    width: 100%;
-    position: relative;
-    padding-top: 380px;
-    overflow: hidden;
-}
-.inner{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top:0;
-    left: 0;
-}
-.slide{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top:0;
-    right:0;
-    left:0;
-    z-index: 1;
-    opacity: 0;
-}
-.slide.active,
-.slide.left,
-.slide.right{
-    z-index: 2;
-    opacity: 1;
-}
-.js-reset-left{left:auto}
-.slide.left{
-    left:-100%;
-    right:0;
-}
-.slide.right{
-    right:-100%;
-    left: auto;
-}
-.transition .slide.left{left:0%}
-.transition .slide.right{right:0%}
-.transition .slide.shift-right{right: 100%;left:auto}
-.transition .slide.shift-left{left: 100%;right:auto}
-.transition .slide{
-    transition-property: right, left, margin;
-}
-.indicators{
-    width:100%;
-    position: absolute;
-    bottom: 0;
-    z-index: 4;
-    padding:0;
-    text-align: center;
-}
-.indicators li{
-    width: 13px;
-    height: 13px;
-    display: inline-block;
-    margin: 5px;
-    background: #fff;
-    list-style-type: none;
-    border-radius: 50%;
-    cursor:pointer;
-    transition:background 0.3s ease-out;
-}
-.indicators li.active{background:#0297df}
-.indicators li:hover{background-color:#2b2b2b}
-.arrow{
-    width: 20px;
-    height: 20px;
-    position:absolute;
-    top:49%;
-    z-index:5;
-    border-top:3px solid #fff;
-    border-right:3px solid #fff;
-    cursor:pointer;
-    transition:border-color 0.3s ease-out;
-}
-.arrow:hover{border-color:#0297df}
-.arrow-left{
-    left:20px;
-    transform:rotate(225deg);
-}
-.arrow-right{
-    right:20px;
-    transform:rotate(45deg);
-}
-.slide{
-    text-align:center;
-    background-size:cover;
-}
-h1{
-    width:100px;
-    height:100px;
-    background-color:rgba(2, 151, 223,0.7);
-    margin:auto;
-    line-height:100px;
-    color:#fff;
-    font-size:2.4em;
-    border-radius:50%;
-}
-.slide:nth-child(1){
-}
+    .panel-body{
+        margin-top:0;
+        width: 80%;
+        border-radius: 0;
+        margin-bottom: 8px;
+        padding:20px 15px;
+    }
+    a[href="#collapse2"], #collapse2 .panel-body,a[href="#collapse4"], #collapse4 .panel-body,a[href="#collapse6"], #collapse6 .panel-body {
+        left: 20%;
+        position: relative;
+    }
+    /**********************************************    Carousel Start   ************************************************/
+    .wrapper{
+        width:100%;
+        position:relative;
+        margin:5% auto 0;
+    }
+    .carousel{
+        width: 100%;
+        position: relative;
+        padding-top: 380px;
+        overflow: hidden;
+    }
+    .inner{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top:0;
+        left: 0;
+    }
+    .slide{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top:0;
+        right:0;
+        left:0;
+        z-index: 1;
+        opacity: 0;
+    }
+    .slide.active,
+    .slide.left,
+    .slide.right{
+        z-index: 2;
+        opacity: 1;
+    }
+    .js-reset-left{left:auto}
+    .slide.left{
+        left:-100%;
+        right:0;
+    }
+    .slide.right{
+        right:-100%;
+        left: auto;
+    }
+    .transition .slide.left{left:0%}
+    .transition .slide.right{right:0%}
+    .transition .slide.shift-right{right: 100%;left:auto}
+    .transition .slide.shift-left{left: 100%;right:auto}
+    .transition .slide{
+        transition-property: right, left, margin;
+    }
+    .indicators{
+        width:100%;
+        position: absolute;
+        bottom: 0;
+        z-index: 4;
+        padding:0;
+        text-align: center;
+    }
+    .indicators li{
+        width: 13px;
+        height: 13px;
+        display: inline-block;
+        margin: 5px;
+        background: #fff;
+        list-style-type: none;
+        border-radius: 50%;
+        cursor:pointer;
+        transition:background 0.3s ease-out;
+    }
+    .indicators li.active{background:#0297df}
+    .indicators li:hover{background-color:#2b2b2b}
+    .arrow{
+        width: 20px;
+        height: 20px;
+        position:absolute;
+        top:49%;
+        z-index:5;
+        border-top:3px solid #fff;
+        border-right:3px solid #fff;
+        cursor:pointer;
+        transition:border-color 0.3s ease-out;
+    }
+    .arrow:hover{border-color:#0297df}
+    .arrow-left{
+        left:20px;
+        transform:rotate(225deg);
+    }
+    .arrow-right{
+        right:20px;
+        transform:rotate(45deg);
+    }
+    .slide{
+        text-align:center;
+        /*padding-top:25%;*/
+        background-size:cover;
+    }
+    h1{
+        width:100px;
+        height:100px;
+        background-color:rgba(2, 151, 223,0.7);
+        margin:auto;
+        line-height:100px;
+        color:#fff;
+        font-size:2.4em;
+        border-radius:50%;
+    }
+    .slide:nth-child(1){
+        /*background-image:url(http://mamiskincare.net/wp-content/uploads/2015/11/inspire-fashion-ideas-for-styleator-concept-with-fashion-style-for-fall-2015-with-street-style-at-stockholm-fashion-week-fall-winter-2015-2016-15.jpg);*/
+    }
+/*.slide:nth-child(2){*/
+    /*background-image:url(http://conversationsabouther.net/wp-content/uploads/2015/03/1-seoul-fashion-week-fall-2015-street-style-45.jpg);*/
+/*}*/
+/*.slide:nth-child(3){*/
+    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+/*}*/
+/*.slide:nth-child(4){*/
+    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+/*}*/
+/*.slide:nth-child(5){*/
+    /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+/*}*/
 /**********************************************    Carousel  End    ************************************************/
     .div-pd-lr{
         padding-left:50px;padding-right:50px;
@@ -154,35 +168,21 @@ h1{
         padding-bottom: 10px;
     }
     .header {
-        text-align: center;
-        width: 80%;
+        /*text-align: center;*/
+        /*width: 80%;*/
         margin: 0 auto;
     }
     .download .download-area .download-btn {
         font-size: 28px;
-        padding: 12px 0 10px 10px;
-        min-width: 263px;
+        padding: 5px 15px 0px 10px;
+        min-width: 220px;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 50px;
         display: table;
-    }
-    .download .custom-btn {
-        color: #fff;
-        border: 2px solid #fff;
-    }
-    .custom-btn {
-        color: #0099FF;
-        border: 1px solid #0099FF;
-    }
-    .custom-btn {
-        background-color: transparent;
-        color: #fff;
-        border-radius: 0;
-        border: 2px solid #fff;
-        -webkit-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
+        width: 220px;
+        height:65px;
+        border:none;
     }
     .download .download-area .app-download {
         margin-left: 40px;
@@ -196,11 +196,6 @@ h1{
     .download .download-area a i {
         float: left;
         margin-top: 15px;
-    }
-    .custom-btn:hover {
-        background-color: #0099FF3b;
-        color: #fff;
-        border-color: #0099FF3b;
     }
     .download .download-area span {
         display: block;
@@ -261,27 +256,64 @@ h1{
         right: 0;
     }
     .div-download {
-        font-family: Montserrat-Light;
+        font-family: Montserrat-Bold;
         font-size: 48px;
-        font-weight: bold;
+        /*font-weight: bold;*/
     }
     .awesome-free {
-        font-family: Montserrat-Light;
-        font-size: 18px;
+        font-family: Montserrat-UltraLight;
+        font-size: 48px;
         margin-bottom: 30px;
-        font-weight: 300;
         letter-spacing: 0.5px;
-        margin: 0 0 10px;
+        margin-top: -30px;
+    }
+    .div-app-download-explain{
+        font-family: Montserrat-UltraLight;
+        font-size: 16px;
+        margin-top: -20px;
     }
     .div-app-download {
         background-image: url(http://laravel.moonfolio.io/./assets/images/background/pad1-panel.png);
         background-position: center center;
         background-size: cover;
-        margin-top: -407px;
-        z-index: 3;
+        /*margin-top: -407px;*/
+        /*z-index: 3;*/
         position: relative;
-        background: rgba(255, 255, 255, 0.04);
+        /*background: rgba(255, 255, 255, 0.04);*/
     }
+    .div-user-avatar {
+        width: 120px;
+        height:120px;
+        border-radius: 50%;
+        object-fit: cover;
+        background-size: cover;
+        background-position: center;
+    }
+    .ios {
+        background-image: url('{{ asset('./assets/images/background/app_download_n.png') }}');
+    }
+    .android {
+        background-image: url('{{ asset('./assets/images/background/app_download_n.png') }}');
+        background-position-y: 65px;
+    }
+    .ios:hover {
+        background-image: url('{{ asset('./assets/images/background/app_download_f.png') }}');
+    }
+    .android:hover {
+        background-image: url('{{ asset('./assets/images/background/app_download_f.png') }}');
+    }
+    .img-app-download {
+        height: 360px;
+        width: 200px;
+        background-size: 100% 100%;
+    }
+.a-link {
+    padding: 15px 2rem 20px;
+    border-radius: 40px;
+    width: 40%;
+    display: inline;
+    font-size: 28px;
+}
 /********************************************************    App download button  End    ********************************************************************/
 </style>
 <script>
@@ -298,24 +330,31 @@ h1{
                 {{--<canvas id="canvas"></canvas>--}}
                 <div class="row">
                     @guest
-                        <div class="col-xs-12 col-sm-5 div-title">
+                        <div class="col-xs-12 col-sm-6 div-title">
                             <label class="home-label jointhe">JOIN THE</label>
                             <label class="home-label community">COMMUNITY</label>
                             <label class="home-label lets">AND LETS GO TO THE</label>
                             <label class="home-label moon">MOON!</label>
-                            <div class="div-button-wrap">
-                                <a href="{{ route('register') }}" class="nav-link a-link sign text-center">NEW PORTFOLIO</a>
+                            <div class="div-button-wrap" style="display:inline-table;">
+                                <a href="#comprehensive" class="nav-link a-link sign text-center" onclick="doOnScrollConprehensive()">Learn more</a>
+                                <a href="{{ route('register') }}" class="nav-link a-link sign text-center">&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;</a>
                             </div>
                         </div>
                     @else
-                        <div class="col-xs-12 col-sm-5 div-title" style="padding-top: 120px;">
+                        <div class="col-xs-12 col-sm-6 div-title" style="padding-top: 120px;">
                             <label class="home-label jointhe">JOIN THE</label>
                             <label class="home-label community">COMMUNITY</label>
                             <label class="home-label lets">AND LETS GO TO THE</label>
                             <label class="home-label moon">MOON!</label>
+                            <div class="div-button-wrap" style="display:inline-table;">
+                                <a href="#comprehensive" class="nav-link a-link sign text-center" onclick="doOnScrollConprehensive()">Learn more</a>
+                            </div>
                         </div>
                     @endguest
-                    <div class="col-xs-12 col-sm-7 text-right">
+                    <div class="col-xs-12 col-sm-6 text-right">
+                        {{--<canvas id="canvasOne" width="500" height="500">--}}
+                        {{--Your browser does not support HTML5 Canvas.--}}
+                        {{--</canvas>--}}
                         <canvas id="particles-js" width="800" height="800"></canvas>
                         <canvas id="myCanvas" width="800" height="800"></canvas>
                         <div class="smartObject"></div>
@@ -324,35 +363,6 @@ h1{
             </div>
         </div>
 
-        <div class="div-app-download">
-            <div class="download section-padding">
-                <div class="container">
-                    <div class="header">
-                        <div class="div-download">Download Moonfolio</div>
-                        <div class="awesome-free"> It's Awesome and Free!</div>
-                        <div class="underline"></div>
-                    </div>
-                    <div class="row download-area">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <a href="" class="btn btn-default custom-btn download-btn">
-                                <i class="fa fa-mobile"></i>
-                                <div class="app-download">
-                                    <span>GET IT ON</span><strong>App Store</strong>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <a href="" class="btn btn-default custom-btn download-btn">
-                                <img class="app-icon" src="{{ asset('./assets/images/background/playstore.png') }}" alt="">
-                                <div class="app-download">
-                                    <span>GET IT ON</span><strong>Google Play</strong>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="div-topportios">
             <div class="container">
@@ -467,7 +477,41 @@ h1{
             </div>
 
         </div>
-        <div class="div-features">
+        <div class="div-app-download">
+            <div class="download section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img class="img-app-download" src="{{ asset('./assets/images/background/app-phone.png') }}"/>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="header">
+                                <div class="div-download">DOWNLOAD</div>
+                                <div class="awesome-free">OUR APP</div>
+                                <div class="div-app-download-explain">
+                                    What makes this portfolio platform better than the rest is the chat functionality,
+                                    where you can talk to other people and ask their experiences and even get useful tips.
+                                    For now the best product on the internet.
+                                    What makes this portfolio platform better than the rest is the chat functionality,
+                                    where you can talk to other people and ask their experiences and even get useful tips.
+                                    For now the best product on the internet.
+                                </div>
+                            </div>
+                            <div class="row download-area">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <a href="" class="btn btn-default custom-btn download-btn ios"></a>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <a href="" class="btn btn-default custom-btn download-btn android"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="div-features" id="comprehensive">
             <div class="container">
                 <div class="div-top-title">
                     <label class="home-label top">COMPREHENSIVE</label>
@@ -727,65 +771,30 @@ h1{
                     <div class="wrapper">
                         <div class="carousel">
                             <div class="inner">
-                                <div class="slide active">
-                                    <div class="div-pad1-panel">
-                                        <label class="div-pad1-label-title"></label>
-                                        <div class="row div-pd-lr">
-                                            <div class="col-xs-12 col-sm-5 col-md-4">
-                                                <div class="div-pad1"></div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-7 col-md-8">
-                                                <label class="div-pad1-label">
-                                                    What makes this portfolio platform better than the rest is the chat functionality,
-                                                    where you can talk to other people and ask their experiences and even get useful tips.
-                                                    For now the best product on the internet.
-                                                </label>
-                                                <label class=" text-center">
-                                                    <a href="/detailportfolio/14" class="a-review-user">MareeN</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="slide">
-                                    <div class="div-pad1-panel">
-                                        <label class="div-pad1-label-title"></label>
-                                        <div class="row div-pd-lr">
-                                            <div class="col-xs-12 col-sm-7 col-md-8">
-                                                <label class="div-pad1-label">
-                                                    Moonfolio price alerts are a MUST-HAVE for any serious crypto currency investor.
-                                                    They saved me from taking profits at the right time and I was able to cash in just before the sell off in January 2018.
-                                                </label>
-                                                <label class=" text-center">
-                                                    <a href="/detailportfolio/24" class="a-review-user">Josh</a>
-                                                </label>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-5 col-md-4">
-                                                <div class="div-pad2"></div>
+                                @if ( $testmonial_users )
+                                    @foreach( $testmonial_users as $idx =>$user )
+                                        <div class="slide {{ ($idx == 0) ? "active" : "" }}">
+                                            <div class="div-pad1-panel">
+                                                <label class="div-pad1-label-title"></label>
+                                                <div class="row div-pd-lr">
+                                                    <div class="col-xs-12 col-sm-4 col-md-3 text-right">
+                                                        <img class="div-user-avatar" src="{{ $user['avatar'] }}" width="100%" />
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-8 col-md-9">
+                                                        <label class="div-pad1-label">
+                                                            What makes this portfolio platform better than the rest is the chat functionality,
+                                                            where you can talk to other people and ask their experiences and even get useful tips.
+                                                            For now the best product on the internet.
+                                                        </label>
+                                                        <label class=" text-center">
+                                                            <a href="/detailportfolio/{{ $user['user_id'] }}" class="a-review-user">{{ $user['full_name'] }}</a>
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="slide">
-                                    <div class="div-pad1-panel">
-                                        <label class="div-pad1-label-title"></label>
-                                        <div class="row div-pd-lr">
-                                            <div class="col-xs-12 col-sm-5 col-md-4">
-                                                <div class="div-pad1"></div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-7 col-md-8">
-                                                <label class="div-pad1-label">
-                                                    I have tried many portfolio websites, including ones that I needed to pay.
-                                                    Moonfolio is simple, looks nice and most importantly it's free.
-                                                    Moonfolio has all cryptos offered in the market and can be added easily in your portfolio.
-                                                </label>
-                                                <label class=" text-center">
-                                                    <a href="/detailportfolio/34" class="a-review-user">Kim</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <div class="arrow arrow-left"></div>
                             <div class="arrow arrow-right"></div>
@@ -856,3 +865,8 @@ h1{
     <script src="{{ asset('./js/frontend/home-carousel.js') }}"></script>
 @endsection
 
+{{--<script>--}}
+    {{--window.setInterval(function() {--}}
+        {{--window.location.reload();--}}
+    {{--}, 10000);--}}
+{{--</script>--}}

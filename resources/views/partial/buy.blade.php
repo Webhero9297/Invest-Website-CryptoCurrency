@@ -35,7 +35,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-5 col-md-4" style="padding: 0;">
         <p class="p-title">My buy list</p>
-        <input type="text" class="search_input" id="myBuyInput" onkeyup="myBuyFunction()" placeholder="Find a specific coin" title="Type in a name">
+        <input type="text" class="search_input" id="myBuyInput" onkeyup="myBuyFunction()" placeholder="Find a specific coin" title="Type in a name" style="display: none;">
         <table id="myBuyTable">
             <thead>
                 <tr class="header">
@@ -80,13 +80,14 @@
             <thead>
             <tr>
                 <th class="td-cell td-grey text-center padding0" width="50px">#</th>
-                <th class="td-cell td-grey padding0" @if (\Auth::user()) width="25%" @endif>User</th>
-                <th class="td-cell td-grey padding0" width="25%">Coin</th>
-                <th class="td-cell td-grey padding0" width="15%">Bid Price</th>
-                <th class="td-cell td-grey padding0">Current Price</th>
-                @if (\Auth::user())
-                    <th class="td-cell td-grey text-center padding0" width="82px" style="width:82px!important;">Action</th>
-                @endif
+                <th class="td-cell td-grey padding0" >User</th>
+                <th class="td-cell td-grey padding0" >Coin</th>
+                <th class="td-cell td-grey padding0" >Quantity</th>
+                <th class="td-cell td-grey padding0" data-toggle="popover" data-content="This is the price that seller's are offering">Bid Price</th>
+                <th class="td-cell td-grey padding0" >Current Price</th>
+                {{--@if (\Auth::user())--}}
+                    {{--<th class="td-cell td-grey text-center padding0" width="82px" style="width:82px!important;">Buy</th>--}}
+                {{--@endif--}}
             </tr>
             </thead>
             <tbody id="tbody_sell_coin_live_data" class="text-center">
@@ -102,13 +103,14 @@
                             <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{ $sell_item['coin_id'] }}.png" width="32px" height="32px" />
                             <span>{{ $sell_item['coin_name'] }}</span>
                         </td>
+                        <td class="td-cell text-center padding0">{{ $sell_item['quantity'] }}</td>
                         <td class="td-cell color-red text-center padding0">${{ $sell_item['purchased_price'] }}</td>
                         <td class="td-cell text-center padding0">${{ $sell_item['current_price'] }}</td>
-                    @if (\Auth::user())
-                        <td class="td-cell text-center padding0">
-                            <button class="buy-button {{ ( \Auth::user() ) ? "" : "button-hidden" }}" onclick="doOnOtherBuyClick('{{ $sell_item['match_id'] }}', {{ json_encode($sell_item) }})">Buy</button>
-                        </td>
-                    @endif
+                    {{--@if (\Auth::user())--}}
+                        {{--<td class="td-cell text-center padding0">--}}
+                            {{--<button class="buy-button {{ ( \Auth::user() ) ? "" : "button-hidden" }}" onclick="doOnOtherBuyClick('{{ $sell_item['match_id'] }}', {{ json_encode($sell_item) }})">Buy</button>--}}
+                        {{--</td>--}}
+                    {{--@endif--}}
                     </tr>
                 @endforeach
             @endif

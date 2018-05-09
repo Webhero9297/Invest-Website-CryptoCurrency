@@ -12,7 +12,7 @@
         <div class="container">
             <div class="panel panel-default">
                 <div class="div-panel-heading">
-                    ADD CRYPTO CURRENCY DETAILS
+                    Add Cryptocurrency details
                 </div>
                 <div class="panel-body">
                     <form method="POST" action="{{ route('store.crypto.currency') }}">
