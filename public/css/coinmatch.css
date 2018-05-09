@@ -72,11 +72,14 @@ input[type="search"] {
     background: #56e2c900;
     color: #fff;
 }
+#other_sell_table_wrapper, #other_buy_table_wrapper {
+    margin-top: -10px!important;
+}
 #other_sell_table, #other_buy_table, #star_table {
     width: 100%;
     border: 1px solid white;
     max-height: 500px;
-    margin-top: 3px!important;
+    margin-top: -5px!important;
 }
 #other_buy_table thead tr, #other_sell_table thead tr, #star_table thead tr {
     background-color: #0297bf;

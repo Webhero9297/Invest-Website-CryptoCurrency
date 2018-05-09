@@ -56,16 +56,14 @@ function doOnLoadLiveProfileCurrencyData() {
         ( total_data.sign*1==1 ) ? p_style= "color-green": p_style="color-red";
 
         theadHTML = '<th class="td-cell" colspan="2">Total Coins: '+total_data.coins+ '</th>\
-                     <th class="td-cell" colspan="2">Invested Capital: $'+total_data.invested_capital+'</th>\
-                     <th class="td-cell" colspan="2">\
+                     <th class="td-cell" colspan="3">Invested Capital: $'+total_data.invested_capital+'</th>\
+                     <th class="td-cell text-left" colspan="3">\
                      Total Profit/Loss: \
                         <span class="'+p_style+'" style="font-size:16px;">\
-                        $'+total_data.total_profit_loss+'</span>\
-                     </th>\
-                     <th class="td-cell" colspan="2" style="padding:0;">\
-                        Total Profit/Loss (%):\
+                        $'+total_data.total_profit_loss+'</span>&nbsp;&nbsp;(\
                         <span class="'+style+'" style="font-size:16px;">\
-                        '+total_data.total_profit_loss_percentage+'</span>\
+                        '+total_data.total_profit_loss_percentage+'%</span>\
+                        )\
                      </th>';
 
         trHTML = '';
@@ -81,7 +79,7 @@ function doOnLoadLiveProfileCurrencyData() {
                             <td class="td-cell">'+currency.name+"(" + currency.symbol + ')</td>\
                             <td class="td-cell">'+ currency.price_usd+'</td>\
                             <td class="td-cell">'+ currency.total_cost+ '<br/>'+currency.quantity+" "+currency.symbol+" @ "+currency.purchased_price+'</td>\
-                            <td class="td-cell '+profitStyle+'">'+currency.profit_loss+'</td>\
+                            <td class="td-cell '+profitStyle+'">$'+currency.profit_loss+'</td>\
                             <td class="td-cell '+h1Style +'">'+currency.percent_change_1h+'%</td>\
                             <td class="td-cell '+h24Style +'">'+currency.percent_change_24h+'%</td>\
                             <td class="td-cell td-action">\
@@ -93,6 +91,7 @@ function doOnLoadLiveProfileCurrencyData() {
         $('#thead_title').html(theadHTML);
         $('#tbody_content').html(trHTML);
 
+        //$('.py-4').css('height', '100%');
         $('.py-4').css('height', '');
 
         $('[data-toggle="tooltip"]').tooltip({

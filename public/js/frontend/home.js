@@ -21,7 +21,13 @@ $(document).ready(function(){
     }
 
 
+
 });
+function doOnScrollConprehensive() {
+    $('html, body').animate({
+        scrollTop: $("#comprehensive").offset().top - 50
+    }, 1500);
+}
 function loadLiveData() {
     $.get('/toplivedata', function(response){
         topUsers = response.top_users;
