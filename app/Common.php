@@ -362,9 +362,11 @@ class Common
         $ret = array();
         if ( $coin_match_datas ) {
             foreach( $realCoinDatas as $idx=>$real_coin ) {
-                $real_coin_id_arr[] = $coin_file_arr[$idx];
-                $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
-                $real_coin_price_arr[] = $real_coin->price_usd;
+                if ( isset($coin_file_arr[$idx]) ) {
+                    $real_coin_id_arr[] = $coin_file_arr[$idx];
+                    $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+                    $real_coin_price_arr[] = $real_coin->price_usd;
+                }
             }
             foreach( $coin_match_datas as $idx=>$coin_match ) {
                 $index = array_search($coin_match['coin_name'], $real_coin_name_arr);
@@ -394,9 +396,11 @@ class Common
         $ret = array();
         if ( $coin_match_datas ) {
             foreach( $realCoinDatas as $idx=>$real_coin ) {
-                $real_coin_id_arr[] = $coin_file_arr[$idx];
-                $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
-                $real_coin_price_arr[] = $real_coin->price_usd;
+                if ( isset($coin_file_arr[$idx]) ) {
+                    $real_coin_id_arr[] = $coin_file_arr[$idx];
+                    $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+                    $real_coin_price_arr[] = $real_coin->price_usd;
+                }
             }
             $invested_coinname_arr = array();
             $enable_status = 0;
@@ -450,8 +454,10 @@ class Common
         $ret = array();
         if ( $coin_review_datas ) {
             foreach( $realCoinDatas as $idx=>$real_coin ) {
-                $real_coin_id_arr[] = $coin_file_arr[$idx];
-                $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+                if ( isset($coin_file_arr[$idx]) ) {
+                    $real_coin_id_arr[] = $coin_file_arr[$idx];
+                    $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
+                }
             }
             foreach( $coin_review_datas as $idx=>$coin_review ) {
                 $coin_match = app(CoinMatch::class)->where('match_id', $coin_review['match_id'])->first()->toArray();

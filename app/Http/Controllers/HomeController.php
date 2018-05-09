@@ -72,8 +72,28 @@ class HomeController extends Controller
                 $top_users[] = $topUser;
             }
         }
+
+        $testmonial_users = [14, 24, 34];
+        $ret_testmonial_data = array();
+
+        foreach( $testmonial_users as $user_id ) {
+            $ret_data = array();
+            $user_data = Common::getUserInfoFromId($user_id);
+            if ( count($user_data)>0 ){
+                if ( is_null($user_data['user_avatar']) ){
+                    $ret_data['avatar'] = '../assets/images/avatars/default.png';
+                }
+                else{
+                    $ret_data['avatar'] = $user_data['user_avatar'];
+                }
+                $ret_data['user_id'] = $user_id;
+                $ret_data['full_name'] = $user_data['full_name'];
+                $ret_testmonial_data[] = $ret_data;
+            }
+        }
+
         return view('frontend.home')->with(['topCryptos'=>$realTopCryptos, 'top_users'=>Common::sortArray($top_users, 'total_profit_loss_percentage'),
-            'alert_message'=>$alert_message]);
+            'alert_message'=>$alert_message, 'testmonial_users'=>$ret_testmonial_data]);
     }
     public function getTopLiveData() {
         $realTopCurrencies = Common::getRealTimeCryptoCurrencyListPerPage(0, 8);

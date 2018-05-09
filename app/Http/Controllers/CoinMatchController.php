@@ -153,9 +153,9 @@ class CoinMatchController extends Controller
 
         $mail->SetFrom("manager@moonfolio.io");
         $mail->FromName   = "It's a Coinmatch!";
-        $mail->AddReplyTo('manager@moonfolio.io');
-        $mail->AddCC('manager@moonfolio.io');
-        $mail->AddBCC('manager@moonfolio.io');
+        $mail->AddReplyTo($send_user['email']);
+        $mail->AddCC($send_user['email']);
+        $mail->AddBCC($send_user['email']);
 
         $mail->AddAddress($to_email);
         $mail->Subject = $subject;
@@ -211,9 +211,9 @@ class CoinMatchController extends Controller
 
         $mail->SetFrom("manager@moonfolio.io");
         $mail->FromName   = "It's a Coinmatch!";
-        $mail->AddReplyTo('manager@moonfolio.io');
-        $mail->AddCC('manager@moonfolio.io');
-        $mail->AddBCC('manager@moonfolio.io');
+        $mail->AddReplyTo($send_user['email']);
+        $mail->AddCC($send_user['email']);
+        $mail->AddBCC($send_user['email']);
 
         $mail->AddAddress($to_email);
         $mail->Subject = $subject;
