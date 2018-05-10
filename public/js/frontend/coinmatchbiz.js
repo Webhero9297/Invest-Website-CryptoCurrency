@@ -46,6 +46,21 @@ $(document).ready(function(){
         'placement': 'top'
     });
 
+
+    $('#other_buy_table_filter input[type="search"]').each(function () {
+        var availableTags = $('#buy-brands-list').find('option').map(function () {
+            return this.value;
+        }).get();
+        $(this).autocomplete({
+            source: availableTags
+        }).on('search', function () {
+console.log(availableTags);
+            if ($(this).val() === '') {
+                $(this).autocomplete('search', ' ');
+            }
+        });
+    });
+
 });
 function doOnGetLiveData() {
     $.getJSON('/getorderdata/'+AuthUser, function(resp){
