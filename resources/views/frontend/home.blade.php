@@ -304,16 +304,16 @@
     }
     .img-app-download {
         height: 360px;
-        width: 200px;
+        width: 185px;
         background-size: 100% 100%;
     }
-.a-link {
-    padding: 15px 2rem 20px;
-    border-radius: 40px;
-    width: 40%;
-    display: inline;
-    font-size: 28px;
-}
+    .a-link {
+        padding: 15px 2rem 20px;
+        border-radius: 40px;
+        width: 40%;
+        display: inline;
+        font-size: 28px;
+    }
 /********************************************************    App download button  End    ********************************************************************/
 </style>
 <script>
@@ -362,8 +362,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="div-topportios">
             <div class="container">
                 <div class="div-top-title">
@@ -482,7 +480,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 text-center">
-                            <img class="img-app-download" src="{{ asset('./assets/images/background/app-phone.png') }}"/>
+                            <img class="img-app-download" src="{{ asset('./assets/images/background/iphone_crypto.png') }}"/>
                         </div>
                         <div class="col-md-8">
                             <div class="header">
