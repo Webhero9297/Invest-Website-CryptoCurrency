@@ -91,7 +91,6 @@ function doOnLoadLiveProfileCurrencyData() {
         $('#thead_title').html(theadHTML);
         $('#tbody_content').html(trHTML);
 
-        //$('.py-4').css('height', '100%');
         $('.py-4').css('height', '');
 
         $('[data-toggle="tooltip"]').tooltip({
