@@ -19,7 +19,6 @@ function doOnSubmit() {
     }
 }
 doOnLoginForm = function(){
-    //$('input[name="email"]').focus();
     $('input.auth-input').blur(function() {
         var $this = $(this);
         if ($this.val())
