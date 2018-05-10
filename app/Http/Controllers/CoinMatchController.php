@@ -151,7 +151,7 @@ class CoinMatchController extends Controller
         $mail->IsSendmail(true);
         $mail->CharSet ="UTF-8";
 
-        $mail->SetFrom("manager@moonfolio.io");
+        $mail->SetFrom($send_user['email']);
         $mail->FromName   = "It's a Coinmatch!";
         $mail->AddReplyTo($send_user['email']);
         $mail->AddCC($send_user['email']);
@@ -163,8 +163,8 @@ class CoinMatchController extends Controller
         $mail->Body = "<div>Hi {$to_fullname},<br><br>
                     <div>We have found a potential {$side}er for you.</div><br>
                     <div>{$send_user_fullname} is interested.</div><br>
-                    <div>Please contact the user on Moonfolio</div><br>
-                    <div>Team Moonfolio</div><br>
+                    <div>Please contact the user on Moonfolio.</div><br>
+                    <div>Team Moonfolio.</div><br>
                     <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" />";
 //        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
@@ -209,7 +209,7 @@ class CoinMatchController extends Controller
         $mail->IsSendmail(true);
         $mail->CharSet ="UTF-8";
 
-        $mail->SetFrom("manager@moonfolio.io");
+        $mail->SetFrom($send_user['email']);
         $mail->FromName   = "It's a Coinmatch!";
         $mail->AddReplyTo($send_user['email']);
         $mail->AddCC($send_user['email']);
@@ -221,8 +221,8 @@ class CoinMatchController extends Controller
         $mail->Body = "<div>Hi {$to_fullname},<br><br>
                     <div>{$msg}</div><br>
                     <div>{$send_user_fullname} is interested.</div><br>
-                    <div>Please contact the user on Moonfolio</div><br>
-                    <div>Team Moonfolio</div><br>
+                    <div>Please contact the user on Moonfolio.</div><br>
+                    <div>Team Moonfolio.</div><br>
                     <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" />";
 //        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
