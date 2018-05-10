@@ -54,7 +54,6 @@ Route::get('/filter/{filter}', 'CoinsController@getSearchDataForFilter')->name('
 
 Route::get('/verification/{code}', 'Auth\RegisterController@verificationForm')->name('verification');
 Route::post('/sendverification', 'Auth\RegisterController@verificationEmail')->name('sendverification');
-//Route::post('/loginuser', 'Auth\LoginController@loginUser')->name('login.user');
 
 Route::get('/verify-user/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
 
