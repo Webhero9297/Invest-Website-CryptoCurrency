@@ -127,9 +127,6 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-center">
-                {{--<p></p>--}}
-            {{--</div>--}}
-            {{--<div class="modal-footer">--}}
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnSendSellInterestedSubmit()" data-toggle="popover" data-content="User will be notified by email.">
                     Interested
                 </button>

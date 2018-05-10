@@ -101,9 +101,6 @@
     }
 
     /* On mouse-over, add a grey background color */
-    /*.chk-container:not(:disabled):hover .chk-label {*/
-        /*color: gold;*/
-    /*}*/
     .chk-container:hover input:not(:disabled) ~ .checkmark, .chk-container input:checked:not(:disabled) ~ .chk-label {
         color: gold;
         background-color: #0297bf;
@@ -111,9 +108,6 @@
     }
 
     /* When the radio button is checked, add a blue background */
-    /*.chk-container:hover .chk-label {*/
-        /*color: gold;*/
-    /*}*/
     .chk-container input:checked:not(:disabled) ~ .checkmark, .chk-container input:checked:not(:disabled) ~ .chk-label {
         color: gold;
         background-color: #2196F3;
@@ -255,7 +249,6 @@
                             <th class="td-cell">Buy/Sell</th>
                             <th class="td-cell">Bid Price(USD)</th>
                             <th class="td-cell">Quantity</th>
-                            {{--<th class="td-cell">Purchased Date</th>--}}
                             <th class="td-cell">Action</th>
                         </tr>
                         </thead>
@@ -271,7 +264,6 @@
                                     <td class="td-cell {{ ( $coin_data['order_side'] == 0 ) ? "color-green" : "color-red" }}">{{ ( $coin_data['order_side'] == 0 ) ? "Buy" : "Sell" }}</td>
                                     <td class="td-cell">{{ $coin_data['purchased_price'] }}</td>
                                     <td class="td-cell">{{ $coin_data['quantity'] }}</td>
-{{--                                    <td class="td-cell">{{ date( "Y-m-d", strtotime($coin_data['purchased_date']) ) }}</td>--}}
                                     <td class="td-cell td-action">
                                         <a class="a-currency-edit" onclick="doOnUpdate('{{ json_encode($coin_data) }}')"  data-toggle="popover" data-content="Edit" />
                                         <a class="a-currency-delete" onclick="doOnDelete('{{ $coin_data['match_id'] }}')"  data-toggle="popover" data-content="Remove"></a>
