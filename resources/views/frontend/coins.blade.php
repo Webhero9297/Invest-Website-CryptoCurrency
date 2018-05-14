@@ -253,6 +253,8 @@
             cursor: pointer;
         }
     </style>
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
+{{--<link href="{{ asset('./css/dataTable.css') }}" rel="stylesheet">--}}
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/accounting.min.js') }}" ></script>
@@ -306,10 +308,14 @@
     @-webkit-keyframes red-example {
         from {background-color: red;}
         to {background-color: transparent;}
+        /*from {color: red;}*/
+        /*to {color: red;}*/
     }
 
     /* Standard syntax */
     @keyframes red-example {
+        /*from {color: red;}*/
+        /*to {color: red;}*/
         from {background-color: red;}
         to {background-color: transparent;}
     }
@@ -317,12 +323,16 @@
     @-webkit-keyframes green-example {
         from {background-color: green;}
         to {background-color: transparent;}
+        /*from {color: green;}*/
+        /*to {color: green;}*/
     }
 
     /* Standard syntax */
     @keyframes green-example {
         from {background-color: green;}
         to {background-color: transparent;}
+        /*from {color: green;}*/
+        /*to {color: green;}*/
     }
 
     .form-inline {

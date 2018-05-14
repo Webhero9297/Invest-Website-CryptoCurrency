@@ -97,6 +97,7 @@ class HomeController extends Controller
     }
     public function getTopLiveData() {
         $realTopCurrencies = Common::getRealTimeCryptoCurrencyListPerPage(0, 8);
+//dd($realTopCurrencies);
         $realTopCryptos = array();
         foreach($realTopCurrencies as $realCrypto) {
             $tmp = Common::stdToArray($realCrypto);

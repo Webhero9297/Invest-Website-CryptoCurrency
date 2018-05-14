@@ -34,6 +34,9 @@
         }
     }
 
+    .img-bg-strech {
+        background-size: cover;
+    }
 
 </style>
 
@@ -71,14 +74,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-7 div-flex">
-                                    <div class="img-icon img-name" ></div>
+                                    <div class="img-icon img-name img-bg-strech" ></div>
                                     <div class="div-pt-7">
                                         <span class="div-label-first">Name:</span>
                                         <span class="div-label-value">{{ $full_name }}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-5 div-flex">
-                                    <div class="img-icon img-gender" ></div>
+                                    <div class="img-icon img-gender img-bg-strech" ></div>
                                     <div class="div-pt-7">
                                         <span class="div-label-first">Gender:</span>
                                         <span class="div-label-value">{{ $gender }}</span>
@@ -87,14 +90,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-7 div-flex">
-                                    <div class="img-icon img-email" ></div>
+                                    <div class="img-icon img-email img-bg-strech" ></div>
                                     <div class="div-pt-7">
                                         <span class="div-label-first">Email:</span>
                                         <span class="div-label-value">{{ $email }}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-5 div-flex">
-                                    <div class="img-icon img-country"  ></div>
+                                    <div class="img-icon img-country img-bg-strech"  ></div>
                                     <div class="div-pt-7">
                                         <span class="div-label-first">Country:</span>
                                         <span class="div-label-value">{{ $country }}</span>
@@ -103,7 +106,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 div-flex">
-                                    <div class="img-icon img-age" ></div>
+                                    <div class="img-icon img-age img-bg-strech" ></div>
                                     <div class="div-pt-7">
                                         <span class="div-label-first">Age:</span>
                                         <span class="div-label-value">{{ $age }}</span>

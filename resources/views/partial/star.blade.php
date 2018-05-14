@@ -28,7 +28,55 @@
         border-radius: 50%;
         object-fit: cover;
     }
+    .search-star-review {
+        height: 32px;
+        border-radius: 5px;
+    }
 </style>
+<datalist id="filter-coin-list">
+    <select>
+        {{--<option class="option_crypto_currency"></option>--}}
+        @if ( $cryptoData )
+            @foreach( $cryptoData as $crypto )
+                <option class="option_crypto_currency" id="{{ $crypto->id }}" currency_symbol="{{ $crypto->symbol }}" value="{{ $crypto->name }}"></option>
+            @endforeach
+        @endif
+    </select>
+</datalist>
+<datalist id="filter-seller-list">
+    <select>
+        {{--<option class="option_crypto_currency"></option>--}}
+        @if ( $star_review_data )
+            @foreach( $star_review_data as $idx=>$review_item )
+                <option class="option_crypto_currency" value="{{ $review_item['maker_username'] }}"></option>
+            @endforeach
+        @endif
+    </select>
+</datalist>
+<datalist id="filter-buyer-list">
+    <select>
+        {{--<option class="option_crypto_currency"></option>--}}
+        @if ( $star_review_data )
+            @foreach( $star_review_data as $idx=>$review_item )
+                <option class="option_crypto_currency" value="{{ $review_item['taker_username'] }}"></option>
+            @endforeach
+        @endif
+    </select>
+</datalist>
+<div class="row">
+    <div class="col-md-4">
+        <label class="lbl-search">Coin:</label>
+        <input type="search" id="filter_coin" class="search_input search-star-review" placeholder="Find a specific coin" />
+    </div>
+    <div class="col-md-4">
+        <label class="lbl-search">Seller:</label>
+        <input type="search" id="filter_seller" class="search_input search-star-review" placeholder="Find a specific seller" />
+    </div>
+    <div class="col-md-4">
+        <label class="lbl-search">Buyer:</label>
+        <input type="search" id="filter_buyer" class="search_input search-star-review" placeholder="Find a specific buyer" />
+    </div>
+</div>
 <div class="row">
     <div class="col-xs-12" style="padding: 0;">
         <table id="star_table" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" style="width:100%;">

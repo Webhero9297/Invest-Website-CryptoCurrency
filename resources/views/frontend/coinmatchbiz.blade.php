@@ -17,6 +17,36 @@
     .modal-dialog-method {
         width: 300px;
     }
+
+    input[type="search"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #a2a2a2;
+    }
+    input[type="search"]::-moz-placeholder { /* Firefox 19+ */
+        color: #a2a2a2;
+    }
+    input[type="search"]:-ms-input-placeholder { /* IE 10+ */
+        color: #a2a2a2;
+    }
+    input[type="search"]:-moz-placeholder { /* Firefox 18- */
+        color: #a2a2a2;
+    }
+
+    input[type="search"]::placeholder {
+        color: #a2a2a2;
+        opacity: 1; /* Firefox */
+    }
+
+    input[type="search"]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #a2a2a2;
+    }
+
+    input[type="search"]::-ms-input-placeholder { /* Microsoft Edge */
+        color: #a2a2a2;
+    }
+
+    #star_table_wrapper {
+        margin-top: -25px;
+    }
 </style>
 <script>
     var global_biz = <?php echo $global_biz; ?>;
@@ -32,9 +62,9 @@
                 </div>
                 <div class="panel-body">
                     <div class="tab">
-                        <button class="tablinks active" onclick="openCity(event, 'div_buy')" data-toggle="popover" data-content="People who would like to buy coins">BUY</button>
-                        <button class="tablinks" onclick="openCity(event, 'div_sell')" data-toggle="popover" data-content="People who would like to sell coins">SELL</button>
-                        <button class="tablinks" onclick="openCity(event, 'div_star')" data-toggle="popover" data-content="Find review's about the people">REVIEW'S</button>
+                        <button class="tablinks active" onclick="openCity(event, 'div_buy')" data-toggle="popover" data-content="People who would like to buy coins">Buy</button>
+                        <button class="tablinks" onclick="openCity(event, 'div_sell')" data-toggle="popover" data-content="People who would like to sell coins">Sell</button>
+                        <button class="tablinks" onclick="openCity(event, 'div_star')" data-toggle="popover" data-content="Find reviews about the people">Reviews</button>
                     </div>
                     <div id="div_buy" class="tabcontent show">
                         @include('partial/buy')
@@ -105,7 +135,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="subject" class="modal-title">Comment</label>
+                        <label for="subject" class="modal-title">Your message have been sent</label>
                         <textarea id="subject" name="review_content" placeholder="Write something.."></textarea>
                     </div>
                     <div class="form-group text-right">
@@ -127,13 +157,16 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-center">
+                {{--<p></p>--}}
+            {{--</div>--}}
+            {{--<div class="modal-footer">--}}
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnSendSellInterestedSubmit()" data-toggle="popover" data-content="User will be notified by email.">
                     Interested
                 </button>
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowSellReviewComment()" data-toggle="popover" data-content="User will receive a message at Moonfolio.">
                     Leave a message
                 </button>
-                <button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowAddReview()" data-toggle="popover" data-content="You can give the user some stars and a comment.">
+                <button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowAddReview()" data-toggle="popover" data-content="Rate the user.">
                     Add review
                 </button>
             </div>
@@ -150,7 +183,7 @@
             <div class="modal-body">
                 <form id="form_review" class="form-modal-content">
                     <div class="form-group">
-                        <label for="comment" class="modal-title">Comment</label>
+                        <label for="comment" class="modal-title">Your message have been sent</label>
                         <textarea id="comment" name="review_content" placeholder="Write something.."></textarea>
                     </div>
                     <div class="form-group text-right">
@@ -202,7 +235,7 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>You have to become Moonfolio account.</p>
+                <p>You must be a Moonfolio user, please signup now or login.</p>
             </div>
             <div class="modal-footer" style="padding:0;">
                 <button type="button" class="button buttonRed" data-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>

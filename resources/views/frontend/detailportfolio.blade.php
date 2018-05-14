@@ -111,11 +111,10 @@
                         <div class="col-md-5 padding0 wrap-div-col">
                             Total Profit/Loss:
                             <span class="{{ ($total_data['total_profit_loss']<0)?"color-red":"color-green" }} strok-white">${{ number_format($total_data['total_profit_loss'], 2, '.',',') }}</span>
-                            &nbsp;&nbsp;(
+                            &nbsp;&nbsp;
                             <span class=" {{ ($total_data['total_profit_loss_percentage']>0)?"color-green":"color-red" }} strok-white">
-                                {{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}%
+                                ({{ number_format($total_data['total_profit_loss_percentage'], 2, '.',',') }}%)
                             </span>
-                            )
                         </div>
                     </div>
                 </div>
@@ -223,6 +222,7 @@
     </div>
 </div>
 
+{{--<script src="{{ asset('./js/frontend/editprofile.js') }}"></script>--}}
 <div id="fb-root"></div>
 <script>
     var fbButton = document.getElementById('fb-share-button');

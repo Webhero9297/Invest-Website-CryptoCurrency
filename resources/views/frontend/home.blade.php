@@ -165,7 +165,7 @@
     }
     .section-padding {
         padding-top: 50px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
     }
     .header {
         /*text-align: center;*/
@@ -314,6 +314,9 @@
         display: inline;
         font-size: 28px;
     }
+    .label-take-inner{
+        font-size: 16px;
+    }
 /********************************************************    App download button  End    ********************************************************************/
 </style>
 <script>
@@ -336,8 +339,8 @@
                             <label class="home-label lets">AND LETS GO TO THE</label>
                             <label class="home-label moon">MOON!</label>
                             <div class="div-button-wrap" style="display:inline-table;">
-                                <a href="#comprehensive" class="nav-link a-link sign text-center" onclick="doOnScrollConprehensive()">Learn more</a>
-                                <a href="{{ route('register') }}" class="nav-link a-link sign text-center">&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;&nbsp;</a>
+                                <a href="#comprehensive" class="nav-link a-link sign text-center" onclick="doOnScrollConprehensive()">&nbsp;&nbsp;Learn more&nbsp;&nbsp;</a>
+                                <a href="{{ route('register') }}" class="nav-link a-link sign text-center">New portfolio</a>
                             </div>
                         </div>
                     @else
@@ -347,7 +350,7 @@
                             <label class="home-label lets">AND LETS GO TO THE</label>
                             <label class="home-label moon">MOON!</label>
                             <div class="div-button-wrap" style="display:inline-table;">
-                                <a href="#comprehensive" class="nav-link a-link sign text-center" onclick="doOnScrollConprehensive()">Learn more</a>
+                                <a href="#comprehensive" class="nav-link a-link sign text-center" onclick="doOnScrollConprehensive()">&nbsp;&nbsp;Learn more&nbsp;&nbsp;</a>
                             </div>
                         </div>
                     @endguest
@@ -486,14 +489,14 @@
                             <div class="header">
                                 <div class="div-download">DOWNLOAD</div>
                                 <div class="awesome-free">OUR APP</div>
-                                <div class="div-app-download-explain">
-                                    What makes this portfolio platform better than the rest is the chat functionality,
-                                    where you can talk to other people and ask their experiences and even get useful tips.
-                                    For now the best product on the internet.
-                                    What makes this portfolio platform better than the rest is the chat functionality,
-                                    where you can talk to other people and ask their experiences and even get useful tips.
-                                    For now the best product on the internet.
-                                </div>
+                                {{--<div class="div-app-download-explain">--}}
+                                    {{--What makes this portfolio platform better than the rest is the chat functionality,--}}
+                                    {{--where you can talk to other people and ask their experiences and even get useful tips.--}}
+                                    {{--For now the best product on the internet.--}}
+                                    {{--What makes this portfolio platform better than the rest is the chat functionality,--}}
+                                    {{--where you can talk to other people and ask their experiences and even get useful tips.--}}
+                                    {{--For now the best product on the internet.--}}
+                                {{--</div>--}}
                             </div>
                             <div class="row download-area">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -514,7 +517,17 @@
                 <div class="div-top-title">
                     <label class="home-label top">COMPREHENSIVE</label>
                     <label class="home-label community port label-features">FEATURES</label>
-                    <label class="home-label label-take">TAKE YOUR PORTFOLIO TO THE MOON!</label>
+                    {{--<label class="home-label label-take label-take-inner">--}}
+                    <p class="white-text label-take-inner">
+                        Moonfolio is a Crypto Portfolio, peer-to-peer service which provides users with an alternative way to acquire and trade cryptocurrencies,
+                        by connecting coin buyers and sellers online.
+                        This exciting new project is not just another standard portfolio tracker, as it boasts some unique additional functionality,
+                        such as automated coin recognition as part of Moonfolio’s “Coinmatch” system, and a facility to set price alerts
+                        if particular coin prices go above or below a specified level.  Also, on-site chat provides easy communication between prospective buyers and sellers.
+                        Moonfolio acts as a gateway into the world of cryptocurrencies, allowing new users to quickly get familiarised with buying and selling,
+                        and users at all levels to grow their crypto portfolios in a fun and exciting way.
+                    </p>
+                    {{--</label>--}}
                 </div>
                 <div class="row div-features-wrap">
                     <div class="col-sm-6">
@@ -780,9 +793,18 @@
                                                     </div>
                                                     <div class="col-xs-12 col-sm-8 col-md-9">
                                                         <label class="div-pad1-label">
-                                                            What makes this portfolio platform better than the rest is the chat functionality,
-                                                            where you can talk to other people and ask their experiences and even get useful tips.
-                                                            For now the best product on the internet.
+                                                            @if ( $user['full_name'] == 'MareeN' )
+                                                                What makes this portfolio platform better than the rest is the chat functionality,
+                                                                where you can talk to other people and ask their experiences and even get useful tips.
+                                                                For now the best product on the internet.
+                                                            @elseif ( $user['full_name'] == 'Josh' )
+                                                                Moonfolio price alerts are a MUST-HAVE for any serious crypto currency investor.
+                                                                They saved me from taking profits at the right time and I was able to cash in just before the sell off in January 2018.
+                                                            @else
+                                                                What makes this portfolio platform better than the rest is the chat functionality,
+                                                                where you can talk to other people and ask their experiences and even get useful tips.
+                                                                For now the best product on the internet.
+                                                            @endif
                                                         </label>
                                                         <label class=" text-center">
                                                             <a href="/detailportfolio/{{ $user['user_id'] }}" class="a-review-user">{{ $user['full_name'] }}</a>

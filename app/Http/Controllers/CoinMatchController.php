@@ -163,9 +163,15 @@ class CoinMatchController extends Controller
         $mail->Body = "<div>Hi {$to_fullname},<br><br>
                     <div>We have found a potential {$side}er for you.</div><br>
                     <div>{$send_user_fullname} is interested.</div><br>
-                    <div>Please contact the user on Moonfolio.</div><br>
+                    <div>Please contact the user on Moonfolio or send the user an email.</div><br>
                     <div>Team Moonfolio.</div><br>
-                    <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" />";
+                    <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" /><br>
+                    <div>
+                        The information on Coin Match is of a general nature only and does not take into account your personal circumstances, financial situation or needs. <br>
+                        Coin Match is only a matching service and does not facilitate any on-site transactions and strictly bears no legal responsibility. <br>
+                        Coin Match does have a rating system, however, these ratings are not to be relied upon. <br>
+                        Please conduct thorough due diligence with any counter-party that you transact or interact with.
+                    </div>";
 //        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
         if(!$mail->Send()){
