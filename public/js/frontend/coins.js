@@ -33,8 +33,14 @@ $(document).ready(function(){
                 });
             }, 60000);
         }, 60000);
+        //
+        ////$('#tfoot').css('display', 'none');
+        //
         socket = io.connect('https://coincap.io');
     });
+    //$('#tfoot').css('display', '');
+    //$('.py-4').css('height', '');
+    //$('.container-fluid').css('height', '');
 });
 function doOnGetRate(callback) {
     $.getJSON('http://coincap.io/exchange_rates', function(resp){
@@ -42,6 +48,7 @@ function doOnGetRate(callback) {
     });
 }
 function doOnLoadLiveChart() {
+    //$('#tfoot').css('display', 'none');
     $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center" style="padding-top:50px;"><div class="loader"></div></td></tr>');
     loadLiveChart();
 }
@@ -116,6 +123,7 @@ function doOnRenderTable(coin_live_datas) {
                 $('#price_'+coin_symbol).addClass(sString);
                 $('#mktcap_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.mktcap*current_fiat_rate, '', 0, ",", "."));
                 $('h24_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.cap24hrChange, '', 2, ",", "."));
+                ///*if (socket_data.msg.long == 'Bitcoin') */console.log(socket_data.msg);
             }
 
         }
@@ -133,9 +141,11 @@ function doOnchangeCurrency(currency) {
 function myFilter(event) {
     var input, filter;
     filter = document.getElementById("myInput").value;
+    //if ( event.keyCode == 13 ){
         $.get('/filter/'+filter, {currency : selected_currency }, function(filter_resp){
             doOnRenderTable(filter_resp);
         });
+    //}
 
 }
 function myFunction() {
@@ -278,6 +288,7 @@ $(function(){
         change: function(){
             var value = $(this).val();
             var text = $(this).children('option:selected').html();
+            console.log(value+' : '+text);
             $('#tfoot').css('display', 'none');
             doOnchangeCurrency(value);
 

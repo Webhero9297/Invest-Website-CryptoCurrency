@@ -105,7 +105,7 @@ label {
     padding-bottom: 60px;
 }
 .div-avatar-bg {
-    background-image: url('../assets/images/background/panel-bk.png');
+    /* background-image: url(../assets/images/background/panel-bk.png); */
     background-size: cover;
     position: relative;
     z-index: 1;
@@ -113,6 +113,7 @@ label {
     height: 190px;
     padding: 10px;
     border: 1px solid #666666;
+    background-color: #0297bf;
 
 }
 .div-avatar-panel {

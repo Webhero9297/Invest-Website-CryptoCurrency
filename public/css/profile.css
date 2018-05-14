@@ -21,6 +21,8 @@
     border-radius: 50%;
     border: 1px solid #333333;
     height: 200px;
+    background-size: cover;
+    background-position: center;
 }
 .div-avatar-img-choise-btn {
     color: #0297bf;

@@ -71,9 +71,10 @@ select.form-control {
 input[type="search"] {
     background: #56e2c900;
     color: #fff;
+    width: calc(100% - 50px);
 }
 #other_sell_table_wrapper, #other_buy_table_wrapper {
-    margin-top: -10px!important;
+    margin-top: -25px!important;
 }
 #other_sell_table, #other_buy_table, #star_table {
     width: 100%;
@@ -289,4 +290,7 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
     margin-top: -10px;
     background-color: #0a0a0a;
     border: 2px solid #6f6f6f;
+}
+.last-td {
+    width: 100px!important;
 }

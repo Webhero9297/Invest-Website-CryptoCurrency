@@ -3,9 +3,11 @@ var sort_cols = {"invest": 2, "capital": 3, "profit": 4};
 $(document).ready(function(){
     loadLivePortfolioData();
 
+    //window.setTimeout(function(){
         window.setInterval(function(){
             loadLivePortfolioData();
         }, 50000);
+    //}, 5000);
 
     $('.span-sort').click(function(){
         event = $(this);
