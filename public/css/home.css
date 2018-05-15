@@ -908,8 +908,8 @@ input:-webkit-autofill ~ label {
         height: 260px;
         margin-top: 260px;
         position: absolute;
-        top: 38px;
-        right: -18px;
+        top: -10px;
+        right: -53px;
     }
     #myCanvas {
         width: 600px;
@@ -925,7 +925,7 @@ input:-webkit-autofill ~ label {
         margin: 140px 230px 6px 80px;
     }
     .a-link {
-        font-size: 32px;
+        font-size: 24px!important;
     }
     .div-container {
         padding:10px 10%;

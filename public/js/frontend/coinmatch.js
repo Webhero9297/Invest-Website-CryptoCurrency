@@ -83,11 +83,13 @@ function doOnClickSellSide() {
     $.getJSON('/getinvestedcoinamount/'+coin_name, function(resp){
         var diff = Decimal.sub(resp.invested, resp.sold);
         if ( diff < quantity ) {
-            var title = "Sorry! Please enter quantity less than total invested amount.<br>"+"Your total invested amount is "+resp.invested + ".<br>";
-            if ( resp.sold != 0 ) {
-                title += "Your total sold amount is "+ resp.sold+".<br>";
-                title += "The amount you can sell is "+ diff + ".<br>";
-            }
+            var title = "You dont have enough balance in your portfolio for this cryptocurrency.";
+            /*
+             if ( resp.sold != 0 ) {
+             title += "Your total sold amount is "+ resp.sold+".<br>";
+             title += "The amount you can sell is "+ diff + ".<br>";
+             }
+             */
             $('.modal-body').html(title);
             $('#myConfirm').modal('show');
             $('input[name="quantity"]').attr('max', resp.quantity);

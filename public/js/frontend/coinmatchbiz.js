@@ -9,10 +9,6 @@ $(document).ready(function(){
     $('#init_alert_modal').modal('show');
 
 
-    sellTable = $('#other_sell_table').DataTable();
-    buyTable  = $('#other_buy_table').DataTable();
-
-    starTable = $('#star_table').DataTable();
     //starTable = $('#star_table').dataTable().api();
 
     $('input.score_radio').click(function(){
@@ -20,8 +16,8 @@ $(document).ready(function(){
         $('input[name="review_score"]').val($(this).val());
     });
     $('.py-4').css('height', '100%');
-    $('#other_sell_table thead th:last').css('width', '82px');
-    $('#other_buy_table thead th:last').css('width', '82px');
+    //$('#other_sell_table thead th:last').css('width', '82px');
+    //$('#other_buy_table thead th:last').css('width', '82px');
     doOnGetLiveData();
     window.setInterval(function(){
         doOnGetLiveData();
@@ -73,7 +69,19 @@ $(document).ready(function(){
     $('#buy_filter_coin').attr('placeholder', 'Find a specific coin');
 
     $('#sell_filter_coin').each(function () {
-
+        var availableTags = $('#sell-brands-list').find('option').map(function () {
+            return this.value;
+        }).get();
+        $(this).autocomplete({
+            source: availableTags,
+            select: function(e, ui) {
+                doOnFilterBuyData( 2, ui.item.value );
+            }
+        }).on('search', function () {
+            if ($(this).val() === '') {
+                $(this).autocomplete('search', ' ');
+            }
+        });
     });
     $('#sell_filter_coin').on('keyup', function () {
         doOnFilterSellData( 2, $(this).val() );
@@ -149,14 +157,10 @@ $(document).ready(function(){
         });
     });
 
-    $($('#star_table_wrapper .row')[0]).css('display', 'none');
-    $($('#other_sell_table_wrapper .row')[0]).css('display', 'none');
-    $($('#other_buy_table_wrapper .row')[0]).css('display', 'none');
 
 });
 
 function filterColumn() {
-console.log(filter_column_arr, filter_value_arr);
     for( j = 0; j < filter_value_arr.length; j++ ) {
         _filterV = filter_value_arr[j];
         if (_filterV!=''){
@@ -218,21 +222,7 @@ function doOnGetLiveData() {
                                             <td class="td-cell text-center padding0">' + buy_item.quantity + '</td>\
                                             <td class="td-cell color-green text-center padding0">$' + buy_item.purchased_price + '</td>';
 
-                tbody_contents +=        '<td class="td-cell text-center padding0">$' + buy_item.current_price + '</td>';
-
-                //if (AuthUser != 'undefined') {
-                //    if ( buy_item.enable_status == 1 ){
-                //        tbody_contents += '<td class="td-cell text-center padding0">\
-                //                              <button class="sell-button" onclick=\'doOnOtherBuyClick("' + buy_item.match_id + '", ' + JSON.stringify(buy_item) + ')\'>Sell</button>\
-                //                           </td>';
-                //    }
-                //    else {
-                //        tbody_contents += '<td class="td-cell text-center padding0">\
-                //                           </td>';
-                //    }
-                //
-                //
-                //}
+                tbody_contents +=           '<td class="td-cell text-center padding0">$' + buy_item.current_price + '</td>';
                 tbody_contents += '</tr>';
             }
             $('#tbody_buy_coin_live_data').html(tbody_contents);
@@ -257,14 +247,6 @@ function doOnGetLiveData() {
                                             <td class="td-cell color-red text-center padding0">$' + sell_item.purchased_price + '</td>';
 
                 tbody_contents +=          '<td class="td-cell text-center padding0">$' + sell_item.current_price + '</td>';
-
-                //if (AuthUser != 'undefined') {
-                //    //sell
-                //    tbody_contents += '<td class="td-cell text-center padding0">\
-                //                               <button class="buy-button" onclick=\'doOnOtherBuyClick("' + sell_item.match_id + '", ' + JSON.stringify(sell_item) + ')\'>Buy</button>\
-                //                           </td>';
-                //
-                //}
                 tbody_contents += '</tr>';
             }
             $('#tbody_sell_coin_live_data').html(tbody_contents);
@@ -307,8 +289,17 @@ function doOnGetLiveData() {
             $('#tbody_star_review_live_data').html(tbody_contents);
         }
         $('.py-4').css('height', '100%!important');
-        $('#other_sell_table thead th:last').css('width', '82px');
-        $('#other_buy_table thead th:last').css('width', '82px');
+        //$('#other_sell_table thead th:last').css('width', '182px');
+        //$('#other_buy_table thead th:last').css('width', '182px');
+
+        sellTable = $('#other_sell_table').DataTable();
+        buyTable  = $('#other_buy_table').DataTable();
+
+        starTable = $('#star_table').DataTable();
+
+        $($('#star_table_wrapper .row')[0]).css('display', 'none');
+        $($('#other_sell_table_wrapper .row')[0]).css('display', 'none');
+        $($('#other_buy_table_wrapper .row')[0]).css('display', 'none');
 
         doOnFilterBuyData(2, $('#buy_filter_coin').val());
         doOnFilterSellData(2, $('#sell_filter_coin').val());
@@ -435,7 +426,14 @@ function doOnClickBuyerForSell(side, obj) {
         send_user_id = $(obj).attr('buyer_id');
         g_side = side;
         $('#div_buy_modal').modal('show');
-        selectedTdInfo = JSON.parse($(obj).attr('td-info'));
+        if ($(obj).attr('td-info') == undefined) return;
+        if ( typeof $(obj).attr('td-info') == 'undefined' ){
+            selectedTdInfo = $(obj).attr('td-info');
+        }
+        else{
+            selectedTdInfo = JSON.parse($(obj).attr('td-info'));
+        }
+
     }
     else {
         $('#alarm_modal').modal('show');
@@ -444,10 +442,11 @@ function doOnClickBuyerForSell(side, obj) {
 function doOnSendSellInterestedSubmit(side) {
     if ( global_biz == undefined ) {
         if ( send_user_id!= undefined ) {
+            $('#div_buy_modal').modal('hide');
             $.getJSON('/sendinterestmsg/'+send_user_id, {side: g_side}, function(resp){
                 if ( resp.result == 'ok') {
-                    $('#div_buy_modal').modal('hide');
-                    $('#confirm_modal').modal('show');
+                    //$('#confirm_modal').modal('show');
+                    $('#popup_modal').modal('show');
                 }
             });
         }
