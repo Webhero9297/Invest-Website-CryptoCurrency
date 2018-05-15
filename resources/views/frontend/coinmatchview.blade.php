@@ -297,8 +297,8 @@
             <div class="modal-body">
                 <p>Just removed detail data.</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="button buttonRed btn-save-details ui-corner-all" data-dismiss="modal">Close</button>
+            <div class="modal-footer text-center">
+                <button type="button" class="button buttonRed btn-save-details ui-corner-all" style="margin:0.3em auto;" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

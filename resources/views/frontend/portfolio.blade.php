@@ -61,7 +61,7 @@
             <div class="container" style="padding-bottom: 200px;">
                 <div class="panel panel-default">
                     <div class="div-panel-heading">
-                        PORTFOLIOS
+                        Portfolios
                         &nbsp;&nbsp;&nbsp;
                         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for name" title="Type in a name">
                     </div>

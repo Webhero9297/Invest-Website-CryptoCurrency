@@ -350,7 +350,7 @@
             <div class="container" style="padding-bottom: 50px;">
                 <div class="panel panel-default" style="border:none;background: transparent;">
                     <div class="div-panel-heading" style="">
-                        COINS
+                        Coins
                         &nbsp;&nbsp;&nbsp;
                         <input type="text" id="myInput" placeholder="Search for coins" title="Type in a name">
                         <div style="display:inline;float:right;margin-top:-15px;">

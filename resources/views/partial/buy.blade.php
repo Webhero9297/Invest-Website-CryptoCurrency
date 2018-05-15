@@ -38,41 +38,41 @@
         <input type="text" class="search_input" id="myBuyInput" onkeyup="myBuyFunction()" placeholder="Find a specific coin" title="Type in a name" style="display: none;">
         <table id="myBuyTable">
             <thead>
-                <tr class="header">
-                    <th class="td-cell text-center">#</th>
-                    <th class="td-cell text-center">Coin</th>
-                    <th class="td-cell text-center">Price</th>
-                    <th class="td-cell text-center" width="0px">Quantity</th>
-                </tr>
+            <tr class="header">
+                <th class="td-cell text-center">#</th>
+                <th class="td-cell text-center">Coin</th>
+                <th class="td-cell text-center">Price</th>
+                <th class="td-cell text-center" width="0px">Quantity</th>
+            </tr>
             </thead>
-        @if ( $buy_list )
-            @foreach( $buy_list as $idx=>$list_item )
-                <tr onclick="doOnMyBuyListClick('{{ $list_item['match_id'] }}')" coin-symbol="{{ $list_item['coin_symbol'] }}">
-                    <td class="td-cell text-center">{{ $idx+1 }}</td>
-                    <td class="td-cell text-center">
-                        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{ $list_item['coin_id'] }}.png" width="32px" height="32px" />
-                        <span>{{ $list_item['coin_symbol'] }}</span>
-                    </td>
-                    <td class="td-cell color-green text-center">${{ $list_item['purchased_price'] }}</td>
-                    <td class="td-cell text-center">{{ $list_item['quantity'] }}</td>
-                </tr>
-            @endforeach
-        @else
-            @if ( \Auth::user() )
-                <tr>
-                    <td colspan="4" style="text-align:center;padding:10px;">
-                    </td>
-                </tr>
+            @if ( $buy_list )
+                @foreach( $buy_list as $idx=>$list_item )
+                    <tr onclick="doOnMyBuyListClick('{{ $list_item['match_id'] }}')" coin-symbol="{{ $list_item['coin_symbol'] }}">
+                        <td class="td-cell text-center">{{ $idx+1 }}</td>
+                        <td class="td-cell text-center">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{ $list_item['coin_id'] }}.png" width="32px" height="32px" />
+                            <span>{{ $list_item['coin_symbol'] }}</span>
+                        </td>
+                        <td class="td-cell color-green text-center">${{ $list_item['purchased_price'] }}</td>
+                        <td class="td-cell text-center">{{ $list_item['quantity'] }}</td>
+                    </tr>
+                @endforeach
             @else
-                <tr>
-                    <td colspan="4" style="text-align:center;padding:10px;">
-                        <a href="{{ route('login') }}" class="a-wrap-btn">Login</a>
-                        <div>or</div>
-                        <a href="{{ route('register') }}" class="a-wrap-btn">New Portfolio</a>
-                    </td>
-                </tr>
+                @if ( \Auth::user() )
+                    <tr>
+                        <td colspan="4" style="text-align:center;padding:10px;">
+                        </td>
+                    </tr>
+                @else
+                    <tr>
+                        <td colspan="4" style="text-align:center;padding:10px;">
+                            <a href="{{ route('login') }}" class="a-wrap-btn">Login</a>
+                            <div>or</div>
+                            <a href="{{ route('register') }}" class="a-wrap-btn">New Portfolio</a>
+                        </td>
+                    </tr>
+                @endif
             @endif
-        @endif
         </table>
     </div>
     <div class="col-xs-12 col-sm-7 col-md-8" style="padding: 0;margin-top:-10px;">
@@ -93,40 +93,14 @@
                         <th class="td-cell td-grey padding0" >Coin</th>
                         <th class="td-cell td-grey padding0" >Quantity</th>
                         <th class="td-cell td-grey padding0" data-toggle="popover" data-content="This is the price that buyers are offering">Price</th>
-                        <th class="td-cell td-grey padding0 last-td">Current Price</th>
+                        <th class="td-cell td-grey padding0 last-td" width="182px">Current Price</th>
                         {{--@if (\Auth::user())--}}
                         {{--<th class="td-cell td-grey text-center padding0" width="82px" style="width:82px!important;">Sell</th>--}}
                         {{--@endif--}}
                     </tr>
                     </thead>
                     <tbody id="tbody_buy_coin_live_data" class="text-center">
-                    @if ( $other_buy_data )
-                        @foreach( $other_buy_data as $idx=>$buy_item )
-                            <tr>
-                                <td class="td-cell text-center padding0">{{ $idx+1 }}</td>
-                                <td class="td-cell text-center padding0 span-buy-nametitle" buyer_id="{{ $buy_item['user_id'] }}" onclick="doOnClickBuyerForSell('buy', this)">
-                                    <img src="{{ $buy_item['user_avatar'] }}" style="border-radius: 50%;object-fit: cover;" width="32px" height="32px" />
-                                    <span>{{ $buy_item['user_full_name'] }}</span>
-                                </td>
-                                <td class="td-cell text-center padding0">
-                                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{ $buy_item['coin_id'] }}.png" width="32px" height="32px" />
-                                    <span>{{ $buy_item['coin_name'] }}</span>
-                                </td>
-                                <td class="td-cell text-center padding0">{{ $buy_item['quantity'] }}</td>
-                                <td class="td-cell color-green text-center padding0">${{ $buy_item['purchased_price'] }}</td>
-                                <td class="td-cell text-center padding0">${{ $buy_item['current_price'] }}</td>
-                                {{--@if (\Auth::user())--}}
-                                {{--<td class="td-cell text-center padding0">--}}
-                                {{--@if ( $buy_item['enable_status'] == 0 )--}}
-                                {{--<span class="sell-button">Sell</span>--}}
-                                {{--@else--}}
-                                {{--<button class="sell-button" onclick="doOnOtherSellClick('{{ $buy_item['match_id'] }}', {{ json_encode($buy_item) }})">Sell</button>--}}
-                                {{--@endif--}}
-                                {{--</td>--}}
-                                {{--@endif--}}
-                            </tr>
-                        @endforeach
-                    @endif
+
                     </tbody>
                 </table>
             </div>

@@ -160,12 +160,12 @@
                 {{--<p></p>--}}
             {{--</div>--}}
             {{--<div class="modal-footer">--}}
-                <button type="button" class="button buttonBlue btn-select-method" onclick="doOnSendSellInterestedSubmit()" data-toggle="popover" data-content="User will be notified by email.">
+                <button type="button" class="button buttonBlue btn-select-method" onclick="doOnSendSellInterestedSubmit()" data-toggle="popover" data-content="User will be notified by email and will receive an alert on Moonfolio.">
                     Interested
                 </button>
-                <button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowSellReviewComment()" data-toggle="popover" data-content="User will receive a message at Moonfolio.">
-                    Leave a message
-                </button>
+                {{--<button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowSellReviewComment()" data-toggle="popover" data-content="User will receive a message at Moonfolio.">--}}
+                    {{--Leave a message--}}
+                {{--</button>--}}
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowAddReview()" data-toggle="popover" data-content="Rate the user.">
                     Add review
                 </button>
@@ -183,7 +183,7 @@
             <div class="modal-body">
                 <form id="form_review" class="form-modal-content">
                     <div class="form-group">
-                        <label for="comment" class="modal-title">Your message have been sent</label>
+                        <label for="comment" class="modal-title">Your message have been sent.</label>
                         <textarea id="comment" name="review_content" placeholder="Write something.."></textarea>
                     </div>
                     <div class="form-group text-right">
@@ -203,7 +203,7 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>An email have been sent to the user. Please wait for his response.</p>
+                <p>An email have been sent to the user. Please wait for their response.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="button buttonBlue" data-dismiss="modal">Ok</button>
@@ -239,6 +239,22 @@
             </div>
             <div class="modal-footer" style="padding:0;">
                 <button type="button" class="button buttonRed" data-dismiss="modal">&nbsp;&nbsp;Close&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popup_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Moonfolio</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>An email has been sent to the user. Please wait for their response.</p>
+            </div>
+            <div class="modal-footer" style="padding:0;">
+                <button type="button" class="button buttonBlue" style="margin:0.3em auto;" data-dismiss="modal">&nbsp;&nbsp;Ok&nbsp;&nbsp;</button>
             </div>
         </div>
     </div>

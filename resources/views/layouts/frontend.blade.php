@@ -14,8 +14,8 @@
     <!-- Scripts -->
     {{--/***************   ChatCamp plugin  Start ************/--}}
 
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" />--}}
-    {{--<link href="/ChatCampPlugin/static/css/main.1d1e2964.css" rel="stylesheet">--}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" />
+    <link href="/ChatCampPlugin/static/css/main.0cb6f1f7.css" rel="stylesheet">
 
     {{--/***************   ChatCamp plugin  Start ************/--}}
 
@@ -42,8 +42,6 @@
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 
-
-
     <style>
         .animate-in {
             -webkit-animation: fadeIn .5s ease-in;
@@ -66,8 +64,8 @@
 </head>
 <body>
 <?php
-    //require_once('../vendor/autoload.php');
-    //use Iflylabs\iFlyChat;
+//require_once('../vendor/autoload.php');
+//use Iflylabs\iFlyChat;
 ?>
 <script>
     var AuthUser = "{{ (\Auth::user()) ? \Auth::user()->id : 'undefined' }}";
@@ -125,7 +123,7 @@
                             var userId = <?php echo \Auth::user()->id; ?>;
                         </script>
 
-                    @endguest
+                        @endguest
                 </ul>
             </div>
         </div>
@@ -163,11 +161,12 @@
         font-family: Montserrat-Hairline;
         font-size: 16px;
         border:none;;
-        width: 340px;
+        width: 360px;
+        padding: 7px;
     }
     .message {
         font-family: Montserrat-Light;
-        font-size: 16px;
+        font-size: 14px;
         color: white;
     }
     .alert-title {
@@ -192,139 +191,137 @@
     <source src="{{ asset('./assets/mp3/notification.mp3') }}" type="audio/mp3" >
 </audio>
 <script>
-$(document).ready(function(){
-    if ( userId != undefined ) {
-        alertNotify();
-        window.setInterval(function(){
+    $(document).ready(function(){
+        if ( userId != undefined ) {
             alertNotify();
-        }, 60000);
+            window.setInterval(function(){
+                alertNotify();
+            }, 60000);
 
+        }
+        var wH = parseFloat($(window)[0].innerHeight);
+        var yieldH = parseFloat($('.py-4').height());
+
+        if ( wH >= (yieldH+100) || wH == yieldH ){
+            $('.py-4').css('height', (wH-100)+'px');
+            $('.container-fluid').css('height', '100%');
+        }
+
+        $('.footer-backtotop').click(function(){
+            $('html, body').animate({
+                scrollTop: $("#home").offset().top
+            }, 2000);
+        });
+    });
+
+    window.addEventListener("beforeunload", function () {
+        document.body.classList.add("animate-out");
+    });
+
+    function alertNotify(){
+        $.get('/pricealert', function(resp){
+            alert_coins = resp.audio_alert_datas;
+            for( i in alert_coins ) {
+                notification(alert_coins[i]);
+            }
+            review_datas = resp.review_datas;
+            for( i in review_datas ) {
+                notificationReview(review_datas[i]);
+            }
+        });
     }
-    var wH = parseFloat($(window)[0].innerHeight);
-    var yieldH = parseFloat($('.py-4').height());
-
-    if ( wH >= (yieldH+100) || wH == yieldH ){
-        $('.py-4').css('height', (wH-100)+'px');
-        $('.container-fluid').css('height', '100%');
+    var x = document.getElementById("notification");
+    function notification(coin_data) {
+        message = '<br/><img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+coin_data.coin_id+'.png" width="32px" height="32px" />';
+        message += '<label class="message">&nbsp;&nbsp;'+coin_data.coin_name+'('+coin_data.symbol+')'+'</label>&nbsp;&nbsp;&nbsp;';
+        //message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">'+coin_data.msg+'</label>';
+        message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Current Price: $'+coin_data.current_price+'</label>';
+        message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Alert time: '+coin_data.current_datetime+'(UTC)</label>';
+        $.notify({
+            title: '<label class="message alert-title">PRICE ALERT!</label>',
+            icon: '',
+            message: message
+        }, {
+            type: 'danger',
+            animate: {
+                enter: 'animated fadeInUp',
+                exit: 'animated fadeOutRight'
+            },
+            placement: {
+                from: "bottom",
+                align: "left"
+            },
+            offset: 20,
+            spacing: 10,
+//        showProgressbar: true,
+            z_index: 1031,
+            delay: 0,
+            timer: 1000,
+            onShow: function(){
+                x.play();
+            }
+        });
     }
-
-    $('.footer-backtotop').click(function(){
-        $('html, body').animate({
-            scrollTop: $("#home").offset().top
-        }, 2000);
-    });
-});
-
-window.addEventListener("beforeunload", function () {
-    document.body.classList.add("animate-out");
-});
-
-function alertNotify(){
-    $.get('/pricealert', function(resp){
-        alert_coins = resp.audio_alert_datas;
-        for( i in alert_coins ) {
-            notification(alert_coins[i]);
+    function notificationReview(coin_data) {
+        message = '';
+        if ( coin_data.side == 'sell' ){
+            message += '<label class="message">&nbsp;&nbsp;'+coin_data.sender_name+' would like to '+coin_data.side+' a coin.</label>';
         }
-        review_datas = resp.review_datas;
-        for( i in review_datas ) {
-            notificationReview(review_datas[i]);
+        else{
+            message += '<label class="message">&nbsp;&nbsp;'+coin_data.sender_name+' is interested in '+coin_data.side+'ing your coin.</label>';
         }
-    });
-}
-var x = document.getElementById("notification");
-function notification(coin_data) {
-    message = '<br/><img src="https://files.coinmarketcap.com/static/widget/coins_legacy/32x32/'+coin_data.coin_id+'.png" width="32px" height="32px" />';
-    message += '<label class="message">&nbsp;&nbsp;'+coin_data.coin_name+'('+coin_data.symbol+')'+'</label>&nbsp;&nbsp;&nbsp;';
-    //message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">'+coin_data.msg+'</label>';
-    message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Current Price: $'+coin_data.current_price+'</label>';
-    message += '<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="message">Alert time: '+coin_data.current_datetime+'(UTC)</label>';
-    $.notify({
-        title: '<label class="message alert-title">PRICE ALERT!</label>',
-        icon: '',
-        message: message
-    }, {
-        type: 'danger',
-        animate: {
-            enter: 'animated fadeInUp',
-            exit: 'animated fadeOutRight'
-        },
-        placement: {
-            from: "bottom",
-            align: "left"
-        },
-        offset: 20,
-        spacing: 10,
+
+        message += '<label class="message">&nbsp;&nbsp;Please contact the user.</label>&nbsp;&nbsp;&nbsp;';
+        $.notify({
+            title: '<img src="/assets/images/background/black_logo.png" height="24px" />',
+            icon: '',
+            message: message
+        }, {
+            type: 'danger',
+            animate: {
+                enter: 'animated fadeInUp',
+                exit: 'animated fadeOutRight'
+            },
+            placement: {
+                from: "bottom",
+                align: "left"
+            },
+            offset: 50,
+            spacing: 30,
 //        showProgressbar: true,
-        z_index: 1031,
-        delay: 0,
-        timer: 1000,
-        onShow: function(){
-            x.play();
-        }
-    });
-}
-function notificationReview(coin_data) {
-    message = '<br/><img src="/assets/images/background/logo.png" height="32px" />';
-    message += '<label class="message">&nbsp;&nbsp;You received from '+coin_data.sender_name+'</label>&nbsp;&nbsp;&nbsp;';
-    message += '<label class="message">&nbsp;&nbsp;He required '+coin_data.side+'ing for your assets.</label>&nbsp;&nbsp;&nbsp;';
-    $.notify({
-        title: '<label class="message alert-title">ALERT!</label>',
-        icon: '',
-        message: message
-    }, {
-        type: 'danger',
-        animate: {
-            enter: 'animated fadeInUp',
-            exit: 'animated fadeOutRight'
-        },
-        placement: {
-            from: "bottom",
-            align: "left"
-        },
-        offset: 20,
-        spacing: 10,
-//        showProgressbar: true,
-        z_index: 1031,
-        delay: 0,
-        timer: 1000,
-        onShow: function(){
-            x.play();
-        }
-    });
-}
+            z_index: 1031,
+            delay: 0,
+            timer: 1000,
+            onShow: function(){
+                x.play();
+            }
+        });
+    }
 </script>
-
-
 
 @guest
 @else
 
-    {{--<div id="app" style="z-index:99999; position: relative; background: white"></div>--}}
+    <div id="cc-app" style="z-index:1000; position: relative; background: white"></div>
     <script>
-       /* window.ChatCampData = {
-          userId: <?php // echo \Auth::user()->id; ?>
-        }*/
+        window.ChatCampData = {
+            userId: '<?php echo \Auth::user()->id; ?>'
+        }
         {{--window.ChatCampData = {}--}}
         {{--window.ChatCampData.userId = "markhan0321@gmail.com";--}}
     </script>
-    {{--<script type="text/javascript" src="/ChatCampPlugin/static/js/main.24c3394c.js"></script>--}}
-    <?php
-            /*
-        $APP_ID = '8844c3c4-e7d9-4533-adf8-7d3dc04b474b';
-        $API_KEY = 'CRE_W2ZQuFUunU7fNqoMjWKPFmLh4JT71gypY3hO4SoW63429';
-        $iflychat = new iFlyChat($APP_ID, $API_KEY);
-        $user = array(
-                'user_name' => \Auth::user()->full_name, // string(required)
-                'user_id' => \Auth::user()->full_name, // string (required)
-                'is_admin' => FALSE, // boolean (optional)
-                'user_avatar_url' => \Auth::user()->user_avatar, // string (optional)
-                'user_profile_url' => '/profile' //'user-profile-link', // string (optional)
-        );
+    <script type="text/javascript" src="/ChatCampPlugin/static/js/main.672107a7.js"></script>
 
-        $iflychat->setUser($user);
-        $iflychat_code = $iflychat->getHtmlCode();
-        print $iflychat_code;
-            */
+    @endguest
 
-    ?>
-@endguest
+    <style>
+        .cc-list-header, .cc-chat-window-header {
+            background-color: #0297bf!important;
+            border-color: #86e5ff!important;
+            margin-left: 0px;
+        }
+        .chatcamp-wb-right {
+            background-color: #0297bf!important;
+        }
+
+    </style>
