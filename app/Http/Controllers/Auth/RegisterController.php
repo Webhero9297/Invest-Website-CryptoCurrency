@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Common;
 use App\Http\Controllers\Auth\RegisterUser;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -66,31 +67,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $curl = curl_init();
 
-//        $serverLink = 'http://'.$_SERVER['HTTP_HOST'];
-//        $logo_link = "{$serverLink}/assets/images/avatars/default.jpg";
-//        curl_setopt_array($curl, array(
-//            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/users.create",
-//            CURLOPT_RETURNTRANSFER => true,
-//            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
-//            CURLOPT_ENCODING => "",
-//            CURLOPT_MAXREDIRS => 10,
-//            CURLOPT_TIMEOUT => 30,
-//            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//            CURLOPT_CUSTOMREQUEST => "POST",
-//            CURLOPT_POSTFIELDS => "id=".$data['email']."&display_name=".$data['full_name']."&avatar_url={$logo_link}",
-//        ));
-//        $response = curl_exec($curl);
-//        $err = curl_error($curl);
-//
-//        curl_close($curl);
-//
-//        if ($err) {
-//            echo "cURL Error #:" . $err;
-//        } else {
-//            echo $response;
-//        }
+
+
 //dd($response);
 //
         $activation_code = substr(str_replace('/', '', Hash::make($data['email'])), -24);
@@ -157,7 +136,7 @@ class RegisterController extends Controller
         //$mail->SMTPSecure = 'SSL';
         $mail->SMTPAuth = true;
         $mail->Username = "manager@moonfolio.io";
-        $mail->Password = "Moonfolio1114!";
+        $mail->Password = "Moonfolio1114!!";
         $mail->IsSendmail(true);
         $mail->CharSet ="UTF-8";
 
@@ -202,7 +181,16 @@ class RegisterController extends Controller
             $user->notification_status  = 1;
             $user->activation_code = null;
             $user->save();
-            auth()->login($user);
+
+            $ccuser_result = Common::createNewCCUser($user);
+
+            if ($ccuser_result['err']) {
+//                echo "cURL Error #:" . $err;
+            } else {
+                auth()->login($user);
+            }
+
+
         } catch (\Exception $exception) {
             logger()->error($exception);
             return "Whoops! something went wrong.";

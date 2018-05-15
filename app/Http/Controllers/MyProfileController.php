@@ -82,7 +82,12 @@ class MyProfileController extends Controller
         $arr['invested_capital'] = number_format($investedCapital, 2, '.',',');
         $arr['current_value'] = number_format($currentValue, 2, '.',',');
         $arr['total_profit_loss'] = number_format($totalProfitLossValue, 2, '.',',');
-        $_temp = ($currentValue/$investedCapital-1)*100;
+        if ( $investedCapital == 0 ) {
+            $_temp = 0;
+        }
+        else {
+            $_temp = ($currentValue/$investedCapital-1)*100;
+        }
         if ( $currentValue < $investedCapital ) $arr['sign'] = -1; else $arr['sign'] = 1;
 
         $arr['total_profit_loss_percentage'] = number_format($_temp, 2, '.',',');
@@ -164,6 +169,7 @@ class MyProfileController extends Controller
         $user->age = $age;
         $user->country = $country;
         $user->save();
+        Common::changeDataOfCCUser($user);
         return redirect()->route('profile');
     }
 
@@ -251,6 +257,7 @@ class MyProfileController extends Controller
         $user = \Auth::user();
         $user->user_avatar = request()->get('default_avatar');
         $user->save();
+        Common::changeAvatarOfCCUser($user);
         return redirect()->route('profile');
     }
     public function changeUserAvatarWithCustomAvatar(Request $request) {
@@ -266,6 +273,7 @@ class MyProfileController extends Controller
             $user_avatar = '/assets/images/avatars/user_avatars/'.$asset_image_filename;
             $user->user_avatar = $user_avatar;
             $user->save();
+            Common::changeAvatarOfCCUser($user);
         }
         return redirect()->route('profile');
     }
@@ -292,7 +300,7 @@ class MyProfileController extends Controller
         //$mail->SMTPSecure = 'SSL';
         $mail->SMTPAuth = true;
         $mail->Username = "manager@moonfolio.io";
-        $mail->Password = "Moonfolio1114!";
+        $mail->Password = "Moonfolio1114!!";
         $mail->IsSendmail(true);
         $mail->CharSet ="UTF-8";
 
@@ -380,9 +388,11 @@ class MyProfileController extends Controller
 
     public function closeThisAccount() {
         $user = \Auth::user();
+        Common::deleteCCUser($user);
         app(User::class)->where('id', $user->id)->delete();
         app(UserCurrencyDetails::class)->where('user_id', $user->id)->delete();
         app(CoinAlert::class)->where('user_id', $user->id)->delete();
+
         \Auth::guard()->logout();
         request()->session()->invalidate();
         return 'ok';

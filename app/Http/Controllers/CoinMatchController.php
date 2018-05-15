@@ -147,30 +147,23 @@ class CoinMatchController extends Controller
         //$mail->SMTPSecure = 'SSL';
         $mail->SMTPAuth = true;
         $mail->Username = "manager@moonfolio.io";
-        $mail->Password = "Moonfolio1114!";
+        $mail->Password = "Moonfolio1114!!";
         $mail->IsSendmail(true);
         $mail->CharSet ="UTF-8";
 
-        $mail->SetFrom($send_user['email']);
-        $mail->FromName   = "It's a Coinmatch!";
+        $mail->ClearAllRecipients();
+
+        $mail->SetFrom("manager@moonfolio.io");
+        $mail->FromName   = $subject;
+        $mail->ClearReplyTos();
         $mail->AddReplyTo($send_user['email']);
-        $mail->AddCC($send_user['email']);
-        $mail->AddBCC($send_user['email']);
+        $mail->AddCC("manager@moonfolio.io");
+        $mail->AddBCC("manager@moonfolio.io");
 
         $mail->AddAddress($to_email);
         $mail->Subject = $subject;
         $mail->IsHTML(true); //Or false if you do not want HTML content
-        $mail->Body = "<div>Hi {$to_fullname},<br><br>
-                    <div>We have found a potential {$side}er for you.</div><br>
-                    <div>{$send_user_fullname} is interested.</div><br>
-                    <div>Please contact the user on Moonfolio or send the user an email.</div><br>
-                    <div>Team Moonfolio.</div><br>
-                    <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" /><br>
-                    <div>
-                        The information on Coin Match is of a general nature only and does not take into account your personal circumstances, financial situation or needs. <br>
-                        Coin Match is only a matching service and does not facilitate any on-site transactions and strictly bears no legal responsibility. <br>
-                        Coin Match does have a rating system, however, these ratings are not to be relied upon. <br>
-                        Please conduct thorough due diligence with any counter-party that you transact or interact with.
+        $mail->Body = "<div>Hi {$to_fullname},<br><br><div>We have found a potential {$side}er for you.</div><br><div>{$send_user_fullname} is interested.</div><br><div>Please contact the user on Moonfolio or send the user an email.</div><br><div>Team Moonfolio.</div><br><img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" /><div style='font-size:13px;color:grey;line-height: 3em;font-weight: 100; text-align: left;'>LEGAL DISCLAIMER: The information collected and distributed by Coin Match (Moonfolio's coin matching algorithm) is of a general nature only and does not take into account your personal circumstances, financial situation or needs. Coin Match is only a matching service and does not facilitate any on-site transactions and strictly bears no legal responsibility for failed transactions or user's losing all of their money owing to a transaction originated using Coin Match or Moonfolio in general. Coin Match does have a rating system, however, these ratings are not to be relied upon.  Please conduct thorough due diligence with any counter-party that you transact or interact with first.
                     </div>";
 //        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
@@ -211,15 +204,18 @@ class CoinMatchController extends Controller
         //$mail->SMTPSecure = 'SSL';
         $mail->SMTPAuth = true;
         $mail->Username = "manager@moonfolio.io";
-        $mail->Password = "Moonfolio1114!";
+        $mail->Password = "Moonfolio1114!!";
         $mail->IsSendmail(true);
         $mail->CharSet ="UTF-8";
 
-        $mail->SetFrom($send_user['email']);
-        $mail->FromName   = "It's a Coinmatch!";
+        $mail->ClearAllRecipients();
+
+        $mail->SetFrom("manager@moonfolio.io");
+        $mail->FromName   = $subject;
+        $mail->ClearReplyTos();
         $mail->AddReplyTo($send_user['email']);
-        $mail->AddCC($send_user['email']);
-        $mail->AddBCC($send_user['email']);
+        $mail->AddCC("manager@moonfolio.io");
+        $mail->AddBCC("manager@moonfolio.io");
 
         $mail->AddAddress($to_email);
         $mail->Subject = $subject;

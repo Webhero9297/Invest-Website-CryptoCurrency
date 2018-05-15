@@ -29,6 +29,10 @@ class HomeController extends Controller
     public function index()
     {
         $loggedInUser = \Auth::user();
+
+//        Common::createNewCCUser($loggedInUser);
+//        dd(Common::testEx($loggedInUser));
+
         $alert_message = 'sent';
         if ( !is_null($loggedInUser) ) {
             if ( $loggedInUser->notification_status == 1 ) {

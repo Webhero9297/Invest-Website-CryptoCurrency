@@ -482,4 +482,138 @@ class Common
         }
         return $ret;
     }
+
+    public static function createNewCCUser( $user ) {
+        $curl = curl_init();
+        $logo_link = "/assets/images/avatars/default.jpg";
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/users.create",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "id=".$user->id."&display_name=".$user->full_name."&avatar_url={$logo_link}&email={$user->email}",
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        return array('result'=>$response, 'err'=>$err);
+    }
+    public static function changeDataOfCCUser( $user ) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/users.update",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "id={$user->id}&display_name={$user->full_name}&email={$user->email}",
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        return array('result'=>$response, 'err'=>$err);
+    }
+    public static function changeAvatarOfCCUser( $user ) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/users.update",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "id=".$user->id."&avatar_url={$user->user_avatar}",
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        return array('result'=>$response, 'err'=>$err);
+    }
+    public static function deleteCCUser( $user ) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/users.delete",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "id=".$user->id,
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        return array('result'=>$response, 'err'=>$err);
+    }
+    public static function listOfCCUser() {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/users.list",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST"
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        return array('result'=>json_decode($response), 'err'=>$err);
+    }
+    public static function test() {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/group_channels.message",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "id=5af9e9de48bdc63696fbd040&user_id=markhan0321@gmail.com&type=text&text=ABCDEFGHI"
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        return array('result'=>json_decode($response), 'err'=>$err);
+    }
+    public static function testEx($user) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.chatcamp.io/api/1.0/group_channels.my_list",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => array('x-app-id: 6395294894813868032', 'x-api-key: dU94VDAvZzhGdzluN3NKZEUwWkhCZz09'),
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "user_id={$user->id}"
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        return array('result'=>json_decode($response), 'err'=>$err);
+    }
 }
