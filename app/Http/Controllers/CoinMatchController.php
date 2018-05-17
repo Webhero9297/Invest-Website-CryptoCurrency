@@ -93,7 +93,6 @@ class CoinMatchController extends Controller
         $star_review_data = app(MatchReview::class)->get();
         if ( $star_review_data ) $star_review_data = $star_review_data->toArray();
         $star_review_data = Common::remakeReviewData($cryptoData, $coin_file_data, $star_review_data);
-//dd($cryptoData);
         return view('frontend.coinmatchbiz')->with(['buy_list'=>$buy_data, 'sell_list'=>$sell_data, 'other_buy_data'=>$other_buy_data,
             'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data, 'global_biz'=>'undefined', 'cryptoData'=>$cryptoData]);
     }
@@ -165,12 +164,9 @@ class CoinMatchController extends Controller
         $mail->IsHTML(true); //Or false if you do not want HTML content
         $mail->Body = "<div>Hi {$to_fullname},<br><br><div>We have found a potential {$side}er for you.</div><br><div>{$send_user_fullname} is interested.</div><br><div>Please contact the user on Moonfolio or send the user an email.</div><br><div>Team Moonfolio.</div><br><img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" /><div style='font-size:13px;color:grey;line-height: 3em;font-weight: 100; text-align: left;'>LEGAL DISCLAIMER: The information collected and distributed by Coin Match (Moonfolio's coin matching algorithm) is of a general nature only and does not take into account your personal circumstances, financial situation or needs. Coin Match is only a matching service and does not facilitate any on-site transactions and strictly bears no legal responsibility for failed transactions or user's losing all of their money owing to a transaction originated using Coin Match or Moonfolio in general. Coin Match does have a rating system, however, these ratings are not to be relied upon.  Please conduct thorough due diligence with any counter-party that you transact or interact with first.
                     </div>";
-//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
         if(!$mail->Send()){
-//            echo "Error sending";
         } else {
-//            echo "Mail successfully sent";
         }
 
         ($side == 'buy') ? $_side = 0 : $_side = 1;
@@ -226,12 +222,9 @@ class CoinMatchController extends Controller
                     <div>Please contact the user on Moonfolio.</div><br>
                     <div>Team Moonfolio.</div><br>
                     <img src='{$serverLink}/assets/images/background/black_logo.png' height=\"32px\" />";
-//        $mail->AltBody = "No HTML Body. Great story goes here! 123123";
 
         if(!$mail->Send()){
-//            echo "Error sending";
         } else {
-//            echo "Mail successfully sent";
         }
 
         ($side == 'buy') ? $_side = 0 : $_side = 1;
