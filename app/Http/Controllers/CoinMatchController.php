@@ -126,7 +126,7 @@ class CoinMatchController extends Controller
             $match_record->save();
         }
 
-        return redirect()->route('coinmatch.biz');
+        return response()->json(['result'=>'ok']);
     }
 
     public function sendInterestMsgToSpecificUser($receive_user_id) {
