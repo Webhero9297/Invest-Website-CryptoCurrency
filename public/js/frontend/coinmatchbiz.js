@@ -8,16 +8,11 @@ var filter_column_arr = [1,4,5];
 $(document).ready(function(){
     $('#init_alert_modal').modal('show');
 
-
-    //starTable = $('#star_table').dataTable().api();
-
     $('input.score_radio').click(function(){
         $('#score_ranking').html($(this).val());
         $('input[name="review_score"]').val($(this).val());
     });
     $('.py-4').css('height', '100%');
-    //$('#other_sell_table thead th:last').css('width', '82px');
-    //$('#other_buy_table thead th:last').css('width', '82px');
     doOnGetLiveData();
     window.setInterval(function(){
         doOnGetLiveData();
@@ -170,7 +165,6 @@ function filterColumn() {
             }
         }
     } );
-    //starTable.columns.adjust().draw();
     starTable.draw();
 }
 function existsIndex( _idx ) {
@@ -375,7 +369,6 @@ function doOnOtherBuyClick(other_match_id, buyJsonObj) {
     if ( typeof buyJsonObj == 'string' ) buyJsonObj = JSON.parse(buyJsonObj);
     $('.score_radio').prop('checked', false);
     $('#score_ranking').html('');
-    //document.getElementById('div_modal').style.display='block';
     $('#div_modal').modal('show');
     $('input[name="match_id"]').val(other_match_id);
 
@@ -395,18 +388,15 @@ function doOnOtherBuyClick(other_match_id, buyJsonObj) {
 
     $('#img_user_avatar').attr('src', buyJsonObj.user_avatar)
     $('#span_user_full_name').html(buyJsonObj.user_full_name)
-    //console.log(buyJsonObj);
 }
 function doOnCloseModal() {
     $('#div_modal').modal('hide');
-    //$('#div_modal').fadeOut(500);
 }
 function doOnOtherSellClick(other_match_id, sellJsonObj) {
     if ( typeof sellJsonObj == 'string' ) sellJsonObj = JSON.parse(sellJsonObj);
     $('.score_radio').prop('checked', false);
     $('#score_ranking').html('');
 
-    //document.getElementById('div_modal').style.display='block';
     $('#div_modal').modal('show');
     $('input[name="match_id"]').val(other_match_id);
 
@@ -426,7 +416,6 @@ function doOnOtherSellClick(other_match_id, sellJsonObj) {
 function doOnReviewSubmit() {
     serialized = $('#form_review').serialize();
 
-    //$('input[name="review_score"]').val($('input[name="ranking"]').val());
     if ($('input[name="review_score"]').val() == '0') {
         alert("Please select review score.")
         return;
@@ -441,10 +430,7 @@ function doOnReviewSubmit() {
                 doOnGetLiveData();
             }
         });
-        console.log(serialized);
-        //$('#form_review').submit();
     }
-    //console.log(serialized);
 }
 function doOnMyBuyListClick(match_id) {
 
@@ -476,7 +462,6 @@ function doOnSendSellInterestedSubmit(side) {
             $('#div_buy_modal').modal('hide');
             $.getJSON('/sendinterestmsg/'+send_user_id, {side: g_side}, function(resp){
                 if ( resp.result == 'ok') {
-                    //$('#confirm_modal').modal('show');
                     $('#popup_modal').modal('show');
                 }
             });
@@ -490,7 +475,6 @@ function doOnShowAddReview() {
         if ( typeof buyJsonObj == 'string' ) buyJsonObj = JSON.parse(buyJsonObj);
         $('.score_radio').prop('checked', false);
         $('#score_ranking').html('');
-        //document.getElementById('div_modal').style.display='block';
         $('#div_buy_modal').modal('hide');
         $('#div_modal').modal('show');
         $('input[name="match_id"]').val(buyJsonObj.match_id);
@@ -530,15 +514,6 @@ function doOnSendMessage() {
 function doOnCloseThisModal() {
 
     $('#div_buy_message_modal').modal('hide');
-    //$('#div_buy_message_modal').show().on('hidden.bs.modal', hideCompleted);
-    //function hideCompleted() {
-    //    hideInProgress = false;
-    //    if (showModalId) {
-    //        showModal(showModalId);
-    //    }
-    //    showModalId = '';
-    //    $("#div_buy_message_modal").off('hidden.bs.modal');
-    //}
 }
 
 function doOnClickContentView(dom) {
