@@ -101,9 +101,6 @@
     }
 
     /* On mouse-over, add a grey background color */
-    /*.chk-container:not(:disabled):hover .chk-label {*/
-        /*color: gold;*/
-    /*}*/
     .chk-container:hover input:not(:disabled) ~ .checkmark, .chk-container input:checked:not(:disabled) ~ .chk-label {
         color: gold;
         background-color: #0297bf;
@@ -111,9 +108,6 @@
     }
 
     /* When the radio button is checked, add a blue background */
-    /*.chk-container:hover .chk-label {*/
-        /*color: gold;*/
-    /*}*/
     .chk-container input:checked:not(:disabled) ~ .checkmark, .chk-container input:checked:not(:disabled) ~ .chk-label {
         color: gold;
         background-color: #2196F3;
@@ -150,7 +144,6 @@
                     <form id="form_detail" method="POST" action="{{ route('store.crypto.currency') }}">
                         @csrf
                         <input type="hidden" name="detail_id" value="{{ $detail_id }}" />
-                        {{--<input type="hidden" name="order_side" value="{{ $order_side }}" />--}}
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label class="control-label grey-color" for="currency_name">Currency Name*</label>
@@ -201,21 +194,6 @@
                                 <label class="control-label label-total" >Total cost(in USD)&nbsp;:&nbsp;&nbsp;&nbsp;</label>
                                 <label class="control-label label-total" id="label_total_cost" >0</label>
                             </div>
-                            {{--<div class="form-group col-sm-6 text-right">--}}
-                                {{--<input type="checkbox" id="box-1" onchange="doOnChangeSideStatus(this)" >--}}
-                                {{--<label for="box-1" class="alert-method">Do you want to &nbsp;&nbsp;</label>--}}
-                                {{--<label class="chk-container" data-toggle="popover" data-content="BUY">--}}
-                                    {{--<input type="radio" class="input_side_status" name="order_side" id="input_buy" disabled>--}}
-                                    {{--<span class="chk-label">Buy</span>--}}
-                                    {{--<span class="checkmark buy"></span>--}}
-                                {{--</label>--}}
-                                {{--<label class="chk-container" data-toggle="popover" data-content="SELL">--}}
-                                    {{--<input type="radio" class="input_side_status" name="order_side" id="input_sell" disabled>--}}
-                                    {{--<span class="chk-label">Sell</span>--}}
-                                    {{--<span class="checkmark sell"></span>--}}
-                                {{--</label>--}}
-                                {{--&nbsp;&nbsp;?&nbsp;--}}
-                            {{--</div>--}}
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
@@ -230,8 +208,6 @@
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
