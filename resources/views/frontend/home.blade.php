@@ -473,14 +473,6 @@
                             <div class="header">
                                 <div class="div-download">DOWNLOAD</div>
                                 <div class="awesome-free">OUR APP</div>
-                                {{--<div class="div-app-download-explain">--}}
-                                {{--What makes this portfolio platform better than the rest is the chat functionality,--}}
-                                {{--where you can talk to other people and ask their experiences and even get useful tips.--}}
-                                {{--For now the best product on the internet.--}}
-                                {{--What makes this portfolio platform better than the rest is the chat functionality,--}}
-                                {{--where you can talk to other people and ask their experiences and even get useful tips.--}}
-                                {{--For now the best product on the internet.--}}
-                                {{--</div>--}}
                             </div>
                             <div class="row download-area">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -501,7 +493,6 @@
                 <div class="div-top-title">
                     <label class="home-label top">COMPREHENSIVE</label>
                     <label class="home-label community port label-features">FEATURES</label>
-                    {{--<label class="home-label label-take label-take-inner">--}}
                     <p class="white-text label-take-inner">
                         Moonfolio is a Crypto Portfolio, peer-to-peer service which provides users with an alternative way to acquire and trade cryptocurrencies,
                         by connecting coin buyers and sellers online.
@@ -511,7 +502,6 @@
                         Moonfolio acts as a gateway into the world of cryptocurrencies, allowing new users to quickly get familiarised with buying and selling,
                         and users at all levels to grow their crypto portfolios in a fun and exciting way.
                     </p>
-                    {{--</label>--}}
                 </div>
                 <div class="row div-features-wrap">
                     <div class="col-sm-6">
