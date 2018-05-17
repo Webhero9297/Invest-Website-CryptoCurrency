@@ -324,10 +324,6 @@ function doOnGetLiveData() {
         doOnFilterBuyData(2, $('#buy_filter_coin').val());
         doOnFilterSellData(2, $('#sell_filter_coin').val());
 
-//console.log(buyTable);
-        //buyTable.init();
-        //sellTable.draw();
-        //starTable.draw();
         filterColumn();
     });
 }
