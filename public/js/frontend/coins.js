@@ -26,21 +26,8 @@ $(document).ready(function(){
         });
 
         loadLiveChart();
-        //window.setTimeout(function(){
-        //    window.setInterval(function(){
-        //        doOnGetRate(function(rates) {
-        //            live_rates = rates;
-        //        });
-        //    }, 60000);
-        //}, 60000);
-        //
-        ////$('#tfoot').css('display', 'none');
-        //
         socket = io.connect('https://coincap.io');
     });
-    //$('#tfoot').css('display', '');
-    //$('.py-4').css('height', '');
-    //$('.container-fluid').css('height', '');
 });
 function doOnGetRate(callback) {
     $.getJSON('http://coincap.io/exchange_rates', function(resp){
@@ -48,7 +35,6 @@ function doOnGetRate(callback) {
     });
 }
 function doOnLoadLiveChart() {
-    //$('#tfoot').css('display', 'none');
     $('#tbody_coin_live_data').html('<tr><td colspan="5" align="center" style="padding-top:50px;"><div class="loader"></div></td></tr>');
     loadLiveChart();
 }
@@ -87,10 +73,6 @@ function doOnRenderTable(coin_live_datas) {
     $('#tfoot').css('display', '');
     $('.py-4').css('height', '100%');
 
-    //table = $('#coin_table').DataTable({
-    //    "lengthMenu": [[100], [100]]
-    //});
-
     if ( typeof table == 'undefined' ){
         table  = $('#coin_table').DataTable({"lengthMenu": [[100], [100]]});
     }
@@ -123,7 +105,6 @@ function doOnRenderTable(coin_live_datas) {
         coin_symbol = socket_data.msg.long.split(' ').join('').split(current_fiat_symbol).join('');
         if ( coin_symbol_data.indexOf(coin_symbol)!= -1 ) {
             var htmlObj = $('#price_'+coin_symbol).html();
-            //if ( htmlObj != undefined ) {
                 var prevV = 0;
                 if ( typeof $('#price_'+coin_symbol).html() == "string" )
                     prevV = $('#price_'+coin_symbol).html().split(',').join('');
@@ -136,13 +117,10 @@ function doOnRenderTable(coin_live_datas) {
                 $('#price_'+coin_symbol).addClass(sString);
                 $('#mktcap_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.mktcap*current_fiat_rate, '', 0, ",", "."));
                 $('h24_'+coin_symbol).html(accounting.formatMoney(socket_data.msg.cap24hrChange, '', 2, ",", "."));
-                ///*if (socket_data.msg.long == 'Bitcoin') */console.log(socket_data.msg);
                 global_coin_data[coin_symbol]['market_cap_usd'] = socket_data.msg.mktcap;
                 global_coin_data[coin_symbol]['percent_change_24h'] = socket_data.msg.cap24hrChange;
                 global_coin_data[coin_symbol]['price_usd'] = socket_data.msg.price;
 
-                //console.log(global_coin_data[coin_symbol]);
-            //}
 
         }
     });
@@ -152,11 +130,8 @@ function doOnchangeCurrency(currency) {
     current_fiat_rate = live_rates[current_fiat_symbol];
 
     selected_currency = currency;
-//alert(current_fiat_rate + ' '+selected_currency);
-//console.log(global_coin_data);
     for( coin_symbol in global_coin_data ) {
         cData = global_coin_data[coin_symbol];
-        console.log(cData);
         ( cData.price_usd*1 > 100 ) ? dc = 2 : dc = 4;
         if ( typeof cData.price_usd == "string" ) {
             price_usd = parseFloat(cData.price_usd.split(',').join(''));
@@ -174,21 +149,14 @@ function doOnchangeCurrency(currency) {
         $('#mktcap_'+coin_symbol).html(accounting.formatMoney(mktcap*current_fiat_rate, '', 0, ",", "."));
         $('h24_'+coin_symbol).html(accounting.formatMoney(cData.percent_change_24h, '', 2, ",", "."));
     }
-    //$('#tbody_coin_live_data tr').each(function(){
-    //    console.log($("td:eq(2)", this).html(), $("td:eq(3)", this).html());
-    //});
-    //$('#tbody_coin_live_data').html('<tr><td colspan="5" align="center"><div class="loader"></div></td></tr>');
-    //loadLiveChart();
 }
 
 function myFilter(event) {
     var input, filter;
     filter = document.getElementById("myInput").value;
-    //if ( event.keyCode == 13 ){
         $.get('/filter/'+filter, {currency : selected_currency }, function(filter_resp){
             doOnRenderTable(filter_resp);
         });
-    //}
 
 }
 function myFunction() {
@@ -331,7 +299,6 @@ $(function(){
         change: function(){
             var value = $(this).val();
             var text = $(this).children('option:selected').html();
-            console.log(value+' : '+text);
             $('#tfoot').css('display', 'none');
             doOnchangeCurrency(value);
 
