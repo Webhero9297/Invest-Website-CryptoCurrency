@@ -203,8 +203,11 @@
         var yieldH = parseFloat($('.py-4').height());
 
         if ( wH >= (yieldH+100) || wH == yieldH ){
-            $('.py-4').css('height', (wH-100)+'px');
-            $('.container-fluid').css('height', '100%');
+            var loc = window.location.href;
+            if ( loc.indexOf('coinmatchbiz') = -1 ) {
+                $('.py-4').css('height', (wH-100)+'px');
+                $('.container-fluid').css('height', '100%');
+            }
         }
 
         $('.footer-backtotop').click(function(){

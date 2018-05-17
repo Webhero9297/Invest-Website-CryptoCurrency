@@ -47,6 +47,15 @@
     #star_table_wrapper {
         margin-top: -25px;
     }
+
+    #content-modal-p {
+        font-size: 16px;
+        word-wrap: break-word;
+        max-height: 300px;
+        overflow-y: auto;
+        display: block;
+        /*height: 240px;*/
+    }
 </style>
 <script>
     var global_biz = <?php echo $global_biz; ?>;
@@ -89,7 +98,8 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="form_review" class="form-modal-content" action="{{ route('coinmatch.review') }}">
+                <form id="form_review" class="form-modal-content" >
+                    @csrf
                     <input type="hidden" name="match_id" value="">
                     <input type="hidden" name="order_side" value="">
                     <input type="hidden" name="review_score" value="0">
@@ -135,7 +145,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="subject" class="modal-title">Your message have been sent</label>
                         <textarea id="subject" name="review_content" placeholder="Write something.."></textarea>
                     </div>
                     <div class="form-group text-right">
@@ -252,6 +261,38 @@
             </div>
             <div class="modal-body">
                 <p>An email has been sent to the user. Please wait for their response.</p>
+            </div>
+            <div class="modal-footer" style="padding:0;">
+                <button type="button" class="button buttonBlue" style="margin:0.3em auto;" data-dismiss="modal">&nbsp;&nbsp;Ok&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="submit_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Moonfolio</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Your review has been added at the reviews section.</p>
+            </div>
+            <div class="modal-footer" style="padding:0;">
+                <button type="button" class="button buttonBlue" style="margin:0.3em auto;" data-dismiss="modal">&nbsp;&nbsp;Ok&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Comment</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="content-modal-p"></div>
             </div>
             <div class="modal-footer" style="padding:0;">
                 <button type="button" class="button buttonBlue" style="margin:0.3em auto;" data-dismiss="modal">&nbsp;&nbsp;Ok&nbsp;&nbsp;</button>

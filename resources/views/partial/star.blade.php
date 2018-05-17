@@ -32,6 +32,12 @@
         height: 32px;
         border-radius: 5px;
     }
+    .span-comment{
+        cursor: pointer;
+    }
+    .span-comment:hover {
+        color: gold;
+    }
 </style>
 <datalist id="filter-coin-list">
     <select>
@@ -47,9 +53,14 @@
     <select>
         {{--<option class="option_crypto_currency"></option>--}}
         @if ( $star_review_data )
-            @foreach( $star_review_data as $idx=>$review_item )
-                <option class="option_crypto_currency" value="{{ $review_item['maker_username'] }}"></option>
-            @endforeach
+            <?php
+            $temp = array();
+            foreach( $star_review_data as $idx=>$review_item ){
+                if ( in_array( $review_item['maker_username'], $temp ) ) continue;
+                echo "<option class='option_crypto_currency' value='{$review_item['maker_username']}'></option>";
+                $temp[] = $review_item['maker_username'];
+            }
+            ?>
         @endif
     </select>
 </datalist>
@@ -57,9 +68,14 @@
     <select>
         {{--<option class="option_crypto_currency"></option>--}}
         @if ( $star_review_data )
-            @foreach( $star_review_data as $idx=>$review_item )
-                <option class="option_crypto_currency" value="{{ $review_item['taker_username'] }}"></option>
-            @endforeach
+            <?php
+            $temp = array();
+            foreach( $star_review_data as $idx=>$review_item ){
+                if ( in_array( $review_item['taker_username'], $temp ) ) continue;
+                echo "<option class='option_crypto_currency' value='{$review_item['taker_username']}'></option>";
+                $temp[] = $review_item['taker_username'];
+            }
+            ?>
         @endif
     </select>
 </datalist>
@@ -119,7 +135,7 @@
                         </td>
                         <td class="td-cell text-center">{{ $review_item['review_score'] }}</td>
                         <td class="td-cell text-center">
-                            <span class="span-comment">{{ $review_item['review_content'] }}</span>
+                            <span class="span-comment" onclick="doOnClickContentView(this)">{{ $review_item['review_content'] }}</span>
                         </td>
                     </tr>
                 @endforeach
