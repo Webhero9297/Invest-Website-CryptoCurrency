@@ -166,15 +166,9 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-center">
-                {{--<p></p>--}}
-            {{--</div>--}}
-            {{--<div class="modal-footer">--}}
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnSendSellInterestedSubmit()" data-toggle="popover" data-content="User will be notified by email and will receive an alert on Moonfolio.">
                     Interested
                 </button>
-                {{--<button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowSellReviewComment()" data-toggle="popover" data-content="User will receive a message at Moonfolio.">--}}
-                    {{--Leave a message--}}
-                {{--</button>--}}
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowAddReview()" data-toggle="popover" data-content="Rate the user.">
                     Add review
                 </button>
