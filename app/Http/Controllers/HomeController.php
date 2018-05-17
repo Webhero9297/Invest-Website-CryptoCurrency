@@ -30,9 +30,6 @@ class HomeController extends Controller
     {
         $loggedInUser = \Auth::user();
 
-//        Common::createNewCCUser($loggedInUser);
-//        dd(Common::testEx($loggedInUser));
-
         $alert_message = 'sent';
         if ( !is_null($loggedInUser) ) {
             if ( $loggedInUser->notification_status == 1 ) {
@@ -101,7 +98,6 @@ class HomeController extends Controller
     }
     public function getTopLiveData() {
         $realTopCurrencies = Common::getRealTimeCryptoCurrencyListPerPage(0, 8);
-//dd($realTopCurrencies);
         $realTopCryptos = array();
         foreach($realTopCurrencies as $realCrypto) {
             $tmp = Common::stdToArray($realCrypto);
