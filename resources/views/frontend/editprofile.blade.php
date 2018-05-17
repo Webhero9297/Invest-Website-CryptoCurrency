@@ -242,16 +242,6 @@
                                         <option value="1" selected>Female</option>
                                     @endif
                                 </select>
-                                {{--<select name="gender" class="form-control our" tabindex="3">--}}
-                                    {{--@if ( $gender == 0 )--}}
-                                        {{--<option value="0" selected>Male</option>--}}
-                                        {{--<option value="1">Female</option>--}}
-                                    {{--@else--}}
-                                        {{--<option value="0">Male</option>--}}
-                                        {{--<option value="1" selected>Female</option>--}}
-                                    {{--@endif--}}
-
-                                {{--</select>--}}
                             </div>
                             <div class="form-group col-sm-2">
                                 <label class="control-label" for="age">Age</label>
@@ -265,7 +255,6 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label class="control-label" for="email">Country</label>
-                                {{--<input type="text" class="form-control input-form-control grey-border grey-color" tabindex="5" id="country" name="country" value="{{ $country }}">--}}
                                 <div class="input-group autocomplete" style="width:100%;">
                                     <input id="NaCountry" type="Country" class="form-control input-form-control grey-border grey-color" name="country" value="{{ $country }}" autocomplete="off">
                                 </div>
