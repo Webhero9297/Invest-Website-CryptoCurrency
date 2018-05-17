@@ -253,8 +253,6 @@
             cursor: pointer;
         }
     </style>
-{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
-{{--<link href="{{ asset('./css/dataTable.css') }}" rel="stylesheet">--}}
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/accounting.min.js') }}" ></script>
