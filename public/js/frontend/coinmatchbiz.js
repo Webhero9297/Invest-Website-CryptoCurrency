@@ -3,8 +3,8 @@ var send_user_id=undefined;
 var g_side;
 var selectedTdInfo = undefined;
 var sellTable, buyTable, starTable;
-var filter_value_arr = [];
-var filter_column_arr = [];
+var filter_value_arr = ['','',''];
+var filter_column_arr = [1,4,5];
 $(document).ready(function(){
     $('#init_alert_modal').modal('show');
 
@@ -161,20 +161,25 @@ $(document).ready(function(){
 });
 
 function filterColumn() {
-    for( j = 0; j < filter_value_arr.length; j++ ) {
-        _filterV = filter_value_arr[j];
-        if (_filterV!=''){
-            starTable.columns(filter_column_arr[j])
-                .search(_filterV, false, true)
-                .draw();
+    starTable.columns().every( function () {
+        var that = this;
+        if ( existsIndex(that.index()) != -1 ) {
+            _filterV = filter_value_arr[existsIndex(that.index())];
+            if ( that.search() !== _filterV ) {
+                that.search( _filterV ).draw();
+            }
         }
-        else{
-            starTable.columns()
-                .search('')
-                .draw();
+    } );
+    //starTable.columns.adjust().draw();
+    starTable.draw();
+}
+function existsIndex( _idx ) {
+    for( j = 0; j < filter_column_arr.length; j++ ) {
+        if ( filter_column_arr[j] == _idx ) {
+            return j;
         }
     }
-
+    return -1;
 }
 function doOnFilterSellData( i, filter_value ) {
     if (filter_value!=''){
@@ -282,20 +287,35 @@ function doOnGetLiveData() {
                                         </td>\
                                         <td class="td-cell text-center padding0">'+review_item.review_score+'</td>\
                                         <td class="td-cell text-center padding0">\
-                                            <span class="span-comment">'+review_content+'</span>\
+                                            <span class="span-comment"  onclick="doOnClickContentView(this)">'+review_content+'</span>\
                                         </td>\
                                     </tr>';
             }
+
             $('#tbody_star_review_live_data').html(tbody_contents);
         }
-        $('.py-4').css('height', '100%!important');
-        //$('#other_sell_table thead th:last').css('width', '182px');
-        //$('#other_buy_table thead th:last').css('width', '182px');
 
-        sellTable = $('#other_sell_table').DataTable();
-        buyTable  = $('#other_buy_table').DataTable();
-
-        starTable = $('#star_table').DataTable();
+        if ( typeof buyTable == 'undefined' ){
+            buyTable  = $('#other_buy_table').DataTable();
+        }
+        else {
+            buyTable.fnClearTable( 0 );
+            buyTable.fnDraw();
+        }
+        if ( typeof sellTable == 'undefined' ){
+            sellTable  = $('#other_sell_table').DataTable();
+        }
+        else {
+            sellTable.fnClearTable( 0 );
+            sellTable.fnDraw();
+        }
+        if ( typeof starTable == 'undefined' ){
+            starTable  = $('#star_table').DataTable();
+        }
+        else {
+            starTable.fnClearTable( 0 );
+            starTable.fnDraw();
+        }
 
         $($('#star_table_wrapper .row')[0]).css('display', 'none');
         $($('#other_sell_table_wrapper .row')[0]).css('display', 'none');
@@ -303,6 +323,11 @@ function doOnGetLiveData() {
 
         doOnFilterBuyData(2, $('#buy_filter_coin').val());
         doOnFilterSellData(2, $('#sell_filter_coin').val());
+
+//console.log(buyTable);
+        //buyTable.init();
+        //sellTable.draw();
+        //starTable.draw();
         filterColumn();
     });
 }
@@ -411,7 +436,17 @@ function doOnReviewSubmit() {
         return;
     }
     else{
-        $('#form_review').submit();
+        $('#subject').html('');
+        subject.value='';
+        $('#div_modal').modal('hide');
+        $.post('/coinmatchreview?'+serialized, function(resp){
+            if ( resp.result == 'ok' ) {
+                $('#submit_modal').modal('show');
+                doOnGetLiveData();
+            }
+        });
+        console.log(serialized);
+        //$('#form_review').submit();
     }
     //console.log(serialized);
 }
@@ -510,3 +545,7 @@ function doOnCloseThisModal() {
     //}
 }
 
+function doOnClickContentView(dom) {
+    $('#content-modal-p').html($(dom).html());
+    $('#content_modal').modal('show');
+}
