@@ -70,7 +70,6 @@ function doOnOtherBuyClick(other_match_id, buyJsonObj) {
     $('#review_amount').val( buyJsonObj.quantity );
 
     $('input[name="order_side"]').val("buy");
-    //console.log(buyJsonObj);
 }
 function doOnOtherSellClick(other_match_id, sellJsonObj) {
     $('.score_radio').prop('checked', false);
@@ -93,7 +92,6 @@ function doOnOtherSellClick(other_match_id, sellJsonObj) {
 function doOnReviewSubmit() {
     serialized = $('#form_review').serialize();
     $('#form_review').submit();
-    //console.log(serialized);
 }
 function doOnMyBuyListClick(match_id) {
 
