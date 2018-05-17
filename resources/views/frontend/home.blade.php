@@ -843,7 +843,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-8" style="padding-top: 17px;">
-                                    {{--RECEIVE MONTHLY TIPS ON ACHIEVING RESULTS--}}
                                 </div>
                                 <div class="col-sm-4 text-right">
                                     <button class="btn btn-primary btn-sendmessage">SEND MESSAGE</button>
@@ -858,9 +857,3 @@
     <script src="{{ asset('./js/frontend/home.js') }}"></script>
     <script src="{{ asset('./js/frontend/home-carousel.js') }}"></script>
 @endsection
-
-{{--<script>--}}
-{{--window.setInterval(function() {--}}
-{{--window.location.reload();--}}
-{{--}, 10000);--}}
-{{--</script>--}}
