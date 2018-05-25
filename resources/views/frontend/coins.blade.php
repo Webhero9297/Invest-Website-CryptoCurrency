@@ -253,6 +253,8 @@
             cursor: pointer;
         }
     </style>
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />--}}
+{{--<link href="{{ asset('./css/dataTable.css') }}" rel="stylesheet">--}}
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
 <script src="{{ asset('./assets/jsLib/accounting.min.js') }}" ></script>
@@ -284,22 +286,22 @@
     }
     .bg-red {
         -webkit-animation-name: red-example;  /* Safari 4.0 - 8.0 */
-        -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
-        -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 0.3s;  /* Safari 4.0 - 8.0 */
+        -webkit-animation-delay: 0.3s; /* Safari 4.0 - 8.0 */
         -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
         animation-name: red-example;
-        animation-duration: 2s;
-        animation-delay: 1s;
+        animation-duration: 0.3s;
+        animation-delay: 0.3s;
         animation-fill-mode: backwards;
     }
     .bg-green {
         -webkit-animation-name: green-example;  /* Safari 4.0 - 8.0 */
-        -webkit-animation-duration: 2s;  /* Safari 4.0 - 8.0 */
-        -webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 0.3s;  /* Safari 4.0 - 8.0 */
+        -webkit-animation-delay: 0.3s; /* Safari 4.0 - 8.0 */
         -webkit-animation-fill-mode: backwards; /* Safari 4.0 - 8.0 */
         animation-name: green-example;
-        animation-duration: 2s;
-        animation-delay: 1s;
+        animation-duration: 0.3s;
+        animation-delay: 0.3s;
         animation-fill-mode: backwards;
     }
     /* Safari 4.0 - 8.0 */

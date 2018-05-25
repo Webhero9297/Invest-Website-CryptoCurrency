@@ -15,7 +15,7 @@
     {{--/***************   ChatCamp plugin  Start ************/--}}
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" />
-    <link href="/ChatCampPlugin/static/css/main.0cb6f1f7.css" rel="stylesheet">
+    <link href="/ChatCampPlugin/static/css/main.575ecd73.css" rel="stylesheet">
 
     {{--/***************   ChatCamp plugin  Start ************/--}}
 
@@ -203,8 +203,8 @@
         var yieldH = parseFloat($('.py-4').height());
 
         if ( wH >= (yieldH+100) || wH == yieldH ){
-            var loc = window.location.href;
-            if ( loc.indexOf('coinmatchbiz') = -1 ) {
+            var loc = String(window.location.href);
+            if ( loc.search('coinmatchbiz') == -1 ) {
                 $('.py-4').css('height', (wH-100)+'px');
                 $('.container-fluid').css('height', '100%');
             }
@@ -313,7 +313,7 @@
         {{--window.ChatCampData = {}--}}
         {{--window.ChatCampData.userId = "markhan0321@gmail.com";--}}
     </script>
-    <script type="text/javascript" src="/ChatCampPlugin/static/js/main.672107a7.js"></script>
+    <script type="text/javascript" src="/ChatCampPlugin/static/js/main.a88152b0.js"></script>
 
     @endguest
 

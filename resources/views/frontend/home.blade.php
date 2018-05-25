@@ -114,6 +114,7 @@
         }
         .slide{
             text-align:center;
+            /*padding-top:25%;*/
             background-size:cover;
         }
         h1{
@@ -126,6 +127,21 @@
             font-size:2.4em;
             border-radius:50%;
         }
+        .slide:nth-child(1){
+            /*background-image:url(http://mamiskincare.net/wp-content/uploads/2015/11/inspire-fashion-ideas-for-styleator-concept-with-fashion-style-for-fall-2015-with-street-style-at-stockholm-fashion-week-fall-winter-2015-2016-15.jpg);*/
+        }
+        /*.slide:nth-child(2){*/
+        /*background-image:url(http://conversationsabouther.net/wp-content/uploads/2015/03/1-seoul-fashion-week-fall-2015-street-style-45.jpg);*/
+        /*}*/
+        /*.slide:nth-child(3){*/
+        /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+        /*}*/
+        /*.slide:nth-child(4){*/
+        /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+        /*}*/
+        /*.slide:nth-child(5){*/
+        /*background-image:url(https://dosenyc.files.wordpress.com/2015/08/eleonora-sebastiani-and-roberto-mararo.jpg);*/
+        /*}*/
         /**********************************************    Carousel  End    ************************************************/
         .div-pd-lr{
             padding-left:50px;padding-right:50px;
@@ -306,6 +322,13 @@
             margin: 5px!important;
         }
         /********************************************************    App download button  End    ********************************************************************/
+        .a-here {
+            color: #0297bf;
+            cursor: pointer;
+        }
+        .a-here:hover {
+            color: gold;
+        }
     </style>
     <script>
         var logo_img = "{{ asset('./assets/images/background/logo.png') }}";
@@ -318,6 +341,7 @@
     <div class="container-fluid padding0">
         <div class="div-home" id="home">
             <div class="container">
+                {{--<canvas id="canvas"></canvas>--}}
                 <div class="row">
                     @guest
                     <div class="col-xs-12 col-sm-6 div-title">
@@ -342,6 +366,9 @@
                         </div>
                         @endguest
                         <div class="col-xs-12 col-sm-6 text-right">
+                            {{--<canvas id="canvasOne" width="500" height="500">--}}
+                            {{--Your browser does not support HTML5 Canvas.--}}
+                            {{--</canvas>--}}
                             <canvas id="particles-js" width="800" height="800"></canvas>
                             <canvas id="myCanvas" width="800" height="800"></canvas>
                             <div class="smartObject"></div>
@@ -462,7 +489,7 @@
             </div>
 
         </div>
-        <div class="div-app-download">
+        <div id="div_app_download" class="div-app-download">
             <div class="download section-padding">
                 <div class="container">
                     <div class="row">
@@ -473,6 +500,14 @@
                             <div class="header">
                                 <div class="div-download">DOWNLOAD</div>
                                 <div class="awesome-free">OUR APP</div>
+                                {{--<div class="div-app-download-explain">--}}
+                                {{--What makes this portfolio platform better than the rest is the chat functionality,--}}
+                                {{--where you can talk to other people and ask their experiences and even get useful tips.--}}
+                                {{--For now the best product on the internet.--}}
+                                {{--What makes this portfolio platform better than the rest is the chat functionality,--}}
+                                {{--where you can talk to other people and ask their experiences and even get useful tips.--}}
+                                {{--For now the best product on the internet.--}}
+                                {{--</div>--}}
                             </div>
                             <div class="row download-area">
                                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -493,6 +528,7 @@
                 <div class="div-top-title">
                     <label class="home-label top">COMPREHENSIVE</label>
                     <label class="home-label community port label-features">FEATURES</label>
+                    {{--<label class="home-label label-take label-take-inner">--}}
                     <p class="white-text label-take-inner">
                         Moonfolio is a Crypto Portfolio, peer-to-peer service which provides users with an alternative way to acquire and trade cryptocurrencies,
                         by connecting coin buyers and sellers online.
@@ -502,6 +538,7 @@
                         Moonfolio acts as a gateway into the world of cryptocurrencies, allowing new users to quickly get familiarised with buying and selling,
                         and users at all levels to grow their crypto portfolios in a fun and exciting way.
                     </p>
+                    {{--</label>--}}
                 </div>
                 <div class="row div-features-wrap">
                     <div class="col-sm-6">
@@ -677,7 +714,7 @@
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        At the moment there is no mobile version, but there will be in future.
+                                        We do have an mobile version, Please click <span onclick="doOnScrollDownloadApp()" class="a-here">here</span>.
                                     </div>
                                 </div>
                             </div>
@@ -843,6 +880,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-8" style="padding-top: 17px;">
+                                    {{--RECEIVE MONTHLY TIPS ON ACHIEVING RESULTS--}}
                                 </div>
                                 <div class="col-sm-4 text-right">
                                     <button class="btn btn-primary btn-sendmessage">SEND MESSAGE</button>
@@ -857,3 +895,9 @@
     <script src="{{ asset('./js/frontend/home.js') }}"></script>
     <script src="{{ asset('./js/frontend/home-carousel.js') }}"></script>
 @endsection
+
+{{--<script>--}}
+{{--window.setInterval(function() {--}}
+{{--window.location.reload();--}}
+{{--}, 10000);--}}
+{{--</script>--}}

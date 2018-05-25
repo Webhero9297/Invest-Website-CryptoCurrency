@@ -209,6 +209,12 @@
         box-shadow: 0!important;
     }
     /***************************************  Custom select box end    *********************************************/
+
+    .div-api-key {
+        border-top: 1px dashed #515151;
+        padding: 10px 0 0 0;
+        border-bottom: 1px dashed #515151;
+    }
 </style>
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home" style="padding-top:100px;">
@@ -255,6 +261,7 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label class="control-label" for="email">Country</label>
+                                {{--<input type="text" class="form-control input-form-control grey-border grey-color" tabindex="5" id="country" name="country" value="{{ $country }}">--}}
                                 <div class="input-group autocomplete" style="width:100%;">
                                     <input id="NaCountry" type="Country" class="form-control input-form-control grey-border grey-color" name="country" value="{{ $country }}" autocomplete="off">
                                 </div>

@@ -2,8 +2,11 @@
 
 @section('content')
 <link href="{{ asset('css/coinmatch.css') }}" rel="stylesheet">
+{{--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">--}}
 <script src="{{ asset('./assets/jsLib/datatable/jquery.datatable.js') }}" ></script>
+{{--<script src="{{ asset('./assets/jsLib/datatable/dataTables.fixedHeader.min.js') }}" ></script>--}}
 <script src="{{ asset('./assets/jsLib/datatable/datatable.bootstrap.js') }}" ></script>
+<script src="{{ asset('./assets/jsLib/accounting.min.js') }}" ></script>
 <style>
     .p-sub-footer{
         color: #a2a2a2;
@@ -45,7 +48,7 @@
     }
 
     #star_table_wrapper {
-        margin-top: -25px;
+        margin-top: 5px;
     }
 
     #content-modal-p {
@@ -56,10 +59,58 @@
         display: block;
         /*height: 240px;*/
     }
+    .FixedHeader_Cloned {
+        background-color: #0297bf;
+    }
+    #star_table_fix_header, #buy_table_fix_header, #sell_table_fix_header {
+        margin-bottom: 0!important;
+        z-index: 1031;
+        position: relative;
+        background-color: #0297bf;
+        border: 1px solid white;
+    }
+    .div-td-cell {
+        height:36px;
+        display: inline-block;
+        font-size: 16px;
+        font-family: Montserrat-Light;
+        color: white;
+        /*font-weight: bold;;*/
+        padding: 4px;
+        text-align: center;
+    }
+    .dataTables_wrapper {
+        width: 100%;
+    }
+    .dataTables_wrapper .row:nth-child(3) {
+        display: none;
+    }
+
+    /* width */
+    div ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    div ::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.1);
+    }
+
+    /* Handle */
+    div ::-webkit-scrollbar-thumb {
+        border-radius: 0!important;
+        background: #0297bf!important;;
+    }
+
+    /* Handle on hover */
+    div ::-webkit-scrollbar-thumb:hover {
+        background: #0297bf!important;
+    }
+
 </style>
 <script>
     var global_biz = <?php echo $global_biz; ?>;
-
+    var order_data = <?php echo $order_data; ?>;
 </script>
 <div class="container-fluid padding0">
     <div class="div-auth-register" id="home" style="padding-top:100px;">
@@ -166,9 +217,15 @@
                 <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-center">
+                {{--<p></p>--}}
+            {{--</div>--}}
+            {{--<div class="modal-footer">--}}
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnSendSellInterestedSubmit()" data-toggle="popover" data-content="User will be notified by email and will receive an alert on Moonfolio.">
                     Interested
                 </button>
+                {{--<button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowSellReviewComment()" data-toggle="popover" data-content="User will receive a message at Moonfolio.">--}}
+                    {{--Leave a message--}}
+                {{--</button>--}}
                 <button type="button" class="button buttonBlue btn-select-method" onclick="doOnShowAddReview()" data-toggle="popover" data-content="Rate the user.">
                     Add review
                 </button>
@@ -271,6 +328,22 @@
             </div>
             <div class="modal-body">
                 <p>Your review has been added at the reviews section.</p>
+            </div>
+            <div class="modal-footer" style="padding:0;">
+                <button type="button" class="button buttonBlue" style="margin:0.3em auto;" data-dismiss="modal">&nbsp;&nbsp;Ok&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="review_cancel_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Moonfolio</h4>
+                <button type="button" class="close" style="color:white;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Sorry, this is already reviewed by an user.</p>
             </div>
             <div class="modal-footer" style="padding:0;">
                 <button type="button" class="button buttonBlue" style="margin:0.3em auto;" data-dismiss="modal">&nbsp;&nbsp;Ok&nbsp;&nbsp;</button>

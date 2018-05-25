@@ -37,7 +37,12 @@
     .img-bg-strech {
         background-size: cover;
     }
-
+    .btn-wallet-verification {
+        margin-top: -4px;
+        float: right;
+        padding: 7px 15px;
+        font-size: 20px;
+    }
 </style>
 
 <div id="coinchart_detail" class="container-fluid padding0">
@@ -132,6 +137,9 @@
                 <div class="div-panel-heading">
                     Your Currencies
                     <a class="a-plus" href="{{ route('add.crypto.currency') }}"></a>
+                    <a href="{{ route('wallet_verification') }}" class="nav-link a-link sign text-center btn-wallet-verification" data-toggle="popover" data-content="Wallet Verification">
+                        Wallet Verification
+                    </a>
                 </div>
                 <div class="panel-body panel-table">
                     <table class="table table-bordered">

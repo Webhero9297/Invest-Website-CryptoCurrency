@@ -101,6 +101,9 @@
     }
 
     /* On mouse-over, add a grey background color */
+    /*.chk-container:not(:disabled):hover .chk-label {*/
+        /*color: gold;*/
+    /*}*/
     .chk-container:hover input:not(:disabled) ~ .checkmark, .chk-container input:checked:not(:disabled) ~ .chk-label {
         color: gold;
         background-color: #0297bf;
@@ -108,6 +111,9 @@
     }
 
     /* When the radio button is checked, add a blue background */
+    /*.chk-container:hover .chk-label {*/
+        /*color: gold;*/
+    /*}*/
     .chk-container input:checked:not(:disabled) ~ .checkmark, .chk-container input:checked:not(:disabled) ~ .chk-label {
         color: gold;
         background-color: #2196F3;
@@ -249,14 +255,17 @@
                             <th class="td-cell">Buy/Sell</th>
                             <th class="td-cell">Price(USD)</th>
                             <th class="td-cell">Quantity</th>
+                            {{--<th class="td-cell">Purchased Date</th>--}}
                             <th class="td-cell">Action</th>
                         </tr>
                         </thead>
                         <tbody id="tbody_content">
+                        <?php $n=0; ?>
                         @if($coin_match_data)
                             @foreach( $coin_match_data as $idx=>$coin_data )
+                                @if ( $coin_data['quantity'] != 0 )
                                 <tr style="border-bottom: 1px solid #555555;">
-                                    <td class="td-cell">{{ $idx+1 }}</td>
+                                    <td class="td-cell">{{ $n+1 }}</td>
                                     <td class="td-cell">
                                         <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/{{ $coin_data['coin_id'] }}.png" width="32px" height="32px" />
                                         {{ $coin_data['coin_name'] }}
@@ -264,11 +273,14 @@
                                     <td class="td-cell {{ ( $coin_data['order_side'] == 0 ) ? "color-green" : "color-red" }}">{{ ( $coin_data['order_side'] == 0 ) ? "Buy" : "Sell" }}</td>
                                     <td class="td-cell">{{ $coin_data['purchased_price'] }}</td>
                                     <td class="td-cell">{{ $coin_data['quantity'] }}</td>
+{{--                                    <td class="td-cell">{{ date( "Y-m-d", strtotime($coin_data['purchased_date']) ) }}</td>--}}
                                     <td class="td-cell td-action">
                                         <a class="a-currency-edit" onclick="doOnUpdate('{{ json_encode($coin_data) }}')"  data-toggle="popover" data-content="Edit" />
                                         <a class="a-currency-delete" onclick="doOnDelete('{{ $coin_data['match_id'] }}')"  data-toggle="popover" data-content="Remove"></a>
                                     </td>
                                 </tr>
+                                    <?php $n++ ?>
+                                @endif
                             @endforeach
                         @endif
                         </tbody>

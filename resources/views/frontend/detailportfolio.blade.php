@@ -222,6 +222,7 @@
     </div>
 </div>
 
+{{--<script src="{{ asset('./js/frontend/editprofile.js') }}"></script>--}}
 <div id="fb-root"></div>
 <script>
     var fbButton = document.getElementById('fb-share-button');
