@@ -11,6 +11,13 @@ class CoinsController extends Controller
     public $json_data;
     public function index() {
 
+//        $totalCount = ceil(count(Common::getRealTimeCryptoCurrencyList())/100);
+
+//        if ( ($totalCount-intval($totalCount)) > 0 )
+//            $totalCount++;
+//        $totalCount = intval($totalCount);
+//        $real_data = Common::getRealTimeCryptoCurrencyList();
+//        $real_data = Common::getRealTimeCryptoCurrencyListPerPage(0);
         return view('frontend.coins');
     }
     public function getCoinDataByPagePos() {
@@ -20,6 +27,7 @@ class CoinsController extends Controller
         $this->json_data = Common::getRealTimeCryptoCurrencyListForFile();
         foreach($real_data as $idx=>$data) {
             $tmp = Common::stdToArray($data);
+//            $tmp = $data;
             $tmp['market_cap_usd'] = number_format($tmp['market_cap_'.strtolower($currency)], 2, '.', ',');
             $tmp['max_supply'] = number_format($tmp['max_supply'], 2, '.', ',');
             $tmp['total_supply'] = number_format($tmp['total_supply'], 2, '.', ',');

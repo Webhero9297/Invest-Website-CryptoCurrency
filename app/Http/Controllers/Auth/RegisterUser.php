@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -31,6 +32,11 @@ trait RegisterUser
     public function register(Request $request)
     {
 //        $this->validator($request->all())->validate();
+        $userModel = new User();
+        if ( $userModel->checkExistsUser($request->get('email')) == 'exist' ){
+            return view('auth.register')->with(['error'=>'exist']);
+        }
+
         $user = $this->create($request->all());
 
         event(new Registered($user));

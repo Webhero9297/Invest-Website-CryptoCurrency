@@ -7,36 +7,51 @@ class Common
 {
     //
     public static function getRealTimeCryptoCurrencyListEx() {
-        $ch = curl_init();
-        $headers = array(
-            'Accept: application/json',
-            'Content-Type: application/json',
-        );
-        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?limit=0');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-
-        $response = curl_exec($ch);
-        return json_decode($response);
+//        $ch = curl_init();
+//        $headers = array(
+//            'Accept: application/json',
+//            'Content-Type: application/json',
+//        );
+//        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?limit=0');
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($ch, CURLOPT_HEADER, 0);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//
+//        $response = curl_exec($ch);
+//        return json_decode($response);
+        $ret_arr = array();
+        $model = new CronTickerV1();
+        $datas = $model->getCoinList();
+        if ( $datas ) return $ret_arr = $datas->toArray();
+        return $ret_arr;
     }
     public static function getRealTimeCryptoCurrencyList() {
-        $ch = curl_init();
-        $headers = array(
-            'Accept: application/json',
-            'Content-Type: application/json',
-        );
-        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?limit=0');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-
-        $response = curl_exec($ch);
-        return json_decode($response);
+//        $ch = curl_init();
+//        $headers = array(
+//            'Accept: application/json',
+//            'Content-Type: application/json',
+//        );
+//        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?limit=0');
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($ch, CURLOPT_HEADER, 0);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//
+//        $response = curl_exec($ch);
+//        if(curl_errno($ch))
+//        {
+//            return [];
+//        }
+////        $response = curl_exec($ch);
+//        return json_decode($response);
+        $ret_arr = array();
+        $model = new CronTickerV1();
+        $datas = $model->getCoinList();
+        if ( $datas ) return $ret_arr = $datas->toArray();
+        return $ret_arr;
     }
     public static function getRealTimeCryptoCurrencyNameList($currency='USD') {
         $ch = curl_init();
@@ -64,23 +79,61 @@ class Common
         $ret['real_data'] = $responses;
         return $ret;
     }
-    public static function getRealTimeCryptoCurrencyListPerPage($start, $limit=100) {
-//        ini_set('max_execution_time', '500');
+    public static function getRealTimeCryptoCurrencyNameListAPI($currency='USD') {
         $ch = curl_init();
         $headers = array(
             'Accept: application/json',
             'Content-Type: application/json',
         );
-        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?start='.$start.'&limit='.$limit);
+        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?convert='.$currency.'&limit=0');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 
-        $response = curl_exec($ch);
-//        ini_set('max_execution_time', '30');
-        return json_decode($response);
+        $fb = curl_exec($ch);
+        curl_close($ch);
+
+        $ret = [];
+        if($fb !== false) {
+            $responses = json_decode($fb);
+            if ( $responses ) {
+                foreach ($responses as $crypto) {
+                    $ret['id'][] = $crypto->id;
+                    $ret['name'][] = $crypto->name;
+                    $ret['lower_name'][] = strtolower($crypto->name);
+                    $ret['symbol'][] = $crypto->symbol;
+                }
+            }
+            $ret['real_data'] = $responses;
+        }
+
+        return $ret;
+
+    }
+    public static function getRealTimeCryptoCurrencyListPerPage($start, $limit=100) {
+//        ini_set('max_execution_time', '500');
+//        $ch = curl_init();
+//        $headers = array(
+//            'Accept: application/json',
+//            'Content-Type: application/json',
+//        );
+//        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?start='.$start.'&limit='.$limit);
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($ch, CURLOPT_HEADER, 0);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//
+//        $response = curl_exec($ch);
+////        ini_set('max_execution_time', '30');
+//        return json_decode($response);
+        $model = new CronTickerV1();
+        $datas = $model->getCoinList();
+
+        if ( $datas ) return $datas->toArray();
+        return [];
     }
     public static function getRealTimeCryptoCurrencyListPerCurrency( $currency='USD') {
         $ch = curl_init();
@@ -97,6 +150,35 @@ class Common
 
         $response = curl_exec($ch);
         return json_decode($response);
+//        $model = new CronTickerV1();
+//        $datas = $model->getCoinList();
+//
+//        if ( $datas ) return $datas->toArray();
+//        return [];
+    }
+    public static function getRealTimeCryptoCurrencyListPerCurrencyAPI( $currency='USD') {
+//        $ch = curl_init();
+//        $headers = array(
+//            'Accept: application/json',
+//            'Content-Type: application/json',
+//        );
+//        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/?convert='.$currency.'&limit=0');
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($ch, CURLOPT_HEADER, 0);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//
+//        $response = curl_exec($ch);
+//        if($response !== false) {
+//            return json_decode($response);
+//        }
+//        return [];
+        $model = new CronTickerV1();
+        $datas = $model->getCoinList();
+
+        if ( $datas ) return $datas->toArray();
+        return [];
     }
     public static function getRealTimeCryptoCurrencyListForFile() {
         $ch = curl_init();
@@ -143,20 +225,49 @@ class Common
         return json_decode($response);
     }
     public static function getRealTimeCryptoCurrencyDataPerCoinId($coinId) {
-        $ch = curl_init();
-        $headers = array(
-            'Accept: application/json',
-            'Content-Type: application/json',
-        );
-        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/'.$coinId.'/');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//        $ch = curl_init();
+//        $headers = array(
+//            'Accept: application/json',
+//            'Content-Type: application/json',
+//        );
+//        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/'.$coinId.'/');
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($ch, CURLOPT_HEADER, 0);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//
+//        $response = curl_exec($ch);
+//        return json_decode($response);
+        $model = new CronTickerV1();
+        $datas = $model->where('id', $coinId)->first();
 
-        $response = curl_exec($ch);
-        return json_decode($response);
+        if ( $datas ) return $datas->toArray();
+        return [];
+    }
+    public static function getRealTimeCryptoCurrencyDataPerCoinIdAPI($coinId) {
+//        $ch = curl_init();
+//        $headers = array(
+//            'Accept: application/json',
+//            'Content-Type: application/json',
+//        );
+//        curl_setopt($ch, CURLOPT_URL, 'https://api.coinmarketcap.com/v1/ticker/'.$coinId.'/');
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($ch, CURLOPT_HEADER, 0);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER , true);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+//
+//        $response = curl_exec($ch);
+//        if($response !== false) {
+//            return json_decode($response);
+//        }
+//        return [];
+        $model = new CronTickerV1();
+        $datas = $model->where('id', $coinId)->first();
+
+        if ( $datas ) return $datas->toArray();
+        return [];
     }
     public static function stdToArray($stdObj){
         $ret = array();
@@ -171,7 +282,20 @@ class Common
         $ret_data = array();
         if ( count($real_data) > 0 ) {
             foreach( $real_data as $coinInfo ) {
-                if ( $coinInfo->name == $_currencyName ) {
+                if ( $coinInfo['name'] == $_currencyName ) {
+                    foreach( $coinInfo as $key=>$value ) {
+                        $ret_data[$key] = $value;
+                    }
+                }
+            }
+        }
+        return $ret_data;
+    }
+    public static function getCurrencyInfoByCurrencyNameEx( $real_data, $_currencyName ) {
+        $ret_data = array();
+        if ( count($real_data) > 0 ) {
+            foreach( $real_data as $coinInfo ) {
+                if ( $coinInfo['name'] == $_currencyName ) {
                     foreach( $coinInfo as $key=>$value ) {
                         $ret_data[$key] = $value;
                     }
@@ -244,7 +368,7 @@ class Common
     public static function getCoinDataFromRecordsExt( $real_data, $records ) {
         $ret_data = array();
         foreach( $records as $record ) {
-            $coin_data = self::getCurrencyInfoByCurrencyName($real_data, $record['currency_name']);
+            $coin_data = self::getCurrencyInfoByCurrencyNameEx($real_data, $record['currency_name']);
             if ( count($coin_data)==0 ) continue;
             $coin_data['quantity'] = $record['quantity'];
             $coin_data['purchased_price'] = $record['purchased_price'];
@@ -365,7 +489,7 @@ class Common
                 if ( isset($coin_file_arr[$idx]) ) {
                     $real_coin_id_arr[] = $coin_file_arr[$idx];
                     $real_coin_name_arr[] = $coin_file_arr[$idx]['name'];
-                    $real_coin_price_arr[] = $real_coin->price_usd;
+                    $real_coin_price_arr[] = $real_coin['price_usd'];
                 }
             }
             foreach( $coin_match_datas as $idx=>$coin_match ) {
@@ -460,7 +584,9 @@ class Common
                 }
             }
             foreach( $coin_review_datas as $idx=>$coin_review ) {
-                $coin_match = app(CoinMatch::class)->where('match_id', $coin_review['match_id'])->first()->toArray();
+                $t  =app(CoinMatch::class)->where('match_id', $coin_review['match_id'])->first();
+                if ( !$t ) continue;
+                $coin_match = $t->toArray();
                 $index = array_search($coin_match['coin_name'], $real_coin_name_arr);
                 if ( $index != -1 ) {
                     $coin_review['coin_name'] = $coin_match['coin_name'];

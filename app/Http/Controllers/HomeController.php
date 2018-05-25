@@ -30,6 +30,9 @@ class HomeController extends Controller
     {
         $loggedInUser = \Auth::user();
 
+//        Common::createNewCCUser($loggedInUser);
+//        dd(Common::testEx($loggedInUser));
+
         $alert_message = 'sent';
         if ( !is_null($loggedInUser) ) {
             if ( $loggedInUser->notification_status == 1 ) {
@@ -38,11 +41,8 @@ class HomeController extends Controller
                 $loggedInUser->save();
             }
         }
-        $realTopCurrencies = Common::getRealTimeCryptoCurrencyListPerPage(0);
-        $realTopCryptos = array();
-        if ( $realTopCurrencies ){
-            foreach($realTopCurrencies as $realCrypto) $realTopCryptos[] = Common::stdToArray($realCrypto);
-        }
+        $realTopCryptos = Common::getRealTimeCryptoCurrencyListPerPage(0);
+
         $topUsers = Common::getTopPortfolios();
         $top_users = array();
         $default = '../assets/images/avatars/default.png';
@@ -98,6 +98,7 @@ class HomeController extends Controller
     }
     public function getTopLiveData() {
         $realTopCurrencies = Common::getRealTimeCryptoCurrencyListPerPage(0, 8);
+
         $realTopCryptos = array();
         foreach($realTopCurrencies as $realCrypto) {
             $tmp = Common::stdToArray($realCrypto);

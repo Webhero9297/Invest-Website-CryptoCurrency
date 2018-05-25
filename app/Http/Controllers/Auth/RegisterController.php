@@ -67,11 +67,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
-
-//dd($response);
-//
         $activation_code = substr(str_replace('/', '', Hash::make($data['email'])), -24);
         $user = User::create([
             'full_name' => $data['full_name'],

@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function checkExistsUser($email) {
+        $data = $this->where('email', $email)->first();
+        if ( $data ) return 'exist';
+        return 'empty';
+    }
+
 }

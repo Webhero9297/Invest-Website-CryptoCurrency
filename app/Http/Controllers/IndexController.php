@@ -27,12 +27,33 @@ class IndexController extends Controller
         if ( $other_sell_data ) $coinMatchData = $other_sell_data->toArray();
         $other_sell_data = Common::remakeCoinDataWithFiles($cryptoData, $coin_file_data, $coinMatchData);
 
-        $star_review_data = app(MatchReview::class)->get();
+        $star_review_data = app(MatchReview::class)->orderBy('id', 'desc')->get();
         if ( $star_review_data ) $star_review_data = $star_review_data->toArray();
         $star_review_data = Common::remakeReviewData($cryptoData, $coin_file_data, $star_review_data);
 
+        $order_data = json_encode(['other_buy_data'=>$other_buy_data, 'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data]);
+
         return view('frontend.coinmatchbiz')->with(['buy_list'=>[], 'sell_list'=>[], 'other_buy_data'=>$other_buy_data,
-            'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data, 'global_biz'=>'1', 'cryptoData'=>$cryptoData]);
+            'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data, 'global_biz'=>'1', 'cryptoData'=>$cryptoData, 'order_data'=>$order_data]);
+    }
+    public function viewLiveBiz() {
+        $cryptoData = Common::getRealTimeCryptoCurrencyList();
+        $coin_file_data = Common::getRealTimeCryptoCurrencyListForFile();
+        $coinMatchData = array();
+
+        $other_buy_data = app(CoinMatch::class)->where('order_side', 0)->where('order_status', 0)->get();
+        if ( $other_buy_data ) $coinMatchData = $other_buy_data->toArray();
+        $other_buy_data = Common::remakeCoinDataWithFilesEx($cryptoData, $coin_file_data, $coinMatchData);
+        $other_sell_data = app(CoinMatch::class)->where('order_side', 1)->where('order_status', 0)->get();
+        if ( $other_sell_data ) $coinMatchData = $other_sell_data->toArray();
+        $other_sell_data = Common::remakeCoinDataWithFiles($cryptoData, $coin_file_data, $coinMatchData);
+
+        $star_review_data = app(MatchReview::class)->orderBy('id', 'desc')->get();
+        if ( $star_review_data ) $star_review_data = $star_review_data->toArray();
+        $star_review_data = Common::remakeReviewData($cryptoData, $coin_file_data, $star_review_data);
+
+
+        return response()->json(['other_buy_data'=>$other_buy_data, 'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data]);
     }
 
     public function getOrderLiveData($userId) {
@@ -56,7 +77,7 @@ class IndexController extends Controller
             if ( $other_sell_data ) $coinMatchData = $other_sell_data->toArray();
             $other_sell_data = Common::remakeCoinDataWithFiles($cryptoData, $coin_file_data, $coinMatchData);
         }
-        $star_review_data = app(MatchReview::class)->get();
+        $star_review_data = app(MatchReview::class)->orderBy('id', 'desc')->get();
         if ( $star_review_data ) $star_review_data = $star_review_data->toArray();
         $star_review_data = Common::remakeReviewData($cryptoData, $coin_file_data, $star_review_data);
         return response()->json(['other_buy_data'=>$other_buy_data, 'other_sell_data'=>$other_sell_data, 'star_review_data'=>$star_review_data]);
