@@ -16,3 +16,19 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'v1/public'], function () {
+    //Portfolio
+    Route::get('/portfolios', 'PublicApiController@getLivePortfolioData');
+    Route::get('/detailportfolios/{user_id}', 'PublicApiController@detailPortfolioAPI');
+    //News
+    Route::get('/news', 'PublicApiController@getNews');
+    //Home
+    Route::get('/toplive', 'PublicApiController@getTopLiveData');
+    //Coins
+    Route::get('/coindata', 'PublicApiController@getCoinDataByPagePos');
+    Route::get('/filtercoindata/{filter}', 'PublicApiController@getSearchDataForFilter');
+    Route::get('/specialcoindata/{coinid}', 'PublicApiController@coinLiveData');
+    //CoinMatch
+    Route::get('/liveorder', 'PublicApiController@viewLiveBiz');
+});
