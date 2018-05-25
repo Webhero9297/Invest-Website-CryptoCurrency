@@ -74,7 +74,7 @@ input[type="search"] {
     width: calc(100% - 50px);
 }
 #other_sell_table_wrapper, #other_buy_table_wrapper {
-    margin-top: -25px!important;
+    margin-top: 4px!important;
 }
 #other_sell_table, #other_buy_table, #star_table {
     width: 100%;

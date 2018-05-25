@@ -5,18 +5,23 @@ var selectedTdInfo = undefined;
 var sellTable, buyTable, starTable;
 var filter_value_arr = ['','',''];
 var filter_column_arr = [1,4,5];
+var currentPageOfStar= 0, currentPageOfSell= 0, currentPageOfBuy=0;
 $(document).ready(function(){
     $('#init_alert_modal').modal('show');
+
+    //starTable = $('#star_table').dataTable().api();
 
     $('input.score_radio').click(function(){
         $('#score_ranking').html($(this).val());
         $('input[name="review_score"]').val($(this).val());
     });
     $('.py-4').css('height', '100%');
-    doOnGetLiveData();
-    window.setInterval(function(){
-        doOnGetLiveData();
-    }, 10000);
+    //$('#other_sell_table thead th:last').css('width', '82px');
+    //$('#other_buy_table thead th:last').css('width', '82px');
+    renderOrderData(order_data);
+    //window.setInterval(function(){
+    //    doOnGetLiveData();
+    //}, 10000);
 
     $('[data-toggle="tooltip"]').tooltip({
         'placement': 'top'
@@ -165,6 +170,7 @@ function filterColumn() {
             }
         }
     } );
+    //starTable.columns.adjust().draw();
     starTable.draw();
 }
 function existsIndex( _idx ) {
@@ -201,13 +207,25 @@ function doOnFilterBuyData( i, filter_value ) {
 }
 
 function doOnGetLiveData() {
+    //$('#tbody_buy_coin_live_data').html('<tr><td class="text-center" colspan="6">Loading...</td></tr>');
+    //$('#tbody_sell_coin_live_data').html('<tr><td class="text-center" colspan="6">Loading...</td></tr>');
+    //$('#tbody_star_review_live_data').html('<tr><td class="text-center" colspan="9">Loading...</td></tr>');
     $.getJSON('/getorderdata/'+AuthUser, function(resp){
-        var other_buy_data = resp.other_buy_data;
-        if ( other_buy_data ) {
-            tbody_contents = '';
-            for(i=0;i<other_buy_data.length;i++) {
-                buy_item = other_buy_data[i];
-                tbody_contents += '<tr class="tr-live" style="border-bottom: 1px solid #555555;">\
+        renderOrderData(resp);
+    });
+}
+function renderOrderData(resp) {
+    var other_buy_data = resp.other_buy_data;
+    tbody_contents = '';
+    $('#other_buy_table').dataTable().fnDestroy();
+    if ( other_buy_data ) {
+        tbody_contents = '';
+        //$('#tbody_buy_coin_live_data').html('');
+        for(i=0;i<other_buy_data.length;i++) {
+            buy_item = other_buy_data[i];
+            ( buy_item.purchased_price*1 > 100 ) ? dc1 = 2 : dc1 = 4;
+            ( buy_item.current_price*1 > 100 ) ? dc2 = 2 : dc2 = 4;
+            tbody_contents += '<tr class="tr-live" style="border-bottom: 1px solid #555555;">\
                                             <td class="td-cell text-center padding0">' + (i + 1) + '</td>\
                                             <td class="td-cell text-center padding0 span-buy-nametitle" buyer_id="' + buy_item.user_id + '"\
                                             td-info=\''+JSON.stringify(buy_item)+'\' onclick="doOnClickBuyerForSell(\'buy\', this)">\
@@ -219,19 +237,24 @@ function doOnGetLiveData() {
                                                 <span>' + buy_item.coin_name + '</span>\
                                             </td>\
                                             <td class="td-cell text-center padding0">' + buy_item.quantity + '</td>\
-                                            <td class="td-cell color-green text-center padding0">$' + buy_item.purchased_price + '</td>';
+                                            <td class="td-cell color-green text-center padding0">$' + accounting.formatMoney(buy_item.purchased_price, '', 2, ",", ".") + '</td>';
 
-                tbody_contents +=           '<td class="td-cell text-center padding0">$' + buy_item.current_price + '</td>';
-                tbody_contents += '</tr>';
-            }
-            $('#tbody_buy_coin_live_data').html(tbody_contents);
+            tbody_contents +=           '<td class="td-cell text-center padding0">$' + accounting.formatMoney(buy_item.current_price, '', 2, ",", ".") + '</td>';
+            tbody_contents += '</tr>';
         }
-        var other_sell_data = resp.other_sell_data;
-        if ( other_sell_data ) {
-            tbody_contents = '';
-            for (i=0;i<other_sell_data.length;i++) {
-                sell_item = other_sell_data[i];
-                tbody_contents += '<tr class="tr-live" style="border-bottom: 1px solid #555555;">\
+        //alert(other_buy_data.length);
+        $('#tbody_buy_coin_live_data').html(tbody_contents);
+        //$('#tbody_sell_coin_live_data').html(tbody_contents);
+    }
+    var other_sell_data = resp.other_sell_data;
+    tbody_contents = '';
+    if ( other_sell_data ) {
+        tbody_contents = '';
+        $('#other_sell_table').dataTable().fnDestroy();
+        //$('#tbody_sell_coin_live_data').empty();
+        for (i=0;i<other_sell_data.length;i++) {
+            sell_item = other_sell_data[i];
+            tbody_contents += '<tr class="tr-live" style="border-bottom: 1px solid #555555;">\
                                             <td class="td-cell text-center padding0">' + (i + 1) + '</td>\
                                             <td class="td-cell text-center padding0 span-buy-nametitle" buyer_id="' + sell_item.user_id + '"\
                                             td-info=\''+JSON.stringify(sell_item)+'\' onclick="doOnClickBuyerForSell(\'sell\', this)">\
@@ -245,22 +268,26 @@ function doOnGetLiveData() {
                                             <td class="td-cell text-center padding0">' + sell_item.quantity + '</td>\
                                             <td class="td-cell color-red text-center padding0">$' + sell_item.purchased_price + '</td>';
 
-                tbody_contents +=          '<td class="td-cell text-center padding0">$' + sell_item.current_price + '</td>';
-                tbody_contents += '</tr>';
-            }
-            $('#tbody_sell_coin_live_data').html(tbody_contents);
+            tbody_contents +=          '<td class="td-cell text-center padding0">$' + sell_item.current_price + '</td>';
+            tbody_contents += '</tr>';
         }
-        var review_data = resp.star_review_data;
-        if ( review_data ) {
-            tbody_contents = '';
-            for (i=0;i<review_data.length;i++) {
-                review_item = review_data[i];
 
-                ( review_item.order_side == 0 ) ? color_str = "color-green" : color_str = "color-red";
-                ( review_item.order_side == 0 ) ? span_str = "Buy" : span_str = "Sell";
-                if ( review_item.review_content == null ) review_content = '';
-                else review_content = review_item.review_content;
-                tbody_contents += '<tr>\
+        $('#tbody_sell_coin_live_data').html(tbody_contents);
+    }
+    var review_data = resp.star_review_data;
+    tbody_contents = '';
+    if ( review_data ) {
+        tbody_contents = '';
+        $('#star_table').dataTable().fnDestroy();
+        $('#tbody_star_review_live_data').empty();
+        for (i=0;i<review_data.length;i++) {
+            review_item = review_data[i];
+
+            ( review_item.order_side == 0 ) ? color_str = "color-green" : color_str = "color-red";
+            ( review_item.order_side == 0 ) ? span_str = "Buy" : span_str = "Sell";
+            if ( review_item.review_content == null ) review_content = '';
+            else review_content = review_item.review_content;
+            tbody_contents += '<tr>\
                                         <td class="td-cell text-center padding0">'+(i+1) +'</td>\
                                         <td class="td-cell text-center padding0">\
                                             <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/'+review_item.coin_id+'.png" width="32px" height="32px" />\
@@ -284,42 +311,31 @@ function doOnGetLiveData() {
                                             <span class="span-comment"  onclick="doOnClickContentView(this)">'+review_content+'</span>\
                                         </td>\
                                     </tr>';
-            }
+        }
+        $('#tbody_star_review_live_data').html(tbody_contents);
+    }
 
-            $('#tbody_star_review_live_data').html(tbody_contents);
-        }
+    buyTable  = $('#other_buy_table').DataTable({"paging": false});
+    //if ( typeof sellTable == 'undefined' ){
+    sellTable  = $('#other_sell_table').DataTable({"paging": false});
+    //}
+    //else {
+    //    sellTable.draw();
+    //}
+    //if ( typeof starTable == 'undefined' ){
+    starTable  = $('#star_table').DataTable({"paging": false});
+    //}
+    //else {
+    //    starTable.draw();
+    //}
 
-        if ( typeof buyTable == 'undefined' ){
-            buyTable  = $('#other_buy_table').DataTable();
-        }
-        else {
-            buyTable.fnClearTable( 0 );
-            buyTable.fnDraw();
-        }
-        if ( typeof sellTable == 'undefined' ){
-            sellTable  = $('#other_sell_table').DataTable();
-        }
-        else {
-            sellTable.fnClearTable( 0 );
-            sellTable.fnDraw();
-        }
-        if ( typeof starTable == 'undefined' ){
-            starTable  = $('#star_table').DataTable();
-        }
-        else {
-            starTable.fnClearTable( 0 );
-            starTable.fnDraw();
-        }
+    $($('#star_table_wrapper .row')[0]).css('display', 'none');
+    $($('#other_sell_table_wrapper .row')[0]).css('display', 'none');
+    $($('#other_buy_table_wrapper .row')[0]).css('display', 'none');
 
-        $($('#star_table_wrapper .row')[0]).css('display', 'none');
-        $($('#other_sell_table_wrapper .row')[0]).css('display', 'none');
-        $($('#other_buy_table_wrapper .row')[0]).css('display', 'none');
-
-        doOnFilterBuyData(2, $('#buy_filter_coin').val());
-        doOnFilterSellData(2, $('#sell_filter_coin').val());
-
-        filterColumn();
-    });
+    doOnFilterBuyData(2, $('#buy_filter_coin').val());
+    doOnFilterSellData(2, $('#sell_filter_coin').val());
+    filterColumn();
 }
 function openCity(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -369,6 +385,7 @@ function doOnOtherBuyClick(other_match_id, buyJsonObj) {
     if ( typeof buyJsonObj == 'string' ) buyJsonObj = JSON.parse(buyJsonObj);
     $('.score_radio').prop('checked', false);
     $('#score_ranking').html('');
+    //document.getElementById('div_modal').style.display='block';
     $('#div_modal').modal('show');
     $('input[name="match_id"]').val(other_match_id);
 
@@ -388,15 +405,18 @@ function doOnOtherBuyClick(other_match_id, buyJsonObj) {
 
     $('#img_user_avatar').attr('src', buyJsonObj.user_avatar)
     $('#span_user_full_name').html(buyJsonObj.user_full_name)
+    //console.log(buyJsonObj);
 }
 function doOnCloseModal() {
     $('#div_modal').modal('hide');
+    //$('#div_modal').fadeOut(500);
 }
 function doOnOtherSellClick(other_match_id, sellJsonObj) {
     if ( typeof sellJsonObj == 'string' ) sellJsonObj = JSON.parse(sellJsonObj);
     $('.score_radio').prop('checked', false);
     $('#score_ranking').html('');
 
+    //document.getElementById('div_modal').style.display='block';
     $('#div_modal').modal('show');
     $('input[name="match_id"]').val(other_match_id);
 
@@ -416,6 +436,7 @@ function doOnOtherSellClick(other_match_id, sellJsonObj) {
 function doOnReviewSubmit() {
     serialized = $('#form_review').serialize();
 
+    //$('input[name="review_score"]').val($('input[name="ranking"]').val());
     if ($('input[name="review_score"]').val() == '0') {
         alert("Please select review score.")
         return;
@@ -429,8 +450,14 @@ function doOnReviewSubmit() {
                 $('#submit_modal').modal('show');
                 doOnGetLiveData();
             }
+            else{
+                $('#review_cancel_modal').modal('show');
+            }
         });
+        //console.log(serialized);
+        //$('#form_review').submit();
     }
+    //console.log(serialized);
 }
 function doOnMyBuyListClick(match_id) {
 
@@ -462,6 +489,7 @@ function doOnSendSellInterestedSubmit(side) {
             $('#div_buy_modal').modal('hide');
             $.getJSON('/sendinterestmsg/'+send_user_id, {side: g_side}, function(resp){
                 if ( resp.result == 'ok') {
+                    //$('#confirm_modal').modal('show');
                     $('#popup_modal').modal('show');
                 }
             });
@@ -475,6 +503,7 @@ function doOnShowAddReview() {
         if ( typeof buyJsonObj == 'string' ) buyJsonObj = JSON.parse(buyJsonObj);
         $('.score_radio').prop('checked', false);
         $('#score_ranking').html('');
+        //document.getElementById('div_modal').style.display='block';
         $('#div_buy_modal').modal('hide');
         $('#div_modal').modal('show');
         $('input[name="match_id"]').val(buyJsonObj.match_id);
@@ -514,9 +543,56 @@ function doOnSendMessage() {
 function doOnCloseThisModal() {
 
     $('#div_buy_message_modal').modal('hide');
+    //$('#div_buy_message_modal').show().on('hidden.bs.modal', hideCompleted);
+    //function hideCompleted() {
+    //    hideInProgress = false;
+    //    if (showModalId) {
+    //        showModal(showModalId);
+    //    }
+    //    showModalId = '';
+    //    $("#div_buy_message_modal").off('hidden.bs.modal');
+    //}
 }
 
 function doOnClickContentView(dom) {
     $('#content-modal-p').html($(dom).html());
     $('#content_modal').modal('show');
+}
+
+function doOnStarScroll( obj ) {
+    //if ( $(obj)[0].scrollTop > 20 ) {
+    //    $('#star_table_fix_header').css('display', 'block');
+    //    for( i in $('#star_head tr')[0].children) {
+    //        $td_tag = $('#star_head tr')[0].children[i];
+    //        $('#fix-td'+i).css('width', ($td_tag.offsetWidth-3)+'px');
+    //    }
+    //}
+    //else {
+    //    $('#star_table_fix_header').css('display', 'none');
+    //}
+}
+
+function doOnBuyScroll( obj ) {
+    //if ( $(obj)[0].scrollTop > 20 ) {
+    //    $('#buy_table_fix_header').css('display', 'block');
+    //    for( i in $('#buy_head tr')[0].children) {
+    //        $td_tag = $('#buy_head tr')[0].children[i];
+    //        $('#fix-buy-td'+i).css('width', ($td_tag.offsetWidth)+'px');
+    //    }
+    //}
+    //else {
+    //    $('#buy_table_fix_header').css('display', 'none');
+    //}
+}
+function doOnSellScroll( obj ) {
+    //if ( $(obj)[0].scrollTop > 20 ) {
+    //    $('#sell_table_fix_header').css('display', 'block');
+    //    for( i in $('#sell_head tr')[0].children) {
+    //        $td_tag = $('#sell_head tr')[0].children[i];
+    //        $('#fix-sell-td'+i).css('width', ($td_tag.offsetWidth-1)+'px');
+    //    }
+    //}
+    //else {
+    //    $('#sell_table_fix_header').css('display', 'none');
+    //}
 }
