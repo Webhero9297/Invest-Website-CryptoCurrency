@@ -56,14 +56,9 @@ $(document).ready(function(){
         'placement': 'top'
     });
 
-    //$('#label_sell').click(function(){
-    //    doOnClickSellSide();
-    //});
-
     $('.py-4').css('height', '');
 
     $('#select_coin_list').bind('click', function(){
-        console.log($(this).val());
     });
 });
 function doOnSelectCoinData(selected_coin_name) {
@@ -84,16 +79,9 @@ function doOnClickSellSide() {
         var diff = Decimal.sub(resp.invested, resp.sold);
         if ( diff < quantity ) {
             var title = "You dont have enough balance in your portfolio for this cryptocurrency.";
-            /*
-             if ( resp.sold != 0 ) {
-             title += "Your total sold amount is "+ resp.sold+".<br>";
-             title += "The amount you can sell is "+ diff + ".<br>";
-             }
-             */
             $('.modal-body').html(title);
             $('#myConfirm').modal('show');
             $('input[name="quantity"]').attr('max', resp.quantity);
-            //$('input[name="quantity"]').val(resp.quantity);
             return;
         }
         else{

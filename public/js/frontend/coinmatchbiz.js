@@ -9,19 +9,12 @@ var currentPageOfStar= 0, currentPageOfSell= 0, currentPageOfBuy=0;
 $(document).ready(function(){
     $('#init_alert_modal').modal('show');
 
-    //starTable = $('#star_table').dataTable().api();
-
     $('input.score_radio').click(function(){
         $('#score_ranking').html($(this).val());
         $('input[name="review_score"]').val($(this).val());
     });
     $('.py-4').css('height', '100%');
-    //$('#other_sell_table thead th:last').css('width', '82px');
-    //$('#other_buy_table thead th:last').css('width', '82px');
     renderOrderData(order_data);
-    //window.setInterval(function(){
-    //    doOnGetLiveData();
-    //}, 10000);
 
     $('[data-toggle="tooltip"]').tooltip({
         'placement': 'top'
@@ -170,7 +163,6 @@ function filterColumn() {
             }
         }
     } );
-    //starTable.columns.adjust().draw();
     starTable.draw();
 }
 function existsIndex( _idx ) {
@@ -207,9 +199,6 @@ function doOnFilterBuyData( i, filter_value ) {
 }
 
 function doOnGetLiveData() {
-    //$('#tbody_buy_coin_live_data').html('<tr><td class="text-center" colspan="6">Loading...</td></tr>');
-    //$('#tbody_sell_coin_live_data').html('<tr><td class="text-center" colspan="6">Loading...</td></tr>');
-    //$('#tbody_star_review_live_data').html('<tr><td class="text-center" colspan="9">Loading...</td></tr>');
     $.getJSON('/getorderdata/'+AuthUser, function(resp){
         renderOrderData(resp);
     });
@@ -220,7 +209,6 @@ function renderOrderData(resp) {
     $('#other_buy_table').dataTable().fnDestroy();
     if ( other_buy_data ) {
         tbody_contents = '';
-        //$('#tbody_buy_coin_live_data').html('');
         for(i=0;i<other_buy_data.length;i++) {
             buy_item = other_buy_data[i];
             ( buy_item.purchased_price*1 > 100 ) ? dc1 = 2 : dc1 = 4;
@@ -242,16 +230,13 @@ function renderOrderData(resp) {
             tbody_contents +=           '<td class="td-cell text-center padding0">$' + accounting.formatMoney(buy_item.current_price, '', 2, ",", ".") + '</td>';
             tbody_contents += '</tr>';
         }
-        //alert(other_buy_data.length);
         $('#tbody_buy_coin_live_data').html(tbody_contents);
-        //$('#tbody_sell_coin_live_data').html(tbody_contents);
     }
     var other_sell_data = resp.other_sell_data;
     tbody_contents = '';
     if ( other_sell_data ) {
         tbody_contents = '';
         $('#other_sell_table').dataTable().fnDestroy();
-        //$('#tbody_sell_coin_live_data').empty();
         for (i=0;i<other_sell_data.length;i++) {
             sell_item = other_sell_data[i];
             tbody_contents += '<tr class="tr-live" style="border-bottom: 1px solid #555555;">\
@@ -316,7 +301,6 @@ function renderOrderData(resp) {
     }
 
     buyTable  = $('#other_buy_table').DataTable({"paging": false});
-    //if ( typeof sellTable == 'undefined' ){
     sellTable  = $('#other_sell_table').DataTable({"paging": false});
     //}
     //else {
