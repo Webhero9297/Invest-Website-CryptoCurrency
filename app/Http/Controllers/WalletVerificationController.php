@@ -22,8 +22,6 @@ class WalletVerificationController extends Controller
         foreach( $token_info->tokens as $token ) {
             $token_data[] = Common::stdToArray($token);
         }
-//$datas = app(UserVerifiedCurrencyDetails::class)->where('user_id', \Auth::user()->id)->get()->toArray();
-//dd($datas);
         $crypto_data = array('coin' => array('bitcoin'=>'Bitcoin', 'ethereum'=>'Ethereum'), 'erc20'=>$token_data);
         return view('frontend.verification')->with(['crypto_data'=>$crypto_data]);
     }
