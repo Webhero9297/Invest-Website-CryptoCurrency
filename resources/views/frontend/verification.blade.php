@@ -167,43 +167,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{--<div class="panel panel-default">--}}
-                                    {{--<div class="panel-heading">--}}
-                                        {{--<h4 class="panel-title">--}}
-                                            {{--<a class="collapse-a" data-toggle="collapse" data-parent="#accordion" href="#erc20_token_list">--}}
-                                                {{--ERC20 Token--}}
-                                            {{--</a>--}}
-                                        {{--</h4>--}}
-                                    {{--</div>--}}
-                                    {{--<div id="erc20_token_list" class="panel-collapse collapse in">--}}
-                                        {{--<div class="panel-body-collapse">--}}
-                                            {{--<input type="text" id="myInput" class="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">--}}
-                                            {{--<ul id="myUL" class="myUL">--}}
-                                                {{--@foreach( $crypto_data['erc20'] as $token )--}}
-                                                    {{--<li>--}}
-                                                        {{--<a href="#" class="a-erc20-token" addr="{{ $token['addr'] }}" decimals="{{ $token['decimals'] }}" onclick="doOnSelectToken(this)">{{ $token['name'] }}</a>--}}
-                                                    {{--</li>--}}
-                                                {{--@endforeach--}}
-                                            {{--</ul>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel panel-default">--}}
-                                    {{--<div class="panel-heading">--}}
-                                        {{--<h4 class="panel-title">--}}
-                                            {{--<a class="collapse-a" data-toggle="collapse" data-parent="#accordion" href="#another_token_list">--}}
-                                                {{--Other Token--}}
-                                            {{--</a>--}}
-                                        {{--</h4>--}}
-                                    {{--</div>--}}
-                                    {{--<div id="another_token_list" class="panel-collapse collapse in">--}}
-                                        {{--<div class="panel-body-collapse">--}}
-                                            {{--<input type="text" id="myInput" class="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">--}}
-                                            {{--<ul id="myUL" class="myUL">--}}
-                                            {{--</ul>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
                             </div>
                         </div>
                         <div class="col-sm-9">
